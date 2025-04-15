@@ -1,4 +1,4 @@
-# Segurança de Containers
+# Segurança de Containers 🛡️
 
 > "Na matrix dos containers, a segurança não é uma opção - é uma arte marcial." - Manifesto do Security-Sama
 

@@ -129,7 +129,7 @@
 2020 ──── Nova era Docker
 ```
 
-## Contribuições Importantes 🏆
+## Contribuições Importantes 
 
 ### Pessoas Chave
 - Solomon Hykes (Fundador)
@@ -144,12 +144,12 @@
 4. Google
 5. Microsoft
 
-## Waifu Tips 💡
+## Waifu Tips
 
 > **History-chan diz:**
 > "Containers são como ninjas modernos - evoluíram de simples ferramentas para mestres do DevOps!"
 
-## Legado e Impacto 🌍
+## Legado e Impacto
 
 ### Na Indústria
 - Revolução no deployment
@@ -163,7 +163,7 @@
 - Testing
 - Distribution
 
-## Checkpoint ✅
+## Checkpoint
 
 Você agora sabe:
 - [x] Origens do Docker
@@ -171,7 +171,7 @@ Você agora sabe:
 - [x] Marcos importantes
 - [x] Impacto na indústria
 
-## Exercícios 🏋️
+## Exercícios 
 
 1. Pesquise sobre uma tecnologia predecessor do Docker
 2. Compare containers modernos com Jails do FreeBSD
