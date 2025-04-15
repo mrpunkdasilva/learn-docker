@@ -1,0 +1,82 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T18:06:15.952477725"><title>Container Storage: Cr&ocirc;nicas dos Dados Perdidos 💾 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"o-teatro-das-sombras-bin-rias","level":0,"title":"O Teatro das Sombras Binárias 🎭","anchor":"#o-teatro-das-sombras-bin-rias"},{"id":"os-tr-s-cavaleiros-do-armazenamento","level":0,"title":"Os Três Cavaleiros do Armazenamento 🏇","anchor":"#os-tr-s-cavaleiros-do-armazenamento"},{"id":"o-overlay2-dan-a-das-camadas","level":0,"title":"O Overlay2: Dança das Camadas 💃","anchor":"#o-overlay2-dan-a-das-camadas"},{"id":"storage-drivers-os-necromantes","level":0,"title":"Storage Drivers: Os Necromantes 🧙‍♂️","anchor":"#storage-drivers-os-necromantes"},{"id":"waifu-storage-tips","level":0,"title":"Waifu Storage Tips 📝","anchor":"#waifu-storage-tips"},{"id":"rituais-de-performance","level":0,"title":"Rituais de Performance 🏃‍♂️","anchor":"#rituais-de-performance"},{"id":"troubleshooting-necropsia-digital","level":0,"title":"Troubleshooting: Necropsia Digital 🔍","anchor":"#troubleshooting-necropsia-digital"},{"id":"exerc-cios-para-os-destemidos","level":0,"title":"Exercícios Para os Destemidos 🎮","anchor":"#exerc-cios-para-os-destemidos"},{"id":"palavras-finais","level":0,"title":"Palavras Finais","anchor":"#palavras-finais"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Container Storage: Cr&ocirc;nicas dos Dados Perdidos 💾 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/container-storage.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Container Storage: Cr&ocirc;nicas dos Dados Perdidos 💾 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/container-storage.html#webpage",
+    "url": "writerside-documentation/container-storage.html",
+    "name": "Container Storage: Cr&ocirc;nicas dos Dados Perdidos 💾 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="container-storage" data-main-title="Container Storage: Crônicas dos Dados Perdidos 💾" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="INIT: Container Matrix///Phase 3: Core Concepts///containers-101.md|Containers 101: Sua Primeira Dose de Containers 💊"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="container-storage" id="container-storage.md">Container Storage: Crônicas dos Dados Perdidos 💾</h1><aside class="prompt" data-type="tip" data-title="" id="-rbrtey_3"><p id="-rbrtey_13">&quot;Em um mundo onde dados s&atilde;o mais valiosos que cr&eacute;ditos digitais, a arte do armazenamento em containers &eacute; como dan&ccedil;a macabra entre persist&ecirc;ncia e efemeridade.&quot; - Mem&oacute;rias de um DBA Cybern&eacute;tico</p></aside><section class="chapter"><h2 id="o-teatro-das-sombras-bin-rias" data-toc="o-teatro-das-sombras-bin-rias">O Teatro das Sombras Bin&aacute;rias 🎭</h2><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════╗
+║  STORAGE MATRIX: O PARADOXO DA PERSISTÊNCIA   ║
+║                                               ║
+║  &quot;Todos os dados são efêmeros,               ║
+║   até que precisemos deles novamente&quot;         ║
+║                                               ║
+╚═══════════════════════════════════════════════╝
+</div><section class="chapter"><h3 id="a-anatomia-do-vazio-digital" data-toc="a-anatomia-do-vazio-digital">A Anatomia do Vazio Digital</h3><p id="-rbrtey_16">Ah, caro aventureiro dos bytes! Permita-me gui&aacute;-lo atrav&eacute;s deste labirinto de dados, onde containers nascem e morrem como sonhos em uma noite de ne&oacute;n, levando consigo seus preciosos dados... ou ser&aacute; que n&atilde;o?</p><div class="code-block" data-lang="none">
+┌─────────────────────────────────┐
+│    Container Life &amp; Death       │
+├─────────────────────────────────┤
+│ ┌─────────┐    ┌────────────┐  │
+│ │ Efêmero │ vs │Persistente │  │
+│ └─────────┘    └────────────┘  │
+│    &quot;Memento Mori Digital&quot;      │
+└─────────────────────────────────┘
+</div></section></section><section class="chapter"><h2 id="os-tr-s-cavaleiros-do-armazenamento" data-toc="os-tr-s-cavaleiros-do-armazenamento">Os Tr&ecirc;s Cavaleiros do Armazenamento 🏇</h2><section class="chapter"><h3 id="1-volumes-o-imortal-digital" data-toc="1-volumes-o-imortal-digital">1. Volumes: O Imortal Digital</h3><p id="-rbrtey_21">Como vampiros em um romance g&oacute;tico-tech, os volumes Docker persistem al&eacute;m da morte de seus containers.</p><div class="code-block" data-lang="bash">
+# Invocando o ritual do volume
+docker volume create dados-imortais
+docker run -v dados-imortais:/data nginx
+# &quot;Nem mesmo um 'docker rm -f' pode matar estes dados&quot;
+</div></section><section class="chapter"><h3 id="2-bind-mounts-as-correntes-digitais" data-toc="2-bind-mounts-as-correntes-digitais">2. Bind Mounts: As Correntes Digitais</h3><p id="-rbrtey_23">Como fantasmas acorrentados a uma mans&atilde;o antiga, bind mounts ligam seu container ao mundo mortal do host.</p><div class="code-block" data-lang="bash">
+# O ritual de ligação
+docker run -v /home/user/dados:/app/dados nginx
+# &quot;Presos para sempre ao sistema host, como uma maldição digital&quot;
+</div></section><section class="chapter"><h3 id="3-tmpfs-o-sussurro-ef-mero" data-toc="3-tmpfs-o-sussurro-ef-mero">3. tmpfs: O Sussurro Ef&ecirc;mero</h3><p id="-rbrtey_25">Como pensamentos em uma mente cibern&eacute;tica, tmpfs existe apenas na mem&oacute;ria vol&aacute;til.</p><div class="code-block" data-lang="bash">
+# A dança do esquecimento
+docker run --tmpfs /app/temp nginx
+# &quot;Aqui jazem dados temporários, que viveram rápido e morreram jovens&quot;
+</div></section></section><section class="chapter"><h2 id="o-overlay2-dan-a-das-camadas" data-toc="o-overlay2-dan-a-das-camadas">O Overlay2: Dan&ccedil;a das Camadas 💃</h2><section class="chapter"><h3 id="a-valsa-das-camadas" data-toc="a-valsa-das-camadas">A Valsa das Camadas</h3><p id="-rbrtey_28">Como um baile de m&aacute;scaras digital, onde cada camada esconde segredos:</p><div class="code-block" data-lang="none">
+┌────────────────────────────┐
+│    Container Layer         │
+├────────────────────────────┤
+│    Upper Layer (RW)       │
+├────────────────────────────┤
+│    Lower Layer (RO)       │
+├────────────────────────────┤
+│    Base Image             │
+└────────────────────────────┘
+&quot;Cada camada, uma história não contada&quot;
+</div></section></section><section class="chapter"><h2 id="storage-drivers-os-necromantes" data-toc="storage-drivers-os-necromantes">Storage Drivers: Os Necromantes 🧙&zwj;♂️</h2><section class="chapter"><h3 id="o-pante-o-dos-drivers" data-toc="o-pante-o-dos-drivers">O Pante&atilde;o dos Drivers</h3><ul class="list _bullet" id="-rbrtey_31"><li class="list__item" id="-rbrtey_33"><p id="-rbrtey_38"><span class="control" id="-rbrtey_39">overlay2</span>: O pr&iacute;ncipe herdeiro, elegante e eficiente</p></li><li class="list__item" id="-rbrtey_34"><p id="-rbrtey_40"><span class="control" id="-rbrtey_41">devicemapper</span>: O velho rei, complexo mas poderoso</p></li><li class="list__item" id="-rbrtey_35"><p id="-rbrtey_42"><span class="control" id="-rbrtey_43">btrfs</span>: O m&iacute;stico incompreendido</p></li><li class="list__item" id="-rbrtey_36"><p id="-rbrtey_44"><span class="control" id="-rbrtey_45">zfs</span>: O mago das pools</p></li><li class="list__item" id="-rbrtey_37"><p id="-rbrtey_46"><span class="control" id="-rbrtey_47">aufs</span>: O ancestral aposentado</p></li></ul><div class="code-block" data-lang="none">
+╔════════════════════════════════╗
+║  DRIVER SELECTION MATRIX       ║
+║                                ║
+║  &quot;Escolha seu veneno digital&quot;  ║
+╚════════════════════════════════╝
+</div></section></section><section class="chapter"><h2 id="waifu-storage-tips" data-toc="waifu-storage-tips">Waifu Storage Tips 📝</h2><aside class="prompt" data-type="tip" data-title="" id="-rbrtey_48"><p id="-rbrtey_50"><span class="control" id="-rbrtey_51">Volume-chan avisa</span>: &quot;Seus dados s&atilde;o como primeiros amores - guarde-os em volumes, ou chore sua perda eternamente! uwu&quot;</p></aside><aside class="prompt" data-type="tip" data-title="" id="-rbrtey_49"><p id="-rbrtey_52"><span class="control" id="-rbrtey_53">Backup-sama declara</span>: &quot;Na matrix dos containers, n&atilde;o existem segundas chances... a menos que voc&ecirc; tenha um backup. Ara ara~&quot;</p></aside></section><section class="chapter"><h2 id="rituais-de-performance" data-toc="rituais-de-performance">Rituais de Performance 🏃&zwj;♂️</h2><section class="chapter"><h3 id="o-cache-dance" data-toc="o-cache-dance">O Cache Dance</h3><div class="code-block" data-lang="bash">
+# O ritual do cache
+--volume-opt size=20G
+--volume-opt o=size=20G
+# &quot;Dança mais rápido, meu precioso cache!&quot;
+</div></section><section class="chapter"><h3 id="a-arte-da-otimiza-o" data-toc="a-arte-da-otimiza-o">A Arte da Otimiza&ccedil;&atilde;o</h3><div class="code-block" data-lang="yaml">
+volumes:
+  data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/data/mysql'
+# &quot;Configuração é poesia em YAML&quot;
+</div></section></section><section class="chapter"><h2 id="troubleshooting-necropsia-digital" data-toc="troubleshooting-necropsia-digital">Troubleshooting: Necropsia Digital 🔍</h2><section class="chapter"><h3 id="sinais-do-al-m" data-toc="sinais-do-al-m">Sinais do Al&eacute;m</h3><div class="code-block" data-lang="bash">
+# Investigando anomalias
+docker volume ls
+docker volume inspect meu-volume
+# &quot;Cada erro conta uma história macabra&quot;
+</div></section></section><section class="chapter"><h2 id="exerc-cios-para-os-destemidos" data-toc="exerc-cios-para-os-destemidos">Exerc&iacute;cios Para os Destemidos 🎮</h2><ol class="list _decimal" id="-rbrtey_60" type="1"><li class="list__item" id="-rbrtey_61"><p id="-rbrtey_64"><span class="control" id="-rbrtey_65">A Cripta</span>: Configure um volume persistente sem perder dados</p></li><li class="list__item" id="-rbrtey_62"><p id="-rbrtey_66"><span class="control" id="-rbrtey_67">O Espelho</span>: Sincronize dados entre host e container</p></li><li class="list__item" id="-rbrtey_63"><p id="-rbrtey_68"><span class="control" id="-rbrtey_69">O Vazio</span>: Gerencie tmpfs sem crashar a mem&oacute;ria</p></li></ol></section><section class="chapter"><h2 id="palavras-finais" data-toc="palavras-finais">Palavras Finais</h2><p id="-rbrtey_70">Como diria o enigm&aacute;tico DevOps Poe: &quot;Em cada container mora um dado, esperando para ser perdido ou salvo. A escolha, meu caro operador, &eacute; sua.&quot;</p><aside class="prompt" data-type="tip" data-title="" id="-rbrtey_72"><p id="-rbrtey_73">&quot;E assim terminamos nossa jornada pelos calabou&ccedil;os do armazenamento. Lembre-se: na pr&oacute;xima vez que seus dados desaparecerem com um container, n&atilde;o foi um bug - foi apenas o karma digital cobrando seu pre&ccedil;o.&quot; - Chronicles of a Storage Engineer, 2084</p></aside></section><div class="last-modified">15 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="container-networking.html" class="navigation-links__prev">Container Networking</a><a href="container-security.html" class="navigation-links__next">Seguran&ccedil;a de Containers</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

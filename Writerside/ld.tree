@@ -20,7 +20,15 @@
             <toc-element topic="common-issues.md"/>
         </toc-element>
         <toc-element toc-title="Phase 3: Core Concepts">
-            <toc-element topic="containers-101.md"/>
+            <toc-element topic="containers-101.md">
+                <toc-element topic="container-internals.md"/>
+                <toc-element topic="container-runtime.md"/>
+                <toc-element topic="container-networking.md"/>
+                <toc-element topic="container-storage.md"/>
+                <toc-element topic="container-security.md"/>
+                <toc-element topic="container-orchestration.md"/>
+                <toc-element topic="container-monitoring.md"/>
+            </toc-element>
             <toc-element topic="images-containers.md"/>
             <toc-element topic="docker-architecture.md"/>
             <toc-element topic="container-lifecycle.md"/>

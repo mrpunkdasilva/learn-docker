@@ -1,0 +1,233 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T18:06:15.870431039"><title>Container Networking | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"a-anatomia-do-caos-digital","level":0,"title":"A Anatomia do Caos Digital 🧬","anchor":"#a-anatomia-do-caos-digital"},{"id":"os-drivers-pilotos-do-submundo-digital","level":0,"title":"Os Drivers: Pilotos do Submundo Digital 🏎️","anchor":"#os-drivers-pilotos-do-submundo-digital"},{"id":"container-network-interface-cni","level":0,"title":"Container Network Interface (CNI)","anchor":"#container-network-interface-cni"},{"id":"configura-o-de-rede","level":0,"title":"Configuração de Rede","anchor":"#configura-o-de-rede"},{"id":"seguran-a-de-rede","level":0,"title":"Segurança de Rede","anchor":"#seguran-a-de-rede"},{"id":"troubleshooting","level":0,"title":"Troubleshooting","anchor":"#troubleshooting"},{"id":"monitoramento","level":0,"title":"Monitoramento","anchor":"#monitoramento"},{"id":"refer-ncias","level":0,"title":"Referências","anchor":"#refer-ncias"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Container Networking | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/container-networking.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Container Networking | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/container-networking.html#webpage",
+    "url": "writerside-documentation/container-networking.html",
+    "name": "Container Networking | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="container-networking" data-main-title="Container Networking" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="INIT: Container Matrix///Phase 3: Core Concepts///containers-101.md|Containers 101: Sua Primeira Dose de Containers 💊"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="container-networking" id="container-networking.md">Container Networking</h1><aside class="prompt" data-type="tip" data-title="" id="-tyyazf_3"><p id="-tyyazf_12">&quot;Em um mundo onde bits dan&ccedil;am atrav&eacute;s de cabos et&eacute;reos e pacotes viajam na velocidade da luz, eis que surge a mais intrigante das artes: a networking de containers.&quot; - Manifesto de um SRE Desiludido</p></aside><section class="chapter"><h2 id="a-anatomia-do-caos-digital" data-toc="a-anatomia-do-caos-digital">A Anatomia do Caos Digital 🧬</h2><p id="-tyyazf_13">Ah, caro leitor! Permita-me gui&aacute;-lo atrav&eacute;s deste labirinto digital onde containers, qual habitantes de uma metr&oacute;pole cyberpunk, comunicam-se atrav&eacute;s de pontes invis&iacute;veis e t&uacute;neis et&eacute;reos.</p><section class="chapter"><h3 id="o-teatro-das-sombras-digitais" data-toc="o-teatro-das-sombras-digitais">O Teatro das Sombras Digitais</h3><div class="code-block" data-lang="none">
+         ╔══════════════════════════════╗
+         ║    A MATRIX DOS CONTAINERS   ║
+         ╚══════════════════════════════╝
+              ↡                 ↡
+    [Container A] ←→ [Container B]
+         ↑    ╱╲              ↑
+         │   ╱  ╲             │
+         │  ╱    ╲            │
+    [Network Namespace]  [Network Bridge]
+              ↓
+         [Host Network]
+     &quot;Onde os pacotes vão para morrer&quot;
+</div><p id="-tyyazf_17">Imagine, se puder, um teatro onde cada container &eacute; um ator mascarado, interpretando seu papel em um palco virtual. Cada um possui sua pr&oacute;pria identidade (IP), seu pr&oacute;prio camarim (namespace), e suas pr&oacute;prias linhas de comunica&ccedil;&atilde;o (veth pairs).</p></section><section class="chapter"><h3 id="os-fantasmas-da-m-quina" data-toc="os-fantasmas-da-m-quina">Os Fantasmas da M&aacute;quina</h3><ul class="list _bullet" id="-tyyazf_18"><li class="list__item" id="-tyyazf_19"><p id="-tyyazf_22"><span class="control" id="-tyyazf_23">Network Namespaces</span>: Como apartamentos em um arranha-c&eacute;u cyberpunk, cada container possui seu pr&oacute;prio espa&ccedil;o isolado. &quot;Meu IP, minhas regras!&quot;</p></li><li class="list__item" id="-tyyazf_20"><p id="-tyyazf_24"><span class="control" id="-tyyazf_25">Bridges Virtuais</span>: Pontes suspensas no vazio digital, conectando realidades paralelas. &quot;A ponte para lugar nenhum, e ao mesmo tempo, para todo lugar.&quot;</p></li><li class="list__item" id="-tyyazf_21"><p id="-tyyazf_26"><span class="control" id="-tyyazf_27">veth pairs</span>: Cord&otilde;es umbilicais digitais, nutrido bits e bytes. &quot;Unidos na vida, unidos na morte.&quot;</p></li></ul></section></section><section class="chapter"><h2 id="os-drivers-pilotos-do-submundo-digital" data-toc="os-drivers-pilotos-do-submundo-digital">Os Drivers: Pilotos do Submundo Digital 🏎️</h2><section class="chapter"><h3 id="bridge-network-o-submundo-comum" data-toc="bridge-network-o-submundo-comum">Bridge Network: O Submundo Comum</h3><p id="-tyyazf_32">Como becos escuros de uma cidade neon, a bridge network &eacute; onde a maioria dos containers vive - n&atilde;o &eacute; bonito, mas &eacute; funcional.</p><div class="code-block" data-lang="none">
+╔═══════════════════════════════════╗
+║  BRIDGE NETWORK: O GUETO DIGITAL  ║
+╠═══════════════════════════════════╣
+║ ┌──────┐  ┌──────┐  ┌──────┐     ║
+║ │ Bot  │  │ Bot  │  │ Bot  │     ║
+║ │ #127 │  │ #254 │  │ #666 │     ║
+║ └──┬───┘  └──┬───┘  └──┬───┘     ║
+║    └────────┬────────┬─┘         ║
+║        [Bridge-01]                ║
+╚═══════════════════════════════════╝
+</div></section><section class="chapter"><h3 id="host-network-a-liberdade-perigosa" data-toc="host-network-a-liberdade-perigosa">Host Network: A Liberdade Perigosa</h3><p id="-tyyazf_34">Ah, a rede do host! Como um mergulho sem paraquedas em Neo-Tokyo. Performance m&aacute;xima, seguran&ccedil;a m&iacute;nima. Viva perigosamente!</p><div class="code-block" data-lang="bash">
+# Para os corajosos (ou loucos)
+docker run --network host nginx
+# &quot;Quem precisa de isolamento quando se tem velocidade?&quot; - DevOps antes do incidente
+</div></section><section class="chapter"><h3 id="overlay-network-a-teia-da-ilus-o" data-toc="overlay-network-a-teia-da-ilus-o">Overlay Network: A Teia da Ilus&atilde;o</h3><p id="-tyyazf_36">Multi-host networking, ou como gosto de chamar: &quot;A arte de fazer containers acreditarem que est&atilde;o na mesma rede quando, na verdade, est&atilde;o separados por um abismo digital.&quot;</p><section class="chapter"><h4 id="configura-o-multi-host" data-toc="configura-o-multi-host">Configura&ccedil;&atilde;o Multi-host</h4><div class="code-block" data-lang="bash">
+# Inicializar swarm
+docker swarm init
+
+# Criar rede overlay
+docker network create \
+  --driver overlay \
+  --attachable \
+  --subnet=10.0.9.0/24 \
+  --gateway=10.0.9.1 \
+  overlay_net
+
+# Criptografia
+docker network create \
+  --driver overlay \
+  --opt encrypted=true \
+  secure_overlay
+</div></section></section><section class="chapter"><h3 id="macvlan" data-toc="macvlan">Macvlan</h3><ul class="list _bullet" id="-tyyazf_39"><li class="list__item" id="-tyyazf_41"><p id="-tyyazf_44">Interfaces MAC dedicadas</p></li><li class="list__item" id="-tyyazf_42"><p id="-tyyazf_45">Performance pr&oacute;xima ao bare metal</p></li><li class="list__item" id="-tyyazf_43"><p id="-tyyazf_46">Integra&ccedil;&atilde;o com redes f&iacute;sicas</p></li></ul><section class="chapter"><h4 id="modos-de-opera-o" data-toc="modos-de-opera-o">Modos de Opera&ccedil;&atilde;o</h4><div class="code-block" data-lang="bash">
+# Modo Bridge
+docker network create -d macvlan \
+  --subnet=192.168.32.0/24 \
+  --gateway=192.168.32.1 \
+  -o parent=eth0 \
+  -o macvlan_mode=bridge \
+  macvlan_bridge
+
+# Modo 802.1q trunk
+docker network create -d macvlan \
+  --subnet=192.168.32.0/24 \
+  --gateway=192.168.32.1 \
+  -o parent=eth0.10 \
+  macvlan_trunk
+</div></section></section></section><section class="chapter"><h2 id="container-network-interface-cni" data-toc="container-network-interface-cni">Container Network Interface (CNI)</h2><section class="chapter"><h3 id="arquitetura-cni" data-toc="arquitetura-cni">Arquitetura CNI</h3><div class="code-block" data-lang="none">
+┌────────────────────────────────────┐
+│ CNI Pipeline                       │
+├────────────────────────────────────┤
+│ ADD → CHECK → DEL                  │
+└────────────────────────────────────┘
+</div></section><section class="chapter"><h3 id="plugins-cni" data-toc="plugins-cni">Plugins CNI</h3><section class="chapter"><h4 id="b-sicos" data-toc="b-sicos">B&aacute;sicos</h4><ul class="list _bullet" id="-tyyazf_54"><li class="list__item" id="-tyyazf_55"><p id="-tyyazf_59">bridge</p></li><li class="list__item" id="-tyyazf_56"><p id="-tyyazf_60">host-local</p></li><li class="list__item" id="-tyyazf_57"><p id="-tyyazf_61">loopback</p></li><li class="list__item" id="-tyyazf_58"><p id="-tyyazf_62">dhcp</p></li></ul></section><section class="chapter"><h4 id="metaplugins" data-toc="metaplugins">Metaplugins</h4><ul class="list _bullet" id="-tyyazf_63"><li class="list__item" id="-tyyazf_64"><p id="-tyyazf_68">flannel</p></li><li class="list__item" id="-tyyazf_65"><p id="-tyyazf_69">tuning</p></li><li class="list__item" id="-tyyazf_66"><p id="-tyyazf_70">portmap</p></li><li class="list__item" id="-tyyazf_67"><p id="-tyyazf_71">bandwidth</p></li></ul></section><section class="chapter"><h4 id="plugins-avan-ados" data-toc="plugins-avan-ados">Plugins Avan&ccedil;ados</h4><ul class="list _bullet" id="-tyyazf_72"><li class="list__item" id="-tyyazf_73"><p id="-tyyazf_76">Calico</p><ul class="list _bullet" id="-tyyazf_77"><li class="list__item" id="-tyyazf_78"><p id="-tyyazf_81">BGP networking</p></li><li class="list__item" id="-tyyazf_79"><p id="-tyyazf_82">Network policies</p></li><li class="list__item" id="-tyyazf_80"><p id="-tyyazf_83">IPAM</p></li></ul></li><li class="list__item" id="-tyyazf_74"><p id="-tyyazf_84">Cilium</p><ul class="list _bullet" id="-tyyazf_85"><li class="list__item" id="-tyyazf_86"><p id="-tyyazf_89">eBPF-based networking</p></li><li class="list__item" id="-tyyazf_87"><p id="-tyyazf_90">L7 policies</p></li><li class="list__item" id="-tyyazf_88"><p id="-tyyazf_91">Observability</p></li></ul></li><li class="list__item" id="-tyyazf_75"><p id="-tyyazf_92">Weave</p><ul class="list _bullet" id="-tyyazf_93"><li class="list__item" id="-tyyazf_94"><p id="-tyyazf_97">Encrypted networking</p></li><li class="list__item" id="-tyyazf_95"><p id="-tyyazf_98">Service discovery</p></li><li class="list__item" id="-tyyazf_96"><p id="-tyyazf_99">Fast datapath</p></li></ul></li></ul></section></section></section><section class="chapter"><h2 id="configura-o-de-rede" data-toc="configura-o-de-rede">Configura&ccedil;&atilde;o de Rede</h2><section class="chapter"><h3 id="port-mapping" data-toc="port-mapping">Port Mapping</h3><div class="code-block" data-lang="bash">
+# Exposição básica
+docker run -p 8080:80 nginx
+
+# UDP ports
+docker run -p 53:53/udp dns-server
+
+# Múltiplos ports
+docker run \
+  -p 80:80 \
+  -p 443:443 \
+  -p 8080:8080 \
+  web-server
+
+# Range de portas
+docker run -p 8080-8090:80-90 nginx
+</div></section><section class="chapter"><h3 id="dns-e-service-discovery" data-toc="dns-e-service-discovery">DNS e Service Discovery</h3><section class="chapter"><h4 id="configura-o-dns" data-toc="configura-o-dns">Configura&ccedil;&atilde;o DNS</h4><div class="code-block" data-lang="yaml">
+# /etc/docker/daemon.json
+{
+  &quot;dns&quot;: [&quot;8.8.8.8&quot;, &quot;8.8.4.4&quot;],
+  &quot;dns-search&quot;: [&quot;example.com&quot;],
+  &quot;dns-opts&quot;: [&quot;ndots:2&quot;, &quot;timeout:2&quot;]
+}
+</div></section><section class="chapter"><h4 id="docker-compose" data-toc="docker-compose">Docker Compose</h4><div class="code-block" data-lang="yaml">
+version: '3.8'
+services:
+  web:
+    networks:
+      frontend:
+        aliases:
+          - web.local
+      backend:
+        aliases:
+          - web.internal
+  api:
+    networks:
+      backend:
+        ipv4_address: 172.16.238.10
+        
+networks:
+  frontend:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+        - subnet: &quot;2001:db8:1::/64&quot;
+  backend:
+    internal: true
+    driver: bridge
+</div></section></section></section><section class="chapter"><h2 id="seguran-a-de-rede" data-toc="seguran-a-de-rede">Seguran&ccedil;a de Rede</h2><section class="chapter"><h3 id="network-policies" data-toc="network-policies">Network Policies</h3><section class="chapter"><h4 id="isolamento-b-sico" data-toc="isolamento-b-sico">Isolamento B&aacute;sico</h4><div class="code-block" data-lang="yaml">
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+</div></section><section class="chapter"><h4 id="pol-ticas-avan-adas" data-toc="pol-ticas-avan-adas">Pol&iacute;ticas Avan&ccedil;adas</h4><div class="code-block" data-lang="yaml">
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: api-allow
+spec:
+  podSelector:
+    matchLabels:
+      role: api
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          purpose: production
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 10.0.0.0/24
+        except:
+        - 10.0.0.1/32
+    ports:
+    - protocol: TCP
+      port: 5432
+</div></section></section><section class="chapter"><h3 id="isolamento" data-toc="isolamento">Isolamento</h3><section class="chapter"><h4 id="t-cnicas-de-isolamento" data-toc="t-cnicas-de-isolamento">T&eacute;cnicas de Isolamento</h4><ul class="list _bullet" id="-tyyazf_115"><li class="list__item" id="-tyyazf_116"><p id="-tyyazf_120">Network namespaces</p></li><li class="list__item" id="-tyyazf_117"><p id="-tyyazf_121">Bridge isolation</p></li><li class="list__item" id="-tyyazf_118"><p id="-tyyazf_122">VLAN tagging</p></li><li class="list__item" id="-tyyazf_119"><p id="-tyyazf_123">Security groups</p></li></ul></section><section class="chapter"><h4 id="firewall-rules" data-toc="firewall-rules">Firewall Rules</h4><div class="code-block" data-lang="bash">
+# Bloquear acesso externo
+iptables -I DOCKER-USER -i ext_if ! -s 192.168.1.0/24 -j DROP
+
+# Permitir apenas portas específicas
+iptables -I DOCKER-USER -i ext_if -p tcp --dport 80 -j ACCEPT
+iptables -I DOCKER-USER -i ext_if -p tcp --dport 443 -j ACCEPT
+</div></section></section></section><section class="chapter"><h2 id="troubleshooting" data-toc="troubleshooting">Troubleshooting</h2><section class="chapter"><h3 id="ferramentas-de-diagn-stico" data-toc="ferramentas-de-diagn-stico">Ferramentas de Diagn&oacute;stico</h3><section class="chapter"><h4 id="network-inspection" data-toc="network-inspection">Network Inspection</h4><div class="code-block" data-lang="bash">
+# Detalhes da rede
+docker network inspect bridge
+
+# Lista de endpoints
+docker network inspect -f '{{range .Containers}}{{.Name}} {{.IPv4Address}}{{end}}' bridge
+
+# Estatísticas de rede
+docker stats --no-stream --format &quot;table {{.Container}}\t{{.NetIO}}&quot;
+</div></section><section class="chapter"><h4 id="debugging-tools" data-toc="debugging-tools">Debugging Tools</h4><div class="code-block" data-lang="bash">
+# tcpdump
+docker run --net=container:target \
+  --privileged \
+  nicolaka/netshoot \
+  tcpdump -i any port 80
+
+# netstat
+docker exec container netstat -tulpn
+
+# iptables
+docker run --net=host --privileged \
+  nicolaka/netshoot \
+  iptables -nvL
+</div></section></section><section class="chapter"><h3 id="problemas-comuns" data-toc="problemas-comuns">Problemas Comuns</h3><section class="chapter"><h4 id="matriz-de-troubleshooting" data-toc="matriz-de-troubleshooting">Matriz de Troubleshooting</h4><div class="table-wrapper"><table class="wide" id="-tyyazf_132"><thead><tr class="ijRowHead" id="-tyyazf_133"><th id="-tyyazf_138"><p>Problema</p></th><th id="-tyyazf_139"><p>Diagn&oacute;stico</p></th><th id="-tyyazf_140"><p>Solu&ccedil;&atilde;o</p></th><th id="-tyyazf_141"><p>Comando</p></th></tr></thead><tbody><tr id="-tyyazf_134"><td id="-tyyazf_142"><p>DNS</p></td><td id="-tyyazf_143"><p><code class="code" id="-tyyazf_146">nslookup</code></p></td><td id="-tyyazf_144"><p>Verificar resolv.conf</p></td><td id="-tyyazf_145"><p><code class="code" id="-tyyazf_147">docker exec container cat /etc/resolv.conf</code></p></td></tr><tr id="-tyyazf_135"><td id="-tyyazf_148"><p>Conectividade</p></td><td id="-tyyazf_149"><p><code class="code" id="-tyyazf_152">ping</code></p></td><td id="-tyyazf_150"><p>Verificar firewall</p></td><td id="-tyyazf_151"><p><code class="code" id="-tyyazf_153">iptables -nvL</code></p></td></tr><tr id="-tyyazf_136"><td id="-tyyazf_154"><p>Portas</p></td><td id="-tyyazf_155"><p><code class="code" id="-tyyazf_158">netstat</code></p></td><td id="-tyyazf_156"><p>Verificar binding</p></td><td id="-tyyazf_157"><p><code class="code" id="-tyyazf_159">netstat -tulpn</code></p></td></tr><tr id="-tyyazf_137"><td id="-tyyazf_160"><p>Performance</p></td><td id="-tyyazf_161"><p><code class="code" id="-tyyazf_164">iperf</code></p></td><td id="-tyyazf_162"><p>Testar bandwidth</p></td><td id="-tyyazf_163"><p><code class="code" id="-tyyazf_165">iperf -c target</code></p></td></tr></tbody></table></div></section></section></section><section class="chapter"><h2 id="monitoramento" data-toc="monitoramento">Monitoramento</h2><section class="chapter"><h3 id="m-tricas-de-rede" data-toc="m-tricas-de-rede">M&eacute;tricas de Rede</h3><section class="chapter"><h4 id="b-sicas" data-toc="b-sicas">B&aacute;sicas</h4><div class="code-block" data-lang="bash">
+# Estatísticas básicas
+docker stats --format &quot;table {{.Name}}\t{{.NetIO}}&quot;
+
+# IO detalhado
+docker stats --no-stream --format &quot;table {{.Container}}\t{{.NetIO}}\t{{.BlockIO}}&quot;
+</div></section><section class="chapter"><h4 id="avan-adas" data-toc="avan-adas">Avan&ccedil;adas</h4><div class="code-block" data-lang="bash">
+# Monitoramento com cAdvisor
+docker run \
+  --volume=/:/rootfs:ro \
+  --volume=/var/run:/var/run:ro \
+  --volume=/sys:/sys:ro \
+  --volume=/var/lib/docker/:/var/lib/docker:ro \
+  --publish=8080:8080 \
+  --detach=true \
+  --name=cadvisor \
+  google/cadvisor:latest
+</div></section></section><section class="chapter"><h3 id="logging" data-toc="logging">Logging</h3><section class="chapter"><h4 id="configura-o-de-log" data-toc="configura-o-de-log">Configura&ccedil;&atilde;o de Log</h4><div class="code-block" data-lang="json">
+{
+  &quot;log-driver&quot;: &quot;json-file&quot;,
+  &quot;log-opts&quot;: {
+    &quot;max-size&quot;: &quot;10m&quot;,
+    &quot;max-file&quot;: &quot;3&quot;
+  }
+}
+</div></section><section class="chapter"><h4 id="coleta-de-logs" data-toc="coleta-de-logs">Coleta de Logs</h4><div class="code-block" data-lang="bash">
+# Logs de rede
+docker logs --tail 100 -f container
+
+# Eventos de rede
+docker events --filter 'type=network'
+</div></section></section></section><section class="chapter"><h2 id="refer-ncias" data-toc="refer-ncias">Refer&ecirc;ncias</h2><section class="chapter"><h3 id="documenta-o" data-toc="documenta-o">Documenta&ccedil;&atilde;o</h3><ul class="list _bullet" id="-tyyazf_180"><li class="list__item" id="-tyyazf_181"><p id="-tyyazf_184"><a href="https://docs.docker.com/network/" id="-tyyazf_185" data-external="true" rel="noopener noreferrer" target="_blank">Docker Networking Overview</a></p></li><li class="list__item" id="-tyyazf_182"><p id="-tyyazf_186"><a href="https://github.com/containernetworking/cni/blob/master/SPEC.md" id="-tyyazf_187" data-external="true" rel="noopener noreferrer" target="_blank">CNI Specification</a></p></li><li class="list__item" id="-tyyazf_183"><p id="-tyyazf_188"><a href="https://github.com/docker/libnetwork/blob/master/docs/design.md" id="-tyyazf_189" data-external="true" rel="noopener noreferrer" target="_blank">Libnetwork Design</a></p></li></ul></section><section class="chapter"><h3 id="ferramentas" data-toc="ferramentas">Ferramentas</h3><ul class="list _bullet" id="-tyyazf_190"><li class="list__item" id="-tyyazf_191"><p id="-tyyazf_194"><a href="https://github.com/nicolaka/netshoot" id="-tyyazf_195" data-external="true" rel="noopener noreferrer" target="_blank">Netshoot</a></p></li><li class="list__item" id="-tyyazf_192"><p id="-tyyazf_196"><a href="https://github.com/docker/docker-diagnose" id="-tyyazf_197" data-external="true" rel="noopener noreferrer" target="_blank">Network Debug Tools</a></p></li><li class="list__item" id="-tyyazf_193"><p id="-tyyazf_198"><a href="https://github.com/containernetworking/plugins" id="-tyyazf_199" data-external="true" rel="noopener noreferrer" target="_blank">Network Plugins</a></p></li></ul></section><section class="chapter"><h3 id="tutoriais-avan-ados" data-toc="tutoriais-avan-ados">Tutoriais Avan&ccedil;ados</h3><ul class="list _bullet" id="-tyyazf_200"><li class="list__item" id="-tyyazf_201"><p id="-tyyazf_204"><a href="https://docs.docker.com/network/overlay/" id="-tyyazf_205" data-external="true" rel="noopener noreferrer" target="_blank">Multi-host Networking</a></p></li><li class="list__item" id="-tyyazf_202"><p id="-tyyazf_206"><a href="https://docs.docker.com/network/security/" id="-tyyazf_207" data-external="true" rel="noopener noreferrer" target="_blank">Network Security</a></p></li><li class="list__item" id="-tyyazf_203"><p id="-tyyazf_208"><a href="https://docs.docker.com/engine/extend/plugins_network/" id="-tyyazf_209" data-external="true" rel="noopener noreferrer" target="_blank">Custom Network Plugins</a></p></li></ul></section><section class="chapter"><h3 id="recursos-adicionais" data-toc="recursos-adicionais">Recursos Adicionais</h3><ul class="list _bullet" id="-tyyazf_210"><li class="list__item" id="-tyyazf_211"><p id="-tyyazf_214"><a href="https://success.docker.com/article/troubleshooting-container-networking" id="-tyyazf_215" data-external="true" rel="noopener noreferrer" target="_blank">Docker Network Troubleshooting Guide</a></p></li><li class="list__item" id="-tyyazf_212"><p id="-tyyazf_216"><a href="https://github.com/containernetworking/cni/blob/master/SPEC.md" id="-tyyazf_217" data-external="true" rel="noopener noreferrer" target="_blank">Container Network Interface Specification</a></p></li><li class="list__item" id="-tyyazf_213"><p id="-tyyazf_218"><a href="https://docs.docker.com/engine/userguide/networking/dockernetworks/" id="-tyyazf_219" data-external="true" rel="noopener noreferrer" target="_blank">Docker Network Architecture</a></p></li></ul></section></section><div class="last-modified">15 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="container-runtime.html" class="navigation-links__prev">Container Runtime: O Motor dos Containers 🚀</a><a href="container-storage.html" class="navigation-links__next">Container Storage: Cr&ocirc;nicas dos Dados Perdidos 💾</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>
