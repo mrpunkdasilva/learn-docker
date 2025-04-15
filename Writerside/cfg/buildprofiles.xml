@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE buildprofiles SYSTEM "https://resources.jetbrains.com/writerside/1.0/build-profiles.dtd">
+<buildprofiles xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <variables>
+        <custom-video-cover>logo-primary.svg</custom-video-cover>
+        <custom-favicons>logo-primary.svg</custom-favicons>
+        <header-logo>logo-primary.svg</header-logo>
+        <og-image>logo-primary.svg</og-image>
+        <og-twitter>logo-primary.svg</og-twitter>
+    </variables>
+    
+    <build-profile instance="ld">
+        <variables>
+            <primary-color>purple</primary-color>
+            <noindex-content>false</noindex-content>
+            <product-web-url>https://github.com/seu-usuario/learn-docker</product-web-url>
+            <download-title>Clone o Repositório</download-title>
+            <download-page>https://github.com/seu-usuario/learn-docker</download-page>
+            <showDownloadButton>true</showDownloadButton>
+        </variables>
+    </build-profile>
+
+    <footer>
+        <copyright>PunkDomus 2025 - Cyberpunk Docker Edition</copyright>
+        <social type="blog" href="https://dev.to/tag/docker">Dev.to Docker Posts</social>
+        <social type="twitter" href="https://twitter.com/docker">Docker Twitter</social>
+        <link href="https://docs.docker.com">Documentação Oficial Docker</link>
+    </footer>
+</buildprofiles>

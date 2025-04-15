@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="ld"
+                 name="Learn Docker"
+                 start-page="welcome.md">
+
+    <toc-element topic="welcome.md"/>
+    
+    <toc-element toc-title="INIT: Container Matrix">
+        <toc-element toc-title="Phase 1: Docker Reality Check">
+            <toc-element topic="why-docker.md"/>
+            <toc-element topic="container-vs-vm.md"/>
+            <toc-element topic="docker-history.md"/>
+        </toc-element>
+        <toc-element toc-title="Phase 2: Setup &amp; Installation">
+            <toc-element topic="installation-guide.md"/>
+            <toc-element topic="docker-desktop-cli.md"/>
+            <toc-element topic="common-issues.md"/>
+        </toc-element>
+        <toc-element toc-title="Phase 3: Core Concepts">
+            <toc-element topic="containers-101.md"/>
+            <toc-element topic="images-containers.md"/>
+            <toc-element topic="docker-architecture.md"/>
+            <toc-element topic="container-lifecycle.md"/>
+            <toc-element topic="cli-basics.md"/>
+        </toc-element>
+    </toc-element>
+
+    <toc-element toc-title="BASICS: Docker Fundamentals">
+        <toc-element toc-title="Phase 1: Docker Basics">
+            <toc-element topic="docker-commands.md"/>
+            <toc-element topic="docker-images.md"/>
+            <toc-element topic="docker-containers.md"/>
+        </toc-element>
+        <toc-element toc-title="Phase 2: Dockerfile Basics">
+            <toc-element topic="dockerfile-intro.md"/>
+            <toc-element topic="dockerfile-commands.md"/>
+            <toc-element topic="dockerfile-examples.md"/>
+        </toc-element>
+        <toc-element toc-title="Phase 3: Docker Compose Basics">
+            <toc-element topic="docker-compose-intro.md"/>
+            <toc-element topic="docker-compose-file.md"/>
+            <toc-element topic="docker-compose-commands.md"/>
+        </toc-element>
+    </toc-element>
+
+    <toc-element toc-title="ADVANCED: Docker Deep Dive">
+        <toc-element toc-title="Phase 1: Networking &amp; Security">
+            <toc-element topic="docker-networking.md"/>
+            <toc-element topic="docker-security.md"/>
+            <toc-element topic="docker-registry.md"/>
+        </toc-element>
+        <toc-element toc-title="Phase 2: Performance &amp; Optimization">
+            <toc-element topic="docker-performance.md"/>
+            <toc-element topic="docker-optimization.md"/>
+            <toc-element topic="docker-caching.md"/>
+        </toc-element>
+        <toc-element toc-title="Phase 3: Advanced Concepts">
+            <toc-element topic="docker-volumes.md"/>
+            <toc-element topic="docker-bind-mounts.md"/>
+            <toc-element topic="docker-multi-stage-builds.md"/>
+        </toc-element>
+    </toc-element>
+
+    <toc-element toc-title="PRACTICE: Hands-on Labs">
+        <toc-element toc-title="Lab 1: Docker Basics">
+            <toc-element topic="lab-1-intro.md"/>
+            <toc-element topic="lab-1-setup.md"/>
+            <toc-element topic="lab-1-exercise.md"/>
+        </toc-element>
+        <toc-element toc-title="Lab 2: Dockerfile &amp; Compose">
+            <toc-element topic="lab-2-intro.md"/>
+            <toc-element topic="lab-2-setup.md"/>
+            <toc-element topic="lab-2-exercise.md"/>
+        </toc-element>
+        <toc-element toc-title="Lab 3: Networking &amp; Security">
+            <toc-element topic="lab-3-intro.md"/>
+            <toc-element topic="lab-3-setup.md"/>
+            <toc-element topic="lab-3-exercise.md"/>
+        </toc-element>
+    </toc-element>
+
+    <toc-element toc-title="CERTIFICATION: Docker Certified Associate">
+        <toc-element toc-title="Exam Overview">
+            <toc-element topic="docker-certified-overview.md"/>
+        </toc-element>
+        <toc-element toc-title="Exam Preparation">
+            <toc-element topic="docker-certified-preparation.md"/>
+        </toc-element>
+        <toc-element toc-title="Exam Topics">
+            <toc-element topic="docker-certified-topics.md"/>
+        </toc-element>
+    </toc-element>
+</instance-profile>

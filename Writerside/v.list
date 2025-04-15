@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE vars SYSTEM "https://resources.jetbrains.com/writerside/1.0/vars.dtd">
+<vars>
+    <var name="product" value="Learn Docker"/>
+    <var name="docker_version" value="24.0.7"/>
+    <var name="release_year" value="2025"/>
+    <var name="author" value="PunkDomus"/>
+    <var name="project_repo" value="https://github.com/seu-usuario/learn-docker"/>
+</vars>
