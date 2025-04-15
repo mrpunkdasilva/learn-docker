@@ -1,0 +1,220 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T20:14:21.699812748"><title>Container Internals: Como Funciona Por Dentro 🔬 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"linux-namespaces","level":0,"title":"Linux Namespaces 🏰","anchor":"#linux-namespaces"},{"id":"control-groups-cgroups-v2","level":0,"title":"Control Groups (cgroups) v2 🎛️","anchor":"#control-groups-cgroups-v2"},{"id":"union-file-system-deep-dive","level":0,"title":"Union File System Deep Dive 📦","anchor":"#union-file-system-deep-dive"},{"id":"container-runtime-spec","level":0,"title":"Container Runtime Spec 🏃","anchor":"#container-runtime-spec"},{"id":"security-internals","level":0,"title":"Security Internals 🔒","anchor":"#security-internals"},{"id":"advanced-networking","level":0,"title":"Advanced Networking 🌐","anchor":"#advanced-networking"},{"id":"storage-deep-dive","level":0,"title":"Storage Deep Dive 💾","anchor":"#storage-deep-dive"},{"id":"advanced-debugging","level":0,"title":"Advanced Debugging 🔍","anchor":"#advanced-debugging"},{"id":"performance-tuning","level":0,"title":"Performance Tuning ⚡","anchor":"#performance-tuning"},{"id":"waifu-tips","level":0,"title":"Waifu Tips 🎮","anchor":"#waifu-tips"},{"id":"refer-ncias-t-cnicas","level":0,"title":"Referências Técnicas 📚","anchor":"#refer-ncias-t-cnicas"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Container Internals: Como Funciona Por Dentro 🔬 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/container-internals.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Container Internals: Como Funciona Por Dentro 🔬 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/container-internals.html#webpage",
+    "url": "writerside-documentation/container-internals.html",
+    "name": "Container Internals: Como Funciona Por Dentro 🔬 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="container-internals" data-main-title="Container Internals: Como Funciona Por Dentro 🔬" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="INIT: Container Matrix///Phase 3: Core Concepts///containers-101.md|Containers 101"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="container-internals" id="container-internals.md">Container Internals: Como Funciona Por Dentro 🔬</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════════════════╗
+║  CONTAINER INTERNALS MATRIX                                           ║
+║                                                                       ║
+║  [ Namespaces + Cgroups + UnionFS = Container ]                      ║
+║                                                                       ║
+║  &quot;Isolamento, Controle e Eficiência&quot;                                 ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="linux-namespaces" data-toc="linux-namespaces">Linux Namespaces 🏰</h2><section class="chapter"><h3 id="tipos-de-namespaces-detalhados" data-toc="tipos-de-namespaces-detalhados">Tipos de Namespaces Detalhados</h3><section class="chapter"><h4 id="1-pid-namespace" data-toc="1-pid-namespace">1. PID Namespace</h4><div class="code-block" data-lang="none">
+┌─────────────────────────┐
+│ Host PID Namespace      │
+│  pid: 1234             │
+│  ┌──────────────────┐  │
+│  │Container PID NS  │  │
+│  │  pid: 1         │  │
+│  └──────────────────┘  │
+└─────────────────────────┘
+</div><ul class="list _bullet" id="z4rrrmj_20"><li class="list__item" id="z4rrrmj_21"><p id="z4rrrmj_25">Isolamento de processos</p></li><li class="list__item" id="z4rrrmj_22"><p id="z4rrrmj_26">Hierarquia pr&oacute;pria</p></li><li class="list__item" id="z4rrrmj_23"><p id="z4rrrmj_27">PID 1 como init</p></li><li class="list__item" id="z4rrrmj_24"><p id="z4rrrmj_28">Nested namespaces</p></li></ul></section><section class="chapter"><h4 id="2-network-namespace" data-toc="2-network-namespace">2. Network Namespace</h4><div class="code-block" data-lang="none">
+┌────────────────────────────┐
+│ Host Network               │
+│ eth0: 192.168.1.10        │
+│  ┌──────────────────────┐  │
+│  │Container Net NS      │  │
+│  │ eth0: 172.17.0.2    │  │
+│  │ lo: 127.0.0.1       │  │
+│  └──────────────────────┘  │
+└────────────────────────────┘
+</div><ul class="list _bullet" id="z4rrrmj_30"><li class="list__item" id="z4rrrmj_31"><p id="z4rrrmj_35">Interface virtual</p></li><li class="list__item" id="z4rrrmj_32"><p id="z4rrrmj_36">Routing tables pr&oacute;prias</p></li><li class="list__item" id="z4rrrmj_33"><p id="z4rrrmj_37">Firewall rules</p></li><li class="list__item" id="z4rrrmj_34"><p id="z4rrrmj_38">Socket isolation</p></li></ul></section><section class="chapter"><h4 id="3-mount-namespace" data-toc="3-mount-namespace">3. Mount Namespace</h4><div class="code-block" data-lang="none">
+┌────────────────────────┐
+│ Host Mount NS          │
+│  /                     │
+│  ├── bin              │
+│  ├── etc              │
+│  └── container_root    │
+│      └── [Container]  │
+└────────────────────────┘
+</div><ul class="list _bullet" id="z4rrrmj_40"><li class="list__item" id="z4rrrmj_41"><p id="z4rrrmj_45">Filesystem isolation</p></li><li class="list__item" id="z4rrrmj_42"><p id="z4rrrmj_46">Bind mounts</p></li><li class="list__item" id="z4rrrmj_43"><p id="z4rrrmj_47">Pivoting root</p></li><li class="list__item" id="z4rrrmj_44"><p id="z4rrrmj_48">Mount propagation</p></li></ul></section></section></section><section class="chapter"><h2 id="control-groups-cgroups-v2" data-toc="control-groups-cgroups-v2">Control Groups (cgroups) v2 🎛️</h2><section class="chapter"><h3 id="hierarquia-unificada" data-toc="hierarquia-unificada">Hierarquia Unificada</h3><div class="code-block" data-lang="none">
+┌─────────────────────────────────┐
+│ /sys/fs/cgroup/                 │
+├─────────────────────────────────┤
+│ ├── container.slice            │
+│ │   ├── memory.max            │
+│ │   ├── cpu.max               │
+│ │   └── io.max                │
+│ └── system.slice              │
+└─────────────────────────────────┘
+</div></section><section class="chapter"><h3 id="controllers-detalhados" data-toc="controllers-detalhados">Controllers Detalhados</h3><section class="chapter"><h4 id="cpu-controller" data-toc="cpu-controller">CPU Controller</h4><div class="code-block" data-lang="bash">
+# Limitar CPU para 50%
+echo &quot;50000 100000&quot; &gt; cpu.max
+
+# Definir peso CPU
+echo &quot;100&quot; &gt; cpu.weight
+</div></section><section class="chapter"><h4 id="memory-controller" data-toc="memory-controller">Memory Controller</h4><div class="code-block" data-lang="bash">
+# Limite de memória
+echo &quot;256M&quot; &gt; memory.max
+
+# Soft limit
+echo &quot;200M&quot; &gt; memory.high
+</div></section><section class="chapter"><h4 id="i-o-controller" data-toc="i-o-controller">I/O Controller</h4><div class="code-block" data-lang="bash">
+# Limite de I/O
+echo &quot;10485760&quot; &gt; io.max
+
+# Peso I/O
+echo &quot;100&quot; &gt; io.weight
+</div></section></section></section><section class="chapter"><h2 id="union-file-system-deep-dive" data-toc="union-file-system-deep-dive">Union File System Deep Dive 📦</h2><section class="chapter"><h3 id="overlay2-internals" data-toc="overlay2-internals">Overlay2 Internals</h3><div class="code-block" data-lang="none">
+┌────────────────────────────┐
+│ Container Layer (Upper)    │
+├────────────────────────────┤
+│ Container Write Layer      │
+├────────────────────────────┤
+│ Image Layer N (Lower)      │
+├────────────────────────────┤
+│ Image Layer 2 (Lower)      │
+├────────────────────────────┤
+│ Base Layer (Lower)         │
+└────────────────────────────┘
+</div></section><section class="chapter"><h3 id="layer-operations" data-toc="layer-operations">Layer Operations</h3><div class="code-block" data-lang="none">
+┌────────────────────────┐
+│ Write Operation        │
+│ ┌──────────────────┐   │
+│ │ Copy-Up          │   │
+│ │ Modify Upper     │   │
+│ └──────────────────┘   │
+└────────────────────────┘
+</div></section><section class="chapter"><h3 id="directory-structure" data-toc="directory-structure">Directory Structure</h3><div class="code-block" data-lang="bash">
+/var/lib/docker/overlay2/
+├── l/                  # Layer shortcuts
+├── [layer-id]/         # Layer content
+│   ├── diff/          # Layer fs content
+│   ├── work/          # Overlay work dir
+│   ├── merged/        # Mount point
+│   └── lower          # Lower layer refs
+</div></section></section><section class="chapter"><h2 id="container-runtime-spec" data-toc="container-runtime-spec">Container Runtime Spec 🏃</h2><section class="chapter"><h3 id="oci-runtime-specification" data-toc="oci-runtime-specification">OCI Runtime Specification</h3><div class="code-block" data-lang="none">
+┌────────────────────────────┐
+│ runtime-spec               │
+├────────────────────────────┤
+│ ├── config.json          │
+│ ├── rootfs/              │
+│ └── state.json          │
+└────────────────────────────┘
+</div></section><section class="chapter"><h3 id="container-lifecycle-states" data-toc="container-lifecycle-states">Container Lifecycle States</h3><div class="code-block" data-lang="none">
+┌──────────┐     ┌──────────┐
+│ creating │ ──► │ created  │
+└──────────┘     └────┬─────┘
+                      │
+                      ▼
+┌──────────┐     ┌──────────┐
+│ stopped  │ ◄── │ running  │
+└──────────┘     └──────────┘
+</div></section></section><section class="chapter"><h2 id="security-internals" data-toc="security-internals">Security Internals 🔒</h2><section class="chapter"><h3 id="linux-capabilities" data-toc="linux-capabilities">Linux Capabilities</h3><div class="code-block" data-lang="none">
+┌────────────────────────────────┐
+│ Default Container Capabilities │
+├────────────────────────────────┤
+│ CHOWN          │ SETUID       │
+│ DAC_OVERRIDE   │ SETGID       │
+│ FOWNER         │ NET_BIND     │
+│ MKNOD          │ SYS_CHROOT   │
+└────────────────────────────────┘
+</div></section><section class="chapter"><h3 id="seccomp-profiles" data-toc="seccomp-profiles">Seccomp Profiles</h3><div class="code-block" data-lang="json">
+{
+  &quot;defaultAction&quot;: &quot;SCMP_ACT_ERRNO&quot;,
+  &quot;architectures&quot;: [&quot;SCMP_ARCH_X86_64&quot;],
+  &quot;syscalls&quot;: [
+    {
+      &quot;names&quot;: [&quot;read&quot;, &quot;write&quot;],
+      &quot;action&quot;: &quot;SCMP_ACT_ALLOW&quot;
+    }
+  ]
+}
+</div></section><section class="chapter"><h3 id="apparmor-profiles" data-toc="apparmor-profiles">AppArmor Profiles</h3><div class="code-block" data-lang="none">
+┌────────────────────────────┐
+│ Docker Default Profile     │
+├────────────────────────────┤
+│ file,                     │
+│ network,                  │
+│ capability,               │
+│ mount                     │
+└────────────────────────────┘
+</div></section></section><section class="chapter"><h2 id="advanced-networking" data-toc="advanced-networking">Advanced Networking 🌐</h2><section class="chapter"><h3 id="cni-container-network-interface" data-toc="cni-container-network-interface">CNI (Container Network Interface)</h3><div class="code-block" data-lang="none">
+┌────────────────────────────┐
+│ CNI Architecture          │
+├────────────────────────────┤
+│ ┌──────────┐ ┌──────────┐ │
+│ │ Plugin   │ │ IPAM     │ │
+│ └──────────┘ └──────────┘ │
+└────────────────────────────┘
+</div></section><section class="chapter"><h3 id="network-drivers" data-toc="network-drivers">Network Drivers</h3><div class="code-block" data-lang="none">
+┌────────────────────────────┐
+│ Network Driver Types       │
+├────────────────────────────┤
+│ bridge                    │
+│ host                      │
+│ overlay                   │
+│ macvlan                   │
+│ none                      │
+└────────────────────────────┘
+</div></section></section><section class="chapter"><h2 id="storage-deep-dive" data-toc="storage-deep-dive">Storage Deep Dive 💾</h2><section class="chapter"><h3 id="storage-driver-operations" data-toc="storage-driver-operations">Storage Driver Operations</h3><div class="code-block" data-lang="none">
+┌────────────────────────────┐
+│ Storage Driver Stack       │
+├────────────────────────────┤
+│ Container Layer           │
+│ Image Layers              │
+│ Storage Driver           │
+│ Block Device             │
+└────────────────────────────┘
+</div></section><section class="chapter"><h3 id="volume-types" data-toc="volume-types">Volume Types</h3><div class="code-block" data-lang="none">
+┌────────────────────────────┐
+│ Volume Types               │
+├────────────────────────────┤
+│ Named Volumes             │
+│ Bind Mounts               │
+│ tmpfs Mounts             │
+└────────────────────────────┘
+</div></section></section><section class="chapter"><h2 id="advanced-debugging" data-toc="advanced-debugging">Advanced Debugging 🔍</h2><section class="chapter"><h3 id="trace-commands" data-toc="trace-commands">Trace Commands</h3><div class="code-block" data-lang="bash">
+# Syscall tracing
+strace -p $PID
+
+# Network tracing
+tcpdump -i any container_port
+
+# Block I/O tracing
+blktrace -d /dev/sda -o trace
+</div></section><section class="chapter"><h3 id="profiling" data-toc="profiling">Profiling</h3><div class="code-block" data-lang="bash">
+# CPU profiling
+perf record -p $PID
+
+# Memory profiling
+heaptrack $PID
+</div></section></section><section class="chapter"><h2 id="performance-tuning" data-toc="performance-tuning">Performance Tuning ⚡</h2><section class="chapter"><h3 id="resource-optimization" data-toc="resource-optimization">Resource Optimization</h3><div class="code-block" data-lang="none">
+┌────────────────────────────┐
+│ Performance Factors        │
+├────────────────────────────┤
+│ CPU Scheduling            │
+│ Memory Management         │
+│ I/O Throughput           │
+│ Network Latency          │
+└────────────────────────────┘
+</div></section><section class="chapter"><h3 id="monitoring-metrics" data-toc="monitoring-metrics">Monitoring Metrics</h3><div class="code-block" data-lang="bash">
+# CPU stats
+docker stats --format &quot;table {{.Container}}\t{{.CPUPerc}}&quot;
+
+# Memory usage
+docker stats --format &quot;table {{.Container}}\t{{.MemUsage}}&quot;
+</div></section></section><section class="chapter"><h2 id="waifu-tips" data-toc="waifu-tips">Waifu Tips 🎮</h2><aside class="prompt" data-type="tip" data-title="" id="z4rrrmj_90"><p id="z4rrrmj_93"><span class="control" id="z4rrrmj_94">Runtime-chan diz:</span> &quot;OCI &eacute; como um contrato m&aacute;gico que garante que todos os containers falem a mesma l&iacute;ngua!&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="z4rrrmj_91"><p id="z4rrrmj_95"><span class="control" id="z4rrrmj_96">Security-sama avisa:</span> &quot;Capabilities s&atilde;o como superpoderes - use com responsabilidade!&quot;</p></aside><aside class="prompt" data-type="note" data-title="" id="z4rrrmj_92"><p id="z4rrrmj_97"><span class="control" id="z4rrrmj_98">Network-chan lembra:</span> &quot;CNI &eacute; como um protocolo de comunica&ccedil;&atilde;o entre dimens&otilde;es paralelas!&quot;</p></aside></section><section class="chapter"><h2 id="refer-ncias-t-cnicas" data-toc="refer-ncias-t-cnicas">Refer&ecirc;ncias T&eacute;cnicas 📚</h2><section class="chapter"><h3 id="documenta-o-oficial" data-toc="documenta-o-oficial">Documenta&ccedil;&atilde;o Oficial</h3><ul class="list _bullet" id="z4rrrmj_102"><li class="list__item" id="z4rrrmj_103"><p id="z4rrrmj_107">OCI Runtime Specification</p></li><li class="list__item" id="z4rrrmj_104"><p id="z4rrrmj_108">Linux Kernel Documentation</p></li><li class="list__item" id="z4rrrmj_105"><p id="z4rrrmj_109">Docker Engine Internals</p></li><li class="list__item" id="z4rrrmj_106"><p id="z4rrrmj_110">Container Security Guide</p></li></ul></section><section class="chapter"><h3 id="ferramentas-teis" data-toc="ferramentas-teis">Ferramentas &Uacute;teis</h3><ul class="list _bullet" id="z4rrrmj_111"><li class="list__item" id="z4rrrmj_112"><p id="z4rrrmj_117">nsenter</p></li><li class="list__item" id="z4rrrmj_113"><p id="z4rrrmj_118">unshare</p></li><li class="list__item" id="z4rrrmj_114"><p id="z4rrrmj_119">runc</p></li><li class="list__item" id="z4rrrmj_115"><p id="z4rrrmj_120">ctr</p></li><li class="list__item" id="z4rrrmj_116"><p id="z4rrrmj_121">nerdctl</p></li></ul></section><section class="chapter"><h3 id="debugging-tools" data-toc="debugging-tools">Debugging Tools</h3><ul class="list _bullet" id="z4rrrmj_122"><li class="list__item" id="z4rrrmj_123"><p id="z4rrrmj_127">strace</p></li><li class="list__item" id="z4rrrmj_124"><p id="z4rrrmj_128">tcpdump</p></li><li class="list__item" id="z4rrrmj_125"><p id="z4rrrmj_129">perf</p></li><li class="list__item" id="z4rrrmj_126"><p id="z4rrrmj_130">heaptrack</p></li></ul></section></section><div class="last-modified">15 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="containers-101.html" class="navigation-links__prev">Containers 101</a><a href="container-runtime.html" class="navigation-links__next">Container Runtime: O Motor dos Containers 🚀</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T20:14:21.693940609"><title>Problemas Comuns: Debugando na Matrix 🐛 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"problemas-de-permiss-o","level":0,"title":"Problemas de Permissão 🔒","anchor":"#problemas-de-permiss-o"},{"id":"conflito-de-portas","level":0,"title":"Conflito de Portas 🔌","anchor":"#conflito-de-portas"},{"id":"sem-espa-o-em-disco","level":0,"title":"Sem Espaço em Disco 💾","anchor":"#sem-espa-o-em-disco"},{"id":"daemon-offline","level":0,"title":"Daemon Offline 👻","anchor":"#daemon-offline"},{"id":"waifu-tips","level":0,"title":"Waifu Tips 💡","anchor":"#waifu-tips"},{"id":"problemas-de-rede","level":0,"title":"Problemas de Rede 🌐","anchor":"#problemas-de-rede"},{"id":"problemas-de-build","level":0,"title":"Problemas de Build 🏗️","anchor":"#problemas-de-build"},{"id":"checklist-de-debug","level":0,"title":"Checklist de Debug ✅","anchor":"#checklist-de-debug"},{"id":"preven-o-o-melhor-rem-dio","level":0,"title":"Prevenção é o Melhor Remédio 💊","anchor":"#preven-o-o-melhor-rem-dio"},{"id":"modo-hardcore-debugging-avan-ado","level":0,"title":"Modo Hardcore: Debugging Avançado 🔍","anchor":"#modo-hardcore-debugging-avan-ado"},{"id":"recursos-de-emerg-ncia","level":0,"title":"Recursos de Emergência 🚨","anchor":"#recursos-de-emerg-ncia"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Problemas Comuns: Debugando na Matrix 🐛 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/common-issues.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Problemas Comuns: Debugando na Matrix 🐛 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/common-issues.html#webpage",
+    "url": "writerside-documentation/common-issues.html",
+    "name": "Problemas Comuns: Debugando na Matrix 🐛 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="common-issues" data-main-title="Problemas Comuns: Debugando na Matrix 🐛" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="INIT: Container Matrix///Phase 2: Setup &amp; Installation"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="common-issues" id="common-issues.md">Problemas Comuns: Debugando na Matrix 🐛</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════════════════╗
+║  DOCKER TROUBLE MATRIX                                                ║
+║                                                                       ║
+║  [ERROR] - Permission denied                                          ║
+║  [ERROR] - Port already in use                                        ║
+║  [ERROR] - No space left on device                                    ║
+║  [ERROR] - Cannot connect to the Docker daemon                        ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="problemas-de-permiss-o" data-toc="problemas-de-permiss-o">Problemas de Permiss&atilde;o 🔒</h2><section class="chapter"><h3 id="sintoma" data-toc="sintoma">Sintoma</h3><div class="code-block" data-lang="bash">
+Got permission denied while trying to connect to the Docker daemon socket
+</div></section><section class="chapter"><h3 id="solu-o" data-toc="solu-o">Solu&ccedil;&atilde;o</h3><div class="code-block" data-lang="bash">
+# Adicione seu usuário ao grupo docker
+sudo usermod -aG docker $USER
+
+# Recarregue os grupos (ou faça logout/login)
+newgrp docker
+</div></section></section><section class="chapter"><h2 id="conflito-de-portas" data-toc="conflito-de-portas">Conflito de Portas 🔌</h2><section class="chapter"><h3 id="sintoma" data-toc="sintoma">Sintoma</h3><div class="code-block" data-lang="bash">
+Error: Ports are not available: listen tcp 0.0.0.0:3000: bind: address already in use
+</div></section><section class="chapter"><h3 id="solu-o" data-toc="solu-o">Solu&ccedil;&atilde;o</h3><div class="code-block" data-lang="bash">
+# Encontre o processo usando a porta
+sudo lsof -i :3000
+
+# Mate o processo (substitua PID)
+sudo kill -9 PID
+
+# OU use uma porta diferente
+docker run -p 3001:3000 minha-app
+</div></section></section><section class="chapter"><h2 id="sem-espa-o-em-disco" data-toc="sem-espa-o-em-disco">Sem Espa&ccedil;o em Disco 💾</h2><section class="chapter"><h3 id="sintoma" data-toc="sintoma">Sintoma</h3><div class="code-block" data-lang="bash">
+no space left on device
+</div></section><section class="chapter"><h3 id="solu-o" data-toc="solu-o">Solu&ccedil;&atilde;o</h3><div class="code-block" data-lang="bash">
+# Limpe recursos não utilizados
+docker system prune -a --volumes
+
+# Verifique o uso de espaço
+docker system df
+</div></section></section><section class="chapter"><h2 id="daemon-offline" data-toc="daemon-offline">Daemon Offline 👻</h2><section class="chapter"><h3 id="sintoma" data-toc="sintoma">Sintoma</h3><div class="code-block" data-lang="bash">
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock
+</div></section><section class="chapter"><h3 id="solu-o" data-toc="solu-o">Solu&ccedil;&atilde;o</h3><div class="code-block" data-lang="bash">
+# Verifique o status do serviço
+sudo systemctl status docker
+
+# Reinicie o daemon
+sudo systemctl restart docker
+</div></section></section><section class="chapter"><h2 id="waifu-tips" data-toc="waifu-tips">Waifu Tips 💡</h2><aside class="prompt" data-type="note" data-title="" id="dsxcax_31"><p id="dsxcax_32"><span class="control" id="dsxcax_33">Debug-chan diz:</span> &quot;Quando tudo falhar, tente <code class="code" id="dsxcax_34">docker system prune</code>. Mas cuidado, isso &eacute; tipo formatar o PC - s&oacute; que para containers!&quot;</p></aside></section><section class="chapter"><h2 id="problemas-de-rede" data-toc="problemas-de-rede">Problemas de Rede 🌐</h2><section class="chapter"><h3 id="sintoma" data-toc="sintoma">Sintoma</h3><div class="code-block" data-lang="bash">
+ERROR: Network gateway has conflicts with existing routes
+</div></section><section class="chapter"><h3 id="solu-o" data-toc="solu-o">Solu&ccedil;&atilde;o</h3><div class="code-block" data-lang="bash">
+# Recrie a rede default
+docker network prune
+docker network create bridge
+</div></section></section><section class="chapter"><h2 id="problemas-de-build" data-toc="problemas-de-build">Problemas de Build 🏗️</h2><section class="chapter"><h3 id="sintoma" data-toc="sintoma">Sintoma</h3><div class="code-block" data-lang="bash">
+Step 3/8 : RUN npm install
+npm ERR! code ECONNREFUSED
+</div></section><section class="chapter"><h3 id="solu-o" data-toc="solu-o">Solu&ccedil;&atilde;o</h3><div class="code-block" data-lang="bash">
+# Verifique sua conexão
+ping 8.8.8.8
+
+# Use mirror alternativo
+npm config set registry https://registry.npmmirror.com
+</div></section></section><section class="chapter"><h2 id="checklist-de-debug" data-toc="checklist-de-debug">Checklist de Debug ✅</h2><ol class="list _decimal" id="dsxcax_43" type="1"><li class="list__item" id="dsxcax_44"><p id="dsxcax_48">Verifique logs</p><div class="code-block" data-lang="bash">
+docker logs &lt;container-id&gt;
+</div></li><li class="list__item" id="dsxcax_45"><p id="dsxcax_50">Inspecione o container</p><div class="code-block" data-lang="bash">
+docker inspect &lt;container-id&gt;
+</div></li><li class="list__item" id="dsxcax_46"><p id="dsxcax_52">Entre no container</p><div class="code-block" data-lang="bash">
+docker exec -it &lt;container-id&gt; sh
+</div></li><li class="list__item" id="dsxcax_47"><p id="dsxcax_54">Monitore recursos</p><div class="code-block" data-lang="bash">
+docker stats
+</div></li></ol></section><section class="chapter"><h2 id="preven-o-o-melhor-rem-dio" data-toc="preven-o-o-melhor-rem-dio">Preven&ccedil;&atilde;o &eacute; o Melhor Rem&eacute;dio 💊</h2><section class="chapter"><h3 id="boas-pr-ticas" data-toc="boas-pr-ticas">Boas Pr&aacute;ticas</h3><ul class="list _bullet" id="dsxcax_58"><li class="list__item" id="dsxcax_59"><p id="dsxcax_64">Use <code class="code" id="dsxcax_65">.dockerignore</code> apropriadamente</p></li><li class="list__item" id="dsxcax_60"><p id="dsxcax_66">Mantenha imagens base atualizadas</p></li><li class="list__item" id="dsxcax_61"><p id="dsxcax_67">Implemente health checks</p></li><li class="list__item" id="dsxcax_62"><p id="dsxcax_68">Monitore uso de recursos</p></li><li class="list__item" id="dsxcax_63"><p id="dsxcax_69">Fa&ccedil;a backup de volumes importantes</p></li></ul></section><section class="chapter"><h3 id="ferramentas-teis" data-toc="ferramentas-teis">Ferramentas &Uacute;teis</h3><ul class="list _bullet" id="dsxcax_70"><li class="list__item" id="dsxcax_71"><p id="dsxcax_75">Portainer (GUI para gest&atilde;o)</p></li><li class="list__item" id="dsxcax_72"><p id="dsxcax_76">ctop (top para containers)</p></li><li class="list__item" id="dsxcax_73"><p id="dsxcax_77">lazydocker (TUI amig&aacute;vel)</p></li><li class="list__item" id="dsxcax_74"><p id="dsxcax_78">docker-compose (orquestra&ccedil;&atilde;o local)</p></li></ul></section></section><section class="chapter"><h2 id="modo-hardcore-debugging-avan-ado" data-toc="modo-hardcore-debugging-avan-ado">Modo Hardcore: Debugging Avan&ccedil;ado 🔍</h2><section class="chapter"><h3 id="an-lise-de-sistema" data-toc="an-lise-de-sistema">An&aacute;lise de Sistema</h3><div class="code-block" data-lang="bash">
+# Verifique limites do sistema
+ulimit -a
+
+# Monitore eventos do Docker
+docker events
+
+# Debug de rede
+docker network inspect bridge
+</div></section><section class="chapter"><h3 id="logs-avan-ados" data-toc="logs-avan-ados">Logs Avan&ccedil;ados</h3><div class="code-block" data-lang="bash">
+# Logs em tempo real com timestamp
+docker logs -f --timestamps &lt;container-id&gt;
+
+# Últimas 100 linhas
+docker logs --tail 100 &lt;container-id&gt;
+</div></section></section><section class="chapter"><h2 id="recursos-de-emerg-ncia" data-toc="recursos-de-emerg-ncia">Recursos de Emerg&ecirc;ncia 🚨</h2><ul class="list _bullet" id="dsxcax_83"><li class="list__item" id="dsxcax_86"><p id="dsxcax_89"><a href="https://docs.docker.com/engine/troubleshoot/" id="dsxcax_90" data-external="true" rel="noopener noreferrer" target="_blank">Docker Debug Guide</a></p></li><li class="list__item" id="dsxcax_87"><p id="dsxcax_91"><a href="https://stackoverflow.com/questions/tagged/docker" id="dsxcax_92" data-external="true" rel="noopener noreferrer" target="_blank">Stack Overflow Docker Tag</a></p></li><li class="list__item" id="dsxcax_88"><p id="dsxcax_93"><a href="https://forums.docker.com/" id="dsxcax_94" data-external="true" rel="noopener noreferrer" target="_blank">Docker Forum</a></p></li></ul><aside class="prompt" data-type="tip" data-title="" id="dsxcax_85"><p id="dsxcax_95">&quot;Todo bug &eacute; uma feature que ainda n&atilde;o encontrou seu prop&oacute;sito.&quot; - Hackerman</p></aside></section><div class="last-modified">15 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="docker-desktop-cli.html" class="navigation-links__prev">Docker Desktop vs CLI: Escolha sua Arma 🔫</a><a href="containers-101.html" class="navigation-links__next">Containers 101</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

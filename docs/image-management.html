@@ -1,0 +1,112 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T20:14:21.699083587"><title>Gerenciamento de Imagens Docker 🎮 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"comandos-essenciais","level":0,"title":"Comandos Essenciais 🛠️","anchor":"#comandos-essenciais"},{"id":"sistema-de-tags","level":0,"title":"Sistema de Tags 🏷️","anchor":"#sistema-de-tags"},{"id":"registries-e-distribui-o","level":0,"title":"Registries e Distribuição 🌐","anchor":"#registries-e-distribui-o"},{"id":"otimiza-o-e-limpeza","level":0,"title":"Otimização e Limpeza 🧹","anchor":"#otimiza-o-e-limpeza"},{"id":"boas-pr-ticas","level":0,"title":"Boas Práticas ✨","anchor":"#boas-pr-ticas"},{"id":"automa-o-e-ci-cd","level":0,"title":"Automação e CI/CD 🤖","anchor":"#automa-o-e-ci-cd"},{"id":"waifu-tips","level":0,"title":"Waifu Tips 💡","anchor":"#waifu-tips"},{"id":"troubleshooting","level":0,"title":"Troubleshooting 🔧","anchor":"#troubleshooting"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Gerenciamento de Imagens Docker 🎮 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/image-management.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Gerenciamento de Imagens Docker 🎮 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/image-management.html#webpage",
+    "url": "writerside-documentation/image-management.html",
+    "name": "Gerenciamento de Imagens Docker 🎮 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="image-management" data-main-title="Gerenciamento de Imagens Docker 🎮" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="INIT: Container Matrix///Phase 3: Core Concepts///images-containers.md|Images vs Containers: O Dual Boot do Futuro 🌌"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="image-management" id="image-management.md">Gerenciamento de Imagens Docker 🎮</h1><div class="code-block" data-lang="none">
+╔══════════════════════════════════════════════════════════════════╗
+║ IMAGE MANAGEMENT MATRIX                                          ║
+║                                                                  ║
+║    ┌─────────┐     ┌─────────┐     ┌─────────┐                 ║
+║    │  Pull   │────▶│  Tag    │────▶│  Push   │                 ║
+║    └─────────┘     └─────────┘     └─────────┘                 ║
+║         ↑              │               │                        ║
+║         └──────────────┴───────────────┘                       ║
+║                                                                ║
+╚══════════════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="comandos-essenciais" data-toc="comandos-essenciais">Comandos Essenciais 🛠️</h2><section class="chapter"><h3 id="gerenciamento-b-sico" data-toc="gerenciamento-b-sico">Gerenciamento B&aacute;sico</h3><div class="code-block" data-lang="bash">
+# Listar imagens
+docker images
+
+# Baixar imagem
+docker pull nginx:latest
+
+# Remover imagem
+docker rmi nginx:latest
+
+# Remover todas imagens não utilizadas
+docker image prune
+</div></section><section class="chapter"><h3 id="tagging-e-versionamento" data-toc="tagging-e-versionamento">Tagging e Versionamento</h3><div class="code-block" data-lang="bash">
+# Criar tag
+docker tag nginx:latest meu-registry.com/nginx:v1.0
+
+# Remover tag
+docker rmi meu-registry.com/nginx:v1.0
+
+# Listar tags de uma imagem
+docker image inspect nginx --format='{{.RepoTags}}'
+</div></section></section><section class="chapter"><h2 id="sistema-de-tags" data-toc="sistema-de-tags">Sistema de Tags 🏷️</h2><div class="code-block" data-lang="none">
+╔════════════════════════════════════════════════════════════╗
+║ TAG CONVENTIONS                                            ║
+║                                                           ║
+║  registry.example.com/org/app:1.0.0-alpine               ║
+║  └─── Registry ─┘ └─ Name ─┘ └─ Tag ─┘ └─ Variant ─┘    ║
+║                                                           ║
+╚════════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h3 id="conven-es-comuns" data-toc="conven-es-comuns">Conven&ccedil;&otilde;es Comuns</h3><ul class="list _bullet" id="-h91tc_19"><li class="list__item" id="-h91tc_20"><p id="-h91tc_25"><code class="code" id="-h91tc_26">latest</code>: vers&atilde;o mais recente</p></li><li class="list__item" id="-h91tc_21"><p id="-h91tc_27"><code class="code" id="-h91tc_28">1.0.0</code>: vers&atilde;o sem&acirc;ntica</p></li><li class="list__item" id="-h91tc_22"><p id="-h91tc_29"><code class="code" id="-h91tc_30">stable</code>: vers&atilde;o est&aacute;vel</p></li><li class="list__item" id="-h91tc_23"><p id="-h91tc_31"><code class="code" id="-h91tc_32">dev</code>: vers&atilde;o desenvolvimento</p></li><li class="list__item" id="-h91tc_24"><p id="-h91tc_33"><code class="code" id="-h91tc_34">alpine</code>: variante espec&iacute;fica</p></li></ul></section></section><section class="chapter"><h2 id="registries-e-distribui-o" data-toc="registries-e-distribui-o">Registries e Distribui&ccedil;&atilde;o 🌐</h2><section class="chapter"><h3 id="docker-hub" data-toc="docker-hub">Docker Hub</h3><div class="code-block" data-lang="bash">
+# Login no Docker Hub
+docker login
+
+# Push para Docker Hub
+docker push username/app:tag
+
+# Pull do Docker Hub
+docker pull username/app:tag
+</div></section><section class="chapter"><h3 id="registry-privado" data-toc="registry-privado">Registry Privado</h3><div class="code-block" data-lang="bash">
+# Login em registry privado
+docker login meu-registry.com
+
+# Push para registry privado
+docker push meu-registry.com/app:tag
+
+# Pull de registry privado
+docker pull meu-registry.com/app:tag
+</div></section></section><section class="chapter"><h2 id="otimiza-o-e-limpeza" data-toc="otimiza-o-e-limpeza">Otimiza&ccedil;&atilde;o e Limpeza 🧹</h2><section class="chapter"><h3 id="limpeza-de-sistema" data-toc="limpeza-de-sistema">Limpeza de Sistema</h3><div class="code-block" data-lang="bash">
+# Remover imagens não utilizadas
+docker image prune -a
+
+# Remover imagens dangling
+docker image prune
+
+# Limpar todo o sistema
+docker system prune
+</div></section><section class="chapter"><h3 id="otimiza-o-de-espa-o" data-toc="otimiza-o-de-espa-o">Otimiza&ccedil;&atilde;o de Espa&ccedil;o</h3><div class="code-block" data-lang="bash">
+# Verificar uso de espaço
+docker system df
+
+# Análise detalhada
+docker system df -v
+</div></section></section><section class="chapter"><h2 id="boas-pr-ticas" data-toc="boas-pr-ticas">Boas Pr&aacute;ticas ✨</h2><section class="chapter"><h3 id="do-s" data-toc="do-s">DO's ✅</h3><ul class="list _bullet" id="-h91tc_45"><li class="list__item" id="-h91tc_46"><p id="-h91tc_51">Use tags espec&iacute;ficas em produ&ccedil;&atilde;o</p></li><li class="list__item" id="-h91tc_47"><p id="-h91tc_52">Mantenha um registro de vers&otilde;es</p></li><li class="list__item" id="-h91tc_48"><p id="-h91tc_53">Documente variantes de imagens</p></li><li class="list__item" id="-h91tc_49"><p id="-h91tc_54">Implemente pol&iacute;tica de reten&ccedil;&atilde;o</p></li><li class="list__item" id="-h91tc_50"><p id="-h91tc_55">Automatize o processo de build/push</p></li></ul></section><section class="chapter"><h3 id="don-ts" data-toc="don-ts">DON'Ts ❌</h3><ul class="list _bullet" id="-h91tc_56"><li class="list__item" id="-h91tc_57"><p id="-h91tc_62">Evite usar <code class="code" id="-h91tc_63">latest</code> em produ&ccedil;&atilde;o</p></li><li class="list__item" id="-h91tc_58"><p id="-h91tc_64">N&atilde;o acumule imagens antigas</p></li><li class="list__item" id="-h91tc_59"><p id="-h91tc_65">N&atilde;o armazene dados sens&iacute;veis</p></li><li class="list__item" id="-h91tc_60"><p id="-h91tc_66">N&atilde;o ignore vulnerabilidades</p></li><li class="list__item" id="-h91tc_61"><p id="-h91tc_67">N&atilde;o deixe imagens sem tag</p></li></ul></section></section><section class="chapter"><h2 id="automa-o-e-ci-cd" data-toc="automa-o-e-ci-cd">Automa&ccedil;&atilde;o e CI/CD 🤖</h2><section class="chapter"><h3 id="github-actions-example" data-toc="github-actions-example">GitHub Actions Example</h3><div class="code-block" data-lang="yaml">
+steps:
+  - uses: actions/checkout@v2
+  
+  - name: Login to Registry
+    run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
+    
+  - name: Build and Push
+    run: |
+      docker build -t app:${{ github.sha }} .
+      docker push app:${{ github.sha }}
+</div></section></section><section class="chapter"><h2 id="waifu-tips" data-toc="waifu-tips">Waifu Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="-h91tc_70"><p id="-h91tc_72"><span class="control" id="-h91tc_73">Registry-chan diz:</span> &quot;Mantenha suas tags organizadas como uma cole&ccedil;&atilde;o de mang&aacute;s! 📚&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-h91tc_71"><p id="-h91tc_74"><span class="control" id="-h91tc_75">Space-chan avisa:</span> &quot;N&atilde;o deixe imagens antigas ocuparem espa&ccedil;o! Fa&ccedil;a limpeza regularmente! 🧹&quot;</p></aside></section><section class="chapter"><h2 id="troubleshooting" data-toc="troubleshooting">Troubleshooting 🔧</h2><section class="chapter"><h3 id="problemas-comuns" data-toc="problemas-comuns">Problemas Comuns</h3><ol class="list _decimal" id="-h91tc_77" type="1"><li class="list__item" id="-h91tc_78"><p id="-h91tc_80"><span class="control" id="-h91tc_82">Pull Fails</span></p><div class="code-block" data-lang="bash">
+# Verificar conectividade
+docker info
+
+# Limpar cache DNS
+docker system prune --volumes
+</div></li><li class="list__item" id="-h91tc_79"><p id="-h91tc_83"><span class="control" id="-h91tc_85">Push Errors</span></p><div class="code-block" data-lang="bash">
+# Verificar autenticação
+docker login
+
+# Verificar permissões
+docker push app:tag
+</div></li></ol></section></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="-h91tc_86" type="1"><li class="list__item" id="-h91tc_88"><p id="-h91tc_91"><span id="-h91tc_92">Opera&ccedil;&otilde;es com Containers</span></p></li><li class="list__item" id="-h91tc_89"><p id="-h91tc_93"><span id="-h91tc_94">Melhores Pr&aacute;ticas</span></p></li><li class="list__item" id="-h91tc_90"><p id="-h91tc_95"><span id="-h91tc_96">Laborat&oacute;rio Pr&aacute;tico</span></p></li></ol><aside class="prompt" data-type="note" data-title="" id="-h91tc_87"><p id="-h91tc_97"><span class="control" id="-h91tc_98">Sensei's Note:</span> &quot;Um bom gerenciamento de imagens &eacute; como manter um dojo organizado - cada coisa em seu lugar.&quot;</p></aside></section><div class="last-modified">15 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="image-anatomy.html" class="navigation-links__prev">Anatomia de uma Imagem Docker 🔬</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>
