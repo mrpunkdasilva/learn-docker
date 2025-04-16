@@ -1,0 +1,144 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T22:55:49.205334022"><title>Docker Commands: O Arsenal Completo 🚀 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"container-commands","level":0,"title":"Container Commands 📦","anchor":"#container-commands"},{"id":"image-commands","level":0,"title":"Image Commands 🖼️","anchor":"#image-commands"},{"id":"network-commands","level":0,"title":"Network Commands 🌐","anchor":"#network-commands"},{"id":"volume-commands","level":0,"title":"Volume Commands 💾","anchor":"#volume-commands"},{"id":"system-commands","level":0,"title":"System Commands ⚙️","anchor":"#system-commands"},{"id":"compose-commands","level":0,"title":"Compose Commands 🎼","anchor":"#compose-commands"},{"id":"command-flags-matrix","level":0,"title":"Command Flags Matrix 🎯","anchor":"#command-flags-matrix"},{"id":"one-liners-poderosos","level":0,"title":"One-Liners Poderosos 💪","anchor":"#one-liners-poderosos"},{"id":"waifu-command-tips","level":0,"title":"Waifu Command Tips 🌸","anchor":"#waifu-command-tips"},{"id":"debug-arsenal","level":0,"title":"Debug Arsenal 🔍","anchor":"#debug-arsenal"},{"id":"quick-reference-card","level":0,"title":"Quick Reference Card 📋","anchor":"#quick-reference-card"},{"id":"checkpoint","level":0,"title":"Checkpoint ✅","anchor":"#checkpoint"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Docker Commands: O Arsenal Completo 🚀 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/docker-commands.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Docker Commands: O Arsenal Completo 🚀 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/docker-commands.html#webpage",
+    "url": "writerside-documentation/docker-commands.html",
+    "name": "Docker Commands: O Arsenal Completo 🚀 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="docker-commands" data-main-title="Docker Commands: O Arsenal Completo 🚀" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="FUNDAMENTALS: Docker Essentials///Basic Commands"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="docker-commands" id="docker-commands.md">Docker Commands: O Arsenal Completo 🚀</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ DOCKER COMMAND CATEGORIES                                 ║
+║                                                          ║
+║ Container │ Image │ Network │ Volume │ System │ Compose  ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="container-commands" data-toc="container-commands">Container Commands 📦</h2><section class="chapter"><h3 id="lifecycle-management" data-toc="lifecycle-management">Lifecycle Management</h3><div class="code-block" data-lang="bash">
+# Criar e Executar
+docker run [options] IMAGE
+  -d, --detach          # Modo background
+  -it                   # Modo interativo
+  --name string         # Nome do container
+  --rm                  # Remove após parar
+  -p, --publish        # Mapear portas
+  -v, --volume         # Montar volume
+
+# Gerenciamento
+docker start CONTAINER   # Iniciar
+docker stop CONTAINER    # Parar
+docker restart CONTAINER # Reiniciar
+docker pause CONTAINER   # Pausar
+docker unpause CONTAINER # Despausar
+docker rm CONTAINER     # Remover
+</div></section><section class="chapter"><h3 id="monitoramento-e-debug" data-toc="monitoramento-e-debug">Monitoramento e Debug</h3><div class="code-block" data-lang="bash">
+# Status e Logs
+docker ps [options]      # Listar containers
+docker logs CONTAINER    # Ver logs
+docker stats CONTAINER   # Métricas em tempo real
+docker top CONTAINER     # Processos
+docker inspect CONTAINER # Info detalhada
+
+# Execução
+docker exec [options] CONTAINER COMMAND
+docker attach CONTAINER  # Conectar ao container
+docker cp SRC_PATH CONTAINER:DEST_PATH
+</div></section></section><section class="chapter"><h2 id="image-commands" data-toc="image-commands">Image Commands 🖼️</h2><section class="chapter"><h3 id="gerenciamento-de-imagens" data-toc="gerenciamento-de-imagens">Gerenciamento de Imagens</h3><div class="code-block" data-lang="bash">
+# Básico
+docker images         # Listar imagens
+docker pull IMAGE     # Baixar imagem
+docker push IMAGE     # Enviar imagem
+docker rmi IMAGE      # Remover imagem
+
+# Build
+docker build [options] PATH
+  -t, --tag         # Nomear imagem
+  -f, --file        # Dockerfile alternativo
+  --no-cache        # Ignorar cache
+
+# Análise
+docker history IMAGE # Ver camadas
+docker inspect IMAGE # Info detalhada
+docker save IMAGE    # Exportar
+docker load         # Importar
+</div></section></section><section class="chapter"><h2 id="network-commands" data-toc="network-commands">Network Commands 🌐</h2><section class="chapter"><h3 id="networking" data-toc="networking">Networking</h3><div class="code-block" data-lang="bash">
+# Gerenciamento
+docker network create  # Criar rede
+docker network ls     # Listar redes
+docker network rm     # Remover rede
+docker network prune  # Limpar não usadas
+
+# Conexões
+docker network connect    # Conectar container
+docker network disconnect # Desconectar
+docker network inspect   # Inspecionar
+</div></section></section><section class="chapter"><h2 id="volume-commands" data-toc="volume-commands">Volume Commands 💾</h2><section class="chapter"><h3 id="storage" data-toc="storage">Storage</h3><div class="code-block" data-lang="bash">
+# Volumes
+docker volume create  # Criar volume
+docker volume ls     # Listar volumes
+docker volume rm     # Remover volume
+docker volume prune  # Limpar não usados
+
+# Inspeção
+docker volume inspect # Info detalhada
+</div></section></section><section class="chapter"><h2 id="system-commands" data-toc="system-commands">System Commands ⚙️</h2><section class="chapter"><h3 id="manuten-o" data-toc="manuten-o">Manuten&ccedil;&atilde;o</h3><div class="code-block" data-lang="bash">
+# Sistema
+docker info        # Info do sistema
+docker version     # Versão
+docker events      # Eventos em tempo real
+
+# Limpeza
+docker system prune     # Limpar tudo
+docker system df       # Uso de disco
+docker system info     # Info do sistema
+</div></section></section><section class="chapter"><h2 id="compose-commands" data-toc="compose-commands">Compose Commands 🎼</h2><section class="chapter"><h3 id="orquestra-o" data-toc="orquestra-o">Orquestra&ccedil;&atilde;o</h3><div class="code-block" data-lang="bash">
+# Básico
+docker-compose up    # Criar e iniciar
+docker-compose down  # Parar e remover
+docker-compose ps    # Listar serviços
+
+# Lifecycle
+docker-compose start  # Iniciar serviços
+docker-compose stop   # Parar serviços
+docker-compose restart # Reiniciar
+</div></section></section><section class="chapter"><h2 id="command-flags-matrix" data-toc="command-flags-matrix">Command Flags Matrix 🎯</h2><div class="table-wrapper"><table class="wide" id="z2fln3k_31"><thead><tr class="ijRowHead" id="z2fln3k_32"><th id="z2fln3k_38"><p>Flag</p></th><th id="z2fln3k_39"><p>Uso</p></th><th id="z2fln3k_40"><p>Exemplo</p></th></tr></thead><tbody><tr id="z2fln3k_33"><td id="z2fln3k_41"><p><code class="code" id="z2fln3k_44">-d</code></p></td><td id="z2fln3k_42"><p>Background</p></td><td id="z2fln3k_43"><p><code class="code" id="z2fln3k_45">docker run -d nginx</code></p></td></tr><tr id="z2fln3k_34"><td id="z2fln3k_46"><p><code class="code" id="z2fln3k_49">-p</code></p></td><td id="z2fln3k_47"><p>Portas</p></td><td id="z2fln3k_48"><p><code class="code" id="z2fln3k_50">docker run -p 80:80 nginx</code></p></td></tr><tr id="z2fln3k_35"><td id="z2fln3k_51"><p><code class="code" id="z2fln3k_54">-v</code></p></td><td id="z2fln3k_52"><p>Volumes</p></td><td id="z2fln3k_53"><p><code class="code" id="z2fln3k_55">docker run -v /host:/container nginx</code></p></td></tr><tr id="z2fln3k_36"><td id="z2fln3k_56"><p><code class="code" id="z2fln3k_59">-e</code></p></td><td id="z2fln3k_57"><p>Env vars</p></td><td id="z2fln3k_58"><p><code class="code" id="z2fln3k_60">docker run -e VAR=value nginx</code></p></td></tr><tr id="z2fln3k_37"><td id="z2fln3k_61"><p><code class="code" id="z2fln3k_64">--rm</code></p></td><td id="z2fln3k_62"><p>Auto-remove</p></td><td id="z2fln3k_63"><p><code class="code" id="z2fln3k_65">docker run --rm alpine</code></p></td></tr></tbody></table></div></section><section class="chapter"><h2 id="one-liners-poderosos" data-toc="one-liners-poderosos">One-Liners Poderosos 💪</h2><div class="code-block" data-lang="bash">
+# Parar todos containers
+docker stop $(docker ps -aq)
+
+# Remover tudo
+docker system prune -af --volumes
+
+# Backup de container
+docker commit container backup/container:v1
+
+# Container efêmero
+docker run --rm -it alpine sh
+</div></section><section class="chapter"><h2 id="waifu-command-tips" data-toc="waifu-command-tips">Waifu Command Tips 🌸</h2><aside class="prompt" data-type="tip" data-title="" id="z2fln3k_67"><p id="z2fln3k_69"><span class="control" id="z2fln3k_70">Command-chan diz:</span> &quot;Use <code class="code" id="z2fln3k_71">--help</code> com qualquer comando para ver todas as op&ccedil;&otilde;es! 📚&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="z2fln3k_68"><p id="z2fln3k_72"><span class="control" id="z2fln3k_73">Docker-sama alerta:</span> &quot;Cuidado com comandos destrutivos como <code class="code" id="z2fln3k_74">prune</code> e <code class="code" id="z2fln3k_75">rm -f</code>! 💥&quot;</p></aside></section><section class="chapter"><h2 id="debug-arsenal" data-toc="debug-arsenal">Debug Arsenal 🔍</h2><section class="chapter"><h3 id="troubleshooting-commands" data-toc="troubleshooting-commands">Troubleshooting Commands</h3><div class="code-block" data-lang="bash">
+# Logs em tempo real
+docker logs -f container
+
+# Métricas live
+docker stats container
+
+# Processos do container
+docker top container
+
+# Dump completo
+docker inspect container &gt; debug.json
+</div></section></section><section class="chapter"><h2 id="quick-reference-card" data-toc="quick-reference-card">Quick Reference Card 📋</h2><div class="code-block" data-lang="none">
+╔════════════════════════════════════════════════════╗
+║ DOCKER COMMANDS CHEAT SHEET                       ║
+╠════════════════════════════════════════════════════╣
+║ Container │ run, ps, start, stop, rm              ║
+║ Image    │ build, pull, push, rmi                ║
+║ Network  │ network create, connect, inspect       ║
+║ Volume   │ volume create, ls, rm                 ║
+║ System   │ info, version, prune                  ║
+║ Compose  │ up, down, ps                          ║
+╚════════════════════════════════════════════════════╝
+</div></section><section class="chapter"><h2 id="checkpoint" data-toc="checkpoint">Checkpoint ✅</h2><p id="z2fln3k_79">Voc&ecirc; agora domina:</p><ul class="list _bullet" id="z2fln3k_80"><li class="list__item" id="z2fln3k_81"><p id="z2fln3k_88">[x] Comandos de container</p></li><li class="list__item" id="z2fln3k_82"><p id="z2fln3k_89">[x] Gerenciamento de imagens</p></li><li class="list__item" id="z2fln3k_83"><p id="z2fln3k_90">[x] Networking</p></li><li class="list__item" id="z2fln3k_84"><p id="z2fln3k_91">[x] Volumes</p></li><li class="list__item" id="z2fln3k_85"><p id="z2fln3k_92">[x] Manuten&ccedil;&atilde;o do sistema</p></li><li class="list__item" id="z2fln3k_86"><p id="z2fln3k_93">[x] Docker Compose basics</p></li><li class="list__item" id="z2fln3k_87"><p id="z2fln3k_94">[x] Troubleshooting</p></li></ul></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="z2fln3k_95" type="1"><li class="list__item" id="z2fln3k_97"><p id="z2fln3k_102"><a href="container-operations.html" id="z2fln3k_103" data-tooltip="Container-chan diz: &quot;Mantenha seus containers leves e eficientes! 🎈&quot;">Container Operations</a></p></li><li class="list__item" id="z2fln3k_98"><p id="z2fln3k_104"><span id="z2fln3k_105">Advanced Networking</span></p></li><li class="list__item" id="z2fln3k_99"><p id="z2fln3k_106"><span id="z2fln3k_107">Volume Management</span></p></li><li class="list__item" id="z2fln3k_100"><p id="z2fln3k_108"><span id="z2fln3k_109">System Administration</span></p></li><li class="list__item" id="z2fln3k_101"><p id="z2fln3k_110"><span id="z2fln3k_111">Compose Deep Dive</span></p></li></ol><aside class="prompt" data-type="note" data-title="" id="z2fln3k_96"><p id="z2fln3k_112"><span class="control" id="z2fln3k_113">Sensei's Note:</span> &quot;Um verdadeiro mestre Docker conhece seus comandos como um samurai conhece sua espada!&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="common-issues.html" class="navigation-links__prev">Problemas Comuns: Debugando na Matrix 🐛</a><a href="cli-basics.html" class="navigation-links__next">CLI Basics: Dominando o Terminal Docker 🎮</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

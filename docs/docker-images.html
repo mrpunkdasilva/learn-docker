@@ -1,0 +1,218 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T22:55:49.155786091"><title>Docker Images: Blueprint do Seu Container 🎨 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"fundamentos-de-imagens","level":0,"title":"Fundamentos de Imagens 📚","anchor":"#fundamentos-de-imagens"},{"id":"anatomia-detalhada","level":0,"title":"Anatomia Detalhada 🔬","anchor":"#anatomia-detalhada"},{"id":"gerenciamento-avan-ado","level":0,"title":"Gerenciamento Avançado 🛠️","anchor":"#gerenciamento-avan-ado"},{"id":"sistema-de-tags","level":0,"title":"Sistema de Tags 🏷️","anchor":"#sistema-de-tags"},{"id":"boas-pr-ticas","level":0,"title":"Boas Práticas 📝","anchor":"#boas-pr-ticas"},{"id":"image-operations-matrix","level":0,"title":"Image Operations Matrix 📊","anchor":"#image-operations-matrix"},{"id":"otimiza-o-de-imagens","level":0,"title":"Otimização de Imagens 🚀","anchor":"#otimiza-o-de-imagens"},{"id":"registry-management","level":0,"title":"Registry Management 🌐","anchor":"#registry-management"},{"id":"advanced-security","level":0,"title":"Advanced Security 🔒","anchor":"#advanced-security"},{"id":"monitoring-metrics","level":0,"title":"Monitoring \u0026 Metrics 📊","anchor":"#monitoring-metrics"},{"id":"advanced-troubleshooting","level":0,"title":"Advanced Troubleshooting 🔧","anchor":"#advanced-troubleshooting"},{"id":"automation-ci-cd","level":0,"title":"Automation \u0026 CI/CD 🤖","anchor":"#automation-ci-cd"},{"id":"waifu-advanced-tips","level":0,"title":"Waifu Advanced Tips 💫","anchor":"#waifu-advanced-tips"},{"id":"quick-reference-pro","level":0,"title":"Quick Reference Pro 📋","anchor":"#quick-reference-pro"},{"id":"advanced-checkpoint","level":0,"title":"Advanced Checkpoint ✅","anchor":"#advanced-checkpoint"},{"id":"next-level-steps","level":0,"title":"Next Level Steps 🎯","anchor":"#next-level-steps"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Docker Images: Blueprint do Seu Container 🎨 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/docker-images.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Docker Images: Blueprint do Seu Container 🎨 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/docker-images.html#webpage",
+    "url": "writerside-documentation/docker-images.html",
+    "name": "Docker Images: Blueprint do Seu Container 🎨 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="docker-images" data-main-title="Docker Images: Blueprint do Seu Container 🎨" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="CORE: Docker Building Blocks///Images"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="docker-images" id="docker-images.md">Docker Images: Blueprint do Seu Container 🎨</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ IMAGE ARCHITECTURE MATRIX                                 ║
+║                                                          ║
+║    Base Image Layer        [Alpine/Ubuntu/Debian]        ║
+║         ↓                                                ║
+║    Dependencies Layer      [Runtime/Libraries]           ║
+║         ↓                                                ║
+║    Application Layer       [Your Code/Apps]              ║
+║         ↓                                                ║
+║    Configuration Layer     [ENV/Settings]                ║
+║         ↓                                                ║
+║    Runtime Layer          [CMD/ENTRYPOINT]              ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="fundamentos-de-imagens" data-toc="fundamentos-de-imagens">Fundamentos de Imagens 📚</h2><section class="chapter"><h3 id="conceitos-b-sicos" data-toc="conceitos-b-sicos">Conceitos B&aacute;sicos</h3><ul class="list _bullet" id="bwm2gw_22"><li class="list__item" id="bwm2gw_23"><p id="bwm2gw_29"><span class="control" id="bwm2gw_30">Imagem</span>: Template read-only para containers</p></li><li class="list__item" id="bwm2gw_24"><p id="bwm2gw_31"><span class="control" id="bwm2gw_32">Container</span>: Inst&acirc;ncia execut&aacute;vel de uma imagem</p></li><li class="list__item" id="bwm2gw_25"><p id="bwm2gw_33"><span class="control" id="bwm2gw_34">Layer</span>: Camada incremental de mudan&ccedil;as</p></li><li class="list__item" id="bwm2gw_26"><p id="bwm2gw_35"><span class="control" id="bwm2gw_36">Registry</span>: Reposit&oacute;rio de imagens</p></li><li class="list__item" id="bwm2gw_27"><p id="bwm2gw_37"><span class="control" id="bwm2gw_38">Tag</span>: Identificador de vers&atilde;o</p></li><li class="list__item" id="bwm2gw_28"><p id="bwm2gw_39"><span class="control" id="bwm2gw_40">Digest</span>: Hash SHA256 &uacute;nico da imagem</p></li></ul></section><section class="chapter"><h3 id="tipos-de-imagens" data-toc="tipos-de-imagens">Tipos de Imagens</h3><ol class="list _decimal" id="bwm2gw_41" type="1"><li class="list__item" id="bwm2gw_42"><p id="bwm2gw_45"><span class="control" id="bwm2gw_47">Base Images</span></p><ul class="list _bullet" id="bwm2gw_46"><li class="list__item" id="bwm2gw_48"><p id="bwm2gw_52">Scratch</p></li><li class="list__item" id="bwm2gw_49"><p id="bwm2gw_53">Alpine (5MB)</p></li><li class="list__item" id="bwm2gw_50"><p id="bwm2gw_54">Debian Slim (80MB)</p></li><li class="list__item" id="bwm2gw_51"><p id="bwm2gw_55">Ubuntu (120MB)</p></li></ul></li><li class="list__item" id="bwm2gw_43"><p id="bwm2gw_56"><span class="control" id="bwm2gw_58">Runtime Images</span></p><ul class="list _bullet" id="bwm2gw_57"><li class="list__item" id="bwm2gw_59"><p id="bwm2gw_62">node:alpine</p></li><li class="list__item" id="bwm2gw_60"><p id="bwm2gw_63">python:slim</p></li><li class="list__item" id="bwm2gw_61"><p id="bwm2gw_64">openjdk:slim</p></li></ul></li><li class="list__item" id="bwm2gw_44"><p id="bwm2gw_65"><span class="control" id="bwm2gw_67">Application Images</span></p><ul class="list _bullet" id="bwm2gw_66"><li class="list__item" id="bwm2gw_68"><p id="bwm2gw_71">nginx:alpine</p></li><li class="list__item" id="bwm2gw_69"><p id="bwm2gw_72">postgres:alpine</p></li><li class="list__item" id="bwm2gw_70"><p id="bwm2gw_73">redis:alpine</p></li></ul></li></ol></section></section><section class="chapter"><h2 id="anatomia-detalhada" data-toc="anatomia-detalhada">Anatomia Detalhada 🔬</h2><section class="chapter"><h3 id="sistema-de-camadas" data-toc="sistema-de-camadas">Sistema de Camadas</h3><div class="code-block" data-lang="bash">
+# Análise de camadas
+docker history --no-trunc nginx:latest
+
+# Metadata detalhada
+docker inspect --format='{{.RootFS.Layers}}' nginx:latest
+
+# Exportar imagem
+docker save nginx:latest | tar -tvf -
+</div></section><section class="chapter"><h3 id="estrutura-interna" data-toc="estrutura-interna">Estrutura Interna</h3><div class="code-block" data-lang="none">
+# Exemplo de construção em camadas
+FROM alpine:3.14
+# Layer 1: Base OS
+
+RUN apk add --no-cache python3
+# Layer 2: Runtime
+
+COPY ./app /app
+# Layer 3: Application
+
+ENV APP_ENV=production
+# Layer 4: Configuration
+
+CMD [&quot;python3&quot;, &quot;/app/main.py&quot;]
+# Layer 5: Runtime command
+</div></section></section><section class="chapter"><h2 id="gerenciamento-avan-ado" data-toc="gerenciamento-avan-ado">Gerenciamento Avan&ccedil;ado 🛠️</h2><section class="chapter"><h3 id="image-operations" data-toc="image-operations">Image Operations</h3><div class="code-block" data-lang="bash">
+# Criar tag local
+docker tag source:latest target:v1.0
+
+# Salvar imagem como tar
+docker save myapp:latest &gt; myapp.tar
+
+# Carregar imagem de tar
+docker load &lt; myapp.tar
+
+# Filtrar imagens
+docker images --filter &quot;dangling=true&quot;
+docker images --filter &quot;label=environment=prod&quot;
+</div></section><section class="chapter"><h3 id="batch-operations" data-toc="batch-operations">Batch Operations</h3><div class="code-block" data-lang="bash">
+# Remover todas imagens não utilizadas
+docker image prune --all --force
+
+# Remover por padrão
+docker images -q &quot;python*&quot; | xargs docker rmi
+
+# Limpar imagens antigas
+docker images --format &quot;{{.ID}}\t{{.CreatedAt}}&quot; | sort -k 2 | head -n 5 | cut -f1 | xargs docker rmi
+</div></section></section><section class="chapter"><h2 id="sistema-de-tags" data-toc="sistema-de-tags">Sistema de Tags 🏷️</h2><section class="chapter"><h3 id="conven-es-de-versionamento" data-toc="conven-es-de-versionamento">Conven&ccedil;&otilde;es de Versionamento</h3><div class="code-block" data-lang="bash">
+# Tags específicas
+registry.example.com/app:1.0.0
+username/app:latest
+custom/app:dev-build
+
+# Multi-arquitetura
+docker pull --platform linux/amd64 nginx
+docker pull --platform linux/arm64 nginx
+</div></section></section><section class="chapter"><h2 id="boas-pr-ticas" data-toc="boas-pr-ticas">Boas Pr&aacute;ticas 📝</h2><section class="chapter"><h3 id="do-s" data-toc="do-s">DO's ✅</h3><ul class="list _bullet" id="bwm2gw_86"><li class="list__item" id="bwm2gw_87"><p id="bwm2gw_92">Use tags espec&iacute;ficas</p></li><li class="list__item" id="bwm2gw_88"><p id="bwm2gw_93">Minimize camadas</p></li><li class="list__item" id="bwm2gw_89"><p id="bwm2gw_94">Otimize cache</p></li><li class="list__item" id="bwm2gw_90"><p id="bwm2gw_95">Documente depend&ecirc;ncias</p></li><li class="list__item" id="bwm2gw_91"><p id="bwm2gw_96">Implemente multi-stage builds</p></li></ul></section><section class="chapter"><h3 id="don-ts" data-toc="don-ts">DON'Ts ❌</h3><ul class="list _bullet" id="bwm2gw_97"><li class="list__item" id="bwm2gw_98"><p id="bwm2gw_103">Evite <code class="code" id="bwm2gw_104">latest</code> em produ&ccedil;&atilde;o</p></li><li class="list__item" id="bwm2gw_99"><p id="bwm2gw_105">N&atilde;o armazene secrets</p></li><li class="list__item" id="bwm2gw_100"><p id="bwm2gw_106">N&atilde;o instale pacotes desnecess&aacute;rios</p></li><li class="list__item" id="bwm2gw_101"><p id="bwm2gw_107">N&atilde;o ignore <code class="code" id="bwm2gw_108">.dockerignore</code></p></li><li class="list__item" id="bwm2gw_102"><p id="bwm2gw_109">N&atilde;o use imagens n&atilde;o oficiais sem verifica&ccedil;&atilde;o</p></li></ul></section></section><section class="chapter"><h2 id="image-operations-matrix" data-toc="image-operations-matrix">Image Operations Matrix 📊</h2><div class="table-wrapper"><table class="wide" id="bwm2gw_110"><thead><tr class="ijRowHead" id="bwm2gw_111"><th id="bwm2gw_119"><p>Opera&ccedil;&atilde;o</p></th><th id="bwm2gw_120"><p>Comando</p></th><th id="bwm2gw_121"><p>Uso Comum</p></th></tr></thead><tbody><tr id="bwm2gw_112"><td id="bwm2gw_122"><p>Build</p></td><td id="bwm2gw_123"><p><code class="code" id="bwm2gw_125">docker build</code></p></td><td id="bwm2gw_124"><p>Criar nova imagem</p></td></tr><tr id="bwm2gw_113"><td id="bwm2gw_126"><p>Pull</p></td><td id="bwm2gw_127"><p><code class="code" id="bwm2gw_129">docker pull</code></p></td><td id="bwm2gw_128"><p>Baixar do registry</p></td></tr><tr id="bwm2gw_114"><td id="bwm2gw_130"><p>Push</p></td><td id="bwm2gw_131"><p><code class="code" id="bwm2gw_133">docker push</code></p></td><td id="bwm2gw_132"><p>Enviar para registry</p></td></tr><tr id="bwm2gw_115"><td id="bwm2gw_134"><p>Tag</p></td><td id="bwm2gw_135"><p><code class="code" id="bwm2gw_137">docker tag</code></p></td><td id="bwm2gw_136"><p>Criar alias/vers&atilde;o</p></td></tr><tr id="bwm2gw_116"><td id="bwm2gw_138"><p>Remove</p></td><td id="bwm2gw_139"><p><code class="code" id="bwm2gw_141">docker rmi</code></p></td><td id="bwm2gw_140"><p>Deletar imagem</p></td></tr><tr id="bwm2gw_117"><td id="bwm2gw_142"><p>Inspect</p></td><td id="bwm2gw_143"><p><code class="code" id="bwm2gw_145">docker inspect</code></p></td><td id="bwm2gw_144"><p>Ver metadata</p></td></tr><tr id="bwm2gw_118"><td id="bwm2gw_146"><p>Prune</p></td><td id="bwm2gw_147"><p><code class="code" id="bwm2gw_149">docker image prune</code></p></td><td id="bwm2gw_148"><p>Limpar n&atilde;o usadas</p></td></tr></tbody></table></div></section><section class="chapter"><h2 id="otimiza-o-de-imagens" data-toc="otimiza-o-de-imagens">Otimiza&ccedil;&atilde;o de Imagens 🚀</h2><section class="chapter"><h3 id="redu-o-de-tamanho" data-toc="redu-o-de-tamanho">Redu&ccedil;&atilde;o de Tamanho</h3><div class="code-block" data-lang="none">
+# Multi-stage build
+FROM node:alpine AS builder
+WORKDIR /app
+COPY . .
+RUN npm ci &amp;&amp; npm run build
+
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+</div></section><section class="chapter"><h3 id="cache-optimization" data-toc="cache-optimization">Cache Optimization</h3><div class="code-block" data-lang="none">
+# Ordem eficiente
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+</div></section></section><section class="chapter"><h2 id="registry-management" data-toc="registry-management">Registry Management 🌐</h2><section class="chapter"><h3 id="docker-hub" data-toc="docker-hub">Docker Hub</h3><div class="code-block" data-lang="bash">
+# Login
+docker login [options] [SERVER]
+
+# Logout
+docker logout [SERVER]
+
+# Pull de registry privado
+docker pull private-registry.com/app:tag
+</div></section></section><section class="chapter"><h2 id="advanced-security" data-toc="advanced-security">Advanced Security 🔒</h2><section class="chapter"><h3 id="image-signing" data-toc="image-signing">Image Signing</h3><div class="code-block" data-lang="bash">
+# Configurar DCT (Docker Content Trust)
+export DOCKER_CONTENT_TRUST=1
+
+# Gerar chaves
+docker trust key generate mykey
+
+# Assinar imagem
+docker trust sign myregistry/myimage:tag
+
+# Verificar assinatura
+docker trust inspect --pretty myregistry/myimage:tag
+</div></section><section class="chapter"><h3 id="security-scanning" data-toc="security-scanning">Security Scanning</h3><div class="code-block" data-lang="bash">
+# Trivy scan
+trivy image python:3.9-alpine
+
+# Snyk scan
+snyk container test nginx:latest
+
+# Anchore scan
+anchore-cli image add nginx:latest
+anchore-cli image wait nginx:latest
+anchore-cli image vuln nginx:latest os
+</div></section></section><section class="chapter"><h2 id="monitoring-metrics" data-toc="monitoring-metrics">Monitoring &amp; Metrics 📊</h2><section class="chapter"><h3 id="image-analytics" data-toc="image-analytics">Image Analytics</h3><div class="code-block" data-lang="bash">
+# Tamanho das camadas
+docker history --no-trunc --format &quot;{{.Size}}\t{{.CreatedBy}}&quot; nginx:latest
+
+# Uso de disco
+docker system df -v --format &quot;{{.Type}}\t{{.TotalCount}}\t{{.Size}}&quot;
+
+# Cache status
+docker builder prune -f --filter until=24h
+</div></section><section class="chapter"><h3 id="performance-tracking" data-toc="performance-tracking">Performance Tracking</h3><div class="code-block" data-lang="bash">
+# Build time analysis
+time docker build --no-cache .
+
+# Layer size tracking
+docker image inspect myapp:latest -f '{{.RootFS.Layers}}'
+
+# Pull time metrics
+time docker pull large-image:latest
+</div></section></section><section class="chapter"><h2 id="advanced-troubleshooting" data-toc="advanced-troubleshooting">Advanced Troubleshooting 🔧</h2><section class="chapter"><h3 id="debug-techniques" data-toc="debug-techniques">Debug Techniques</h3><div class="code-block" data-lang="bash">
+# Debug build
+DOCKER_BUILDKIT=1 docker build --progress=plain .
+
+# Layer inspection
+docker save myimage:latest | tar -xC /tmp/image-layers
+
+# Network issues
+docker pull --verbose registry.example.com/image:tag
+</div></section><section class="chapter"><h3 id="common-issues-matrix" data-toc="common-issues-matrix">Common Issues Matrix</h3><div class="table-wrapper"><table class="wide" id="bwm2gw_167"><thead><tr class="ijRowHead" id="bwm2gw_168"><th id="bwm2gw_173"><p>Problema</p></th><th id="bwm2gw_174"><p>Diagn&oacute;stico</p></th><th id="bwm2gw_175"><p>Solu&ccedil;&atilde;o</p></th></tr></thead><tbody><tr id="bwm2gw_169"><td id="bwm2gw_176"><p>Pull Timeout</p></td><td id="bwm2gw_177"><p><code class="code" id="bwm2gw_179">docker pull -v</code></p></td><td id="bwm2gw_178"><p>Verificar rede/proxy</p></td></tr><tr id="bwm2gw_170"><td id="bwm2gw_180"><p>Build Failure</p></td><td id="bwm2gw_181"><p><code class="code" id="bwm2gw_183">--no-cache</code></p></td><td id="bwm2gw_182"><p>Limpar cache/deps</p></td></tr><tr id="bwm2gw_171"><td id="bwm2gw_184"><p>Layer Issues</p></td><td id="bwm2gw_185"><p><code class="code" id="bwm2gw_187">docker history</code></p></td><td id="bwm2gw_186"><p>Otimizar Dockerfile</p></td></tr><tr id="bwm2gw_172"><td id="bwm2gw_188"><p>Space Issues</p></td><td id="bwm2gw_189"><p><code class="code" id="bwm2gw_191">docker system df</code></p></td><td id="bwm2gw_190"><p>Prune/cleanup</p></td></tr></tbody></table></div></section></section><section class="chapter"><h2 id="automation-ci-cd" data-toc="automation-ci-cd">Automation &amp; CI/CD 🤖</h2><section class="chapter"><h3 id="github-actions" data-toc="github-actions">GitHub Actions</h3><div class="code-block" data-lang="yaml">
+name: Docker Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: user/app:latest
+</div></section><section class="chapter"><h3 id="automated-testing" data-toc="automated-testing">Automated Testing</h3><div class="code-block" data-lang="bash">
+# Test script
+#!/bin/bash
+set -e
+
+# Build image
+docker build -t test-image .
+
+# Run container tests
+docker run --rm test-image npm test
+
+# Security scan
+trivy image test-image
+
+# Cleanup
+docker rmi test-image
+</div></section></section><section class="chapter"><h2 id="waifu-advanced-tips" data-toc="waifu-advanced-tips">Waifu Advanced Tips 💫</h2><aside class="prompt" data-type="tip" data-title="" id="bwm2gw_196"><p id="bwm2gw_199"><span class="control" id="bwm2gw_200">Registry-chan diz:</span> &quot;Mantenha seus registries organizados como uma cole&ccedil;&atilde;o de mang&aacute;s! 📚&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="bwm2gw_197"><p id="bwm2gw_201"><span class="control" id="bwm2gw_202">Build-sama alerta:</span> &quot;Multi-stage builds s&atilde;o como transforma&ccedil;&otilde;es de magical girls - mais leves e poderosas! ✨&quot;</p></aside><aside class="prompt" data-type="note" data-title="" id="bwm2gw_198"><p id="bwm2gw_203"><span class="control" id="bwm2gw_204">Cache-kun ensina:</span> &quot;Cache &eacute; como um bento box - organize bem para reutilizar depois! 🍱&quot;</p></aside></section><section class="chapter"><h2 id="quick-reference-pro" data-toc="quick-reference-pro">Quick Reference Pro 📋</h2><div class="code-block" data-lang="none">
+╔════════════════════════════════════════════════════╗
+║ ADVANCED IMAGE MANAGEMENT                          ║
+╠════════════════════════════════════════════════════╣
+║ Multi-arch │ docker buildx build --platform all    ║
+║ Sign       │ docker trust sign image:tag          ║
+║ Scan       │ trivy image nginx:latest             ║
+║ Analyze    │ docker history --no-trunc image      ║
+║ Debug      │ DOCKER_BUILDKIT=1 docker build .     ║
+║ Optimize   │ docker build --squash .              ║
+║ Monitor    │ docker events --filter type=image    ║
+╚════════════════════════════════════════════════════╝
+</div></section><section class="chapter"><h2 id="advanced-checkpoint" data-toc="advanced-checkpoint">Advanced Checkpoint ✅</h2><p id="bwm2gw_206">Voc&ecirc; agora domina:</p><ul class="list _bullet" id="bwm2gw_207"><li class="list__item" id="bwm2gw_208"><p id="bwm2gw_215">[x] Arquitetura interna de imagens</p></li><li class="list__item" id="bwm2gw_209"><p id="bwm2gw_216">[x] Multi-stage builds avan&ccedil;ados</p></li><li class="list__item" id="bwm2gw_210"><p id="bwm2gw_217">[x] Registry privado e autentica&ccedil;&atilde;o</p></li><li class="list__item" id="bwm2gw_211"><p id="bwm2gw_218">[x] Signing e scanning</p></li><li class="list__item" id="bwm2gw_212"><p id="bwm2gw_219">[x] Debug e troubleshooting</p></li><li class="list__item" id="bwm2gw_213"><p id="bwm2gw_220">[x] CI/CD integration</p></li><li class="list__item" id="bwm2gw_214"><p id="bwm2gw_221">[x] Performance optimization</p></li></ul></section><section class="chapter"><h2 id="next-level-steps" data-toc="next-level-steps">Next Level Steps 🎯</h2><ol class="list _decimal" id="bwm2gw_222" type="1"><li class="list__item" id="bwm2gw_224"><p id="bwm2gw_229"><span id="bwm2gw_230">Container Orchestration</span></p></li><li class="list__item" id="bwm2gw_225"><p id="bwm2gw_231"><span id="bwm2gw_232">Advanced Security</span></p></li><li class="list__item" id="bwm2gw_226"><p id="bwm2gw_233"><span id="bwm2gw_234">Custom Base Images</span></p></li><li class="list__item" id="bwm2gw_227"><p id="bwm2gw_235"><span id="bwm2gw_236">Registry Federation</span></p></li><li class="list__item" id="bwm2gw_228"><p id="bwm2gw_237"><span id="bwm2gw_238">Image Policy Management</span></p></li></ol><aside class="prompt" data-type="note" data-title="" id="bwm2gw_223"><p id="bwm2gw_239"><span class="control" id="bwm2gw_240">Sensei's Final Note:</span> &quot;Uma imagem Docker &eacute; como um kata perfeito - cada movimento tem prop&oacute;sito, precis&atilde;o e efici&ecirc;ncia! 🥋&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="container-internals.html" class="navigation-links__prev">Container Internals: Como Funciona Por Dentro 🔬</a><a href="image-fundamentals.html" class="navigation-links__next">Fundamentos de Imagens Docker 📦</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

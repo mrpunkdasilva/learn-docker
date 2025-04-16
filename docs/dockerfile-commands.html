@@ -1,0 +1,217 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T22:55:49.168863632"><title>Dockerfile Commands: Guia Definitivo 🛠️ | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"comandos-base","level":0,"title":"Comandos Base 📝","anchor":"#comandos-base"},{"id":"comandos-de-conte-do","level":0,"title":"Comandos de Conteúdo 📦","anchor":"#comandos-de-conte-do"},{"id":"comandos-de-execu-o","level":0,"title":"Comandos de Execução 🚀","anchor":"#comandos-de-execu-o"},{"id":"comandos-de-configura-o","level":0,"title":"Comandos de Configuração ⚙️","anchor":"#comandos-de-configura-o"},{"id":"comandos-avan-ados","level":0,"title":"Comandos Avançados 🔧","anchor":"#comandos-avan-ados"},{"id":"padr-es-e-truques","level":0,"title":"Padrões e Truques 🎯","anchor":"#padr-es-e-truques"},{"id":"waifu-command-tips","level":0,"title":"Waifu Command Tips 💡","anchor":"#waifu-command-tips"},{"id":"matriz-de-compatibilidade","level":0,"title":"Matriz de Compatibilidade 📊","anchor":"#matriz-de-compatibilidade"},{"id":"checkpoint","level":0,"title":"Checkpoint ✅","anchor":"#checkpoint"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"},{"id":"recursos-adicionais","level":0,"title":"Recursos Adicionais 📚","anchor":"#recursos-adicionais"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Dockerfile Commands: Guia Definitivo 🛠️ | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/dockerfile-commands.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Dockerfile Commands: Guia Definitivo 🛠️ | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/dockerfile-commands.html#webpage",
+    "url": "writerside-documentation/dockerfile-commands.html",
+    "name": "Dockerfile Commands: Guia Definitivo 🛠️ | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="dockerfile-commands" data-main-title="Dockerfile Commands: Guia Definitivo 🛠️" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="DEVELOPMENT: Building Applications///Dockerfile"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="dockerfile-commands" id="dockerfile-commands.md">Dockerfile Commands: Guia Definitivo 🛠️</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ DOCKERFILE COMMAND REFERENCE                              ║
+║                                                          ║
+║ FROM │ ARG │ ENV │ WORKDIR │ COPY │ ADD │ RUN │ CMD     ║
+║                                                          ║
+║ ENTRYPOINT │ EXPOSE │ VOLUME │ USER │ LABEL │ ONBUILD   ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="comandos-base" data-toc="comandos-base">Comandos Base 📝</h2><section class="chapter"><h3 id="from" data-toc="from">FROM</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+FROM &lt;imagem&gt;
+FROM &lt;imagem&gt;:&lt;tag&gt;
+FROM &lt;imagem&gt;@&lt;digest&gt;
+
+# Exemplos
+FROM ubuntu:22.04
+FROM node:18-alpine
+FROM golang:1.19@sha256:8f2b0...
+</div><aside class="prompt" data-type="warning" data-title="" id="-tm8r4k_20"><p id="-tm8r4k_21"><span class="control" id="-tm8r4k_22">From-chan diz:</span> &quot;Sempre especifique uma tag ou digest! <code class="code" id="-tm8r4k_23">latest</code> &eacute; perigoso em produ&ccedil;&atilde;o! 🎯&quot;</p></aside></section><section class="chapter"><h3 id="arg" data-toc="arg">ARG</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+ARG &lt;nome&gt;[=&lt;default&gt;]
+
+# Exemplos
+ARG VERSION=1.0.0
+ARG BUILD_DATE
+ARG GITHUB_TOKEN  # Sensível - usar com --build-arg
+
+# Escopo especial
+ARG BASE_IMAGE=ubuntu:22.04
+FROM ${BASE_IMAGE}
+</div></section><section class="chapter"><h3 id="env" data-toc="env">ENV</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+ENV &lt;key&gt;=&lt;value&gt;
+ENV &lt;key&gt; &lt;value&gt;
+
+# Exemplos
+ENV NODE_ENV=production
+ENV PORT=3000 \
+    HOST=0.0.0.0 \
+    APP_NAME=&quot;Docker App&quot;
+</div></section><section class="chapter"><h3 id="workdir" data-toc="workdir">WORKDIR</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+WORKDIR /path/to/dir
+
+# Exemplos
+WORKDIR /app
+WORKDIR $HOME/app
+WORKDIR src  # Relativo ao WORKDIR anterior
+</div></section></section><section class="chapter"><h2 id="comandos-de-conte-do" data-toc="comandos-de-conte-do">Comandos de Conte&uacute;do 📦</h2><section class="chapter"><h3 id="copy" data-toc="copy">COPY</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+COPY &lt;src&gt; &lt;dest&gt;
+COPY [&quot;&lt;src&gt;&quot;,... &quot;&lt;dest&gt;&quot;]
+
+# Exemplos
+COPY . .
+COPY package*.json ./
+COPY --chown=node:node . .
+COPY --from=builder /app/dist ./public
+</div></section><section class="chapter"><h3 id="add" data-toc="add">ADD</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+ADD &lt;src&gt; &lt;dest&gt;
+ADD [&quot;&lt;src&gt;&quot;,... &quot;&lt;dest&gt;&quot;]
+
+# Exemplos
+ADD https://example.com/file.tar.gz /tmp/
+ADD source.tar.gz /usr/local/
+ADD --chown=user:group files* /app/
+</div><aside class="prompt" data-type="warning" data-title="" id="-tm8r4k_31"><p id="-tm8r4k_32"><span class="control" id="-tm8r4k_33">Copy-chan avisa:</span> &quot;Prefira COPY ao inv&eacute;s de ADD! ADD tem poderes especiais que podem ser perigosos! 🎭&quot;</p></aside></section></section><section class="chapter"><h2 id="comandos-de-execu-o" data-toc="comandos-de-execu-o">Comandos de Execu&ccedil;&atilde;o 🚀</h2><section class="chapter"><h3 id="run" data-toc="run">RUN</h3><div class="code-block" data-lang="none">
+# Sintaxe shell
+RUN &lt;comando&gt;
+
+# Sintaxe exec
+RUN [&quot;executável&quot;, &quot;param1&quot;, &quot;param2&quot;]
+
+# Exemplos práticos
+RUN apt-get update &amp;&amp; \
+    apt-get install -y \
+        curl \
+        nginx \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt-get update &amp;&amp; apt-get install -y python3
+
+RUN --mount=type=secret,id=ssh,target=/root/.ssh/id_rsa \
+    git clone git@github.com:org/repo.git
+</div></section><section class="chapter"><h3 id="cmd" data-toc="cmd">CMD</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+CMD [&quot;executável&quot;, &quot;param1&quot;, &quot;param2&quot;]  # exec form (preferida)
+CMD comando param1 param2               # shell form
+CMD [&quot;param1&quot;, &quot;param2&quot;]               # como parâmetros para ENTRYPOINT
+
+# Exemplos
+CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
+CMD [&quot;python3&quot;, &quot;app.py&quot;]
+CMD [&quot;--port&quot;, &quot;8080&quot;]  # com ENTRYPOINT
+</div></section><section class="chapter"><h3 id="entrypoint" data-toc="entrypoint">ENTRYPOINT</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+ENTRYPOINT [&quot;executável&quot;, &quot;param1&quot;]  # exec form (preferida)
+ENTRYPOINT comando param1            # shell form
+
+# Exemplos
+ENTRYPOINT [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
+ENTRYPOINT [&quot;/docker-entrypoint.sh&quot;]
+ENTRYPOINT [&quot;python3&quot;]
+</div></section></section><section class="chapter"><h2 id="comandos-de-configura-o" data-toc="comandos-de-configura-o">Comandos de Configura&ccedil;&atilde;o ⚙️</h2><section class="chapter"><h3 id="expose" data-toc="expose">EXPOSE</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+EXPOSE &lt;port&gt; [&lt;port&gt;/&lt;protocol&gt;...]
+
+# Exemplos
+EXPOSE 80
+EXPOSE 80/tcp 443/tcp
+EXPOSE 53/udp
+</div></section><section class="chapter"><h3 id="volume" data-toc="volume">VOLUME</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+VOLUME [&quot;/data&quot;]
+VOLUME /data /logs /temp
+
+# Exemplos
+VOLUME [&quot;/var/log&quot;]
+VOLUME [&quot;/var/www&quot;, &quot;/var/log/nginx&quot;]
+VOLUME /mnt/data
+</div></section><section class="chapter"><h3 id="user" data-toc="user">USER</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+USER &lt;user&gt;[:&lt;group&gt;]
+USER &lt;UID&gt;[:&lt;GID&gt;]
+
+# Exemplos
+USER node
+USER node:node
+USER 1000:1000
+</div></section><section class="chapter"><h3 id="label" data-toc="label">LABEL</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+LABEL &lt;key&gt;=&lt;value&gt;
+
+# Exemplos
+LABEL version=&quot;1.0.0&quot;
+LABEL maintainer=&quot;dev@example.com&quot; \
+      description=&quot;Nginx server&quot; \
+      vendor=&quot;ACME Corp&quot;
+</div></section></section><section class="chapter"><h2 id="comandos-avan-ados" data-toc="comandos-avan-ados">Comandos Avan&ccedil;ados 🔧</h2><section class="chapter"><h3 id="healthcheck" data-toc="healthcheck">HEALTHCHECK</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+HEALTHCHECK [OPTIONS] CMD comando
+
+# Exemplos
+HEALTHCHECK --interval=30s --timeout=3s \
+    CMD curl -f http://localhost/ || exit 1
+
+HEALTHCHECK --start-period=5s \
+    CMD wget -q --spider http://localhost:3000/health || exit 1
+
+# Desabilitar healthcheck
+HEALTHCHECK NONE
+</div></section><section class="chapter"><h3 id="shell" data-toc="shell">SHELL</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+SHELL [&quot;executável&quot;, &quot;parâmetros&quot;]
+
+# Exemplos
+SHELL [&quot;/bin/bash&quot;, &quot;-c&quot;]
+SHELL [&quot;powershell&quot;, &quot;-command&quot;]
+</div></section><section class="chapter"><h3 id="onbuild" data-toc="onbuild">ONBUILD</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+ONBUILD &lt;INSTRUÇÃO&gt;
+
+# Exemplos
+ONBUILD COPY . /app/src
+ONBUILD RUN /usr/local/bin/python-build
+</div></section><section class="chapter"><h3 id="stopsignal" data-toc="stopsignal">STOPSIGNAL</h3><div class="code-block" data-lang="none">
+# Sintaxe básica
+STOPSIGNAL signal
+
+# Exemplos
+STOPSIGNAL SIGTERM
+STOPSIGNAL 9
+</div></section></section><section class="chapter"><h2 id="padr-es-e-truques" data-toc="padr-es-e-truques">Padr&otilde;es e Truques 🎯</h2><section class="chapter"><h3 id="multi-stage-builds" data-toc="multi-stage-builds">Multi-stage Builds</h3><div class="code-block" data-lang="none">
+# Build stage
+FROM golang:1.19 AS builder
+WORKDIR /app
+COPY . .
+RUN go build -o main
+
+# Final stage
+FROM alpine:3.18
+COPY --from=builder /app/main /usr/local/bin/
+ENTRYPOINT [&quot;main&quot;]
+</div></section><section class="chapter"><h3 id="build-cache" data-toc="build-cache">Build Cache</h3><div class="code-block" data-lang="none">
+# Cache de dependências
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Cache de build
+RUN --mount=type=cache,target=/root/.cache/go-build \
+    go build -o app
+</div></section><section class="chapter"><h3 id="args-e-env-combinados" data-toc="args-e-env-combinados">Args e Env Combinados</h3><div class="code-block" data-lang="none">
+# Build-time config
+ARG NODE_ENV
+ENV NODE_ENV=${NODE_ENV:-production}
+
+# Runtime config
+ARG CONFIG_FILE=config.json
+COPY ${CONFIG_FILE} /etc/app/config.json
+</div></section></section><section class="chapter"><h2 id="waifu-command-tips" data-toc="waifu-command-tips">Waifu Command Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="-tm8r4k_62"><p id="-tm8r4k_65"><span class="control" id="-tm8r4k_66">Build-chan diz:</span> &quot;Mantenha suas instru&ccedil;&otilde;es organizadas - do menos mut&aacute;vel para o mais mut&aacute;vel! 📚&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-tm8r4k_63"><p id="-tm8r4k_67"><span class="control" id="-tm8r4k_68">Cache-sama alerta:</span> &quot;Use <code class="code" id="-tm8r4k_69">--mount=type=cache</code> para builds mais r&aacute;pidos! 🚀&quot;</p></aside><aside class="prompt" data-type="note" data-title="" id="-tm8r4k_64"><p id="-tm8r4k_70"><span class="control" id="-tm8r4k_71">Security-chan lembra:</span> &quot;Sempre use a forma exec para CMD e ENTRYPOINT em produ&ccedil;&atilde;o! 🔒&quot;</p></aside></section><section class="chapter"><h2 id="matriz-de-compatibilidade" data-toc="matriz-de-compatibilidade">Matriz de Compatibilidade 📊</h2><div class="table-wrapper"><table class="wide" id="-tm8r4k_72"><thead><tr class="ijRowHead" id="-tm8r4k_73"><th id="-tm8r4k_80"><p>Comando</p></th><th id="-tm8r4k_81"><p>M&uacute;ltiplos por Dockerfile</p></th><th id="-tm8r4k_82"><p>Sobrescrito por Args</p></th><th id="-tm8r4k_83"><p>Persiste na Imagem</p></th></tr></thead><tbody><tr id="-tm8r4k_74"><td id="-tm8r4k_84"><p>FROM</p></td><td id="-tm8r4k_85"><p>✅ (multi-stage)</p></td><td id="-tm8r4k_86"><p>✅</p></td><td id="-tm8r4k_87"><p>-</p></td></tr><tr id="-tm8r4k_75"><td id="-tm8r4k_88"><p>ARG</p></td><td id="-tm8r4k_89"><p>✅</p></td><td id="-tm8r4k_90"><p>✅</p></td><td id="-tm8r4k_91"><p>❌</p></td></tr><tr id="-tm8r4k_76"><td id="-tm8r4k_92"><p>ENV</p></td><td id="-tm8r4k_93"><p>✅</p></td><td id="-tm8r4k_94"><p>❌</p></td><td id="-tm8r4k_95"><p>✅</p></td></tr><tr id="-tm8r4k_77"><td id="-tm8r4k_96"><p>COPY</p></td><td id="-tm8r4k_97"><p>✅</p></td><td id="-tm8r4k_98"><p>✅ (src/dest)</p></td><td id="-tm8r4k_99"><p>✅</p></td></tr><tr id="-tm8r4k_78"><td id="-tm8r4k_100"><p>RUN</p></td><td id="-tm8r4k_101"><p>✅</p></td><td id="-tm8r4k_102"><p>❌</p></td><td id="-tm8r4k_103"><p>✅</p></td></tr><tr id="-tm8r4k_79"><td id="-tm8r4k_104"><p>CMD</p></td><td id="-tm8r4k_105"><p>❌ (&uacute;ltimo vale)</p></td><td id="-tm8r4k_106"><p>❌</p></td><td id="-tm8r4k_107"><p>✅</p></td></tr></tbody></table></div></section><section class="chapter"><h2 id="checkpoint" data-toc="checkpoint">Checkpoint ✅</h2><p id="-tm8r4k_108">Voc&ecirc; agora domina:</p><ul class="list _bullet" id="-tm8r4k_109"><li class="list__item" id="-tm8r4k_110"><p id="-tm8r4k_116">[x] Todos os comandos b&aacute;sicos do Dockerfile</p></li><li class="list__item" id="-tm8r4k_111"><p id="-tm8r4k_117">[x] Sintaxe e op&ccedil;&otilde;es de cada comando</p></li><li class="list__item" id="-tm8r4k_112"><p id="-tm8r4k_118">[x] Casos de uso e exemplos pr&aacute;ticos</p></li><li class="list__item" id="-tm8r4k_113"><p id="-tm8r4k_119">[x] Padr&otilde;es avan&ccedil;ados e truques</p></li><li class="list__item" id="-tm8r4k_114"><p id="-tm8r4k_120">[x] Boas pr&aacute;ticas para cada comando</p></li><li class="list__item" id="-tm8r4k_115"><p id="-tm8r4k_121">[x] Compatibilidade e limita&ccedil;&otilde;es</p></li></ul></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="-tm8r4k_122" type="1"><li class="list__item" id="-tm8r4k_123"><p id="-tm8r4k_126"><span id="-tm8r4k_127">Dockerfile Examples</span></p></li><li class="list__item" id="-tm8r4k_124"><p id="-tm8r4k_128"><a href="best-practices.html" id="-tm8r4k_129" data-tooltip="Security-chan diz: &quot;Nunca confie em imagens não verificadas! 🔍&quot;">Best Practices</a></p></li><li class="list__item" id="-tm8r4k_125"><p id="-tm8r4k_130"><span id="-tm8r4k_131">Advanced Patterns</span></p></li></ol></section><section class="chapter"><h2 id="recursos-adicionais" data-toc="recursos-adicionais">Recursos Adicionais 📚</h2><ul class="list _bullet" id="-tm8r4k_132"><li class="list__item" id="-tm8r4k_134"><p id="-tm8r4k_137"><a href="https://docs.docker.com/engine/reference/builder/" id="-tm8r4k_138" data-external="true" rel="noopener noreferrer" target="_blank">Dockerfile Reference</a></p></li><li class="list__item" id="-tm8r4k_135"><p id="-tm8r4k_139"><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/" id="-tm8r4k_140" data-external="true" rel="noopener noreferrer" target="_blank">Best Practices Guide</a></p></li><li class="list__item" id="-tm8r4k_136"><p id="-tm8r4k_141"><a href="https://docs.docker.com/build/building/multi-stage/" id="-tm8r4k_142" data-external="true" rel="noopener noreferrer" target="_blank">Multi-stage Builds</a></p></li></ul><aside class="prompt" data-type="note" data-title="" id="-tm8r4k_133"><p id="-tm8r4k_143"><span class="control" id="-tm8r4k_144">Sensei's Note:</span> &quot;Cada comando &eacute; uma ferramenta - aprenda quando e como usar cada uma delas para construir imagens perfeitas! 🎯&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="dockerfile-intro.html" class="navigation-links__prev">Dockerfile: A Arte de Construir Imagens 🎨</a><a href="best-practices.html" class="navigation-links__next">Melhores Pr&aacute;ticas Docker: O Caminho do Mestre 🎯</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

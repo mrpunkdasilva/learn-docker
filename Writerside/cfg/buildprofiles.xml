@@ -16,7 +16,7 @@
             <primary-color>purple</primary-color>
             <noindex-content>false</noindex-content>
             <product-web-url>https://github.com/seu-usuario/learn-docker</product-web-url>
-            <download-title>Clone o Repositório</download-title>
+            <download-title>Repositório</download-title>
             <download-page>https://github.com/seu-usuario/learn-docker</download-page>
             <showDownloadButton>true</showDownloadButton>
         </variables>

@@ -1,0 +1,127 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T22:55:49.287311067"><title>Ciclo de Vida dos Containers: Do Nascimento &agrave; Transcend&ecirc;ncia 🔄 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"estados-fundamentais","level":0,"title":"Estados Fundamentais 🎭","anchor":"#estados-fundamentais"},{"id":"transi-es-de-estado-avan-adas","level":0,"title":"Transições de Estado Avançadas 🔄","anchor":"#transi-es-de-estado-avan-adas"},{"id":"monitoramento-e-logging","level":0,"title":"Monitoramento e Logging 📊","anchor":"#monitoramento-e-logging"},{"id":"waifu-container-tips","level":0,"title":"Waifu Container Tips 💡","anchor":"#waifu-container-tips"},{"id":"checkpoint-final","level":0,"title":"Checkpoint Final ✅","anchor":"#checkpoint-final"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Ciclo de Vida dos Containers: Do Nascimento &agrave; Transcend&ecirc;ncia 🔄 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/container-lifecycle.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Ciclo de Vida dos Containers: Do Nascimento &agrave; Transcend&ecirc;ncia 🔄 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/container-lifecycle.html#webpage",
+    "url": "writerside-documentation/container-lifecycle.html",
+    "name": "Ciclo de Vida dos Containers: Do Nascimento &agrave; Transcend&ecirc;ncia 🔄 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="container-lifecycle" data-main-title="Ciclo de Vida dos Containers: Do Nascimento à Transcendência 🔄" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="CORE: Docker Building Blocks///Container Basics"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="container-lifecycle" id="container-lifecycle.md">Ciclo de Vida dos Containers: Do Nascimento à Transcendência 🔄</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ CONTAINER LIFECYCLE STATES                                ║
+║                                                          ║
+║    created ──► running ◄──► paused                       ║
+║        │         │            │                          ║
+║        │         └──► stopped ◄┘                         ║
+║        │              │                                  ║
+║        └──────────────► removed                         ║
+║                                                          ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="estados-fundamentais" data-toc="estados-fundamentais">Estados Fundamentais 🎭</h2><section class="chapter"><h3 id="1-created" data-toc="1-created">1. Created</h3><div class="code-block" data-lang="bash">
+# Criar container sem iniciar
+docker create --name meu-container nginx
+
+# Verificar estado
+docker ps -a | grep meu-container
+
+# Criar com configurações específicas
+docker create \
+  --name web-app \
+  --memory 512m \
+  --cpus 2 \
+  --network bridge \
+  nginx:latest
+</div></section><section class="chapter"><h3 id="2-running" data-toc="2-running">2. Running</h3><div class="code-block" data-lang="bash">
+# Iniciar container
+docker start meu-container
+
+# Criar e iniciar imediatamente
+docker run -d --name outro-container nginx
+
+# Executar com limites e variáveis
+docker run -d \
+  --name app \
+  -p 8080:80 \
+  -v /data:/app/data \
+  -e NODE_ENV=production \
+  --restart unless-stopped \
+  node:alpine
+</div></section><section class="chapter"><h3 id="3-paused" data-toc="3-paused">3. Paused</h3><div class="code-block" data-lang="bash">
+# Pausar container
+docker pause meu-container
+
+# Despausar container
+docker unpause meu-container
+
+# Pausar múltiplos containers
+docker pause $(docker ps -q)
+</div></section><section class="chapter"><h3 id="4-stopped" data-toc="4-stopped">4. Stopped</h3><div class="code-block" data-lang="bash">
+# Parar container gracefully
+docker stop meu-container
+
+# Parar container imediatamente
+docker kill meu-container
+
+# Parar com timeout personalizado
+docker stop --time 30 meu-container
+</div></section><section class="chapter"><h3 id="5-removed" data-toc="5-removed">5. Removed</h3><div class="code-block" data-lang="bash">
+# Remover container parado
+docker rm meu-container
+
+# Forçar remoção
+docker rm -f meu-container
+
+# Remover todos containers parados
+docker container prune
+</div></section></section><section class="chapter"><h2 id="transi-es-de-estado-avan-adas" data-toc="transi-es-de-estado-avan-adas">Transi&ccedil;&otilde;es de Estado Avan&ccedil;adas 🔄</h2><section class="chapter"><h3 id="restart-policies" data-toc="restart-policies">Restart Policies</h3><div class="code-block" data-lang="bash">
+# No - não reinicia automaticamente
+docker run --restart no nginx
+
+# Always - sempre reinicia
+docker run --restart always nginx
+
+# On-failure - reinicia em caso de erro
+docker run --restart on-failure:3 nginx
+
+# Unless-stopped - reinicia exceto se parado manualmente
+docker run --restart unless-stopped nginx
+</div></section><section class="chapter"><h3 id="gerenciamento-de-recursos" data-toc="gerenciamento-de-recursos">Gerenciamento de Recursos</h3><div class="code-block" data-lang="bash">
+# Limitar memória e CPU
+docker run \
+  --memory 512m \
+  --memory-swap 1g \
+  --cpus 2 \
+  --cpu-shares 1024 \
+  nginx
+
+# Atualizar limites em runtime
+docker update \
+  --memory 1g \
+  --cpus 4 \
+  container_id
+</div></section></section><section class="chapter"><h2 id="monitoramento-e-logging" data-toc="monitoramento-e-logging">Monitoramento e Logging 📊</h2><section class="chapter"><h3 id="health-checks" data-toc="health-checks">Health Checks</h3><div class="code-block" data-lang="bash">
+# Configurar health check
+docker run -d \
+  --name web \
+  --health-cmd=&quot;curl -f http://localhost/ || exit 1&quot; \
+  --health-interval=5s \
+  --health-retries=3 \
+  --health-timeout=2s \
+  nginx
+</div></section><section class="chapter"><h3 id="logs" data-toc="logs">Logs</h3><div class="code-block" data-lang="bash">
+# Ver logs com timestamp
+docker logs --timestamps container_id
+
+# Follow logs em tempo real
+docker logs -f container_id
+
+# Logs desde específico timestamp
+docker logs --since 2023-01-01T00:00:00 container_id
+</div></section></section><section class="chapter"><h2 id="waifu-container-tips" data-toc="waifu-container-tips">Waifu Container Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="z6ck9hj_28"><p id="z6ck9hj_31"><span class="control" id="z6ck9hj_32">Lifecycle-chan diz:</span> &quot;Containers s&atilde;o ef&ecirc;meros! Trate-os como borboletas digitais! 🦋&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="z6ck9hj_29"><p id="z6ck9hj_33"><span class="control" id="z6ck9hj_34">State-sama alerta:</span> &quot;Sempre use stop antes de rm para um graceful shutdown! 🛑&quot;</p></aside><aside class="prompt" data-type="tip" data-title="" id="z6ck9hj_30"><p id="z6ck9hj_35"><span class="control" id="z6ck9hj_36">Debug-chan sugere:</span> &quot;Logs s&atilde;o como pegadas digitais - siga-as para encontrar problemas! 🔍&quot;</p></aside></section><section class="chapter"><h2 id="checkpoint-final" data-toc="checkpoint-final">Checkpoint Final ✅</h2><p id="z6ck9hj_37">Voc&ecirc; agora domina:</p><ul class="list _bullet" id="z6ck9hj_38"><li class="list__item" id="z6ck9hj_39"><p id="z6ck9hj_45">[x] Estados e transi&ccedil;&otilde;es dos containers</p></li><li class="list__item" id="z6ck9hj_40"><p id="z6ck9hj_46">[x] Pol&iacute;ticas de restart</p></li><li class="list__item" id="z6ck9hj_41"><p id="z6ck9hj_47">[x] Monitoramento b&aacute;sico</p></li><li class="list__item" id="z6ck9hj_42"><p id="z6ck9hj_48">[x] Health checks</p></li><li class="list__item" id="z6ck9hj_43"><p id="z6ck9hj_49">[x] Logging</p></li><li class="list__item" id="z6ck9hj_44"><p id="z6ck9hj_50">[x] Gerenciamento de recursos</p></li></ul></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="z6ck9hj_51" type="1"><li class="list__item" id="z6ck9hj_53"><p id="z6ck9hj_56"><a href="container-operations.html" id="z6ck9hj_57" data-tooltip="Container-chan diz: &quot;Mantenha seus containers leves e eficientes! 🎈&quot;">Container Operations</a></p></li><li class="list__item" id="z6ck9hj_54"><p id="z6ck9hj_58"><a href="container-runtime.html" id="z6ck9hj_59" data-tooltip="Namespaces">Container Runtime</a></p></li><li class="list__item" id="z6ck9hj_55"><p id="z6ck9hj_60"><a href="container-monitoring.html" id="z6ck9hj_61" data-tooltip="Monitor-chan diz: &quot;Métricas são como batimentos cardíacos do sistema - monitore-os ou enfrente o flatline! uwu&quot;">Container Monitoring</a></p></li></ol><aside class="prompt" data-type="note" data-title="" id="z6ck9hj_52"><p id="z6ck9hj_62"><span class="control" id="z6ck9hj_63">Sensei's Note:</span> &quot;Dominar o ciclo de vida dos containers &eacute; como se tornar um mestre Jedi - requer paci&ecirc;ncia, pr&aacute;tica e sabedoria.&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="containers-101.html" class="navigation-links__prev">Containers 101</a><a href="container-internals.html" class="navigation-links__next">Container Internals: Como Funciona Por Dentro 🔬</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

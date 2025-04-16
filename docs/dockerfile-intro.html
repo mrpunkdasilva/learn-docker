@@ -1,0 +1,269 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T22:55:49.128082772"><title>Dockerfile: A Arte de Construir Imagens 🎨 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"o-que-um-dockerfile","level":0,"title":"O que é um Dockerfile? 🤔","anchor":"#o-que-um-dockerfile"},{"id":"anatomia-b-sica","level":0,"title":"Anatomia Básica 🔬","anchor":"#anatomia-b-sica"},{"id":"instru-es-essenciais","level":0,"title":"Instruções Essenciais 📝","anchor":"#instru-es-essenciais"},{"id":"boas-pr-ticas-avan-adas","level":0,"title":"Boas Práticas Avançadas 🌟","anchor":"#boas-pr-ticas-avan-adas"},{"id":"padr-es-avan-ados","level":0,"title":"Padrões Avançados 🎯","anchor":"#padr-es-avan-ados"},{"id":"waifu-docker-tips","level":0,"title":"Waifu Docker Tips 💡","anchor":"#waifu-docker-tips"},{"id":"exemplos-do-mundo-real","level":0,"title":"Exemplos do Mundo Real 🌍","anchor":"#exemplos-do-mundo-real"},{"id":"checkpoint","level":0,"title":"Checkpoint ✅","anchor":"#checkpoint"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"},{"id":"recursos-adicionais","level":0,"title":"Recursos Adicionais 📚","anchor":"#recursos-adicionais"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Dockerfile: A Arte de Construir Imagens 🎨 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/dockerfile-intro.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Dockerfile: A Arte de Construir Imagens 🎨 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/dockerfile-intro.html#webpage",
+    "url": "writerside-documentation/dockerfile-intro.html",
+    "name": "Dockerfile: A Arte de Construir Imagens 🎨 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="dockerfile-intro" data-main-title="Dockerfile: A Arte de Construir Imagens 🎨" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="DEVELOPMENT: Building Applications///Dockerfile"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="dockerfile-intro" id="dockerfile-intro.md">Dockerfile: A Arte de Construir Imagens 🎨</h1><div class="code-block" data-lang="none">
+╔════════════════════════════════════════════════════════════╗
+║ DOCKERFILE STRUCTURE                                       ║
+║                                                           ║
+║ FROM base_image                                           ║
+║ ├── ENV variables                                         ║
+║ ├── COPY/ADD files                                        ║
+║ ├── RUN commands                                          ║
+║ ├── EXPOSE ports                                          ║
+║ └── CMD/ENTRYPOINT                                        ║
+║                                                           ║
+╚════════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="o-que-um-dockerfile" data-toc="o-que-um-dockerfile">O que &eacute; um Dockerfile? 🤔</h2><p id="i6gpfu_14">Um Dockerfile &eacute; um arquivo de texto que cont&eacute;m todas as instru&ccedil;&otilde;es necess&aacute;rias para criar uma imagem Docker. Pense nele como uma receita que o Docker usa para &quot;cozinhar&quot; sua aplica&ccedil;&atilde;o em um container.</p><section class="chapter"><h3 id="caracter-sticas-principais" data-toc="caracter-sticas-principais">Caracter&iacute;sticas Principais</h3><ul class="list _bullet" id="i6gpfu_17"><li class="list__item" id="i6gpfu_18"><p id="i6gpfu_23">Formato texto simples</p></li><li class="list__item" id="i6gpfu_19"><p id="i6gpfu_24">Execu&ccedil;&atilde;o sequencial de instru&ccedil;&otilde;es</p></li><li class="list__item" id="i6gpfu_20"><p id="i6gpfu_25">Sistema de camadas (layers)</p></li><li class="list__item" id="i6gpfu_21"><p id="i6gpfu_26">Cache inteligente</p></li><li class="list__item" id="i6gpfu_22"><p id="i6gpfu_27">Sintaxe declarativa</p></li></ul></section><section class="chapter"><h3 id="por-que-usar-dockerfile" data-toc="por-que-usar-dockerfile">Por que usar Dockerfile?</h3><ul class="list _bullet" id="i6gpfu_28"><li class="list__item" id="i6gpfu_29"><p id="i6gpfu_34">Automa&ccedil;&atilde;o da cria&ccedil;&atilde;o de imagens</p></li><li class="list__item" id="i6gpfu_30"><p id="i6gpfu_35">Reprodutibilidade</p></li><li class="list__item" id="i6gpfu_31"><p id="i6gpfu_36">Versionamento</p></li><li class="list__item" id="i6gpfu_32"><p id="i6gpfu_37">Padroniza&ccedil;&atilde;o</p></li><li class="list__item" id="i6gpfu_33"><p id="i6gpfu_38">Facilidade de compartilhamento</p></li></ul></section></section><section class="chapter"><h2 id="anatomia-b-sica" data-toc="anatomia-b-sica">Anatomia B&aacute;sica 🔬</h2><section class="chapter"><h3 id="estrutura-fundamental" data-toc="estrutura-fundamental">Estrutura Fundamental</h3><div class="code-block" data-lang="none">
+# Comentário explicativo
+FROM ubuntu:20.04
+
+# Variáveis de ambiente
+ENV APP_HOME=/app \
+    APP_ENV=production
+
+# Diretório de trabalho
+WORKDIR $APP_HOME
+
+# Copiar arquivos
+COPY . .
+
+# Executar comandos
+RUN apt-get update &amp;&amp; \
+    apt-get install -y python3
+
+# Expor portas
+EXPOSE 8080
+
+# Comando padrão
+CMD [&quot;python3&quot;, &quot;app.py&quot;]
+</div></section></section><section class="chapter"><h2 id="instru-es-essenciais" data-toc="instru-es-essenciais">Instru&ccedil;&otilde;es Essenciais 📝</h2><section class="chapter"><h3 id="from" data-toc="from">FROM</h3><p id="i6gpfu_49">A instru&ccedil;&atilde;o FROM &eacute; sempre a primeira instru&ccedil;&atilde;o v&aacute;lida em um Dockerfile.</p><div class="code-block" data-lang="none">
+# Imagem base oficial
+FROM node:18-alpine
+
+# Imagem scratch (vazia)
+FROM scratch
+
+# Multi-stage build
+FROM golang:1.19 AS builder
+</div><aside class="prompt" data-type="tip" data-title="" id="i6gpfu_51"><p id="i6gpfu_52"><span class="control" id="i6gpfu_53">Build-chan diz:</span> &quot;A escolha da imagem base &eacute; como escolher o terreno para construir sua casa - precisa ser s&oacute;lido! 🏗️&quot;</p></aside></section><section class="chapter"><h3 id="arg" data-toc="arg">ARG</h3><p id="i6gpfu_54">ARG &eacute; a &uacute;nica instru&ccedil;&atilde;o que pode vir antes de FROM.</p><div class="code-block" data-lang="none">
+# Definir versão durante o build
+ARG NODE_VERSION=18
+FROM node:${NODE_VERSION}-alpine
+
+# Múltiplos argumentos
+ARG BUILD_ENV
+ARG BUILD_VERSION
+</div></section><section class="chapter"><h3 id="env" data-toc="env">ENV</h3><p id="i6gpfu_56">Vari&aacute;veis de ambiente que persistem na imagem final.</p><div class="code-block" data-lang="none">
+# Variáveis simples
+ENV APP_HOME=/app
+
+# Múltiplas variáveis
+ENV APP_ENV=production \
+    APP_PORT=3000 \
+    APP_VERSION=1.0.0
+
+# Usando variáveis
+ENV PATH=&quot;${APP_HOME}/bin:${PATH}&quot;
+</div></section><section class="chapter"><h3 id="workdir" data-toc="workdir">WORKDIR</h3><p id="i6gpfu_58">Define o diret&oacute;rio de trabalho para instru&ccedil;&otilde;es subsequentes.</p><div class="code-block" data-lang="none">
+# Diretório absoluto
+WORKDIR /app
+
+# Diretório relativo (concatena com WORKDIR anterior)
+WORKDIR src
+WORKDIR tests  # Resultado: /app/src/tests
+</div></section><section class="chapter"><h3 id="copy-e-add" data-toc="copy-e-add">COPY e ADD</h3><div class="code-block" data-lang="none">
+# Copiar arquivo local
+COPY package.json .
+
+# Copiar com wildcard
+COPY *.js ./
+
+# Copiar preservando permissões
+COPY --chown=node:node . .
+
+# ADD para URLs e archives
+ADD https://example.com/file.tar.gz .
+ADD source.tar.gz /usr/local/
+</div></section><section class="chapter"><h3 id="run" data-toc="run">RUN</h3><div class="code-block" data-lang="none">
+# Formato shell
+RUN apt-get update
+
+# Formato exec
+RUN [&quot;apt-get&quot;, &quot;install&quot;, &quot;-y&quot;, &quot;nginx&quot;]
+
+# Multi-line com limpeza
+RUN apt-get update &amp;&amp; \
+    apt-get install -y \
+    curl \
+    nginx \
+    postgresql-client \
+    &amp;&amp; rm -rf /var/lib/apt/lists/* \
+    &amp;&amp; apt-get clean
+
+# Criar usuário e grupo
+RUN groupadd -r appgroup &amp;&amp; \
+    useradd -r -g appgroup appuser
+</div></section><section class="chapter"><h3 id="expose" data-toc="expose">EXPOSE</h3><div class="code-block" data-lang="none">
+# Expor uma porta
+EXPOSE 8080
+
+# Expor múltiplas portas
+EXPOSE 80 443
+
+# Expor UDP
+EXPOSE 53/udp
+</div></section><section class="chapter"><h3 id="cmd-e-entrypoint" data-toc="cmd-e-entrypoint">CMD e ENTRYPOINT</h3><div class="code-block" data-lang="none">
+# CMD formato exec (recomendado)
+CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
+
+# CMD formato shell (evitar)
+CMD nginx -g &quot;daemon off;&quot;
+
+# ENTRYPOINT com CMD
+ENTRYPOINT [&quot;python3&quot;]
+CMD [&quot;app.py&quot;]
+
+# Script de entrada
+COPY docker-entrypoint.sh /
+ENTRYPOINT [&quot;/docker-entrypoint.sh&quot;]
+CMD [&quot;app&quot;, &quot;start&quot;]
+</div></section></section><section class="chapter"><h2 id="boas-pr-ticas-avan-adas" data-toc="boas-pr-ticas-avan-adas">Boas Pr&aacute;ticas Avan&ccedil;adas 🌟</h2><section class="chapter"><h3 id="1-otimiza-o-de-camadas" data-toc="1-otimiza-o-de-camadas">1. Otimiza&ccedil;&atilde;o de Camadas</h3><div class="code-block" data-lang="none">
+# ❌ Ruim - Muitas camadas
+RUN apt-get update
+RUN apt-get install -y python3
+RUN apt-get install -y nginx
+RUN rm -rf /var/lib/apt/lists/*
+
+# ✅ Bom - Uma única camada
+RUN apt-get update &amp;&amp; \
+    apt-get install -y \
+    python3 \
+    nginx \
+    &amp;&amp; rm -rf /var/lib/apt/lists/* \
+    &amp;&amp; apt-get clean
+</div></section><section class="chapter"><h3 id="2-cache-eficiente" data-toc="2-cache-eficiente">2. Cache Eficiente</h3><div class="code-block" data-lang="none">
+# ✅ Copiar apenas arquivos de dependência primeiro
+COPY package*.json ./
+RUN npm ci
+
+# Copiar código-fonte depois
+COPY . .
+RUN npm run build
+
+# ✅ Agrupar comandos relacionados
+RUN curl -sL https://example.com/setup.sh | bash - &amp;&amp; \
+    apt-get update &amp;&amp; \
+    apt-get install -y package1 package2 &amp;&amp; \
+    rm -rf /var/lib/apt/lists/*
+</div></section><section class="chapter"><h3 id="3-multi-stage-builds-avan-ados" data-toc="3-multi-stage-builds-avan-ados">3. Multi-stage Builds Avan&ccedil;ados</h3><div class="code-block" data-lang="none">
+# Stage de build
+FROM node:18 AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Stage de testes
+FROM builder AS tester
+RUN npm run test
+
+# Stage final
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+</div></section><section class="chapter"><h3 id="4-seguran-a" data-toc="4-seguran-a">4. Seguran&ccedil;a</h3><div class="code-block" data-lang="none">
+# Usar versões específicas
+FROM node:18.17.1-alpine3.18
+
+# Criar e usar usuário não-root
+RUN addgroup -S appgroup &amp;&amp; adduser -S appuser -G appgroup
+USER appuser
+
+# Minimizar superfície de ataque
+FROM alpine:3.18
+RUN apk add --no-cache nodejs
+</div></section></section><section class="chapter"><h2 id="padr-es-avan-ados" data-toc="padr-es-avan-ados">Padr&otilde;es Avan&ccedil;ados 🎯</h2><section class="chapter"><h3 id="1-imagens-base-personalizadas" data-toc="1-imagens-base-personalizadas">1. Imagens Base Personalizadas</h3><div class="code-block" data-lang="none">
+# Dockerfile.base
+FROM ubuntu:22.04
+RUN apt-get update &amp;&amp; \
+    apt-get install -y \
+    curl \
+    nginx \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+# Dockerfile
+FROM myorg/baseimage:1.0
+COPY . .
+</div></section><section class="chapter"><h3 id="2-build-arguments-din-micos" data-toc="2-build-arguments-din-micos">2. Build Arguments Din&acirc;micos</h3><div class="code-block" data-lang="none">
+# Build-time variables
+ARG BUILD_VERSION
+ARG BUILD_DATE
+ARG VCS_REF
+
+# Labels para metadata
+LABEL org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.version=$BUILD_VERSION
+</div></section><section class="chapter"><h3 id="3-health-checks" data-toc="3-health-checks">3. Health Checks</h3><div class="code-block" data-lang="none">
+# Verificação básica
+HEALTHCHECK CMD curl -f http://localhost/ || exit 1
+
+# Verificação avançada
+HEALTHCHECK --interval=30s --timeout=3s \
+    CMD wget -q --spider http://localhost:3000/health || exit 1
+</div></section></section><section class="chapter"><h2 id="waifu-docker-tips" data-toc="waifu-docker-tips">Waifu Docker Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="i6gpfu_78"><p id="i6gpfu_82"><span class="control" id="i6gpfu_83">Dockerfile-chan diz:</span> &quot;Mantenha suas imagens leves e eficientes! Menos &eacute; mais! 🎨&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="i6gpfu_79"><p id="i6gpfu_84"><span class="control" id="i6gpfu_85">Cache-sama alerta:</span> &quot;Organize suas instru&ccedil;&otilde;es da menos mut&aacute;vel para a mais mut&aacute;vel! 🔄&quot;</p></aside><aside class="prompt" data-type="note" data-title="" id="i6gpfu_80"><p id="i6gpfu_86"><span class="control" id="i6gpfu_87">Security-chan lembra:</span> &quot;Nunca exponha secrets no Dockerfile! Use build args ou environment files! 🔒&quot;</p></aside><aside class="prompt" data-type="tip" data-title="" id="i6gpfu_81"><p id="i6gpfu_88"><span class="control" id="i6gpfu_89">Performance-chan sugere:</span> &quot;Use multi-stage builds para reduzir o tamanho final da imagem! 🚀&quot;</p></aside></section><section class="chapter"><h2 id="exemplos-do-mundo-real" data-toc="exemplos-do-mundo-real">Exemplos do Mundo Real 🌍</h2><section class="chapter"><h3 id="aplica-o-web-full-stack" data-toc="aplica-o-web-full-stack">Aplica&ccedil;&atilde;o Web Full-stack</h3><div class="code-block" data-lang="none">
+# Build stage
+FROM node:18-alpine AS frontend-builder
+WORKDIR /app
+COPY frontend/package*.json ./
+RUN npm ci
+COPY frontend/ .
+RUN npm run build
+
+# Backend stage
+FROM golang:1.19-alpine AS backend-builder
+WORKDIR /app
+COPY backend/go.* ./
+RUN go mod download
+COPY backend/ .
+RUN CGO_ENABLED=0 go build -o api
+
+# Final stage
+FROM alpine:3.18
+RUN apk add --no-cache ca-certificates nginx
+COPY --from=frontend-builder /app/dist /usr/share/nginx/html
+COPY --from=backend-builder /app/api /usr/local/bin/
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
+</div></section><section class="chapter"><h3 id="microservi-o-com-cache" data-toc="microservi-o-com-cache">Microservi&ccedil;o com Cache</h3><div class="code-block" data-lang="none">
+FROM golang:1.19-alpine AS builder
+
+# Cache go modules
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Build app with version info
+ARG VERSION
+ARG BUILD_DATE
+RUN --mount=type=cache,target=/root/.cache/go-build \
+    go build -ldflags=&quot;-X main.Version=${VERSION} -X main.BuildDate=${BUILD_DATE}&quot; \
+    -o /app
+
+FROM alpine:3.18
+COPY --from=builder /app /usr/local/bin/
+ENTRYPOINT [&quot;/usr/local/bin/app&quot;]
+</div></section></section><section class="chapter"><h2 id="checkpoint" data-toc="checkpoint">Checkpoint ✅</h2><p id="i6gpfu_94">Voc&ecirc; agora domina:</p><ul class="list _bullet" id="i6gpfu_95"><li class="list__item" id="i6gpfu_96"><p id="i6gpfu_104">[x] Estrutura b&aacute;sica do Dockerfile</p></li><li class="list__item" id="i6gpfu_97"><p id="i6gpfu_105">[x] Instru&ccedil;&otilde;es principais e seus usos</p></li><li class="list__item" id="i6gpfu_98"><p id="i6gpfu_106">[x] Boas pr&aacute;ticas e otimiza&ccedil;&otilde;es</p></li><li class="list__item" id="i6gpfu_99"><p id="i6gpfu_107">[x] Multi-stage builds avan&ccedil;ados</p></li><li class="list__item" id="i6gpfu_100"><p id="i6gpfu_108">[x] Otimiza&ccedil;&atilde;o de cache</p></li><li class="list__item" id="i6gpfu_101"><p id="i6gpfu_109">[x] Seguran&ccedil;a e melhores pr&aacute;ticas</p></li><li class="list__item" id="i6gpfu_102"><p id="i6gpfu_110">[x] Padr&otilde;es avan&ccedil;ados de build</p></li><li class="list__item" id="i6gpfu_103"><p id="i6gpfu_111">[x] Exemplos do mundo real</p></li></ul></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="i6gpfu_112" type="1"><li class="list__item" id="i6gpfu_113"><p id="i6gpfu_116"><a href="dockerfile-commands.html" id="i6gpfu_117" data-tooltip="From-chan diz: &quot;Sempre especifique uma tag ou digest! latest é perigoso em produção! 🎯&quot;">Dockerfile Commands</a> - Aprofunde-se nas instru&ccedil;&otilde;es</p></li><li class="list__item" id="i6gpfu_114"><p id="i6gpfu_118"><span id="i6gpfu_119">Dockerfile Examples</span> - Veja mais exemplos pr&aacute;ticos</p></li><li class="list__item" id="i6gpfu_115"><p id="i6gpfu_120"><a href="best-practices.html" id="i6gpfu_121" data-tooltip="Security-chan diz: &quot;Nunca confie em imagens não verificadas! 🔍&quot;">Best Practices</a> - Domine as melhores pr&aacute;ticas</p></li></ol></section><section class="chapter"><h2 id="recursos-adicionais" data-toc="recursos-adicionais">Recursos Adicionais 📚</h2><ul class="list _bullet" id="i6gpfu_122"><li class="list__item" id="i6gpfu_124"><p id="i6gpfu_127"><a href="https://docs.docker.com/engine/reference/builder/" id="i6gpfu_128" data-external="true" rel="noopener noreferrer" target="_blank">Dockerfile Reference</a></p></li><li class="list__item" id="i6gpfu_125"><p id="i6gpfu_129"><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/" id="i6gpfu_130" data-external="true" rel="noopener noreferrer" target="_blank">Docker Build Guide</a></p></li><li class="list__item" id="i6gpfu_126"><p id="i6gpfu_131"><a href="https://docs.docker.com/develop/develop-images/multistage-build/" id="i6gpfu_132" data-external="true" rel="noopener noreferrer" target="_blank">Multi-stage Builds</a></p></li></ul><aside class="prompt" data-type="note" data-title="" id="i6gpfu_123"><p id="i6gpfu_133"><span class="control" id="i6gpfu_134">Sensei's Note:</span> &quot;Um Dockerfile &eacute; como uma receita - os ingredientes importam, mas a ordem e o m&eacute;todo fazem toda a diferen&ccedil;a! Pratique, refine e sempre busque a excel&ecirc;ncia em suas builds! 🎯&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="container-runtime.html" class="navigation-links__prev">Container Runtime: O Motor dos Containers 🚀</a><a href="dockerfile-commands.html" class="navigation-links__next">Dockerfile Commands: Guia Definitivo 🛠️</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

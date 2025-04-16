@@ -1,0 +1,158 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T22:55:49.278612475"><title>CLI Basics: Dominando o Terminal Docker 🎮 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"comandos-essenciais","level":0,"title":"Comandos Essenciais 🛠️","anchor":"#comandos-essenciais"},{"id":"flags-comuns","level":0,"title":"Flags Comuns 🚩","anchor":"#flags-comuns"},{"id":"network-commands","level":0,"title":"Network Commands 🌐","anchor":"#network-commands"},{"id":"volume-commands","level":0,"title":"Volume Commands 💾","anchor":"#volume-commands"},{"id":"logs-e-debug","level":0,"title":"Logs e Debug 🔍","anchor":"#logs-e-debug"},{"id":"dicas-de-produtividade","level":0,"title":"Dicas de Produtividade ⚡","anchor":"#dicas-de-produtividade"},{"id":"waifu-cli-tips","level":0,"title":"Waifu CLI Tips 💡","anchor":"#waifu-cli-tips"},{"id":"troubleshooting-common-issues","level":0,"title":"Troubleshooting Common Issues 🔧","anchor":"#troubleshooting-common-issues"},{"id":"checkpoint","level":0,"title":"Checkpoint ✅","anchor":"#checkpoint"},{"id":"quick-reference-card","level":0,"title":"Quick Reference Card 📋","anchor":"#quick-reference-card"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="CLI Basics: Dominando o Terminal Docker 🎮 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/cli-basics.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="CLI Basics: Dominando o Terminal Docker 🎮 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/cli-basics.html#webpage",
+    "url": "writerside-documentation/cli-basics.html",
+    "name": "CLI Basics: Dominando o Terminal Docker 🎮 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="cli-basics" data-main-title="CLI Basics: Dominando o Terminal Docker 🎮" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="FUNDAMENTALS: Docker Essentials///Basic Commands"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="cli-basics" id="cli-basics.md">CLI Basics: Dominando o Terminal Docker 🎮</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ DOCKER CLI COMMAND STRUCTURE                              ║
+║                                                          ║
+║ docker [options] command [arguments]                      ║
+║                                                          ║
+║ Examples:                                                ║
+║ docker run nginx                                         ║
+║ docker container ls                                      ║
+║ docker image build .                                     ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="comandos-essenciais" data-toc="comandos-essenciais">Comandos Essenciais 🛠️</h2><section class="chapter"><h3 id="sistema-e-informa-es" data-toc="sistema-e-informa-es">Sistema e Informa&ccedil;&otilde;es</h3><div class="code-block" data-lang="bash">
+# Verificar versão
+docker version
+
+# Informações do sistema
+docker info
+
+# Status do daemon
+docker system df
+
+# Limpar recursos não utilizados
+docker system prune -a
+</div></section><section class="chapter"><h3 id="gerenciamento-de-containers" data-toc="gerenciamento-de-containers">Gerenciamento de Containers</h3><div class="code-block" data-lang="bash">
+# Listar containers
+docker ps          # Ativos
+docker ps -a       # Todos
+docker ps -q       # Apenas IDs
+docker ps --size   # Com tamanho
+
+# Criar e executar
+docker run nginx
+docker run -d --name web nginx    # Detached mode
+docker run -it ubuntu bash        # Interativo
+
+# Operações básicas
+docker start web
+docker stop web
+docker restart web
+docker rm web
+</div></section><section class="chapter"><h3 id="gerenciamento-de-imagens" data-toc="gerenciamento-de-imagens">Gerenciamento de Imagens</h3><div class="code-block" data-lang="bash">
+# Listar imagens
+docker images
+docker image ls
+
+# Baixar imagem
+docker pull nginx:latest
+
+# Remover imagem
+docker rmi nginx
+docker image rm nginx
+
+# Construir imagem
+docker build -t app:1.0 .
+</div></section></section><section class="chapter"><h2 id="flags-comuns" data-toc="flags-comuns">Flags Comuns 🚩</h2><section class="chapter"><h3 id="run-flags" data-toc="run-flags">Run Flags</h3><div class="code-block" data-lang="bash">
+# Portas
+-p 8080:80        # Host:Container
+
+# Volumes
+-v /host:/container
+
+# Variáveis de ambiente
+-e MYSQL_ROOT_PASSWORD=secret
+
+# Recursos
+--memory 512m
+--cpus 2
+
+# Network
+--network bridge
+</div></section><section class="chapter"><h3 id="formato-de-sa-da" data-toc="formato-de-sa-da">Formato de Sa&iacute;da</h3><div class="code-block" data-lang="bash">
+# Formatação JSON
+docker ps --format '{{json .}}'
+
+# Tabela customizada
+docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}'
+</div></section></section><section class="chapter"><h2 id="network-commands" data-toc="network-commands">Network Commands 🌐</h2><div class="code-block" data-lang="bash">
+# Listar redes
+docker network ls
+
+# Criar rede
+docker network create mynet
+
+# Conectar container
+docker network connect mynet container1
+
+# Inspecionar rede
+docker network inspect mynet
+</div></section><section class="chapter"><h2 id="volume-commands" data-toc="volume-commands">Volume Commands 💾</h2><div class="code-block" data-lang="bash">
+# Listar volumes
+docker volume ls
+
+# Criar volume
+docker volume create mydata
+
+# Inspecionar volume
+docker volume inspect mydata
+
+# Remover volume
+docker volume rm mydata
+</div></section><section class="chapter"><h2 id="logs-e-debug" data-toc="logs-e-debug">Logs e Debug 🔍</h2><div class="code-block" data-lang="bash">
+# Ver logs
+docker logs container1
+docker logs -f container1    # Follow
+docker logs --tail 100 container1
+
+# Executar comando
+docker exec -it container1 bash
+
+# Inspecionar container
+docker inspect container1
+</div></section><section class="chapter"><h2 id="dicas-de-produtividade" data-toc="dicas-de-produtividade">Dicas de Produtividade ⚡</h2><section class="chapter"><h3 id="aliases-teis" data-toc="aliases-teis">Aliases &Uacute;teis</h3><div class="code-block" data-lang="bash">
+# Adicione ao seu .bashrc ou .zshrc
+alias d='docker'
+alias dc='docker-compose'
+alias dps='docker ps'
+alias dim='docker images'
+</div></section><section class="chapter"><h3 id="one-liners-poderosos" data-toc="one-liners-poderosos">One-Liners Poderosos</h3><div class="code-block" data-lang="bash">
+# Parar todos containers
+docker stop $(docker ps -q)
+
+# Remover containers parados
+docker container prune
+
+# Remover imagens não utilizadas
+docker image prune -a
+
+# Backup de container
+docker commit container1 backup/container1
+</div></section></section><section class="chapter"><h2 id="waifu-cli-tips" data-toc="waifu-cli-tips">Waifu CLI Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="suum1f_32"><p id="suum1f_34"><span class="control" id="suum1f_35">CLI-chan diz:</span> &quot;Sempre use <code class="code" id="suum1f_36">--help</code> quando precisar! &Eacute; como ter um manual de bolso! 📖&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="suum1f_33"><p id="suum1f_37"><span class="control" id="suum1f_38">Terminal-sama alerta:</span> &quot;Cuidado com <code class="code" id="suum1f_39">docker system prune -a</code>! Ele &eacute; tipo um delete sem recovery! 🗑️&quot;</p></aside></section><section class="chapter"><h2 id="troubleshooting-common-issues" data-toc="troubleshooting-common-issues">Troubleshooting Common Issues 🔧</h2><div class="table-wrapper"><table class="wide" id="suum1f_40"><thead><tr class="ijRowHead" id="suum1f_41"><th id="suum1f_46"><p>Erro</p></th><th id="suum1f_47"><p>Causa Prov&aacute;vel</p></th><th id="suum1f_48"><p>Solu&ccedil;&atilde;o</p></th></tr></thead><tbody><tr id="suum1f_42"><td id="suum1f_49"><p><code class="code" id="suum1f_52">Cannot connect to Docker daemon</code></p></td><td id="suum1f_50"><p>Docker n&atilde;o est&aacute; rodando</p></td><td id="suum1f_51"><p><code class="code" id="suum1f_53">sudo systemctl start docker</code></p></td></tr><tr id="suum1f_43"><td id="suum1f_54"><p><code class="code" id="suum1f_57">Port is already allocated</code></p></td><td id="suum1f_55"><p>Porta em uso</p></td><td id="suum1f_56"><p>Use outra porta ou libere a atual</p></td></tr><tr id="suum1f_44"><td id="suum1f_58"><p><code class="code" id="suum1f_61">No space left on device</code></p></td><td id="suum1f_59"><p>Disco cheio</p></td><td id="suum1f_60"><p><code class="code" id="suum1f_62">docker system prune</code></p></td></tr><tr id="suum1f_45"><td id="suum1f_63"><p><code class="code" id="suum1f_66">Permission denied</code></p></td><td id="suum1f_64"><p>N&atilde;o est&aacute; no grupo docker</p></td><td id="suum1f_65"><p><code class="code" id="suum1f_67">sudo usermod -aG docker $USER</code></p></td></tr></tbody></table></div></section><section class="chapter"><h2 id="checkpoint" data-toc="checkpoint">Checkpoint ✅</h2><p id="suum1f_68">Voc&ecirc; agora sabe:</p><ul class="list _bullet" id="suum1f_69"><li class="list__item" id="suum1f_70"><p id="suum1f_77">[x] Estrutura b&aacute;sica dos comandos</p></li><li class="list__item" id="suum1f_71"><p id="suum1f_78">[x] Gerenciar containers</p></li><li class="list__item" id="suum1f_72"><p id="suum1f_79">[x] Gerenciar imagens</p></li><li class="list__item" id="suum1f_73"><p id="suum1f_80">[x] Trabalhar com redes</p></li><li class="list__item" id="suum1f_74"><p id="suum1f_81">[x] Gerenciar volumes</p></li><li class="list__item" id="suum1f_75"><p id="suum1f_82">[x] Debug e logs</p></li><li class="list__item" id="suum1f_76"><p id="suum1f_83">[x] Aliases e produtividade</p></li></ul></section><section class="chapter"><h2 id="quick-reference-card" data-toc="quick-reference-card">Quick Reference Card 📋</h2><div class="code-block" data-lang="none">
+╔════════════════════════════════════════════════════╗
+║ DOCKER CLI CHEAT SHEET                            ║
+╠════════════════════════════════════════════════════╣
+║ docker run     → Criar/Executar container         ║
+║ docker ps      → Listar containers                ║
+║ docker images  → Listar imagens                   ║
+║ docker build   → Construir imagem                 ║
+║ docker exec    → Executar comando                 ║
+║ docker logs    → Ver logs                         ║
+║ docker inspect → Inspecionar objeto               ║
+║ docker prune   → Limpar recursos                  ║
+╚════════════════════════════════════════════════════╝
+</div></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="suum1f_85" type="1"><li class="list__item" id="suum1f_87"><p id="suum1f_92"><a href="docker-commands.html" id="suum1f_93" data-tooltip="Command-chan diz: &quot;Use --help com qualquer comando para ver todas as opções! 📚&quot;">Docker Commands</a></p></li><li class="list__item" id="suum1f_88"><p id="suum1f_94"><a href="docker-images.html" id="suum1f_95" data-tooltip="Imagem: Template read-only para containers">Docker Images</a></p></li><li class="list__item" id="suum1f_89"><p id="suum1f_96"><span id="suum1f_97">Docker Containers</span></p></li><li class="list__item" id="suum1f_90"><p id="suum1f_98"><span id="suum1f_99">Docker Compose</span></p></li><li class="list__item" id="suum1f_91"><p id="suum1f_100"><span id="suum1f_101">Docker Networks</span></p></li></ol><aside class="prompt" data-type="note" data-title="" id="suum1f_86"><p id="suum1f_102"><span class="control" id="suum1f_103">Sensei's Note:</span> &quot;O CLI &eacute; sua espada no mundo Docker. Mantenha-a afiada e saiba quando us&aacute;-la!&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="docker-commands.html" class="navigation-links__prev">Docker Commands: O Arsenal Completo 🚀</a><a href="containers-101.html" class="navigation-links__next">Containers 101</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

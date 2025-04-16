@@ -1,0 +1,99 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T22:55:49.162679495"><title>Arquitetura Docker: O Blueprint da Matrix 🏗️ | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"componentes-principais","level":0,"title":"Componentes Principais 🔧","anchor":"#componentes-principais"},{"id":"fluxo-de-comunica-o","level":0,"title":"Fluxo de Comunicação 🔄","anchor":"#fluxo-de-comunica-o"},{"id":"componentes-detalhados","level":0,"title":"Componentes Detalhados 🔍","anchor":"#componentes-detalhados"},{"id":"waifu-tech-tips","level":0,"title":"Waifu Tech Tips 💡","anchor":"#waifu-tech-tips"},{"id":"diagrama-de-intera-o","level":0,"title":"Diagrama de Interação 📊","anchor":"#diagrama-de-intera-o"},{"id":"seguran-a-e-isolamento","level":0,"title":"Segurança e Isolamento 🔒","anchor":"#seguran-a-e-isolamento"},{"id":"networking-architecture","level":0,"title":"Networking Architecture 🌐","anchor":"#networking-architecture"},{"id":"storage-architecture","level":0,"title":"Storage Architecture 💾","anchor":"#storage-architecture"},{"id":"checkpoint","level":0,"title":"Checkpoint ✅","anchor":"#checkpoint"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"},{"id":"refer-ncias","level":0,"title":"Referências 📚","anchor":"#refer-ncias"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Arquitetura Docker: O Blueprint da Matrix 🏗️ | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/docker-architecture.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Arquitetura Docker: O Blueprint da Matrix 🏗️ | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/docker-architecture.html#webpage",
+    "url": "writerside-documentation/docker-architecture.html",
+    "name": "Arquitetura Docker: O Blueprint da Matrix 🏗️ | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="docker-architecture" data-main-title="Arquitetura Docker: O Blueprint da Matrix 🏗️" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="CORE: Docker Building Blocks///Architecture"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="docker-architecture" id="docker-architecture.md">Arquitetura Docker: O Blueprint da Matrix 🏗️</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════════════════╗
+║  DOCKER ARCHITECTURE BLUEPRINT                                        ║
+║                                                                       ║
+║  Client → Docker Host → Container Runtime → Registry                  ║
+║                                                                       ║
+║  &quot;A arquitetura que sustenta o multiverso dos containers&quot;            ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="componentes-principais" data-toc="componentes-principais">Componentes Principais 🔧</h2><section class="chapter"><h3 id="1-docker-client" data-toc="1-docker-client">1. Docker Client</h3><div class="code-block" data-lang="none">
+┌─────────────────────┐
+│    Docker CLI       │
+├─────────────────────┤
+│ - docker build     │
+│ - docker pull      │
+│ - docker run       │
+│ - docker push      │
+└─────────────────────┘
+</div></section><section class="chapter"><h3 id="2-docker-host" data-toc="2-docker-host">2. Docker Host</h3><div class="code-block" data-lang="none">
+┌──────────────────────────────────────┐
+│           Docker Daemon              │
+├──────────────────────────────────────┤
+│ ┌────────────┐  ┌────────────────┐  │
+│ │ Containers │  │     Images     │  │
+│ └────────────┘  └────────────────┘  │
+│ ┌────────────┐  ┌────────────────┐  │
+│ │  Volumes   │  │    Networks    │  │
+│ └────────────┘  └────────────────┘  │
+└──────────────────────────────────────┘
+</div></section><section class="chapter"><h3 id="3-container-runtime" data-toc="3-container-runtime">3. Container Runtime</h3><div class="code-block" data-lang="none">
+┌─────────────────────────────────┐
+│ High-Level Runtime (Docker)     │
+├─────────────────────────────────┤
+│ Container Engine (containerd)   │
+├─────────────────────────────────┤
+│ Container Runtime (runc)        │
+├─────────────────────────────────┤
+│ Linux Kernel                    │
+└─────────────────────────────────┘
+</div></section><section class="chapter"><h3 id="4-registry" data-toc="4-registry">4. Registry</h3><div class="code-block" data-lang="none">
+┌────────────────────┐
+│  Docker Registry   │
+├────────────────────┤
+│ - Docker Hub      │
+│ - Private Registry│
+│ - Mirror Registry │
+└────────────────────┘
+</div></section></section><section class="chapter"><h2 id="fluxo-de-comunica-o" data-toc="fluxo-de-comunica-o">Fluxo de Comunica&ccedil;&atilde;o 🔄</h2><section class="chapter"><h3 id="build-flow" data-toc="build-flow">Build Flow</h3><div class="code-block" data-lang="none">
+[Client] ──build──&gt; [Daemon] ──create──&gt; [Image]
+   │                   │                   │
+   └───────────────────┴───────push───────┘
+                      │
+                   [Registry]
+</div></section><section class="chapter"><h3 id="run-flow" data-toc="run-flow">Run Flow</h3><div class="code-block" data-lang="none">
+[Client] ──run──&gt; [Daemon] ──pull──&gt; [Registry]
+                    │
+                    v
+              [Container]
+</div></section></section><section class="chapter"><h2 id="componentes-detalhados" data-toc="componentes-detalhados">Componentes Detalhados 🔍</h2><section class="chapter"><h3 id="docker-daemon-dockerd" data-toc="docker-daemon-dockerd">Docker Daemon (dockerd)</h3><ul class="list _bullet" id="l9vx8l_30"><li class="list__item" id="l9vx8l_31"><p id="l9vx8l_35">Gerencia objetos Docker</p></li><li class="list__item" id="l9vx8l_32"><p id="l9vx8l_36">Manipula API requests</p></li><li class="list__item" id="l9vx8l_33"><p id="l9vx8l_37">Gerencia containers</p></li><li class="list__item" id="l9vx8l_34"><p id="l9vx8l_38">Controla imagens</p></li></ul></section><section class="chapter"><h3 id="containerd" data-toc="containerd">containerd</h3><ul class="list _bullet" id="l9vx8l_39"><li class="list__item" id="l9vx8l_40"><p id="l9vx8l_44">Gerenciamento de runtime</p></li><li class="list__item" id="l9vx8l_41"><p id="l9vx8l_45">Execu&ccedil;&atilde;o de containers</p></li><li class="list__item" id="l9vx8l_42"><p id="l9vx8l_46">Gerenciamento de imagens</p></li><li class="list__item" id="l9vx8l_43"><p id="l9vx8l_47">Interface com runc</p></li></ul></section><section class="chapter"><h3 id="runc" data-toc="runc">runc</h3><ul class="list _bullet" id="l9vx8l_48"><li class="list__item" id="l9vx8l_49"><p id="l9vx8l_53">Cria&ccedil;&atilde;o de containers</p></li><li class="list__item" id="l9vx8l_50"><p id="l9vx8l_54">Implementa&ccedil;&atilde;o OCI</p></li><li class="list__item" id="l9vx8l_51"><p id="l9vx8l_55">Interface com kernel</p></li><li class="list__item" id="l9vx8l_52"><p id="l9vx8l_56">Isolamento de recursos</p></li></ul></section></section><section class="chapter"><h2 id="waifu-tech-tips" data-toc="waifu-tech-tips">Waifu Tech Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="l9vx8l_57"><p id="l9vx8l_59"><span class="control" id="l9vx8l_60">Architecture-chan diz:</span> &quot;Cada componente tem seu papel! Como em um time de idol, todos precisam trabalhar juntos! 🎤&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="l9vx8l_58"><p id="l9vx8l_61"><span class="control" id="l9vx8l_62">Runtime-sama alerta:</span> &quot;Nunca subestime o poder do container runtime - ele &eacute; o verdadeiro MVP! 🏆&quot;</p></aside></section><section class="chapter"><h2 id="diagrama-de-intera-o" data-toc="diagrama-de-intera-o">Diagrama de Intera&ccedil;&atilde;o 📊</h2><div class="code-block" data-lang="none">
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│  Docker CLI  │────&gt;│Docker Daemon │────&gt;│  containerd  │
+└──────────────┘     └──────────────┘     └──────────────┘
+                           │                      │
+                           v                      v
+                    ┌──────────────┐     ┌──────────────┐
+                    │   Registry   │     │    runc      │
+                    └──────────────┘     └──────────────┘
+</div></section><section class="chapter"><h2 id="seguran-a-e-isolamento" data-toc="seguran-a-e-isolamento">Seguran&ccedil;a e Isolamento 🔒</h2><section class="chapter"><h3 id="namespace-isolation" data-toc="namespace-isolation">Namespace Isolation</h3><ul class="list _bullet" id="l9vx8l_66"><li class="list__item" id="l9vx8l_67"><p id="l9vx8l_73">PID Namespace</p></li><li class="list__item" id="l9vx8l_68"><p id="l9vx8l_74">Network Namespace</p></li><li class="list__item" id="l9vx8l_69"><p id="l9vx8l_75">Mount Namespace</p></li><li class="list__item" id="l9vx8l_70"><p id="l9vx8l_76">UTS Namespace</p></li><li class="list__item" id="l9vx8l_71"><p id="l9vx8l_77">IPC Namespace</p></li><li class="list__item" id="l9vx8l_72"><p id="l9vx8l_78">User Namespace</p></li></ul></section><section class="chapter"><h3 id="control-groups-cgroups" data-toc="control-groups-cgroups">Control Groups (cgroups)</h3><ul class="list _bullet" id="l9vx8l_79"><li class="list__item" id="l9vx8l_80"><p id="l9vx8l_85">CPU</p></li><li class="list__item" id="l9vx8l_81"><p id="l9vx8l_86">Memory</p></li><li class="list__item" id="l9vx8l_82"><p id="l9vx8l_87">I/O</p></li><li class="list__item" id="l9vx8l_83"><p id="l9vx8l_88">Network</p></li><li class="list__item" id="l9vx8l_84"><p id="l9vx8l_89">Devices</p></li></ul></section></section><section class="chapter"><h2 id="networking-architecture" data-toc="networking-architecture">Networking Architecture 🌐</h2><section class="chapter"><h3 id="default-networks" data-toc="default-networks">Default Networks</h3><div class="code-block" data-lang="none">
+┌─────────────────┐
+│     bridge      │
+├─────────────────┤
+│      host       │
+├─────────────────┤
+│      none       │
+└─────────────────┘
+</div></section><section class="chapter"><h3 id="custom-networks" data-toc="custom-networks">Custom Networks</h3><ul class="list _bullet" id="l9vx8l_93"><li class="list__item" id="l9vx8l_94"><p id="l9vx8l_98">Bridge</p></li><li class="list__item" id="l9vx8l_95"><p id="l9vx8l_99">Overlay</p></li><li class="list__item" id="l9vx8l_96"><p id="l9vx8l_100">Macvlan</p></li><li class="list__item" id="l9vx8l_97"><p id="l9vx8l_101">IPvlan</p></li></ul></section></section><section class="chapter"><h2 id="storage-architecture" data-toc="storage-architecture">Storage Architecture 💾</h2><section class="chapter"><h3 id="storage-drivers" data-toc="storage-drivers">Storage Drivers</h3><ul class="list _bullet" id="l9vx8l_104"><li class="list__item" id="l9vx8l_105"><p id="l9vx8l_110">overlay2</p></li><li class="list__item" id="l9vx8l_106"><p id="l9vx8l_111">devicemapper</p></li><li class="list__item" id="l9vx8l_107"><p id="l9vx8l_112">btrfs</p></li><li class="list__item" id="l9vx8l_108"><p id="l9vx8l_113">zfs</p></li><li class="list__item" id="l9vx8l_109"><p id="l9vx8l_114">vfs</p></li></ul></section><section class="chapter"><h3 id="volume-types" data-toc="volume-types">Volume Types</h3><div class="code-block" data-lang="none">
+┌─────────────────┐
+│ Named Volumes   │
+├─────────────────┤
+│ Bind Mounts     │
+├─────────────────┤
+│ tmpfs Mounts    │
+└─────────────────┘
+</div></section></section><section class="chapter"><h2 id="checkpoint" data-toc="checkpoint">Checkpoint ✅</h2><p id="l9vx8l_116">Voc&ecirc; agora entende:</p><ul class="list _bullet" id="l9vx8l_117"><li class="list__item" id="l9vx8l_118"><p id="l9vx8l_124">[x] Componentes principais</p></li><li class="list__item" id="l9vx8l_119"><p id="l9vx8l_125">[x] Fluxo de comunica&ccedil;&atilde;o</p></li><li class="list__item" id="l9vx8l_120"><p id="l9vx8l_126">[x] Container runtime</p></li><li class="list__item" id="l9vx8l_121"><p id="l9vx8l_127">[x] Networking</p></li><li class="list__item" id="l9vx8l_122"><p id="l9vx8l_128">[x] Storage</p></li><li class="list__item" id="l9vx8l_123"><p id="l9vx8l_129">[x] Seguran&ccedil;a</p></li></ul></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="l9vx8l_130" type="1"><li class="list__item" id="l9vx8l_133"><p id="l9vx8l_136"><a href="container-runtime.html" id="l9vx8l_137" data-tooltip="Namespaces">Container Runtime</a></p></li><li class="list__item" id="l9vx8l_134"><p id="l9vx8l_138"><a href="container-networking.html" id="l9vx8l_139" data-tooltip="&quot;Em um mundo onde bits dançam através de cabos etéreos e pacotes viajam na velocidade da luz, eis que surge a mais intrigante das artes: a networking de containers.&quot; - Manifesto de um SRE Desiludido">Networking</a></p></li><li class="list__item" id="l9vx8l_135"><p id="l9vx8l_140"><a href="container-storage.html" id="l9vx8l_141" data-tooltip="&quot;Em um mundo onde dados são mais valiosos que créditos digitais, a arte do armazenamento em containers é como dança macabra entre persistência e efemeridade.&quot; - Memórias de um DBA Cybernético">Storage</a></p></li></ol><aside class="prompt" data-type="tip" data-title="" id="l9vx8l_131"><p id="l9vx8l_142">&quot;A arquitetura &eacute; como um bonsai - cada componente precisa ser cuidadosamente podado e mantido.&quot;</p><ul class="list _bullet" id="l9vx8l_143"><li class="list__item" id="l9vx8l_144"><p id="l9vx8l_145">Docker Architect-sensei, 2025</p></li></ul></aside></section><section class="chapter"><h2 id="refer-ncias" data-toc="refer-ncias">Refer&ecirc;ncias 📚</h2><ul class="list _bullet" id="l9vx8l_146"><li class="list__item" id="l9vx8l_147"><p id="l9vx8l_150"><a href="https://docs.docker.com" id="l9vx8l_151" data-external="true" rel="noopener noreferrer" target="_blank">Docker Documentation</a></p></li><li class="list__item" id="l9vx8l_148"><p id="l9vx8l_152"><a href="https://opencontainers.org" id="l9vx8l_153" data-external="true" rel="noopener noreferrer" target="_blank">OCI Specification</a></p></li><li class="list__item" id="l9vx8l_149"><p id="l9vx8l_154"><a href="https://containerd.io" id="l9vx8l_155" data-external="true" rel="noopener noreferrer" target="_blank">containerd Documentation</a></p></li></ul></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="image-management.html" class="navigation-links__prev">Gerenciamento de Imagens Docker 🎮</a><a href="container-runtime.html" class="navigation-links__next">Container Runtime: O Motor dos Containers 🚀</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

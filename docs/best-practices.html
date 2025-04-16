@@ -1,0 +1,153 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T22:55:49.212544175"><title>Melhores Pr&aacute;ticas Docker: O Caminho do Mestre 🎯 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"dockerfile-best-practices","level":0,"title":"Dockerfile Best Practices 📝","anchor":"#dockerfile-best-practices"},{"id":"security-guidelines","level":0,"title":"Security Guidelines 🔒","anchor":"#security-guidelines"},{"id":"performance-optimization","level":0,"title":"Performance Optimization 🚀","anchor":"#performance-optimization"},{"id":"development-workflow","level":0,"title":"Development Workflow 💻","anchor":"#development-workflow"},{"id":"production-deployment","level":0,"title":"Production Deployment 🌟","anchor":"#production-deployment"},{"id":"ci-cd-integration","level":0,"title":"CI/CD Integration 🔄","anchor":"#ci-cd-integration"},{"id":"monitoring-maintenance","level":0,"title":"Monitoring \u0026 Maintenance 📊","anchor":"#monitoring-maintenance"},{"id":"do-s-and-don-ts-matrix","level":0,"title":"DO\u0027s and DON\u0027Ts Matrix ✨","anchor":"#do-s-and-don-ts-matrix"},{"id":"waifu-best-practice-tips","level":0,"title":"Waifu Best Practice Tips 💡","anchor":"#waifu-best-practice-tips"},{"id":"checklist-de-qualidade","level":0,"title":"Checklist de Qualidade ✅","anchor":"#checklist-de-qualidade"},{"id":"troubleshooting-guide","level":0,"title":"Troubleshooting Guide 🔧","anchor":"#troubleshooting-guide"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Melhores Pr&aacute;ticas Docker: O Caminho do Mestre 🎯 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/best-practices.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Melhores Pr&aacute;ticas Docker: O Caminho do Mestre 🎯 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/best-practices.html#webpage",
+    "url": "writerside-documentation/best-practices.html",
+    "name": "Melhores Pr&aacute;ticas Docker: O Caminho do Mestre 🎯 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="best-practices" data-main-title="Melhores Práticas Docker: O Caminho do Mestre 🎯" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="DEVELOPMENT: Building Applications///Dockerfile"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="best-practices" id="best-practices.md">Melhores Práticas Docker: O Caminho do Mestre 🎯</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ DOCKER BEST PRACTICES MATRIX                              ║
+║                                                          ║
+║    Security ◄────► Performance ◄────► Maintainability    ║
+║        ▲              ▲                ▲                 ║
+║        │              │                │                 ║
+║        └──────────────┴────────────────┘                ║
+║                   DevOps Flow                           ║
+║                                                          ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="dockerfile-best-practices" data-toc="dockerfile-best-practices">Dockerfile Best Practices 📝</h2><section class="chapter"><h3 id="otimiza-o-de-imagens" data-toc="otimiza-o-de-imagens">Otimiza&ccedil;&atilde;o de Imagens</h3><div class="code-block" data-lang="none">
+# ✅ Multi-stage build
+FROM node:alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+</div></section><section class="chapter"><h3 id="layer-optimization" data-toc="layer-optimization">Layer Optimization</h3><div class="code-block" data-lang="none">
+# ✅ Combine RUN commands
+RUN apt-get update &amp;&amp; \
+    apt-get install -y \
+    package1 \
+    package2 &amp;&amp; \
+    rm -rf /var/lib/apt/lists/*
+
+# ❌ Avoid multiple RUN commands
+RUN apt-get update
+RUN apt-get install package1
+RUN apt-get install package2
+</div></section></section><section class="chapter"><h2 id="security-guidelines" data-toc="security-guidelines">Security Guidelines 🔒</h2><section class="chapter"><h3 id="container-hardening" data-toc="container-hardening">Container Hardening</h3><div class="code-block" data-lang="none">
+# ✅ Use non-root user
+FROM alpine
+RUN adduser -D appuser
+USER appuser
+
+# ✅ Read-only root filesystem
+docker run --read-only nginx
+</div></section><section class="chapter"><h3 id="secrets-management" data-toc="secrets-management">Secrets Management</h3><div class="code-block" data-lang="bash">
+# ✅ Use Docker secrets
+docker secret create app_secret secret.txt
+docker service create \
+    --secret app_secret \
+    myapp
+
+# ❌ Avoid environment variables for secrets
+docker run -e &quot;API_KEY=secret&quot; myapp
+</div></section></section><section class="chapter"><h2 id="performance-optimization" data-toc="performance-optimization">Performance Optimization 🚀</h2><section class="chapter"><h3 id="resource-management" data-toc="resource-management">Resource Management</h3><div class="code-block" data-lang="bash">
+# ✅ Set resource limits
+docker run \
+    --cpus=&quot;.5&quot; \
+    --memory=&quot;512m&quot; \
+    --memory-swap=&quot;1g&quot; \
+    nginx
+</div></section><section class="chapter"><h3 id="networking" data-toc="networking">Networking</h3><div class="code-block" data-lang="bash">
+# ✅ Use user-defined networks
+docker network create --driver overlay mynet
+
+# ✅ Enable DNS caching
+docker run --dns-opt=&quot;ndots:1&quot; nginx
+</div></section></section><section class="chapter"><h2 id="development-workflow" data-toc="development-workflow">Development Workflow 💻</h2><section class="chapter"><h3 id="docker-compose" data-toc="docker-compose">Docker Compose</h3><div class="code-block" data-lang="yaml">
+# ✅ docker-compose.yml
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+</div></section><section class="chapter"><h3 id="testing" data-toc="testing">Testing</h3><div class="code-block" data-lang="bash">
+# ✅ Dedicated test container
+docker-compose -f docker-compose.test.yml up
+</div></section></section><section class="chapter"><h2 id="production-deployment" data-toc="production-deployment">Production Deployment 🌟</h2><section class="chapter"><h3 id="health-checks" data-toc="health-checks">Health Checks</h3><div class="code-block" data-lang="none">
+# ✅ Add HEALTHCHECK
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
+</div></section><section class="chapter"><h3 id="logging" data-toc="logging">Logging</h3><div class="code-block" data-lang="bash">
+# ✅ Configure logging
+docker run \
+    --log-driver json-file \
+    --log-opt max-size=10m \
+    --log-opt max-file=3 \
+    nginx
+</div></section></section><section class="chapter"><h2 id="ci-cd-integration" data-toc="ci-cd-integration">CI/CD Integration 🔄</h2><section class="chapter"><h3 id="build-pipeline" data-toc="build-pipeline">Build Pipeline</h3><div class="code-block" data-lang="yaml">
+# ✅ GitHub Actions example
+name: Docker Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build and test
+        run: |
+          docker build -t myapp:test .
+          docker run myapp:test npm test
+</div></section></section><section class="chapter"><h2 id="monitoring-maintenance" data-toc="monitoring-maintenance">Monitoring &amp; Maintenance 📊</h2><section class="chapter"><h3 id="container-health" data-toc="container-health">Container Health</h3><div class="code-block" data-lang="bash">
+# ✅ Regular health checks
+docker inspect --format='{{.State.Health.Status}}' container_name
+
+# ✅ Resource monitoring
+docker stats --format &quot;table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}&quot;
+</div></section></section><section class="chapter"><h2 id="do-s-and-don-ts-matrix" data-toc="do-s-and-don-ts-matrix">DO's and DON'Ts Matrix ✨</h2><section class="chapter"><h3 id="do-s" data-toc="do-s">DO's ✅</h3><div class="code-block" data-lang="none">
+┌────────────────────────────────┐
+│ 1. Use multi-stage builds      │
+│ 2. Set resource limits         │
+│ 3. Implement health checks     │
+│ 4. Use .dockerignore          │
+│ 5. Version control images      │
+└────────────────────────────────┘
+</div></section><section class="chapter"><h3 id="don-ts" data-toc="don-ts">DON'Ts ❌</h3><div class="code-block" data-lang="none">
+┌────────────────────────────────┐
+│ 1. Run as root                 │
+│ 2. Store secrets in images     │
+│ 3. Use latest tag             │
+│ 4. Ignore security scans      │
+│ 5. Skip health checks         │
+└────────────────────────────────┘
+</div></section></section><section class="chapter"><h2 id="waifu-best-practice-tips" data-toc="waifu-best-practice-tips">Waifu Best Practice Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="-7u4ckq_44"><p id="-7u4ckq_46"><span class="control" id="-7u4ckq_47">Security-chan diz:</span> &quot;Nunca confie em imagens n&atilde;o verificadas! 🔍&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-7u4ckq_45"><p id="-7u4ckq_48"><span class="control" id="-7u4ckq_49">Performance-sama avisa:</span> &quot;Containers leves s&atilde;o containers felizes! 🎈&quot;</p></aside></section><section class="chapter"><h2 id="checklist-de-qualidade" data-toc="checklist-de-qualidade">Checklist de Qualidade ✅</h2><section class="chapter"><h3 id="antes-do-deploy" data-toc="antes-do-deploy">Antes do Deploy</h3><ol class="list _decimal" id="-7u4ckq_51" type="1"><li class="list__item" id="-7u4ckq_52"><p id="-7u4ckq_59">[ ] Imagem otimizada</p></li><li class="list__item" id="-7u4ckq_53"><p id="-7u4ckq_60">[ ] Security scan realizado</p></li><li class="list__item" id="-7u4ckq_54"><p id="-7u4ckq_61">[ ] Resources limits definidos</p></li><li class="list__item" id="-7u4ckq_55"><p id="-7u4ckq_62">[ ] Health checks implementados</p></li><li class="list__item" id="-7u4ckq_56"><p id="-7u4ckq_63">[ ] Logs configurados</p></li><li class="list__item" id="-7u4ckq_57"><p id="-7u4ckq_64">[ ] Backups planejados</p></li><li class="list__item" id="-7u4ckq_58"><p id="-7u4ckq_65">[ ] Monitoring setup</p></li></ol></section></section><section class="chapter"><h2 id="troubleshooting-guide" data-toc="troubleshooting-guide">Troubleshooting Guide 🔧</h2><section class="chapter"><h3 id="common-issues" data-toc="common-issues">Common Issues</h3><div class="code-block" data-lang="bash">
+# ✅ Debug container
+docker logs container_name
+
+# ✅ Interactive debug
+docker exec -it container_name sh
+
+# ✅ Network debug
+docker network inspect bridge
+</div></section></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="-7u4ckq_68" type="1"><li class="list__item" id="-7u4ckq_70"><p id="-7u4ckq_73"><a href="hands-on-lab.html" id="-7u4ckq_74" data-tooltip="Criar uma aplicação web simples usando Docker">Laborat&oacute;rio Pr&aacute;tico</a></p></li><li class="list__item" id="-7u4ckq_71"><p id="-7u4ckq_75"><a href="troubleshooting-guide.html" id="-7u4ckq_76" data-tooltip="Debug-chan diz: &quot;Logs são como pegadas digitais - siga-as e encontrará a verdade! 🔍&quot;">Guia de Troubleshooting</a></p></li><li class="list__item" id="-7u4ckq_72"><p id="-7u4ckq_77"><span id="-7u4ckq_78">Certifica&ccedil;&atilde;o Docker</span></p></li></ol><aside class="prompt" data-type="note" data-title="" id="-7u4ckq_69"><p id="-7u4ckq_79"><span class="control" id="-7u4ckq_80">Sensei's Note:</span> &quot;As melhores pr&aacute;ticas s&atilde;o como um kata - devem ser praticadas at&eacute; se tornarem naturais.&quot;</p></aside></section><div class="last-modified">15 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="dockerfile-commands.html" class="navigation-links__prev">Dockerfile Commands: Guia Definitivo 🛠️</a><a href="container-operations.html" class="navigation-links__next">Opera&ccedil;&otilde;es com Containers: O Manual do Operador 🎮</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

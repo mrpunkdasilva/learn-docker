@@ -1,0 +1,144 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T22:55:49.131888238"><title>Opera&ccedil;&otilde;es com Containers: O Manual do Operador 🎮 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"opera-es-b-sicas","level":0,"title":"Operações Básicas 🛠️","anchor":"#opera-es-b-sicas"},{"id":"gerenciamento-de-estado","level":0,"title":"Gerenciamento de Estado 📊","anchor":"#gerenciamento-de-estado"},{"id":"network-operations","level":0,"title":"Network Operations 🌐","anchor":"#network-operations"},{"id":"volume-operations","level":0,"title":"Volume Operations 💾","anchor":"#volume-operations"},{"id":"troubleshooting-matrix","level":0,"title":"Troubleshooting Matrix 🔍","anchor":"#troubleshooting-matrix"},{"id":"batch-operations","level":0,"title":"Batch Operations 🚀","anchor":"#batch-operations"},{"id":"health-checks","level":0,"title":"Health Checks 💓","anchor":"#health-checks"},{"id":"waifu-operation-tips","level":0,"title":"Waifu Operation Tips 💡","anchor":"#waifu-operation-tips"},{"id":"debug-commands","level":0,"title":"Debug Commands 🔧","anchor":"#debug-commands"},{"id":"automation-scripts","level":0,"title":"Automation Scripts 🤖","anchor":"#automation-scripts"},{"id":"checkpoint","level":0,"title":"Checkpoint ✅","anchor":"#checkpoint"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Opera&ccedil;&otilde;es com Containers: O Manual do Operador 🎮 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/container-operations.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Opera&ccedil;&otilde;es com Containers: O Manual do Operador 🎮 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/container-operations.html#webpage",
+    "url": "writerside-documentation/container-operations.html",
+    "name": "Opera&ccedil;&otilde;es com Containers: O Manual do Operador 🎮 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="container-operations" data-main-title="Operações com Containers: O Manual do Operador 🎮" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="DEVELOPMENT: Building Applications///Container Operations"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="container-operations" id="container-operations.md">Operações com Containers: O Manual do Operador 🎮</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ CONTAINER LIFECYCLE                                       ║
+║                                                          ║
+║    created ──► running ◄──► paused                       ║
+║        │         │            │                          ║
+║        │         └──► stopped ◄┘                         ║
+║        │              │                                  ║
+║        └──────────────► removed                         ║
+║                                                          ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="opera-es-b-sicas" data-toc="opera-es-b-sicas">Opera&ccedil;&otilde;es B&aacute;sicas 🛠️</h2><section class="chapter"><h3 id="ciclo-de-vida" data-toc="ciclo-de-vida">Ciclo de Vida</h3><div class="code-block" data-lang="bash">
+# Criar container
+docker create --name meu-app nginx
+
+# Iniciar container
+docker start meu-app
+
+# Parar container
+docker stop meu-app
+
+# Remover container
+docker rm meu-app
+</div></section><section class="chapter"><h3 id="execu-o-e-acesso" data-toc="execu-o-e-acesso">Execu&ccedil;&atilde;o e Acesso</h3><div class="code-block" data-lang="bash">
+# Executar novo container
+docker run -d --name web nginx
+
+# Executar comando em container
+docker exec -it web bash
+
+# Visualizar logs
+docker logs web
+
+# Copiar arquivos
+docker cp arquivo.txt web:/app/
+</div></section></section><section class="chapter"><h2 id="gerenciamento-de-estado" data-toc="gerenciamento-de-estado">Gerenciamento de Estado 📊</h2><section class="chapter"><h3 id="status-e-inspe-o" data-toc="status-e-inspe-o">Status e Inspe&ccedil;&atilde;o</h3><div class="code-block" data-lang="bash">
+# Listar containers
+docker ps -a
+
+# Inspecionar container
+docker inspect web
+
+# Estatísticas em tempo real
+docker stats web
+
+# Processos em execução
+docker top web
+</div></section><section class="chapter"><h3 id="controle-de-recursos" data-toc="controle-de-recursos">Controle de Recursos</h3><div class="code-block" data-lang="bash">
+# Limitar CPU e memória
+docker run -d \
+  --cpus=&quot;.5&quot; \
+  --memory=&quot;512m&quot; \
+  --name app \
+  nginx
+
+# Atualizar limites
+docker update --cpus=&quot;.8&quot; app
+</div></section></section><section class="chapter"><h2 id="network-operations" data-toc="network-operations">Network Operations 🌐</h2><section class="chapter"><h3 id="conectividade" data-toc="conectividade">Conectividade</h3><div class="code-block" data-lang="bash">
+# Criar rede
+docker network create minha-rede
+
+# Conectar container
+docker network connect minha-rede web
+
+# Desconectar container
+docker network disconnect minha-rede web
+
+# Inspecionar rede
+docker network inspect minha-rede
+</div></section></section><section class="chapter"><h2 id="volume-operations" data-toc="volume-operations">Volume Operations 💾</h2><section class="chapter"><h3 id="persist-ncia-de-dados" data-toc="persist-ncia-de-dados">Persist&ecirc;ncia de Dados</h3><div class="code-block" data-lang="bash">
+# Criar volume
+docker volume create meus-dados
+
+# Montar volume
+docker run -d \
+  -v meus-dados:/data \
+  --name db \
+  postgres
+
+# Listar volumes
+docker volume ls
+
+# Remover volume
+docker volume rm meus-dados
+</div></section></section><section class="chapter"><h2 id="troubleshooting-matrix" data-toc="troubleshooting-matrix">Troubleshooting Matrix 🔍</h2><div class="table-wrapper"><table class="wide" id="-n3clcj_28"><thead><tr class="ijRowHead" id="-n3clcj_29"><th id="-n3clcj_34"><p>Problema</p></th><th id="-n3clcj_35"><p>Comando</p></th><th id="-n3clcj_36"><p>Solu&ccedil;&atilde;o</p></th></tr></thead><tbody><tr id="-n3clcj_30"><td id="-n3clcj_37"><p>Container n&atilde;o inicia</p></td><td id="-n3clcj_38"><p><code class="code" id="-n3clcj_40">docker logs</code></p></td><td id="-n3clcj_39"><p>Verificar logs de erro</p></td></tr><tr id="-n3clcj_31"><td id="-n3clcj_41"><p>Container travado</p></td><td id="-n3clcj_42"><p><code class="code" id="-n3clcj_44">docker restart</code></p></td><td id="-n3clcj_43"><p>Reiniciar container</p></td></tr><tr id="-n3clcj_32"><td id="-n3clcj_45"><p>Mem&oacute;ria alta</p></td><td id="-n3clcj_46"><p><code class="code" id="-n3clcj_48">docker stats</code></p></td><td id="-n3clcj_47"><p>Ajustar limites</p></td></tr><tr id="-n3clcj_33"><td id="-n3clcj_49"><p>Rede inst&aacute;vel</p></td><td id="-n3clcj_50"><p><code class="code" id="-n3clcj_52">docker network inspect</code></p></td><td id="-n3clcj_51"><p>Verificar conectividade</p></td></tr></tbody></table></div></section><section class="chapter"><h2 id="batch-operations" data-toc="batch-operations">Batch Operations 🚀</h2><section class="chapter"><h3 id="opera-es-em-massa" data-toc="opera-es-em-massa">Opera&ccedil;&otilde;es em Massa</h3><div class="code-block" data-lang="bash">
+# Parar todos containers
+docker stop $(docker ps -q)
+
+# Remover containers parados
+docker container prune
+
+# Remover tudo não usado
+docker system prune -a
+
+# Backup de volumes
+docker run --rm \
+  -v volume_name:/source \
+  -v $(pwd):/backup \
+  alpine tar czf /backup/volume_backup.tar.gz /source
+</div></section></section><section class="chapter"><h2 id="health-checks" data-toc="health-checks">Health Checks 💓</h2><section class="chapter"><h3 id="monitoramento-de-sa-de" data-toc="monitoramento-de-sa-de">Monitoramento de Sa&uacute;de</h3><div class="code-block" data-lang="bash">
+# Container com health check
+docker run -d \
+  --health-cmd=&quot;curl -f http://localhost/ || exit 1&quot; \
+  --health-interval=5s \
+  --name web \
+  nginx
+
+# Verificar status
+docker inspect --format='{{.State.Health.Status}}' web
+</div></section></section><section class="chapter"><h2 id="waifu-operation-tips" data-toc="waifu-operation-tips">Waifu Operation Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="-n3clcj_57"><p id="-n3clcj_59"><span class="control" id="-n3clcj_60">Container-chan diz:</span> &quot;Mantenha seus containers leves e eficientes! 🎈&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-n3clcj_58"><p id="-n3clcj_61"><span class="control" id="-n3clcj_62">Resource-sama avisa:</span> &quot;Sempre defina limites de recursos para evitar surpresas! ⚡&quot;</p></aside></section><section class="chapter"><h2 id="debug-commands" data-toc="debug-commands">Debug Commands 🔧</h2><section class="chapter"><h3 id="ferramentas-de-debug" data-toc="ferramentas-de-debug">Ferramentas de Debug</h3><div class="code-block" data-lang="bash">
+# Logs em tempo real
+docker logs -f web
+
+# Histórico de eventos
+docker events --filter container=web
+
+# Dump de estado
+docker inspect web &gt; debug.json
+
+# Trace de rede
+docker run --net container:web nicolaka/netshoot
+</div></section></section><section class="chapter"><h2 id="automation-scripts" data-toc="automation-scripts">Automation Scripts 🤖</h2><section class="chapter"><h3 id="exemplos-de-automa-o" data-toc="exemplos-de-automa-o">Exemplos de Automa&ccedil;&atilde;o</h3><div class="code-block" data-lang="bash">
+#!/bin/bash
+# Restart containers mais velhos que 7 dias
+docker ps -q | xargs docker inspect \
+  --format='{{.Id}} {{.State.StartedAt}}' | \
+  awk '{if ($2 &lt;= &quot;'$(date -d'7 days ago' -Ins --utc)'&quot;) print $1}' | \
+  xargs docker restart
+</div></section></section><section class="chapter"><h2 id="checkpoint" data-toc="checkpoint">Checkpoint ✅</h2><p id="-n3clcj_67">Voc&ecirc; agora sabe:</p><ul class="list _bullet" id="-n3clcj_68"><li class="list__item" id="-n3clcj_69"><p id="-n3clcj_75">[x] Gerenciar ciclo de vida</p></li><li class="list__item" id="-n3clcj_70"><p id="-n3clcj_76">[x] Controlar recursos</p></li><li class="list__item" id="-n3clcj_71"><p id="-n3clcj_77">[x] Operar redes</p></li><li class="list__item" id="-n3clcj_72"><p id="-n3clcj_78">[x] Gerenciar volumes</p></li><li class="list__item" id="-n3clcj_73"><p id="-n3clcj_79">[x] Debugar problemas</p></li><li class="list__item" id="-n3clcj_74"><p id="-n3clcj_80">[x] Automatizar opera&ccedil;&otilde;es</p></li></ul></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="-n3clcj_81" type="1"><li class="list__item" id="-n3clcj_83"><p id="-n3clcj_86"><a href="best-practices.html" id="-n3clcj_87" data-tooltip="Security-chan diz: &quot;Nunca confie em imagens não verificadas! 🔍&quot;">Melhores Pr&aacute;ticas</a></p></li><li class="list__item" id="-n3clcj_84"><p id="-n3clcj_88"><a href="hands-on-lab.html" id="-n3clcj_89" data-tooltip="Criar uma aplicação web simples usando Docker">Laborat&oacute;rio Pr&aacute;tico</a></p></li><li class="list__item" id="-n3clcj_85"><p id="-n3clcj_90"><a href="troubleshooting-guide.html" id="-n3clcj_91" data-tooltip="Debug-chan diz: &quot;Logs são como pegadas digitais - siga-as e encontrará a verdade! 🔍&quot;">Guia de Troubleshooting</a></p></li></ol><aside class="prompt" data-type="note" data-title="" id="-n3clcj_82"><p id="-n3clcj_92"><span class="control" id="-n3clcj_93">Sensei's Note:</span> &quot;A maestria em opera&ccedil;&otilde;es de containers vem da pr&aacute;tica constante e da aten&ccedil;&atilde;o aos detalhes.&quot;</p></aside></section><div class="last-modified">15 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="best-practices.html" class="navigation-links__prev">Melhores Pr&aacute;ticas Docker: O Caminho do Mestre 🎯</a><a href="container-networking.html" class="navigation-links__next">Container Networking</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

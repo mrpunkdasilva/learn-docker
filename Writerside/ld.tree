@@ -8,104 +8,125 @@
 
     <toc-element topic="welcome.md"/>
     
-    <toc-element toc-title="INIT: Container Matrix">
-        <toc-element toc-title="Phase 1: Docker Reality Check">
+    <!-- FASE 1: Fundamentos -->
+    <toc-element toc-title="FUNDAMENTALS: Docker Essentials">
+        <toc-element toc-title="Getting Started">
             <toc-element topic="why-docker.md"/>
             <toc-element topic="container-vs-vm.md"/>
             <toc-element topic="docker-history.md"/>
         </toc-element>
-        <toc-element toc-title="Phase 2: Setup &amp; Installation">
+        <toc-element toc-title="Installation">
             <toc-element topic="installation-guide.md"/>
             <toc-element topic="docker-desktop-cli.md"/>
             <toc-element topic="common-issues.md"/>
         </toc-element>
-        <toc-element toc-title="Phase 3: Core Concepts">
-            <toc-element topic="containers-101.md">
-                <toc-element topic="container-internals.md"/>
-                <toc-element topic="container-runtime.md"/>
-                <toc-element topic="container-networking.md"/>
-                <toc-element topic="container-storage.md"/>
-                <toc-element topic="container-security.md"/>
-                <toc-element topic="container-orchestration.md"/>
-                <toc-element topic="container-monitoring.md"/>
-            </toc-element>
-            <toc-element topic="images-containers.md">
-                <toc-element topic="image-fundamentals.md"/>
-                <toc-element topic="image-anatomy.md"/>
-                <toc-element topic="image-management.md"/>
-                <toc-element topic="container-operations.md"/>
-                <toc-element topic="best-practices.md"/>
-                <toc-element topic="hands-on-lab.md"/>
-                <toc-element topic="troubleshooting-guide.md"/>
-            </toc-element>
-            <toc-element topic="docker-architecture.md"/>
-            <toc-element topic="container-lifecycle.md"/>
+        <toc-element toc-title="Basic Commands">
+            <toc-element topic="docker-commands.md"/>
             <toc-element topic="cli-basics.md"/>
         </toc-element>
     </toc-element>
 
-    <toc-element toc-title="BASICS: Docker Fundamentals">
-        <toc-element toc-title="Phase 1: Docker Basics">
-            <toc-element topic="docker-commands.md"/>
-            <toc-element topic="docker-images.md"/>
-            <toc-element topic="docker-containers.md"/>
+    <!-- FASE 2: Core Concepts -->
+    <toc-element toc-title="CORE: Docker Building Blocks">
+        <toc-element toc-title="Container Basics">
+            <toc-element topic="containers-101.md"/>
+            <toc-element topic="container-lifecycle.md"/>
+            <toc-element topic="container-internals.md"/>
         </toc-element>
-        <toc-element toc-title="Phase 2: Dockerfile Basics">
+        <toc-element toc-title="Images">
+            <toc-element topic="docker-images.md"/>
+            <toc-element topic="image-fundamentals.md"/>
+            <toc-element topic="image-anatomy.md"/>
+            <toc-element topic="image-management.md"/>
+        </toc-element>
+        <toc-element toc-title="Architecture">
+            <toc-element topic="docker-architecture.md"/>
+            <toc-element topic="container-runtime.md"/>
+        </toc-element>
+    </toc-element>
+
+    <!-- FASE 3: Development -->
+    <toc-element toc-title="DEVELOPMENT: Building Applications">
+        <toc-element toc-title="Dockerfile">
             <toc-element topic="dockerfile-intro.md"/>
             <toc-element topic="dockerfile-commands.md"/>
             <toc-element topic="dockerfile-examples.md"/>
+            <toc-element topic="best-practices.md"/>
         </toc-element>
-        <toc-element toc-title="Phase 3: Docker Compose Basics">
+        <toc-element toc-title="Docker Compose">
             <toc-element topic="docker-compose-intro.md"/>
             <toc-element topic="docker-compose-file.md"/>
             <toc-element topic="docker-compose-commands.md"/>
         </toc-element>
+        <toc-element toc-title="Container Operations">
+            <toc-element topic="container-operations.md"/>
+            <toc-element topic="container-logging.md"/>
+            <toc-element topic="container-troubleshooting.md"/>
+        </toc-element>
     </toc-element>
 
-    <toc-element toc-title="ADVANCED: Docker Deep Dive">
-        <toc-element toc-title="Phase 1: Networking &amp; Security">
+    <!-- FASE 4: Infrastructure -->
+    <toc-element toc-title="INFRASTRUCTURE: System Design">
+        <toc-element toc-title="Networking">
+            <toc-element topic="container-networking.md"/>
             <toc-element topic="docker-networking.md"/>
+        </toc-element>
+        <toc-element toc-title="Storage">
+            <toc-element topic="container-storage.md"/>
+            <toc-element topic="docker-volumes.md"/>
+            <toc-element topic="docker-bind-mounts.md"/>
+        </toc-element>
+        <toc-element toc-title="Security">
+            <toc-element topic="container-security.md"/>
             <toc-element topic="docker-security.md"/>
             <toc-element topic="docker-registry.md"/>
         </toc-element>
-        <toc-element toc-title="Phase 2: Performance &amp; Optimization">
+    </toc-element>
+
+    <!-- FASE 5: Advanced -->
+    <toc-element toc-title="ADVANCED: Production Ready">
+        <toc-element toc-title="Performance">
             <toc-element topic="docker-performance.md"/>
             <toc-element topic="docker-optimization.md"/>
             <toc-element topic="docker-caching.md"/>
-        </toc-element>
-        <toc-element toc-title="Phase 3: Advanced Concepts">
-            <toc-element topic="docker-volumes.md"/>
-            <toc-element topic="docker-bind-mounts.md"/>
             <toc-element topic="docker-multi-stage-builds.md"/>
+        </toc-element>
+        <toc-element toc-title="Monitoring">
+            <toc-element topic="container-monitoring.md"/>
+            <toc-element topic="container-resources.md"/>
+        </toc-element>
+        <toc-element toc-title="Orchestration">
+            <toc-element topic="container-orchestration.md"/>
+            <toc-element topic="container-best-practices.md"/>
         </toc-element>
     </toc-element>
 
-    <toc-element toc-title="PRACTICE: Hands-on Labs">
-        <toc-element toc-title="Lab 1: Docker Basics">
+    <!-- FASE 6: Hands-on -->
+    <toc-element toc-title="PRACTICE: Real World">
+        <toc-element toc-title="Lab 1: Basics">
             <toc-element topic="lab-1-intro.md"/>
             <toc-element topic="lab-1-setup.md"/>
             <toc-element topic="lab-1-exercise.md"/>
         </toc-element>
-        <toc-element toc-title="Lab 2: Dockerfile &amp; Compose">
+        <toc-element toc-title="Lab 2: Development">
             <toc-element topic="lab-2-intro.md"/>
             <toc-element topic="lab-2-setup.md"/>
             <toc-element topic="lab-2-exercise.md"/>
         </toc-element>
-        <toc-element toc-title="Lab 3: Networking &amp; Security">
+        <toc-element toc-title="Lab 3: Production">
             <toc-element topic="lab-3-intro.md"/>
             <toc-element topic="lab-3-setup.md"/>
             <toc-element topic="lab-3-exercise.md"/>
         </toc-element>
+        <toc-element topic="hands-on-lab.md"/>
+        <toc-element topic="troubleshooting-guide.md"/>
     </toc-element>
 
-    <toc-element toc-title="CERTIFICATION: Docker Certified Associate">
-        <toc-element toc-title="Exam Overview">
-            <toc-element topic="docker-certified-overview.md"/>
-        </toc-element>
+    <!-- FASE 7: Certification -->
+    <toc-element toc-title="CERTIFICATION: DCA">
         <toc-element toc-title="Exam Preparation">
+            <toc-element topic="docker-certified-overview.md"/>
             <toc-element topic="docker-certified-preparation.md"/>
-        </toc-element>
-        <toc-element toc-title="Exam Topics">
             <toc-element topic="docker-certified-topics.md"/>
         </toc-element>
     </toc-element>

@@ -1,0 +1,115 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-15T22:55:49.219081655"><title>Guia de Troubleshooting: Debugando na Matrix 🔍 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"problemas-comuns-e-solu-es","level":0,"title":"Problemas Comuns e Soluções 🎯","anchor":"#problemas-comuns-e-solu-es"},{"id":"ferramentas-de-debug-avan-adas","level":0,"title":"Ferramentas de Debug Avançadas 🛠️","anchor":"#ferramentas-de-debug-avan-adas"},{"id":"t-cnicas-de-investiga-o","level":0,"title":"Técnicas de Investigação 🔎","anchor":"#t-cnicas-de-investiga-o"},{"id":"waifu-debug-tips","level":0,"title":"Waifu Debug Tips 💡","anchor":"#waifu-debug-tips"},{"id":"checklist-de-debug","level":0,"title":"Checklist de Debug ✅","anchor":"#checklist-de-debug"},{"id":"matriz-de-decis-o","level":0,"title":"Matriz de Decisão 📊","anchor":"#matriz-de-decis-o"},{"id":"comandos-de-emerg-ncia","level":0,"title":"Comandos de Emergência 🚨","anchor":"#comandos-de-emerg-ncia"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Guia de Troubleshooting: Debugando na Matrix 🔍 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/troubleshooting-guide.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Guia de Troubleshooting: Debugando na Matrix 🔍 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/troubleshooting-guide.html#webpage",
+    "url": "writerside-documentation/troubleshooting-guide.html",
+    "name": "Guia de Troubleshooting: Debugando na Matrix 🔍 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="troubleshooting-guide" data-main-title="Guia de Troubleshooting: Debugando na Matrix 🔍" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="PRACTICE: Real World"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="troubleshooting-guide" id="troubleshooting-guide.md">Guia de Troubleshooting: Debugando na Matrix 🔍</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ DOCKER DEBUG MATRIX v1.0                                  ║
+║                                                          ║
+║ STATUS: SCANNING FOR ISSUES...                           ║
+║ LEVEL: FROM BASIC TO ADVANCED                            ║
+║ MISSION: RESOLVER PROBLEMAS COMO UM PRO                  ║
+║                                                          ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="problemas-comuns-e-solu-es" data-toc="problemas-comuns-e-solu-es">Problemas Comuns e Solu&ccedil;&otilde;es 🎯</h2><section class="chapter"><h3 id="1-container-n-o-inicia" data-toc="1-container-n-o-inicia">1. Container n&atilde;o Inicia</h3><div class="code-block" data-lang="bash">
+# Verificar logs
+docker logs container_id
+
+# Verificar status
+docker ps -a
+
+# Inspecionar configuração
+docker inspect container_id
+</div></section><section class="chapter"><h3 id="2-problemas-de-rede" data-toc="2-problemas-de-rede">2. Problemas de Rede</h3><div class="code-block" data-lang="bash">
+# Verificar redes
+docker network ls
+
+# Testar conectividade
+docker run --rm busybox ping container_name
+
+# Inspecionar rede
+docker network inspect bridge
+</div></section><section class="chapter"><h3 id="3-problemas-de-volume" data-toc="3-problemas-de-volume">3. Problemas de Volume</h3><div class="code-block" data-lang="bash">
+# Listar volumes
+docker volume ls
+
+# Inspecionar volume
+docker volume inspect volume_name
+
+# Verificar permissões
+ls -la /var/lib/docker/volumes/
+</div></section></section><section class="chapter"><h2 id="ferramentas-de-debug-avan-adas" data-toc="ferramentas-de-debug-avan-adas">Ferramentas de Debug Avan&ccedil;adas 🛠️</h2><section class="chapter"><h3 id="docker-stats" data-toc="docker-stats">Docker Stats</h3><div class="code-block" data-lang="bash">
+# Monitorar recursos
+docker stats
+
+# Limitar recursos
+docker run --memory=512m --cpu-shares=512 image_name
+</div></section><section class="chapter"><h3 id="docker-events" data-toc="docker-events">Docker Events</h3><div class="code-block" data-lang="bash">
+# Monitorar eventos em tempo real
+docker events
+
+# Filtrar eventos
+docker events --filter 'type=container'
+</div></section><section class="chapter"><h3 id="logging-avan-ado" data-toc="logging-avan-ado">Logging Avan&ccedil;ado</h3><div class="code-block" data-lang="bash">
+# Logs com timestamp
+docker logs --timestamps container_id
+
+# Logs em tempo real
+docker logs --follow container_id
+
+# Últimas N linhas
+docker logs --tail 100 container_id
+</div></section></section><section class="chapter"><h2 id="t-cnicas-de-investiga-o" data-toc="t-cnicas-de-investiga-o">T&eacute;cnicas de Investiga&ccedil;&atilde;o 🔎</h2><section class="chapter"><h3 id="1-container-deep-dive" data-toc="1-container-deep-dive">1. Container Deep Dive</h3><div class="code-block" data-lang="bash">
+# Acessar container
+docker exec -it container_id sh
+
+# Processos rodando
+docker top container_id
+
+# Histórico de comandos
+docker history image_name
+</div></section><section class="chapter"><h3 id="2-network-debugging" data-toc="2-network-debugging">2. Network Debugging</h3><div class="code-block" data-lang="bash">
+# DNS lookup
+docker run --rm busybox nslookup container_name
+
+# Trace route
+docker run --rm busybox traceroute host.docker.internal
+
+# Port mapping
+docker port container_id
+</div></section><section class="chapter"><h3 id="3-storage-analysis" data-toc="3-storage-analysis">3. Storage Analysis</h3><div class="code-block" data-lang="bash">
+# Disk usage
+docker system df
+
+# Clean up
+docker system prune -a
+
+# Volume cleanup
+docker volume prune
+</div></section></section><section class="chapter"><h2 id="waifu-debug-tips" data-toc="waifu-debug-tips">Waifu Debug Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="-f21mro_30"><p id="-f21mro_32"><span class="control" id="-f21mro_33">Debug-chan diz:</span> &quot;Logs s&atilde;o como pegadas digitais - siga-as e encontrar&aacute; a verdade! 🔍&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-f21mro_31"><p id="-f21mro_34"><span class="control" id="-f21mro_35">Network-sama alerta:</span> &quot;Sempre verifique suas configura&ccedil;&otilde;es de rede duas vezes! 🌐&quot;</p></aside></section><section class="chapter"><h2 id="checklist-de-debug" data-toc="checklist-de-debug">Checklist de Debug ✅</h2><section class="chapter"><h3 id="b-sico" data-toc="b-sico">B&aacute;sico</h3><ul class="list _bullet" id="-f21mro_38"><li class="list__item" id="-f21mro_39"><p id="-f21mro_43">[ ] Verificar logs do container</p></li><li class="list__item" id="-f21mro_40"><p id="-f21mro_44">[ ] Confirmar status do container</p></li><li class="list__item" id="-f21mro_41"><p id="-f21mro_45">[ ] Checar configura&ccedil;&otilde;es de rede</p></li><li class="list__item" id="-f21mro_42"><p id="-f21mro_46">[ ] Validar volumes montados</p></li></ul></section><section class="chapter"><h3 id="avan-ado" data-toc="avan-ado">Avan&ccedil;ado</h3><ul class="list _bullet" id="-f21mro_47"><li class="list__item" id="-f21mro_48"><p id="-f21mro_52">[ ] Analisar m&eacute;tricas de performance</p></li><li class="list__item" id="-f21mro_49"><p id="-f21mro_53">[ ] Investigar eventos do sistema</p></li><li class="list__item" id="-f21mro_50"><p id="-f21mro_54">[ ] Verificar seguran&ccedil;a</p></li><li class="list__item" id="-f21mro_51"><p id="-f21mro_55">[ ] Validar recursos dispon&iacute;veis</p></li></ul></section></section><section class="chapter"><h2 id="matriz-de-decis-o" data-toc="matriz-de-decis-o">Matriz de Decis&atilde;o 📊</h2><div class="table-wrapper"><table class="wide" id="-f21mro_56"><thead><tr class="ijRowHead" id="-f21mro_57"><th id="-f21mro_62"><p>Sintoma</p></th><th id="-f21mro_63"><p>Primeira A&ccedil;&atilde;o</p></th><th id="-f21mro_64"><p>Pr&oacute;xima A&ccedil;&atilde;o</p></th><th id="-f21mro_65"><p>Solu&ccedil;&atilde;o Comum</p></th></tr></thead><tbody><tr id="-f21mro_58"><td id="-f21mro_66"><p>Container Crashando</p></td><td id="-f21mro_67"><p><code class="code" id="-f21mro_70">docker logs</code></p></td><td id="-f21mro_68"><p><code class="code" id="-f21mro_71">docker inspect</code></p></td><td id="-f21mro_69"><p>Verificar recursos</p></td></tr><tr id="-f21mro_59"><td id="-f21mro_72"><p>Rede Lenta</p></td><td id="-f21mro_73"><p><code class="code" id="-f21mro_76">docker network inspect</code></p></td><td id="-f21mro_74"><p><code class="code" id="-f21mro_77">ping test</code></p></td><td id="-f21mro_75"><p>Ajustar DNS</p></td></tr><tr id="-f21mro_60"><td id="-f21mro_78"><p>Disco Cheio</p></td><td id="-f21mro_79"><p><code class="code" id="-f21mro_82">docker system df</code></p></td><td id="-f21mro_80"><p><code class="code" id="-f21mro_83">docker system prune</code></p></td><td id="-f21mro_81"><p>Limpar volumes</p></td></tr><tr id="-f21mro_61"><td id="-f21mro_84"><p>CPU Alta</p></td><td id="-f21mro_85"><p><code class="code" id="-f21mro_88">docker stats</code></p></td><td id="-f21mro_86"><p><code class="code" id="-f21mro_89">top</code> no container</p></td><td id="-f21mro_87"><p>Limitar recursos</p></td></tr></tbody></table></div></section><section class="chapter"><h2 id="comandos-de-emerg-ncia" data-toc="comandos-de-emerg-ncia">Comandos de Emerg&ecirc;ncia 🚨</h2><section class="chapter"><h3 id="reset-r-pido" data-toc="reset-r-pido">Reset R&aacute;pido</h3><div class="code-block" data-lang="bash">
+# Parar todos containers
+docker stop $(docker ps -q)
+
+# Remover containers parados
+docker container prune
+
+# Limpar sistema
+docker system prune -af
+</div></section><section class="chapter"><h3 id="backup-de-emerg-ncia" data-toc="backup-de-emerg-ncia">Backup de Emerg&ecirc;ncia</h3><div class="code-block" data-lang="bash">
+# Backup de volume
+docker run --rm -v volume_name:/source -v $(pwd):/backup alpine tar -czf /backup/volume_backup.tar.gz -C /source .
+
+# Backup de container
+docker commit container_id backup_image
+</div></section></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="-f21mro_94" type="1"><li class="list__item" id="-f21mro_96"><p id="-f21mro_99"><a href="hands-on-lab.html" id="-f21mro_100" data-tooltip="Criar uma aplicação web simples usando Docker">Laborat&oacute;rio Pr&aacute;tico</a></p></li><li class="list__item" id="-f21mro_97"><p id="-f21mro_101"><a href="best-practices.html" id="-f21mro_102" data-tooltip="Security-chan diz: &quot;Nunca confie em imagens não verificadas! 🔍&quot;">Melhores Pr&aacute;ticas</a></p></li><li class="list__item" id="-f21mro_98"><p id="-f21mro_103"><a href="container-monitoring.html" id="-f21mro_104" data-tooltip="Monitor-chan diz: &quot;Métricas são como batimentos cardíacos do sistema - monitore-os ou enfrente o flatline! uwu&quot;">Monitoramento Avan&ccedil;ado</a></p></li></ol><aside class="prompt" data-type="note" data-title="" id="-f21mro_95"><p id="-f21mro_105"><span class="control" id="-f21mro_106">Sensei's Note:</span> &quot;O melhor debug &eacute; aquele que voc&ecirc; n&atilde;o precisa fazer - monitore proativamente!&quot;</p></aside></section><div class="last-modified">15 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="hands-on-lab.html" class="navigation-links__prev">Laborat&oacute;rio Pr&aacute;tico: M&atilde;o na Massa! 🧪</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>
