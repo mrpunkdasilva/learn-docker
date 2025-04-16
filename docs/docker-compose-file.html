@@ -1,0 +1,226 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T00:51:07.666155484"><title>Docker Compose File: Anatomia Completa 📑 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"estrutura-base","level":0,"title":"Estrutura Base 📋","anchor":"#estrutura-base"},{"id":"services-deep-dive","level":0,"title":"Services Deep Dive 🔍","anchor":"#services-deep-dive"},{"id":"network-configuration","level":0,"title":"Network Configuration 🌐","anchor":"#network-configuration"},{"id":"volume-configuration","level":0,"title":"Volume Configuration 💾","anchor":"#volume-configuration"},{"id":"configs-e-secrets","level":0,"title":"Configs e Secrets 🔒","anchor":"#configs-e-secrets"},{"id":"deploy-configuration","level":0,"title":"Deploy Configuration 🚀","anchor":"#deploy-configuration"},{"id":"exemplos-completos","level":0,"title":"Exemplos Completos 📚","anchor":"#exemplos-completos"},{"id":"waifu-compose-tips","level":0,"title":"Waifu Compose Tips 💡","anchor":"#waifu-compose-tips"},{"id":"checkpoint","level":0,"title":"Checkpoint ✅","anchor":"#checkpoint"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"},{"id":"recursos-adicionais","level":0,"title":"Recursos Adicionais 📚","anchor":"#recursos-adicionais"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Docker Compose File: Anatomia Completa 📑 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/docker-compose-file.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Docker Compose File: Anatomia Completa 📑 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/docker-compose-file.html#webpage",
+    "url": "writerside-documentation/docker-compose-file.html",
+    "name": "Docker Compose File: Anatomia Completa 📑 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="docker-compose-file" data-main-title="Docker Compose File: Anatomia Completa 📑" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="DEVELOPMENT: Building Applications///Docker Compose"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="docker-compose-file" id="docker-compose-file.md">Docker Compose File: Anatomia Completa 📑</h1><div class="code-block" data-lang="none">
+╔════════════════════════════════════════════════════════════╗
+║ DOCKER COMPOSE FILE REFERENCE                              ║
+║                                                           ║
+║ Version │ Services │ Networks │ Volumes │ Configs │ Deploy ║
+║                                                           ║
+║ Basic → Advanced → Production → Swarm                      ║
+╚════════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="estrutura-base" data-toc="estrutura-base">Estrutura Base 📋</h2><section class="chapter"><h3 id="vers-es-suportadas" data-toc="vers-es-suportadas">Vers&otilde;es Suportadas</h3><div class="code-block" data-lang="yaml">
+version: &quot;3.8&quot;  # Última versão estável
+# ou
+version: &quot;2.4&quot;  # Legacy support
+</div></section><section class="chapter"><h3 id="componentes-principais" data-toc="componentes-principais">Componentes Principais</h3><div class="code-block" data-lang="yaml">
+version: &quot;3.8&quot;
+services:     # Definição dos containers
+networks:     # Configuração de redes
+volumes:      # Volumes persistentes
+configs:      # Configurações
+secrets:      # Dados sensíveis
+</div></section></section><section class="chapter"><h2 id="services-deep-dive" data-toc="services-deep-dive">Services Deep Dive 🔍</h2><section class="chapter"><h3 id="configura-es-b-sicas" data-toc="configura-es-b-sicas">Configura&ccedil;&otilde;es B&aacute;sicas</h3><div class="code-block" data-lang="yaml">
+services:
+  webapp:
+    image: nginx:alpine          # Imagem base
+    build: ./webapp             # Ou build local
+    container_name: myapp       # Nome personalizado
+    hostname: webapp           # Hostname interno
+    ports:
+      - &quot;80:80&quot;               # Port mapping
+    environment:              # Variáveis de ambiente
+      NODE_ENV: production
+</div></section><section class="chapter"><h3 id="configura-es-avan-adas" data-toc="configura-es-avan-adas">Configura&ccedil;&otilde;es Avan&ccedil;adas</h3><div class="code-block" data-lang="yaml">
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.prod
+      args:
+        BUILD_ENV: production
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;curl&quot;, &quot;-f&quot;, &quot;http://localhost&quot;]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+</div></section></section><section class="chapter"><h2 id="network-configuration" data-toc="network-configuration">Network Configuration 🌐</h2><section class="chapter"><h3 id="tipos-de-rede" data-toc="tipos-de-rede">Tipos de Rede</h3><div class="code-block" data-lang="yaml">
+networks:
+  frontend:
+    driver: bridge
+    
+  backend:
+    driver: overlay
+    internal: true
+    
+  custom:
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+</div></section><section class="chapter"><h3 id="service-network-config" data-toc="service-network-config">Service Network Config</h3><div class="code-block" data-lang="yaml">
+services:
+  web:
+    networks:
+      frontend:
+        ipv4_address: 172.16.1.10
+      backend:
+        aliases:
+          - webapp
+</div></section></section><section class="chapter"><h2 id="volume-configuration" data-toc="volume-configuration">Volume Configuration 💾</h2><section class="chapter"><h3 id="tipos-de-volume" data-toc="tipos-de-volume">Tipos de Volume</h3><div class="code-block" data-lang="yaml">
+volumes:
+  db_data:    # Named volume
+    driver: local
+    
+  cache:
+    driver: tmpfs
+    driver_opts:
+      size: 100M
+</div></section><section class="chapter"><h3 id="service-volume-config" data-toc="service-volume-config">Service Volume Config</h3><div class="code-block" data-lang="yaml">
+services:
+  db:
+    volumes:
+      - db_data:/var/lib/mysql     # Named volume
+      - ./config:/etc/mysql/conf.d  # Bind mount
+      - /tmp/data:/tmp/data        # Host path
+</div></section></section><section class="chapter"><h2 id="configs-e-secrets" data-toc="configs-e-secrets">Configs e Secrets 🔒</h2><section class="chapter"><h3 id="configura-es" data-toc="configura-es">Configura&ccedil;&otilde;es</h3><div class="code-block" data-lang="yaml">
+configs:
+  http_config:
+    file: ./http.conf
+  api_config:
+    external: true
+
+services:
+  web:
+    configs:
+      - source: http_config
+        target: /etc/nginx/conf.d/default.conf
+</div></section><section class="chapter"><h3 id="secrets" data-toc="secrets">Secrets</h3><div class="code-block" data-lang="yaml">
+secrets:
+  db_password:
+    file: ./db_password.txt
+  api_key:
+    external: true
+
+services:
+  api:
+    secrets:
+      - db_password
+      - api_key
+</div></section></section><section class="chapter"><h2 id="deploy-configuration" data-toc="deploy-configuration">Deploy Configuration 🚀</h2><section class="chapter"><h3 id="swarm-mode" data-toc="swarm-mode">Swarm Mode</h3><div class="code-block" data-lang="yaml">
+services:
+  api:
+    deploy:
+      mode: replicated
+      replicas: 3
+      placement:
+        constraints:
+          - node.role == worker
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+</div></section></section><section class="chapter"><h2 id="exemplos-completos" data-toc="exemplos-completos">Exemplos Completos 📚</h2><section class="chapter"><h3 id="stack-de-desenvolvimento" data-toc="stack-de-desenvolvimento">Stack de Desenvolvimento</h3><div class="code-block" data-lang="yaml">
+version: &quot;3.8&quot;
+
+services:
+  frontend:
+    build: 
+      context: ./frontend
+      target: development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - &quot;3000:3000&quot;
+    environment:
+      - REACT_APP_API_URL=http://api:5000
+    depends_on:
+      - api
+
+  api:
+    build: ./backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - &quot;5000:5000&quot;
+    environment:
+      - DATABASE_URL=postgres://user:pass@db:5432/dbname
+      - REDIS_URL=redis://cache:6379
+    depends_on:
+      - db
+      - cache
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=dbname
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  cache:
+    image: redis:7-alpine
+    volumes:
+      - redisdata:/data
+
+volumes:
+  pgdata:
+  redisdata:
+
+networks:
+  default:
+    driver: bridge
+</div></section><section class="chapter"><h3 id="stack-de-produ-o" data-toc="stack-de-produ-o">Stack de Produ&ccedil;&atilde;o</h3><div class="code-block" data-lang="yaml">
+version: &quot;3.8&quot;
+
+services:
+  app:
+    image: myapp:${TAG:-latest}
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+    configs:
+      - source: app_config
+        target: /app/config.yml
+    secrets:
+      - source: app_secret
+        target: /app/secret.key
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;curl&quot;, &quot;-f&quot;, &quot;http://localhost/health&quot;]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+configs:
+  app_config:
+    file: ./config/production.yml
+
+secrets:
+  app_secret:
+    file: ./secrets/production.key
+</div></section></section><section class="chapter"><h2 id="waifu-compose-tips" data-toc="waifu-compose-tips">Waifu Compose Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="-v6d2bj_41"><p id="-v6d2bj_44"><span class="control" id="-v6d2bj_45">Config-chan diz:</span> &quot;Mantenha suas configura&ccedil;&otilde;es organizadas e versionadas! 📝&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-v6d2bj_42"><p id="-v6d2bj_46"><span class="control" id="-v6d2bj_47">Deploy-chan alerta:</span> &quot;Sempre teste suas configura&ccedil;&otilde;es antes de ir para produ&ccedil;&atilde;o! 🚨&quot;</p></aside><aside class="prompt" data-type="note" data-title="" id="-v6d2bj_43"><p id="-v6d2bj_48"><span class="control" id="-v6d2bj_49">Secret-chan lembra:</span> &quot;Nunca comite seus secrets no reposit&oacute;rio! 🔐&quot;</p></aside></section><section class="chapter"><h2 id="checkpoint" data-toc="checkpoint">Checkpoint ✅</h2><p id="-v6d2bj_50">Voc&ecirc; agora domina:</p><ul class="list _bullet" id="-v6d2bj_51"><li class="list__item" id="-v6d2bj_52"><p id="-v6d2bj_60">[x] Estrutura completa do arquivo</p></li><li class="list__item" id="-v6d2bj_53"><p id="-v6d2bj_61">[x] Configura&ccedil;&otilde;es de servi&ccedil;o</p></li><li class="list__item" id="-v6d2bj_54"><p id="-v6d2bj_62">[x] Networking avan&ccedil;ado</p></li><li class="list__item" id="-v6d2bj_55"><p id="-v6d2bj_63">[x] Gerenciamento de volumes</p></li><li class="list__item" id="-v6d2bj_56"><p id="-v6d2bj_64">[x] Configs e secrets</p></li><li class="list__item" id="-v6d2bj_57"><p id="-v6d2bj_65">[x] Deploy configurations</p></li><li class="list__item" id="-v6d2bj_58"><p id="-v6d2bj_66">[x] Exemplos pr&aacute;ticos</p></li><li class="list__item" id="-v6d2bj_59"><p id="-v6d2bj_67">[x] Boas pr&aacute;ticas</p></li></ul></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="-v6d2bj_68" type="1"><li class="list__item" id="-v6d2bj_69"><p id="-v6d2bj_72"><a href="docker-compose-commands.html" id="-v6d2bj_73" data-tooltip="Compose-chan diz: &quot;Use docker compose config para validar seu arquivo antes de executar! 📝&quot;">Docker Compose Commands</a></p></li><li class="list__item" id="-v6d2bj_70"><p id="-v6d2bj_74"><a href="container-operations.html" id="-v6d2bj_75" data-tooltip="Container-chan diz: &quot;Mantenha seus containers leves e eficientes! 🎈&quot;">Container Operations</a></p></li><li class="list__item" id="-v6d2bj_71"><p id="-v6d2bj_76"><a href="best-practices.html" id="-v6d2bj_77" data-tooltip="Security-chan diz: &quot;Nunca confie em imagens não verificadas! 🔍&quot;">Best Practices</a></p></li></ol></section><section class="chapter"><h2 id="recursos-adicionais" data-toc="recursos-adicionais">Recursos Adicionais 📚</h2><ul class="list _bullet" id="-v6d2bj_78"><li class="list__item" id="-v6d2bj_80"><p id="-v6d2bj_83"><a href="https://docs.docker.com/compose/compose-file/" id="-v6d2bj_84" data-external="true" rel="noopener noreferrer" target="_blank">Compose File Reference</a></p></li><li class="list__item" id="-v6d2bj_81"><p id="-v6d2bj_85"><a href="https://github.com/compose-spec/compose-spec" id="-v6d2bj_86" data-external="true" rel="noopener noreferrer" target="_blank">Compose Specification</a></p></li><li class="list__item" id="-v6d2bj_82"><p id="-v6d2bj_87"><a href="https://github.com/docker/awesome-compose" id="-v6d2bj_88" data-external="true" rel="noopener noreferrer" target="_blank">Docker Compose Examples</a></p></li></ul><aside class="prompt" data-type="note" data-title="" id="-v6d2bj_79"><p id="-v6d2bj_89"><span class="control" id="-v6d2bj_90">Sensei's Note:</span> &quot;O arquivo docker-compose.yml &eacute; como uma receita - cada ingrediente e sua medida importa para o resultado final! 🍜&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="docker-compose-intro.html" class="navigation-links__prev">Docker Compose: Orquestrando Containers 🎼</a><a href="docker-compose-commands.html" class="navigation-links__next">Docker Compose Commands: Orquestrando com Maestria 🎼</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

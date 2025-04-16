@@ -1,0 +1,118 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T00:51:07.43331241"><title>Container Logging: Dominando os Logs 📝 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"logging-basics","level":0,"title":"Logging Basics 🔰","anchor":"#logging-basics"},{"id":"log-drivers","level":0,"title":"Log Drivers 🚗","anchor":"#log-drivers"},{"id":"advanced-logging","level":0,"title":"Advanced Logging 🎓","anchor":"#advanced-logging"},{"id":"logging-best-practices","level":0,"title":"Logging Best Practices 🎯","anchor":"#logging-best-practices"},{"id":"troubleshooting-matrix","level":0,"title":"Troubleshooting Matrix 🔍","anchor":"#troubleshooting-matrix"},{"id":"logging-patterns","level":0,"title":"Logging Patterns 📊","anchor":"#logging-patterns"},{"id":"waifu-logging-tips","level":0,"title":"Waifu Logging Tips 💡","anchor":"#waifu-logging-tips"},{"id":"monitoring-integration","level":0,"title":"Monitoring Integration 📊","anchor":"#monitoring-integration"},{"id":"quick-commands","level":0,"title":"Quick Commands 🚀","anchor":"#quick-commands"},{"id":"checkpoint","level":0,"title":"Checkpoint ✅","anchor":"#checkpoint"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Container Logging: Dominando os Logs 📝 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/container-logging.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Container Logging: Dominando os Logs 📝 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/container-logging.html#webpage",
+    "url": "writerside-documentation/container-logging.html",
+    "name": "Container Logging: Dominando os Logs 📝 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="container-logging" data-main-title="Container Logging: Dominando os Logs 📝" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="DEVELOPMENT: Building Applications///Container Operations"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="container-logging" id="container-logging.md">Container Logging: Dominando os Logs 📝</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ CONTAINER LOGGING MATRIX                                  ║
+║                                                          ║
+║ stdout/stderr → driver → aggregator → storage → analysis ║
+║                                                          ║
+║ STATUS: CAPTURING CONTAINER INSIGHTS...                  ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="logging-basics" data-toc="logging-basics">Logging Basics 🔰</h2><section class="chapter"><h3 id="comandos-essenciais" data-toc="comandos-essenciais">Comandos Essenciais</h3><div class="code-block" data-lang="bash">
+# Logs básicos
+docker logs container_id
+
+# Follow logs em tempo real
+docker logs -f container_id
+
+# Logs com timestamp
+docker logs -t container_id
+
+# Últimas N linhas
+docker logs --tail 100 container_id
+
+# Logs desde timestamp
+docker logs --since 2023-01-01T00:00:00 container_id
+</div></section></section><section class="chapter"><h2 id="log-drivers" data-toc="log-drivers">Log Drivers 🚗</h2><section class="chapter"><h3 id="configura-o-de-driver" data-toc="configura-o-de-driver">Configura&ccedil;&atilde;o de Driver</h3><div class="code-block" data-lang="json">
+{
+  &quot;log-driver&quot;: &quot;json-file&quot;,
+  &quot;log-opts&quot;: {
+    &quot;max-size&quot;: &quot;10m&quot;,
+    &quot;max-file&quot;: &quot;3&quot;
+  }
+}
+</div></section><section class="chapter"><h3 id="drivers-dispon-veis" data-toc="drivers-dispon-veis">Drivers Dispon&iacute;veis</h3><div class="table-wrapper"><table class="wide" id="-u5zvny_20"><thead><tr class="ijRowHead" id="-u5zvny_21"><th id="-u5zvny_28"><p>Driver</p></th><th id="-u5zvny_29"><p>Uso</p></th><th id="-u5zvny_30"><p>Descri&ccedil;&atilde;o</p></th></tr></thead><tbody><tr id="-u5zvny_22"><td id="-u5zvny_31"><p>json-file</p></td><td id="-u5zvny_32"><p>Default</p></td><td id="-u5zvny_33"><p>Logs em formato JSON</p></td></tr><tr id="-u5zvny_23"><td id="-u5zvny_34"><p>local</p></td><td id="-u5zvny_35"><p>Local</p></td><td id="-u5zvny_36"><p>Logs persistentes locais</p></td></tr><tr id="-u5zvny_24"><td id="-u5zvny_37"><p>syslog</p></td><td id="-u5zvny_38"><p>System</p></td><td id="-u5zvny_39"><p>Logs para syslog</p></td></tr><tr id="-u5zvny_25"><td id="-u5zvny_40"><p>journald</p></td><td id="-u5zvny_41"><p>SystemD</p></td><td id="-u5zvny_42"><p>Logs para journald</p></td></tr><tr id="-u5zvny_26"><td id="-u5zvny_43"><p>fluentd</p></td><td id="-u5zvny_44"><p>Aggregation</p></td><td id="-u5zvny_45"><p>Logs para Fluentd</p></td></tr><tr id="-u5zvny_27"><td id="-u5zvny_46"><p>splunk</p></td><td id="-u5zvny_47"><p>Enterprise</p></td><td id="-u5zvny_48"><p>Logs para Splunk</p></td></tr></tbody></table></div></section></section><section class="chapter"><h2 id="advanced-logging" data-toc="advanced-logging">Advanced Logging 🎓</h2><section class="chapter"><h3 id="fluentd-integration" data-toc="fluentd-integration">Fluentd Integration</h3><div class="code-block" data-lang="yaml">
+version: '3'
+services:
+  app:
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: localhost:24224
+        tag: docker.{{.Name}}
+</div></section><section class="chapter"><h3 id="elk-stack-setup" data-toc="elk-stack-setup">ELK Stack Setup</h3><div class="code-block" data-lang="yaml">
+version: '3'
+services:
+  filebeat:
+    image: elastic/filebeat
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+</div></section></section><section class="chapter"><h2 id="logging-best-practices" data-toc="logging-best-practices">Logging Best Practices 🎯</h2><section class="chapter"><h3 id="do-s" data-toc="do-s">DO's ✅</h3><ul class="list _bullet" id="-u5zvny_55"><li class="list__item" id="-u5zvny_56"><p id="-u5zvny_62">Configure log rotation</p></li><li class="list__item" id="-u5zvny_57"><p id="-u5zvny_63">Use estruturado logging</p></li><li class="list__item" id="-u5zvny_58"><p id="-u5zvny_64">Implemente log levels</p></li><li class="list__item" id="-u5zvny_59"><p id="-u5zvny_65">Centralize logs</p></li><li class="list__item" id="-u5zvny_60"><p id="-u5zvny_66">Monitore log size</p></li><li class="list__item" id="-u5zvny_61"><p id="-u5zvny_67">Backup logs importantes</p></li></ul></section><section class="chapter"><h3 id="don-ts" data-toc="don-ts">DON'Ts ❌</h3><ul class="list _bullet" id="-u5zvny_68"><li class="list__item" id="-u5zvny_69"><p id="-u5zvny_74">N&atilde;o ignore log rotation</p></li><li class="list__item" id="-u5zvny_70"><p id="-u5zvny_75">Evite logs verbosos demais</p></li><li class="list__item" id="-u5zvny_71"><p id="-u5zvny_76">N&atilde;o armazene dados sens&iacute;veis</p></li><li class="list__item" id="-u5zvny_72"><p id="-u5zvny_77">N&atilde;o negligencie log parsing</p></li><li class="list__item" id="-u5zvny_73"><p id="-u5zvny_78">Evite duplica&ccedil;&atilde;o de logs</p></li></ul></section></section><section class="chapter"><h2 id="troubleshooting-matrix" data-toc="troubleshooting-matrix">Troubleshooting Matrix 🔍</h2><div class="table-wrapper"><table class="wide" id="-u5zvny_79"><thead><tr class="ijRowHead" id="-u5zvny_80"><th id="-u5zvny_85"><p>Problema</p></th><th id="-u5zvny_86"><p>Sintoma</p></th><th id="-u5zvny_87"><p>Solu&ccedil;&atilde;o</p></th></tr></thead><tbody><tr id="-u5zvny_81"><td id="-u5zvny_88"><p>Log cheio</p></td><td id="-u5zvny_89"><p>Disk space</p></td><td id="-u5zvny_90"><p>Configurar rotation</p></td></tr><tr id="-u5zvny_82"><td id="-u5zvny_91"><p>Log lento</p></td><td id="-u5zvny_92"><p>Performance</p></td><td id="-u5zvny_93"><p>Ajustar buffer size</p></td></tr><tr id="-u5zvny_83"><td id="-u5zvny_94"><p>Log perdido</p></td><td id="-u5zvny_95"><p>Missing data</p></td><td id="-u5zvny_96"><p>Verificar driver</p></td></tr><tr id="-u5zvny_84"><td id="-u5zvny_97"><p>Log duplicado</p></td><td id="-u5zvny_98"><p>Redundancy</p></td><td id="-u5zvny_99"><p>Checar configura&ccedil;&atilde;o</p></td></tr></tbody></table></div></section><section class="chapter"><h2 id="logging-patterns" data-toc="logging-patterns">Logging Patterns 📊</h2><section class="chapter"><h3 id="structured-logging" data-toc="structured-logging">Structured Logging</h3><div class="code-block" data-lang="json">
+{
+  &quot;level&quot;: &quot;info&quot;,
+  &quot;timestamp&quot;: &quot;2023-01-01T00:00:00Z&quot;,
+  &quot;service&quot;: &quot;api&quot;,
+  &quot;message&quot;: &quot;Request processed&quot;,
+  &quot;details&quot;: {
+    &quot;method&quot;: &quot;GET&quot;,
+    &quot;path&quot;: &quot;/api/v1/users&quot;,
+    &quot;duration&quot;: &quot;125ms&quot;
+  }
+}
+</div></section><section class="chapter"><h3 id="log-aggregation" data-toc="log-aggregation">Log Aggregation</h3><div class="code-block" data-lang="none">
+┌──────────┐    ┌──────────┐    ┌──────────┐
+│Container │───►│Collector │───►│  Store   │
+└──────────┘    └──────────┘    └──────────┘
+     │               │               │
+     └───────────────┴───────────────┘
+         Distributed Logging Flow
+</div></section></section><section class="chapter"><h2 id="waifu-logging-tips" data-toc="waifu-logging-tips">Waifu Logging Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="-u5zvny_104"><p id="-u5zvny_107"><span class="control" id="-u5zvny_108">Log-chan diz:</span> &quot;Logs s&atilde;o como pegadas digitais - mantenha-os organizados! 📝&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-u5zvny_105"><p id="-u5zvny_109"><span class="control" id="-u5zvny_110">Debug-sama alerta:</span> &quot;Sempre configure log rotation, ou seu disco ficar&aacute; triste! 💾&quot;</p></aside><aside class="prompt" data-type="note" data-title="" id="-u5zvny_106"><p id="-u5zvny_111"><span class="control" id="-u5zvny_112">Trace-chan sugere:</span> &quot;Use log levels sabiamente para facilitar o debugging! 🔍&quot;</p></aside></section><section class="chapter"><h2 id="monitoring-integration" data-toc="monitoring-integration">Monitoring Integration 📊</h2><section class="chapter"><h3 id="prometheus-format" data-toc="prometheus-format">Prometheus Format</h3><div class="code-block" data-lang="yaml">
+logging:
+  metrics:
+    - name: log_messages_total
+      type: counter
+      labels:
+        level: ${level}
+        service: ${service}
+</div></section><section class="chapter"><h3 id="grafana-dashboard" data-toc="grafana-dashboard">Grafana Dashboard</h3><div class="code-block" data-lang="json">
+{
+  &quot;panels&quot;: [
+    {
+      &quot;title&quot;: &quot;Log Volume&quot;,
+      &quot;type&quot;: &quot;graph&quot;,
+      &quot;targets&quot;: [
+        {
+          &quot;expr&quot;: &quot;rate(log_messages_total[5m])&quot;,
+          &quot;legendFormat&quot;: &quot;{{level}}&quot;
+        }
+      ]
+    }
+  ]
+}
+</div></section></section><section class="chapter"><h2 id="quick-commands" data-toc="quick-commands">Quick Commands 🚀</h2><div class="code-block" data-lang="bash">
+# Debug logging
+docker logs --debug container_id
+
+# Export logs
+docker logs container_id &gt; app.log
+
+# Multi-container logs
+docker compose logs -f service_name
+
+# Log stats
+docker logs --details container_id
+</div></section><section class="chapter"><h2 id="checkpoint" data-toc="checkpoint">Checkpoint ✅</h2><p id="-u5zvny_118">Voc&ecirc; agora domina:</p><ul class="list _bullet" id="-u5zvny_119"><li class="list__item" id="-u5zvny_120"><p id="-u5zvny_127">[x] Comandos b&aacute;sicos de logging</p></li><li class="list__item" id="-u5zvny_121"><p id="-u5zvny_128">[x] Log drivers</p></li><li class="list__item" id="-u5zvny_122"><p id="-u5zvny_129">[x] Log rotation</p></li><li class="list__item" id="-u5zvny_123"><p id="-u5zvny_130">[x] Structured logging</p></li><li class="list__item" id="-u5zvny_124"><p id="-u5zvny_131">[x] Log aggregation</p></li><li class="list__item" id="-u5zvny_125"><p id="-u5zvny_132">[x] Troubleshooting</p></li><li class="list__item" id="-u5zvny_126"><p id="-u5zvny_133">[x] Best practices</p></li></ul></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="-u5zvny_134" type="1"><li class="list__item" id="-u5zvny_136"><p id="-u5zvny_139"><a href="container-monitoring.html" id="-u5zvny_140" data-tooltip="Monitor-chan diz: &quot;Métricas são como batimentos cardíacos do sistema - monitore-os ou enfrente o flatline! uwu&quot;">Container Monitoring</a></p></li><li class="list__item" id="-u5zvny_137"><p id="-u5zvny_141"><a href="container-operations.html" id="-u5zvny_142" data-tooltip="Container-chan diz: &quot;Mantenha seus containers leves e eficientes! 🎈&quot;">Container Operations</a></p></li><li class="list__item" id="-u5zvny_138"><p id="-u5zvny_143"><a href="troubleshooting-guide.html" id="-u5zvny_144" data-tooltip="Debug-chan diz: &quot;Logs são como pegadas digitais - siga-as e encontrará a verdade! 🔍&quot;">Troubleshooting Guide</a></p></li></ol><aside class="prompt" data-type="note" data-title="" id="-u5zvny_135"><p id="-u5zvny_145"><span class="control" id="-u5zvny_146">Master Logger's Note:</span> &quot;Logs s&atilde;o seus olhos no mundo dos containers - mantenha-os limpos e afiados! 👀&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="container-operations.html" class="navigation-links__prev">Opera&ccedil;&otilde;es com Containers: O Manual do Operador 🎮</a><a href="container-troubleshooting.html" class="navigation-links__next">Container Troubleshooting: A Arte do Debug 🔍</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

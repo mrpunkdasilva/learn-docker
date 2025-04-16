@@ -125,8 +125,7 @@ Encontrou um bug? Quer adicionar mais referências cyberpunk? Abra uma issue ou 
 
 ## Contato
 
-- **Discord**: [Link para o servidor]
-- **Twitter**: [@DockerMaster]
+- **Twitter**: [@mrpunksama](https://twitter.com/mrpunksama)
 
 ## Licença
 

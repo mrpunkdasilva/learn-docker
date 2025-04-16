@@ -1,0 +1,161 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T00:51:07.331000831"><title>Docker Performance Optimization 🚀 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"resource-management","level":0,"title":"Resource Management 📊","anchor":"#resource-management"},{"id":"storage-performance","level":0,"title":"Storage Performance 💾","anchor":"#storage-performance"},{"id":"network-optimization","level":0,"title":"Network Optimization 🌐","anchor":"#network-optimization"},{"id":"build-performance","level":0,"title":"Build Performance ⚡","anchor":"#build-performance"},{"id":"runtime-performance","level":0,"title":"Runtime Performance 🔄","anchor":"#runtime-performance"},{"id":"monitoring-tools","level":0,"title":"Monitoring Tools 📈","anchor":"#monitoring-tools"},{"id":"performance-testing","level":0,"title":"Performance Testing 🔍","anchor":"#performance-testing"},{"id":"best-practices-checklist","level":0,"title":"Best Practices Checklist ✅","anchor":"#best-practices-checklist"},{"id":"performance-troubleshooting-matrix","level":0,"title":"Performance Troubleshooting Matrix 🎯","anchor":"#performance-troubleshooting-matrix"},{"id":"advanced-tuning","level":0,"title":"Advanced Tuning 🔧","anchor":"#advanced-tuning"},{"id":"waifu-performance-tips","level":0,"title":"Waifu Performance Tips 💫","anchor":"#waifu-performance-tips"},{"id":"quick-reference","level":0,"title":"Quick Reference 📚","anchor":"#quick-reference"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Docker Performance Optimization 🚀 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/docker-performance.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Docker Performance Optimization 🚀 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/docker-performance.html#webpage",
+    "url": "writerside-documentation/docker-performance.html",
+    "name": "Docker Performance Optimization 🚀 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="docker-performance" data-main-title="Docker Performance Optimization 🚀" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="ADVANCED: Production Ready///Performance"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="docker-performance" id="docker-performance.md">Docker Performance Optimization 🚀</h1><div class="code-block" data-lang="none">
+╔════════════════════════════════════════════════════╗
+║  DOCKER PERFORMANCE OPTIMIZATION                   ║
+║                                                   ║
+║  CPU | Memory | I/O | Network | Build | Runtime   ║
+╚════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="resource-management" data-toc="resource-management">Resource Management 📊</h2><section class="chapter"><h3 id="cpu-optimization" data-toc="cpu-optimization">CPU Optimization</h3><div class="code-block" data-lang="bash">
+# Limitar CPU
+docker run --cpus=&quot;.5&quot; nginx
+
+# Definir CPU shares
+docker run --cpu-shares=512 nginx
+
+# Pinning em CPUs específicas
+docker run --cpuset-cpus=&quot;0,1&quot; nginx
+</div></section><section class="chapter"><h3 id="memory-management" data-toc="memory-management">Memory Management</h3><div class="code-block" data-lang="bash">
+# Limitar memória
+docker run --memory=&quot;512m&quot; nginx
+
+# Configurar swap
+docker run --memory-swap=&quot;1g&quot; nginx
+
+# Reservar memória
+docker run --memory-reservation=&quot;256m&quot; nginx
+</div></section></section><section class="chapter"><h2 id="storage-performance" data-toc="storage-performance">Storage Performance 💾</h2><section class="chapter"><h3 id="storage-driver-selection" data-toc="storage-driver-selection">Storage Driver Selection</h3><div class="code-block" data-lang="yaml">
+{
+  &quot;storage-driver&quot;: &quot;overlay2&quot;,
+  &quot;storage-opts&quot;: [
+    &quot;overlay2.override_kernel_check=true&quot;
+  ]
+}
+</div></section><section class="chapter"><h3 id="volume-performance" data-toc="volume-performance">Volume Performance</h3><div class="code-block" data-lang="bash">
+# Volume local otimizado
+docker volume create --driver local \
+  --opt type=tmpfs \
+  --opt device=tmpfs \
+  --opt o=size=1g \
+  fast-volume
+
+# Monitorar I/O
+docker stats --format &quot;table {{.Name}}\t{{.BlockIO}}&quot;
+</div></section></section><section class="chapter"><h2 id="network-optimization" data-toc="network-optimization">Network Optimization 🌐</h2><section class="chapter"><h3 id="network-mode-selection" data-toc="network-mode-selection">Network Mode Selection</h3><div class="code-block" data-lang="bash">
+# Host networking
+docker run --network host nginx
+
+# Performance tuning
+docker run \
+  --network-alias=fastnet \
+  --dns=8.8.8.8 \
+  nginx
+</div></section><section class="chapter"><h3 id="network-metrics" data-toc="network-metrics">Network Metrics</h3><div class="code-block" data-lang="bash">
+# Monitorar tráfego
+docker stats --format &quot;table {{.Name}}\t{{.NetIO}}&quot;
+
+# Análise detalhada
+docker run --rm \
+  --net container:target-container \
+  nicolaka/netshoot iftop
+</div></section></section><section class="chapter"><h2 id="build-performance" data-toc="build-performance">Build Performance ⚡</h2><section class="chapter"><h3 id="multi-stage-builds" data-toc="multi-stage-builds">Multi-stage Builds</h3><div class="code-block" data-lang="none">
+# Build stage
+FROM golang:1.19 AS builder
+WORKDIR /app
+COPY . .
+RUN CGO_ENABLED=0 go build -o app
+
+# Production stage
+FROM alpine:3.14
+COPY --from=builder /app/app /
+CMD [&quot;/app&quot;]
+</div></section><section class="chapter"><h3 id="cache-optimization" data-toc="cache-optimization">Cache Optimization</h3><div class="code-block" data-lang="bash">
+# Usar buildkit
+export DOCKER_BUILDKIT=1
+
+# Cache em registry
+docker buildx build \
+  --cache-from type=registry,ref=user/app:cache \
+  --cache-to type=registry,ref=user/app:cache \
+  .
+</div></section></section><section class="chapter"><h2 id="runtime-performance" data-toc="runtime-performance">Runtime Performance 🔄</h2><section class="chapter"><h3 id="container-stats" data-toc="container-stats">Container Stats</h3><div class="code-block" data-lang="bash">
+# Métricas em tempo real
+docker stats --no-stream
+
+# Formato personalizado
+docker stats --format \
+  &quot;table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}&quot;
+</div></section><section class="chapter"><h3 id="resource-quotas" data-toc="resource-quotas">Resource Quotas</h3><div class="code-block" data-lang="yaml">
+version: '3.8'
+services:
+  app:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+</div></section></section><section class="chapter"><h2 id="monitoring-tools" data-toc="monitoring-tools">Monitoring Tools 📈</h2><section class="chapter"><h3 id="prometheus-integration" data-toc="prometheus-integration">Prometheus Integration</h3><div class="code-block" data-lang="yaml">
+metrics:
+  prometheus:
+    enabled: true
+    port: 9323
+</div></section><section class="chapter"><h3 id="grafana-dashboard" data-toc="grafana-dashboard">Grafana Dashboard</h3><div class="code-block" data-lang="bash">
+# Container metrics
+rate(container_cpu_usage_seconds_total{container_name!=&quot;&quot;}[5m])
+sum(container_memory_usage_bytes) by (container_name)
+</div></section></section><section class="chapter"><h2 id="performance-testing" data-toc="performance-testing">Performance Testing 🔍</h2><section class="chapter"><h3 id="load-testing" data-toc="load-testing">Load Testing</h3><div class="code-block" data-lang="bash">
+# Apache Benchmark
+ab -n 1000 -c 10 http://localhost:8080/
+
+# Hey HTTP load generator
+hey -n 2000 -c 50 http://localhost:8080/
+</div></section><section class="chapter"><h3 id="profiling" data-toc="profiling">Profiling</h3><div class="code-block" data-lang="bash">
+# CPU profile
+docker run --cap-add=SYS_PTRACE \
+  --security-opt seccomp=unconfined \
+  app perf record -F 99 -p 1
+
+# Memory profile
+docker run -p 6060:6060 app
+go tool pprof http://localhost:6060/debug/pprof/heap
+</div></section></section><section class="chapter"><h2 id="best-practices-checklist" data-toc="best-practices-checklist">Best Practices Checklist ✅</h2><section class="chapter"><h3 id="container-level" data-toc="container-level">Container Level</h3><ol class="list _decimal" id="-bcb8se_46" type="1"><li class="list__item" id="-bcb8se_47"><p id="-bcb8se_52">[x] Resource limits configurados</p></li><li class="list__item" id="-bcb8se_48"><p id="-bcb8se_53">[x] Logging driver otimizado</p></li><li class="list__item" id="-bcb8se_49"><p id="-bcb8se_54">[x] Network mode apropriado</p></li><li class="list__item" id="-bcb8se_50"><p id="-bcb8se_55">[x] Volume mounts eficientes</p></li><li class="list__item" id="-bcb8se_51"><p id="-bcb8se_56">[x] Image size otimizado</p></li></ol></section><section class="chapter"><h3 id="host-level" data-toc="host-level">Host Level</h3><ol class="list _decimal" id="-bcb8se_57" type="1"><li class="list__item" id="-bcb8se_58"><p id="-bcb8se_63">[x] Storage driver adequado</p></li><li class="list__item" id="-bcb8se_59"><p id="-bcb8se_64">[x] Sistema de arquivos otimizado</p></li><li class="list__item" id="-bcb8se_60"><p id="-bcb8se_65">[x] Kernel parameters tuned</p></li><li class="list__item" id="-bcb8se_61"><p id="-bcb8se_66">[x] Network stack otimizado</p></li><li class="list__item" id="-bcb8se_62"><p id="-bcb8se_67">[x] Monitoramento ativo</p></li></ol></section></section><section class="chapter"><h2 id="performance-troubleshooting-matrix" data-toc="performance-troubleshooting-matrix">Performance Troubleshooting Matrix 🎯</h2><div class="table-wrapper"><table class="wide" id="-bcb8se_68"><thead><tr class="ijRowHead" id="-bcb8se_69"><th id="-bcb8se_74"><p>Sintoma</p></th><th id="-bcb8se_75"><p>M&eacute;trica</p></th><th id="-bcb8se_76"><p>Comando</p></th><th id="-bcb8se_77"><p>Solu&ccedil;&atilde;o</p></th></tr></thead><tbody><tr id="-bcb8se_70"><td id="-bcb8se_78"><p>CPU Alto</p></td><td id="-bcb8se_79"><p>container_cpu_usage</p></td><td id="-bcb8se_80"><p><code class="code" id="-bcb8se_82">docker stats</code></p></td><td id="-bcb8se_81"><p>Ajustar limites</p></td></tr><tr id="-bcb8se_71"><td id="-bcb8se_83"><p>Mem&oacute;ria Leak</p></td><td id="-bcb8se_84"><p>container_memory_usage</p></td><td id="-bcb8se_85"><p><code class="code" id="-bcb8se_87">docker stats</code></p></td><td id="-bcb8se_86"><p>Heap analysis</p></td></tr><tr id="-bcb8se_72"><td id="-bcb8se_88"><p>I/O Lento</p></td><td id="-bcb8se_89"><p>container_fs_io_current</p></td><td id="-bcb8se_90"><p><code class="code" id="-bcb8se_92">iostat</code></p></td><td id="-bcb8se_91"><p>Storage driver</p></td></tr><tr id="-bcb8se_73"><td id="-bcb8se_93"><p>Network Lag</p></td><td id="-bcb8se_94"><p>container_network_transmit</p></td><td id="-bcb8se_95"><p><code class="code" id="-bcb8se_97">iftop</code></p></td><td id="-bcb8se_96"><p>Network mode</p></td></tr></tbody></table></div></section><section class="chapter"><h2 id="advanced-tuning" data-toc="advanced-tuning">Advanced Tuning 🔧</h2><section class="chapter"><h3 id="kernel-parameters" data-toc="kernel-parameters">Kernel Parameters</h3><div class="code-block" data-lang="bash">
+# Ajustar sysctls
+docker run --sysctl net.core.somaxconn=1024 nginx
+
+# Configurar ulimits
+docker run --ulimit nofile=65535:65535 nginx
+</div></section><section class="chapter"><h3 id="runtime-flags" data-toc="runtime-flags">Runtime Flags</h3><div class="code-block" data-lang="bash">
+# Otimizar garbage collector
+docker run -e &quot;GOGC=100&quot; app
+
+# Tuning JVM
+docker run -e &quot;JAVA_OPTS=-XX:+UseG1GC&quot; java-app
+</div></section></section><section class="chapter"><h2 id="waifu-performance-tips" data-toc="waifu-performance-tips">Waifu Performance Tips 💫</h2><aside class="prompt" data-type="tip" data-title="" id="-bcb8se_102"><p id="-bcb8se_104"><span class="control" id="-bcb8se_105">Performance-chan diz:</span> &quot;Monitore seus containers como se fossem seus tamagotchis!&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-bcb8se_103"><p id="-bcb8se_106"><span class="control" id="-bcb8se_107">Resource-sama alerta:</span> &quot;Limites s&atilde;o importantes, como por&ccedil;&otilde;es de ramen!&quot;</p></aside></section><section class="chapter"><h2 id="quick-reference" data-toc="quick-reference">Quick Reference 📚</h2><section class="chapter"><h3 id="common-commands" data-toc="common-commands">Common Commands</h3><div class="code-block" data-lang="bash">
+# CPU profile
+docker stats --format &quot;table {{.Container}}\t{{.CPUPerc}}&quot;
+
+# Memory analysis
+docker stats --format &quot;table {{.Container}}\t{{.MemUsage}}&quot;
+
+# I/O metrics
+docker stats --format &quot;table {{.Container}}\t{{.BlockIO}}&quot;
+
+# Network stats
+docker stats --format &quot;table {{.Container}}\t{{.NetIO}}&quot;
+</div></section><section class="chapter"><h3 id="performance-tools" data-toc="performance-tools">Performance Tools</h3><ol class="list _decimal" id="-bcb8se_111" type="1"><li class="list__item" id="-bcb8se_113"><p id="-bcb8se_118">cAdvisor</p></li><li class="list__item" id="-bcb8se_114"><p id="-bcb8se_119">Prometheus</p></li><li class="list__item" id="-bcb8se_115"><p id="-bcb8se_120">Grafana</p></li><li class="list__item" id="-bcb8se_116"><p id="-bcb8se_121">netdata</p></li><li class="list__item" id="-bcb8se_117"><p id="-bcb8se_122">ctop</p></li></ol><aside class="prompt" data-type="note" data-title="" id="-bcb8se_112"><p id="-bcb8se_123"><span class="control" id="-bcb8se_124">Performance Master's Note:</span> &quot;Performance &eacute; como um jardim zen - requer aten&ccedil;&atilde;o constante e ajustes sutis.&quot;</p></aside></section></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="docker-registry.html" class="navigation-links__prev">Docker Registry: Seu Reposit&oacute;rio Privado 📦</a><a href="docker-optimization.html" class="navigation-links__next">Docker Optimization Guide 🚀</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

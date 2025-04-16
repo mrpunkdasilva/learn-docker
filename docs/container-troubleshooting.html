@@ -1,0 +1,135 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T00:51:07.665179592"><title>Container Troubleshooting: A Arte do Debug 🔍 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"quick-debug-commands","level":0,"title":"Quick Debug Commands 🚀","anchor":"#quick-debug-commands"},{"id":"matriz-de-problemas-comuns","level":0,"title":"Matriz de Problemas Comuns 📊","anchor":"#matriz-de-problemas-comuns"},{"id":"network-debugging","level":0,"title":"Network Debugging 🌐","anchor":"#network-debugging"},{"id":"storage-troubleshooting","level":0,"title":"Storage Troubleshooting 💾","anchor":"#storage-troubleshooting"},{"id":"resource-management","level":0,"title":"Resource Management 📊","anchor":"#resource-management"},{"id":"advanced-debug-techniques","level":0,"title":"Advanced Debug Techniques 🔬","anchor":"#advanced-debug-techniques"},{"id":"debug-toolkit","level":0,"title":"Debug Toolkit 🛠️","anchor":"#debug-toolkit"},{"id":"waifu-debug-tips","level":0,"title":"Waifu Debug Tips 💡","anchor":"#waifu-debug-tips"},{"id":"emergency-procedures","level":0,"title":"Emergency Procedures 🚨","anchor":"#emergency-procedures"},{"id":"debug-checklist","level":0,"title":"Debug Checklist ✅","anchor":"#debug-checklist"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Container Troubleshooting: A Arte do Debug 🔍 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/container-troubleshooting.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Container Troubleshooting: A Arte do Debug 🔍 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/container-troubleshooting.html#webpage",
+    "url": "writerside-documentation/container-troubleshooting.html",
+    "name": "Container Troubleshooting: A Arte do Debug 🔍 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="container-troubleshooting" data-main-title="Container Troubleshooting: A Arte do Debug 🔍" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="DEVELOPMENT: Building Applications///Container Operations"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="container-troubleshooting" id="container-troubleshooting.md">Container Troubleshooting: A Arte do Debug 🔍</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ CONTAINER TROUBLESHOOTING MATRIX v2.0                     ║
+║                                                          ║
+║ [Container] → [Runtime] → [Network] → [Storage] → [Logs] ║
+║                                                          ║
+║ STATUS: DEBUGGING IN PROGRESS...                         ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="quick-debug-commands" data-toc="quick-debug-commands">Quick Debug Commands 🚀</h2><section class="chapter"><h3 id="container-status" data-toc="container-status">Container Status</h3><div class="code-block" data-lang="bash">
+# Status geral
+docker ps -a
+
+# Detalhes do container
+docker inspect container_id
+
+# Métricas em tempo real
+docker stats container_id
+
+# Processos rodando
+docker top container_id
+</div></section><section class="chapter"><h3 id="logs-e-eventos" data-toc="logs-e-eventos">Logs e Eventos</h3><div class="code-block" data-lang="bash">
+# Logs com timestamp
+docker logs -t container_id
+
+# Eventos do sistema
+docker events --filter container=container_id
+
+# Logs em tempo real
+docker logs -f container_id
+
+# Debug mode
+docker --debug run nginx
+</div></section></section><section class="chapter"><h2 id="matriz-de-problemas-comuns" data-toc="matriz-de-problemas-comuns">Matriz de Problemas Comuns 📊</h2><section class="chapter"><h3 id="1-container-n-o-inicia" data-toc="1-container-n-o-inicia">1. Container n&atilde;o Inicia</h3><div class="table-wrapper"><table class="wide" id="z64oy6v_21"><thead><tr class="ijRowHead" id="z64oy6v_22"><th id="z64oy6v_27"><p>Sintoma</p></th><th id="z64oy6v_28"><p>Comando</p></th><th id="z64oy6v_29"><p>Solu&ccedil;&atilde;o</p></th></tr></thead><tbody><tr id="z64oy6v_23"><td id="z64oy6v_30"><p>Exit Code != 0</p></td><td id="z64oy6v_31"><p><code class="code" id="z64oy6v_33">docker logs</code></p></td><td id="z64oy6v_32"><p>Verificar logs de erro</p></td></tr><tr id="z64oy6v_24"><td id="z64oy6v_34"><p>OOM Killer</p></td><td id="z64oy6v_35"><p><code class="code" id="z64oy6v_37">docker stats</code></p></td><td id="z64oy6v_36"><p>Aumentar limite de mem&oacute;ria</p></td></tr><tr id="z64oy6v_25"><td id="z64oy6v_38"><p>Port Conflict</p></td><td id="z64oy6v_39"><p><code class="code" id="z64oy6v_41">docker port</code></p></td><td id="z64oy6v_40"><p>Mudar mapeamento de porta</p></td></tr><tr id="z64oy6v_26"><td id="z64oy6v_42"><p>Missing Volume</p></td><td id="z64oy6v_43"><p><code class="code" id="z64oy6v_45">docker inspect</code></p></td><td id="z64oy6v_44"><p>Verificar volume mounts</p></td></tr></tbody></table></div></section><section class="chapter"><h3 id="2-performance-issues" data-toc="2-performance-issues">2. Performance Issues</h3><div class="table-wrapper"><table class="wide" id="z64oy6v_46"><thead><tr class="ijRowHead" id="z64oy6v_47"><th id="z64oy6v_52"><p>Sintoma</p></th><th id="z64oy6v_53"><p>Comando</p></th><th id="z64oy6v_54"><p>Solu&ccedil;&atilde;o</p></th></tr></thead><tbody><tr id="z64oy6v_48"><td id="z64oy6v_55"><p>CPU High</p></td><td id="z64oy6v_56"><p><code class="code" id="z64oy6v_58">docker stats</code></p></td><td id="z64oy6v_57"><p>Verificar processos</p></td></tr><tr id="z64oy6v_49"><td id="z64oy6v_59"><p>Memory Leak</p></td><td id="z64oy6v_60"><p><code class="code" id="z64oy6v_62">docker stats</code></p></td><td id="z64oy6v_61"><p>Analisar heap dump</p></td></tr><tr id="z64oy6v_50"><td id="z64oy6v_63"><p>I/O Slow</p></td><td id="z64oy6v_64"><p><code class="code" id="z64oy6v_66">iostat</code></p></td><td id="z64oy6v_65"><p>Verificar disco</p></td></tr><tr id="z64oy6v_51"><td id="z64oy6v_67"><p>Network Lag</p></td><td id="z64oy6v_68"><p><code class="code" id="z64oy6v_70">docker network</code></p></td><td id="z64oy6v_69"><p>Debug conectividade</p></td></tr></tbody></table></div></section></section><section class="chapter"><h2 id="network-debugging" data-toc="network-debugging">Network Debugging 🌐</h2><section class="chapter"><h3 id="comandos-de-rede" data-toc="comandos-de-rede">Comandos de Rede</h3><div class="code-block" data-lang="bash">
+# DNS lookup
+docker run --rm busybox nslookup container_name
+
+# Network inspect
+docker network inspect network_name
+
+# Port mapping
+docker port container_id
+
+# Network stats
+docker stats --format &quot;table {{.Name}}\t{{.NetIO}}&quot;
+</div></section><section class="chapter"><h3 id="common-network-issues" data-toc="common-network-issues">Common Network Issues</h3><ol class="list _decimal" id="z64oy6v_74" type="1"><li class="list__item" id="z64oy6v_75"><p id="z64oy6v_77">DNS Resolution</p><div class="code-block" data-lang="bash">
+# Test DNS
+docker run --rm busybox ping 8.8.8.8
+</div></li><li class="list__item" id="z64oy6v_76"><p id="z64oy6v_79">Port Conflicts</p><div class="code-block" data-lang="bash">
+# Check ports
+netstat -tulpn
+</div></li></ol></section></section><section class="chapter"><h2 id="storage-troubleshooting" data-toc="storage-troubleshooting">Storage Troubleshooting 💾</h2><section class="chapter"><h3 id="volume-debug" data-toc="volume-debug">Volume Debug</h3><div class="code-block" data-lang="bash">
+# List volumes
+docker volume ls
+
+# Inspect volume
+docker volume inspect volume_name
+
+# Check disk usage
+docker system df -v
+</div></section><section class="chapter"><h3 id="storage-issues-matrix" data-toc="storage-issues-matrix">Storage Issues Matrix</h3><div class="table-wrapper"><table class="wide" id="z64oy6v_84"><thead><tr class="ijRowHead" id="z64oy6v_85"><th id="z64oy6v_90"><p>Problema</p></th><th id="z64oy6v_91"><p>Comando</p></th><th id="z64oy6v_92"><p>Solu&ccedil;&atilde;o</p></th></tr></thead><tbody><tr id="z64oy6v_86"><td id="z64oy6v_93"><p>No Space</p></td><td id="z64oy6v_94"><p><code class="code" id="z64oy6v_96">docker system df</code></p></td><td id="z64oy6v_95"><p>Cleanup unused</p></td></tr><tr id="z64oy6v_87"><td id="z64oy6v_97"><p>Volume Missing</p></td><td id="z64oy6v_98"><p><code class="code" id="z64oy6v_100">docker volume ls</code></p></td><td id="z64oy6v_99"><p>Recreate volume</p></td></tr><tr id="z64oy6v_88"><td id="z64oy6v_101"><p>Permission Error</p></td><td id="z64oy6v_102"><p><code class="code" id="z64oy6v_104">ls -la /var/lib/docker</code></p></td><td id="z64oy6v_103"><p>Fix permissions</p></td></tr><tr id="z64oy6v_89"><td id="z64oy6v_105"><p>Mount Failed</p></td><td id="z64oy6v_106"><p><code class="code" id="z64oy6v_108">docker inspect</code></p></td><td id="z64oy6v_107"><p>Check mount points</p></td></tr></tbody></table></div></section></section><section class="chapter"><h2 id="resource-management" data-toc="resource-management">Resource Management 📊</h2><section class="chapter"><h3 id="memory-issues" data-toc="memory-issues">Memory Issues</h3><div class="code-block" data-lang="bash">
+# Memory stats
+docker stats --format &quot;table {{.Name}}\t{{.MemUsage}}&quot;
+
+# Memory limits
+docker update --memory 512m container_id
+
+# OOM analysis
+dmesg | grep -i kill
+</div></section><section class="chapter"><h3 id="cpu-debug" data-toc="cpu-debug">CPU Debug</h3><div class="code-block" data-lang="bash">
+# CPU stats
+docker stats --format &quot;table {{.Name}}\t{{.CPUPerc}}&quot;
+
+# CPU limits
+docker update --cpus 2 container_id
+</div></section></section><section class="chapter"><h2 id="advanced-debug-techniques" data-toc="advanced-debug-techniques">Advanced Debug Techniques 🔬</h2><section class="chapter"><h3 id="container-deep-dive" data-toc="container-deep-dive">Container Deep Dive</h3><div class="code-block" data-lang="bash">
+# Shell access
+docker exec -it container_id sh
+
+# Process list
+ps aux
+
+# Network status
+netstat -tulpn
+
+# File system
+df -h
+</div></section><section class="chapter"><h3 id="system-analysis" data-toc="system-analysis">System Analysis</h3><div class="code-block" data-lang="bash">
+# System events
+docker system events
+
+# Resource usage
+docker system df
+
+# Detailed info
+docker system info
+</div></section></section><section class="chapter"><h2 id="debug-toolkit" data-toc="debug-toolkit">Debug Toolkit 🛠️</h2><section class="chapter"><h3 id="essential-tools" data-toc="essential-tools">Essential Tools</h3><div class="code-block" data-lang="bash">
+# Network tools
+docker run --rm nicolaka/netshoot
+
+# System analysis
+docker run --rm -v /:/host alpine sh
+
+# Performance analysis
+docker run --rm --pid=host netflix/vector
+</div></section></section><section class="chapter"><h2 id="waifu-debug-tips" data-toc="waifu-debug-tips">Waifu Debug Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="z64oy6v_119"><p id="z64oy6v_122"><span class="control" id="z64oy6v_123">Debug-chan diz:</span> &quot;Sempre comece pelos logs - eles contam a hist&oacute;ria completa! 📝&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="z64oy6v_120"><p id="z64oy6v_124"><span class="control" id="z64oy6v_125">Resource-sama alerta:</span> &quot;Monitore seus recursos, ou enfrente a ira do OOM Killer! ⚡&quot;</p></aside><aside class="prompt" data-type="note" data-title="" id="z64oy6v_121"><p id="z64oy6v_126"><span class="control" id="z64oy6v_127">Network-chan sugere:</span> &quot;Problemas de rede? Verifique DNS primeiro! 🌐&quot;</p></aside></section><section class="chapter"><h2 id="emergency-procedures" data-toc="emergency-procedures">Emergency Procedures 🚨</h2><section class="chapter"><h3 id="quick-recovery" data-toc="quick-recovery">Quick Recovery</h3><div class="code-block" data-lang="bash">
+# Stop all containers
+docker stop $(docker ps -q)
+
+# Remove stopped
+docker container prune
+
+# Clean system
+docker system prune -af
+</div></section><section class="chapter"><h3 id="backup-critical-data" data-toc="backup-critical-data">Backup Critical Data</h3><div class="code-block" data-lang="bash">
+# Volume backup
+docker run --rm -v volume_name:/data -v $(pwd):/backup alpine tar -czf /backup/volume.tar.gz /data
+
+# Container commit
+docker commit container_id backup_image
+</div></section></section><section class="chapter"><h2 id="debug-checklist" data-toc="debug-checklist">Debug Checklist ✅</h2><section class="chapter"><h3 id="basic-checks" data-toc="basic-checks">Basic Checks</h3><ul class="list _bullet" id="z64oy6v_134"><li class="list__item" id="z64oy6v_135"><p id="z64oy6v_140">[ ] Verificar logs do container</p></li><li class="list__item" id="z64oy6v_136"><p id="z64oy6v_141">[ ] Confirmar status do container</p></li><li class="list__item" id="z64oy6v_137"><p id="z64oy6v_142">[ ] Checar uso de recursos</p></li><li class="list__item" id="z64oy6v_138"><p id="z64oy6v_143">[ ] Validar configura&ccedil;&atilde;o de rede</p></li><li class="list__item" id="z64oy6v_139"><p id="z64oy6v_144">[ ] Verificar volumes montados</p></li></ul></section><section class="chapter"><h3 id="advanced-checks" data-toc="advanced-checks">Advanced Checks</h3><ul class="list _bullet" id="z64oy6v_145"><li class="list__item" id="z64oy6v_146"><p id="z64oy6v_151">[ ] Analisar eventos do sistema</p></li><li class="list__item" id="z64oy6v_147"><p id="z64oy6v_152">[ ] Verificar logs do daemon</p></li><li class="list__item" id="z64oy6v_148"><p id="z64oy6v_153">[ ] Validar permiss&otilde;es</p></li><li class="list__item" id="z64oy6v_149"><p id="z64oy6v_154">[ ] Checar limites de recursos</p></li><li class="list__item" id="z64oy6v_150"><p id="z64oy6v_155">[ ] Investigar depend&ecirc;ncias</p></li></ul></section></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="z64oy6v_156" type="1"><li class="list__item" id="z64oy6v_158"><p id="z64oy6v_161"><a href="container-monitoring.html" id="z64oy6v_162" data-tooltip="Monitor-chan diz: &quot;Métricas são como batimentos cardíacos do sistema - monitore-os ou enfrente o flatline! uwu&quot;">Container Monitoring</a></p></li><li class="list__item" id="z64oy6v_159"><p id="z64oy6v_163"><a href="container-logging.html" id="z64oy6v_164" data-tooltip="Configure log rotation">Container Logging</a></p></li><li class="list__item" id="z64oy6v_160"><p id="z64oy6v_165"><a href="container-security.html" id="z64oy6v_166" data-tooltip="&quot;Na matrix dos containers, a segurança não é uma opção - é uma arte marcial.&quot; - Manifesto do Security-Sama">Container Security</a></p></li></ol><aside class="prompt" data-type="note" data-title="" id="z64oy6v_157"><p id="z64oy6v_167"><span class="control" id="z64oy6v_168">Debug Master's Note:</span> &quot;Na matrix dos containers, cada erro &eacute; uma oportunidade de aprendizado! 🎓&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="container-logging.html" class="navigation-links__prev">Container Logging: Dominando os Logs 📝</a><a href="container-networking.html" class="navigation-links__next">Container Networking</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

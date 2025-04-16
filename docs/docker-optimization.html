@@ -1,0 +1,168 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T00:51:07.386069897"><title>Docker Optimization Guide 🚀 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"image-optimization","level":0,"title":"Image Optimization 📦","anchor":"#image-optimization"},{"id":"runtime-optimization","level":0,"title":"Runtime Optimization ⚡","anchor":"#runtime-optimization"},{"id":"storage-optimization","level":0,"title":"Storage Optimization 💾","anchor":"#storage-optimization"},{"id":"network-optimization","level":0,"title":"Network Optimization 🌐","anchor":"#network-optimization"},{"id":"build-optimization","level":0,"title":"Build Optimization 🏗️","anchor":"#build-optimization"},{"id":"memory-optimization","level":0,"title":"Memory Optimization 🧠","anchor":"#memory-optimization"},{"id":"cpu-optimization","level":0,"title":"CPU Optimization 💻","anchor":"#cpu-optimization"},{"id":"optimization-checklist","level":0,"title":"Optimization Checklist ✅","anchor":"#optimization-checklist"},{"id":"monitoring-metrics","level":0,"title":"Monitoring \u0026 Metrics 📊","anchor":"#monitoring-metrics"},{"id":"best-practices-matrix","level":0,"title":"Best Practices Matrix 📋","anchor":"#best-practices-matrix"},{"id":"waifu-optimization-tips","level":0,"title":"Waifu Optimization Tips 💫","anchor":"#waifu-optimization-tips"},{"id":"quick-reference","level":0,"title":"Quick Reference 📚","anchor":"#quick-reference"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Docker Optimization Guide 🚀 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/docker-optimization.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Docker Optimization Guide 🚀 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/docker-optimization.html#webpage",
+    "url": "writerside-documentation/docker-optimization.html",
+    "name": "Docker Optimization Guide 🚀 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="docker-optimization" data-main-title="Docker Optimization Guide 🚀" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="ADVANCED: Production Ready///Performance"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="docker-optimization" id="docker-optimization.md">Docker Optimization Guide 🚀</h1><section class="chapter"><h2 id="image-optimization" data-toc="image-optimization">Image Optimization 📦</h2><section class="chapter"><h3 id="multi-stage-builds" data-toc="multi-stage-builds">Multi-stage Builds</h3><div class="code-block" data-lang="none">
+# Build stage
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Production stage
+FROM node:18-alpine
+COPY --from=builder /app/dist ./dist
+RUN npm ci --only=production
+CMD [&quot;node&quot;, &quot;dist/main.js&quot;]
+</div></section><section class="chapter"><h3 id="layer-optimization" data-toc="layer-optimization">Layer Optimization</h3><div class="code-block" data-lang="none">
+# ✅ Combine commands
+RUN apt-get update &amp;&amp; \
+    apt-get install -y \
+      curl \
+      nginx \
+      postgresql-client &amp;&amp; \
+    rm -rf /var/lib/apt/lists/*
+
+# ✅ Use .dockerignore
+node_modules
+npm-debug.log
+Dockerfile
+.git
+.env
+</div></section></section><section class="chapter"><h2 id="runtime-optimization" data-toc="runtime-optimization">Runtime Optimization ⚡</h2><section class="chapter"><h3 id="resource-limits" data-toc="resource-limits">Resource Limits</h3><div class="code-block" data-lang="yaml">
+version: '3.8'
+services:
+  app:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          memory: 256M
+</div></section><section class="chapter"><h3 id="container-settings" data-toc="container-settings">Container Settings</h3><div class="code-block" data-lang="bash">
+# Otimizar garbage collector
+docker run -e &quot;GOGC=100&quot; app
+
+# Tuning JVM
+docker run \
+  -e &quot;JAVA_OPTS=-XX:+UseG1GC -XX:MaxRAMPercentage=75&quot; \
+  java-app
+</div></section></section><section class="chapter"><h2 id="storage-optimization" data-toc="storage-optimization">Storage Optimization 💾</h2><section class="chapter"><h3 id="volume-performance" data-toc="volume-performance">Volume Performance</h3><div class="code-block" data-lang="bash">
+# tmpfs para dados temporários
+docker run \
+  --tmpfs /tmp:rw,noexec,nosuid,size=1g \
+  nginx
+
+# Volume otimizado
+docker volume create --driver local \
+  --opt type=ext4 \
+  --opt device=/dev/sda1 \
+  fast-storage
+</div></section><section class="chapter"><h3 id="i-o-tuning" data-toc="i-o-tuning">I/O Tuning</h3><div class="code-block" data-lang="yaml">
+services:
+  db:
+    volumes:
+      - data:/var/lib/postgresql/data
+    blkio_config:
+      weight: 1000
+      device_read_bps:
+        - path: /dev/sda
+          rate: '100mb'
+</div></section></section><section class="chapter"><h2 id="network-optimization" data-toc="network-optimization">Network Optimization 🌐</h2><section class="chapter"><h3 id="dns-settings" data-toc="dns-settings">DNS Settings</h3><div class="code-block" data-lang="bash">
+# DNS otimizado
+docker run \
+  --dns 8.8.8.8 \
+  --dns-search example.com \
+  nginx
+</div></section><section class="chapter"><h3 id="network-mode" data-toc="network-mode">Network Mode</h3><div class="code-block" data-lang="bash">
+# Host networking para performance
+docker run --network host nginx
+
+# Container networking otimizado
+docker run \
+  --network-alias=fastnet \
+  --dns=8.8.8.8 \
+  nginx
+</div></section></section><section class="chapter"><h2 id="build-optimization" data-toc="build-optimization">Build Optimization 🏗️</h2><section class="chapter"><h3 id="buildkit-features" data-toc="buildkit-features">BuildKit Features</h3><div class="code-block" data-lang="bash">
+# Habilitar BuildKit
+export DOCKER_BUILDKIT=1
+
+# Build paralelo
+docker buildx build \
+  --platform linux/amd64,linux/arm64 \
+  --push .
+</div></section><section class="chapter"><h3 id="cache-strategies" data-toc="cache-strategies">Cache Strategies</h3><div class="code-block" data-lang="none">
+# ✅ Otimizar cache
+COPY package*.json ./
+RUN npm ci
+COPY . .
+
+# Cache em registry
+docker buildx build \
+  --cache-from type=registry,ref=user/app:cache \
+  --cache-to type=registry,ref=user/app:cache \
+  .
+</div></section></section><section class="chapter"><h2 id="memory-optimization" data-toc="memory-optimization">Memory Optimization 🧠</h2><section class="chapter"><h3 id="memory-management" data-toc="memory-management">Memory Management</h3><div class="code-block" data-lang="bash">
+# Limites de memória
+docker run \
+  --memory=&quot;512m&quot; \
+  --memory-swap=&quot;1g&quot; \
+  --memory-reservation=&quot;256m&quot; \
+  nginx
+
+# OOM settings
+docker run \
+  --oom-kill-disable \
+  --memory=&quot;1g&quot; \
+  nginx
+</div></section></section><section class="chapter"><h2 id="cpu-optimization" data-toc="cpu-optimization">CPU Optimization 💻</h2><section class="chapter"><h3 id="cpu-allocation" data-toc="cpu-allocation">CPU Allocation</h3><div class="code-block" data-lang="bash">
+# CPU limits
+docker run \
+  --cpus=&quot;.5&quot; \
+  --cpu-shares=512 \
+  nginx
+
+# CPU pinning
+docker run \
+  --cpuset-cpus=&quot;0,1&quot; \
+  nginx
+</div></section></section><section class="chapter"><h2 id="optimization-checklist" data-toc="optimization-checklist">Optimization Checklist ✅</h2><section class="chapter"><h3 id="build-time" data-toc="build-time">Build Time</h3><ol class="list _decimal" id="tom8iz_41" type="1"><li class="list__item" id="tom8iz_42"><p id="tom8iz_47">[x] Multi-stage builds</p></li><li class="list__item" id="tom8iz_43"><p id="tom8iz_48">[x] Layer optimization</p></li><li class="list__item" id="tom8iz_44"><p id="tom8iz_49">[x] .dockerignore</p></li><li class="list__item" id="tom8iz_45"><p id="tom8iz_50">[x] BuildKit enabled</p></li><li class="list__item" id="tom8iz_46"><p id="tom8iz_51">[x] Cache strategies</p></li></ol></section><section class="chapter"><h3 id="runtime" data-toc="runtime">Runtime</h3><ol class="list _decimal" id="tom8iz_52" type="1"><li class="list__item" id="tom8iz_53"><p id="tom8iz_58">[x] Resource limits</p></li><li class="list__item" id="tom8iz_54"><p id="tom8iz_59">[x] Volume optimization</p></li><li class="list__item" id="tom8iz_55"><p id="tom8iz_60">[x] Network tuning</p></li><li class="list__item" id="tom8iz_56"><p id="tom8iz_61">[x] Memory management</p></li><li class="list__item" id="tom8iz_57"><p id="tom8iz_62">[x] CPU allocation</p></li></ol></section></section><section class="chapter"><h2 id="monitoring-metrics" data-toc="monitoring-metrics">Monitoring &amp; Metrics 📊</h2><section class="chapter"><h3 id="performance-metrics" data-toc="performance-metrics">Performance Metrics</h3><div class="code-block" data-lang="bash">
+# Container stats
+docker stats --no-stream --format \
+  &quot;table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}&quot;
+
+# I/O metrics
+docker stats --format \
+  &quot;table {{.Container}}\t{{.BlockIO}}\t{{.NetIO}}&quot;
+</div></section></section><section class="chapter"><h2 id="best-practices-matrix" data-toc="best-practices-matrix">Best Practices Matrix 📋</h2><div class="table-wrapper"><table class="wide" id="tom8iz_65"><thead><tr class="ijRowHead" id="tom8iz_66"><th id="tom8iz_71"><p>&Aacute;rea</p></th><th id="tom8iz_72"><p>Otimiza&ccedil;&atilde;o</p></th><th id="tom8iz_73"><p>Impacto</p></th></tr></thead><tbody><tr id="tom8iz_67"><td id="tom8iz_74"><p>Build</p></td><td id="tom8iz_75"><p>Multi-stage</p></td><td id="tom8iz_76"><p>Redu&ccedil;&atilde;o de tamanho</p></td></tr><tr id="tom8iz_68"><td id="tom8iz_77"><p>Runtime</p></td><td id="tom8iz_78"><p>Resource limits</p></td><td id="tom8iz_79"><p>Estabilidade</p></td></tr><tr id="tom8iz_69"><td id="tom8iz_80"><p>Storage</p></td><td id="tom8iz_81"><p>Volume drivers</p></td><td id="tom8iz_82"><p>I/O Performance</p></td></tr><tr id="tom8iz_70"><td id="tom8iz_83"><p>Network</p></td><td id="tom8iz_84"><p>Host networking</p></td><td id="tom8iz_85"><p>Lat&ecirc;ncia reduzida</p></td></tr></tbody></table></div></section><section class="chapter"><h2 id="waifu-optimization-tips" data-toc="waifu-optimization-tips">Waifu Optimization Tips 💫</h2><aside class="prompt" data-type="tip" data-title="" id="tom8iz_86"><p id="tom8iz_88"><span class="control" id="tom8iz_89">Build-chan diz:</span> &quot;Camadas s&atilde;o como um bolo - quanto menos, melhor!&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="tom8iz_87"><p id="tom8iz_90"><span class="control" id="tom8iz_91">Performance-sama alerta:</span> &quot;Recursos s&atilde;o preciosos como cristais m&aacute;gicos!&quot;</p></aside></section><section class="chapter"><h2 id="quick-reference" data-toc="quick-reference">Quick Reference 📚</h2><section class="chapter"><h3 id="common-optimizations" data-toc="common-optimizations">Common Optimizations</h3><div class="code-block" data-lang="bash">
+# Build otimizado
+DOCKER_BUILDKIT=1 docker build --no-cache .
+
+# Runtime otimizado
+docker run \
+  --cpus=2 \
+  --memory=2g \
+  --network host \
+  app
+
+# Storage otimizado
+docker volume create --driver local \
+  --opt type=tmpfs \
+  --opt device=tmpfs \
+  --opt o=size=1g \
+  fast-volume
+</div><aside class="prompt" data-type="note" data-title="" id="tom8iz_94"><p id="tom8iz_95"><span class="control" id="tom8iz_96">Optimization Master's Note:</span> &quot;A verdadeira otimiza&ccedil;&atilde;o &eacute; um equil&iacute;brio entre performance e recursos.&quot;</p></aside></section></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="docker-performance.html" class="navigation-links__prev">Docker Performance Optimization 🚀</a><a href="container-monitoring.html" class="navigation-links__next">Container Monitoring: Os Olhos do Sistema 👁️</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

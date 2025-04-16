@@ -1,0 +1,259 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T00:51:07.31315517"><title>Dockerfile Examples: Exemplos do Mundo Real 🌍 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"web-applications","level":0,"title":"Web Applications 🌐","anchor":"#web-applications"},{"id":"backend-services","level":0,"title":"Backend Services 🔧","anchor":"#backend-services"},{"id":"databases","level":0,"title":"Databases 💾","anchor":"#databases"},{"id":"cli-tools","level":0,"title":"CLI Tools 🛠️","anchor":"#cli-tools"},{"id":"microservices","level":0,"title":"Microservices 🚀","anchor":"#microservices"},{"id":"development-environments","level":0,"title":"Development Environments 🔧","anchor":"#development-environments"},{"id":"production-patterns","level":0,"title":"Production Patterns 🏭","anchor":"#production-patterns"},{"id":"waifu-example-tips","level":0,"title":"Waifu Example Tips 💡","anchor":"#waifu-example-tips"},{"id":"checkpoint","level":0,"title":"Checkpoint ✅","anchor":"#checkpoint"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"},{"id":"recursos-adicionais","level":0,"title":"Recursos Adicionais 📚","anchor":"#recursos-adicionais"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Dockerfile Examples: Exemplos do Mundo Real 🌍 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/dockerfile-examples.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Dockerfile Examples: Exemplos do Mundo Real 🌍 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/dockerfile-examples.html#webpage",
+    "url": "writerside-documentation/dockerfile-examples.html",
+    "name": "Dockerfile Examples: Exemplos do Mundo Real 🌍 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="dockerfile-examples" data-main-title="Dockerfile Examples: Exemplos do Mundo Real 🌍" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="DEVELOPMENT: Building Applications///Dockerfile"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="dockerfile-examples" id="dockerfile-examples.md">Dockerfile Examples: Exemplos do Mundo Real 🌍</h1><div class="code-block" data-lang="none">
+╔════════════════════════════════════════════════════════════╗
+║ DOCKERFILE EXAMPLES COLLECTION                             ║
+║                                                           ║
+║ Web Apps │ APIs │ Databases │ CLI Tools │ Microservices   ║
+║                                                           ║
+║ Development │ Production │ Multi-stage │ Optimized        ║
+╚════════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="web-applications" data-toc="web-applications">Web Applications 🌐</h2><section class="chapter"><h3 id="node-js-application" data-toc="node-js-application">Node.js Application</h3><div class="code-block" data-lang="none">
+# Development
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD [&quot;npm&quot;, &quot;run&quot;, &quot;dev&quot;]
+
+# Production
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package*.json ./
+RUN npm ci --only=production
+EXPOSE 3000
+CMD [&quot;npm&quot;, &quot;start&quot;]
+</div></section><section class="chapter"><h3 id="react-nginx" data-toc="react-nginx">React + Nginx</h3><div class="code-block" data-lang="none">
+# Build stage
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Production stage
+FROM nginx:alpine
+COPY --from=builder /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
+</div></section></section><section class="chapter"><h2 id="backend-services" data-toc="backend-services">Backend Services 🔧</h2><section class="chapter"><h3 id="go-api-server" data-toc="go-api-server">Go API Server</h3><div class="code-block" data-lang="none">
+# Build stage
+FROM golang:1.19-alpine AS builder
+WORKDIR /app
+COPY go.* ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -o api
+
+# Production stage
+FROM alpine:3.18
+RUN apk add --no-cache ca-certificates
+COPY --from=builder /app/api /usr/local/bin/
+COPY --from=builder /app/configs /configs
+EXPOSE 8080
+CMD [&quot;api&quot;, &quot;--config&quot;, &quot;/configs/prod.yaml&quot;]
+</div></section><section class="chapter"><h3 id="python-fastapi" data-toc="python-fastapi">Python FastAPI</h3><div class="code-block" data-lang="none">
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+ENV PORT=8000
+EXPOSE 8000
+
+CMD [&quot;uvicorn&quot;, &quot;main:app&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;, &quot;--port&quot;, &quot;8000&quot;]
+</div></section></section><section class="chapter"><h2 id="databases" data-toc="databases">Databases 💾</h2><section class="chapter"><h3 id="postgresql-custom" data-toc="postgresql-custom">PostgreSQL Custom</h3><div class="code-block" data-lang="none">
+FROM postgres:15-alpine
+
+# Configurações customizadas
+COPY postgresql.conf /etc/postgresql/postgresql.conf
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Timezone
+ENV TZ=UTC
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone
+
+# Volumes
+VOLUME [&quot;/var/lib/postgresql/data&quot;]
+
+EXPOSE 5432
+</div></section><section class="chapter"><h3 id="redis-with-custom-config" data-toc="redis-with-custom-config">Redis with Custom Config</h3><div class="code-block" data-lang="none">
+FROM redis:7-alpine
+
+# Copiar configuração customizada
+COPY redis.conf /usr/local/etc/redis/redis.conf
+
+# Persistência
+VOLUME [&quot;/data&quot;]
+
+EXPOSE 6379
+CMD [&quot;redis-server&quot;, &quot;/usr/local/etc/redis/redis.conf&quot;]
+</div></section></section><section class="chapter"><h2 id="cli-tools" data-toc="cli-tools">CLI Tools 🛠️</h2><section class="chapter"><h3 id="aws-cli-tool" data-toc="aws-cli-tool">AWS CLI Tool</h3><div class="code-block" data-lang="none">
+FROM alpine:3.18
+
+RUN apk add --no-cache \
+    python3 \
+    py3-pip \
+    groff \
+    less \
+    &amp;&amp; pip3 install --no-cache-dir awscli
+
+WORKDIR /aws
+
+ENTRYPOINT [&quot;aws&quot;]
+</div></section><section class="chapter"><h3 id="custom-devops-tool" data-toc="custom-devops-tool">Custom DevOps Tool</h3><div class="code-block" data-lang="none">
+FROM ubuntu:22.04
+
+# Ferramentas essenciais
+RUN apt-get update &amp;&amp; apt-get install -y \
+    curl \
+    wget \
+    git \
+    jq \
+    vim \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+# Scripts customizados
+COPY scripts/ /usr/local/bin/
+RUN chmod +x /usr/local/bin/*
+
+WORKDIR /workspace
+ENTRYPOINT [&quot;/bin/bash&quot;]
+</div></section></section><section class="chapter"><h2 id="microservices" data-toc="microservices">Microservices 🚀</h2><section class="chapter"><h3 id="java-spring-boot" data-toc="java-spring-boot">Java Spring Boot</h3><div class="code-block" data-lang="none">
+# Build stage
+FROM eclipse-temurin:17-jdk-alpine AS builder
+WORKDIR /app
+COPY . .
+RUN ./gradlew bootJar
+
+# Production stage
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+COPY --from=builder /app/build/libs/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT [&quot;java&quot;, &quot;-jar&quot;, &quot;app.jar&quot;]
+</div></section><section class="chapter"><h3 id="rust-microservice" data-toc="rust-microservice">Rust Microservice</h3><div class="code-block" data-lang="none">
+# Build stage
+FROM rust:1.70 AS builder
+WORKDIR /usr/src/app
+COPY . .
+RUN cargo build --release
+
+# Production stage
+FROM debian:bullseye-slim
+RUN apt-get update &amp;&amp; apt-get install -y \
+    ca-certificates \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+COPY --from=builder /usr/src/app/target/release/myapp /usr/local/bin/
+CMD [&quot;myapp&quot;]
+</div></section></section><section class="chapter"><h2 id="development-environments" data-toc="development-environments">Development Environments 🔧</h2><section class="chapter"><h3 id="php-development" data-toc="php-development">PHP Development</h3><div class="code-block" data-lang="none">
+FROM php:8.2-apache
+
+# Extensões PHP
+RUN docker-php-ext-install \
+    pdo_mysql \
+    mysqli
+
+# Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Apache config
+COPY apache.conf /etc/apache2/sites-available/000-default.conf
+RUN a2enmod rewrite
+
+# App
+WORKDIR /var/www/html
+COPY . .
+RUN composer install
+
+EXPOSE 80
+</div></section><section class="chapter"><h3 id="vue-js-development" data-toc="vue-js-development">Vue.js Development</h3><div class="code-block" data-lang="none">
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Dependencies
+COPY package*.json ./
+RUN npm install
+
+# Hot reload config
+COPY . .
+ENV HOST=0.0.0.0
+EXPOSE 5173
+
+CMD [&quot;npm&quot;, &quot;run&quot;, &quot;dev&quot;]
+</div></section></section><section class="chapter"><h2 id="production-patterns" data-toc="production-patterns">Production Patterns 🏭</h2><section class="chapter"><h3 id="secure-python-app" data-toc="secure-python-app">Secure Python App</h3><div class="code-block" data-lang="none">
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+RUN python -m compileall -b .
+
+FROM python:3.11-slim
+WORKDIR /app
+
+# Usuário não-root
+RUN useradd -m -r appuser &amp;&amp; \
+    chown appuser:appuser /app
+
+# Apenas arquivos compilados
+COPY --from=builder /app/*.pyc .
+COPY --from=builder /app/configs ./configs
+
+USER appuser
+CMD [&quot;python&quot;, &quot;main.pyc&quot;]
+</div></section><section class="chapter"><h3 id="optimized-node-js" data-toc="optimized-node-js">Optimized Node.js</h3><div class="code-block" data-lang="none">
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM node:18-alpine
+WORKDIR /app
+
+# Apenas dependências de produção
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package*.json ./
+RUN npm ci --only=production
+
+# Configurações de segurança
+ENV NODE_ENV=production
+USER node
+EXPOSE 3000
+CMD [&quot;node&quot;, &quot;dist/main.js&quot;]
+</div></section></section><section class="chapter"><h2 id="waifu-example-tips" data-toc="waifu-example-tips">Waifu Example Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="xg4hfv_43"><p id="xg4hfv_46"><span class="control" id="xg4hfv_47">Build-chan diz:</span> &quot;Multi-stage builds s&atilde;o como magia - reduzem o tamanho final e aumentam a seguran&ccedil;a! ✨&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="xg4hfv_44"><p id="xg4hfv_48"><span class="control" id="xg4hfv_49">Security-chan alerta:</span> &quot;Sempre use vers&otilde;es espec&iacute;ficas das imagens base! <code class="code" id="xg4hfv_50">latest</code> &eacute; perigoso! 🛡️&quot;</p></aside><aside class="prompt" data-type="note" data-title="" id="xg4hfv_45"><p id="xg4hfv_51"><span class="control" id="xg4hfv_52">Performance-chan sugere:</span> &quot;Organize as camadas do menos mut&aacute;vel para o mais mut&aacute;vel! 🚀&quot;</p></aside></section><section class="chapter"><h2 id="checkpoint" data-toc="checkpoint">Checkpoint ✅</h2><p id="xg4hfv_53">Voc&ecirc; agora tem exemplos de:</p><ul class="list _bullet" id="xg4hfv_54"><li class="list__item" id="xg4hfv_55"><p id="xg4hfv_62">[x] Aplica&ccedil;&otilde;es Web modernas</p></li><li class="list__item" id="xg4hfv_56"><p id="xg4hfv_63">[x] Backends e APIs</p></li><li class="list__item" id="xg4hfv_57"><p id="xg4hfv_64">[x] Bancos de dados customizados</p></li><li class="list__item" id="xg4hfv_58"><p id="xg4hfv_65">[x] Ferramentas CLI</p></li><li class="list__item" id="xg4hfv_59"><p id="xg4hfv_66">[x] Microservi&ccedil;os</p></li><li class="list__item" id="xg4hfv_60"><p id="xg4hfv_67">[x] Ambientes de desenvolvimento</p></li><li class="list__item" id="xg4hfv_61"><p id="xg4hfv_68">[x] Configura&ccedil;&otilde;es de produ&ccedil;&atilde;o</p></li></ul></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="xg4hfv_69" type="1"><li class="list__item" id="xg4hfv_70"><p id="xg4hfv_73"><a href="best-practices.html" id="xg4hfv_74" data-tooltip="Security-chan diz: &quot;Nunca confie em imagens não verificadas! 🔍&quot;">Best Practices</a></p></li><li class="list__item" id="xg4hfv_71"><p id="xg4hfv_75"><span id="xg4hfv_76">Advanced Patterns</span></p></li><li class="list__item" id="xg4hfv_72"><p id="xg4hfv_77"><span id="xg4hfv_78">Production Deployment</span></p></li></ol></section><section class="chapter"><h2 id="recursos-adicionais" data-toc="recursos-adicionais">Recursos Adicionais 📚</h2><ul class="list _bullet" id="xg4hfv_79"><li class="list__item" id="xg4hfv_81"><p id="xg4hfv_84"><a href="https://hub.docker.com/search?q=&amp;type=image&amp;image_filter=official" id="xg4hfv_85" data-external="true" rel="noopener noreferrer" target="_blank">Docker Official Images</a></p></li><li class="list__item" id="xg4hfv_82"><p id="xg4hfv_86"><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/" id="xg4hfv_87" data-external="true" rel="noopener noreferrer" target="_blank">Dockerfile Best Practices</a></p></li><li class="list__item" id="xg4hfv_83"><p id="xg4hfv_88"><a href="https://github.com/docker/awesome-compose" id="xg4hfv_89" data-external="true" rel="noopener noreferrer" target="_blank">Docker Compose Examples</a></p></li></ul><aside class="prompt" data-type="note" data-title="" id="xg4hfv_80"><p id="xg4hfv_90"><span class="control" id="xg4hfv_91">Sensei's Note:</span> &quot;Um bom exemplo vale mais que mil explica&ccedil;&otilde;es. Estude, adapte e crie seus pr&oacute;prios padr&otilde;es! 🎯&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="dockerfile-commands.html" class="navigation-links__prev">Dockerfile Commands: Guia Definitivo 🛠️</a><a href="best-practices.html" class="navigation-links__next">Melhores Pr&aacute;ticas Docker: O Caminho do Mestre 🎯</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

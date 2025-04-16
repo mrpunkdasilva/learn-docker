@@ -1,0 +1,153 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T00:51:07.608523532"><title>Docker Compose: Orquestrando Containers 🎼 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"o-que-docker-compose","level":0,"title":"O que é Docker Compose? 🤔","anchor":"#o-que-docker-compose"},{"id":"conceitos-fundamentais","level":0,"title":"Conceitos Fundamentais 📚","anchor":"#conceitos-fundamentais"},{"id":"exemplo-completo-stack-web","level":0,"title":"Exemplo Completo: Stack Web 🌐","anchor":"#exemplo-completo-stack-web"},{"id":"comandos-essenciais","level":0,"title":"Comandos Essenciais 🛠️","anchor":"#comandos-essenciais"},{"id":"waifu-docker-compose-tips","level":0,"title":"Waifu Docker Compose Tips 💡","anchor":"#waifu-docker-compose-tips"},{"id":"padr-es-comuns","level":0,"title":"Padrões Comuns 🎯","anchor":"#padr-es-comuns"},{"id":"boas-pr-ticas","level":0,"title":"Boas Práticas ✨","anchor":"#boas-pr-ticas"},{"id":"checkpoint","level":0,"title":"Checkpoint ✅","anchor":"#checkpoint"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"},{"id":"recursos-adicionais","level":0,"title":"Recursos Adicionais 📚","anchor":"#recursos-adicionais"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Docker Compose: Orquestrando Containers 🎼 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/docker-compose-intro.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Docker Compose: Orquestrando Containers 🎼 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/docker-compose-intro.html#webpage",
+    "url": "writerside-documentation/docker-compose-intro.html",
+    "name": "Docker Compose: Orquestrando Containers 🎼 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="docker-compose-intro" data-main-title="Docker Compose: Orquestrando Containers 🎼" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="DEVELOPMENT: Building Applications///Docker Compose"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="docker-compose-intro" id="docker-compose-intro.md">Docker Compose: Orquestrando Containers 🎼</h1><div class="code-block" data-lang="none">
+╔════════════════════════════════════════════════════════════╗
+║ DOCKER COMPOSE OVERVIEW                                    ║
+║                                                           ║
+║ Services │ Networks │ Volumes │ Environment │ Dependencies ║
+║                                                           ║
+║ Development │ Testing │ Production │ CI/CD                ║
+╚════════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="o-que-docker-compose" data-toc="o-que-docker-compose">O que &eacute; Docker Compose? 🤔</h2><p id="-l9j1b3_14">Docker Compose &eacute; uma ferramenta para definir e executar aplica&ccedil;&otilde;es Docker multi-container. Com um &uacute;nico arquivo YAML, voc&ecirc; configura todos os servi&ccedil;os da sua aplica&ccedil;&atilde;o e, com um &uacute;nico comando, cria e inicia todos os servi&ccedil;os.</p><section class="chapter"><h3 id="anatomia-do-docker-compose-yml" data-toc="anatomia-do-docker-compose-yml">Anatomia do docker-compose.yml</h3><div class="code-block" data-lang="yaml">
+version: &quot;3.8&quot;
+services:
+  web:
+    build: ./web
+    ports:
+      - &quot;8000:8000&quot;
+    depends_on:
+      - db
+  db:
+    image: postgres:15
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:
+</div></section></section><section class="chapter"><h2 id="conceitos-fundamentais" data-toc="conceitos-fundamentais">Conceitos Fundamentais 📚</h2><section class="chapter"><h3 id="1-services" data-toc="1-services">1. Services</h3><p id="-l9j1b3_20">Cada container que comp&otilde;e sua aplica&ccedil;&atilde;o.</p><div class="code-block" data-lang="yaml">
+services:
+  frontend:
+    image: nginx:alpine
+    ports:
+      - &quot;80:80&quot;
+  
+  backend:
+    build: ./backend
+    environment:
+      - NODE_ENV=development
+</div></section><section class="chapter"><h3 id="2-networks" data-toc="2-networks">2. Networks</h3><p id="-l9j1b3_22">Redes que conectam seus containers.</p><div class="code-block" data-lang="yaml">
+services:
+  api:
+    networks:
+      - backend-network
+  
+networks:
+  backend-network:
+    driver: bridge
+</div></section><section class="chapter"><h3 id="3-volumes" data-toc="3-volumes">3. Volumes</h3><p id="-l9j1b3_24">Armazenamento persistente para seus dados.</p><div class="code-block" data-lang="yaml">
+services:
+  db:
+    volumes:
+      - db_data:/var/lib/mysql
+      
+volumes:
+  db_data:
+</div></section></section><section class="chapter"><h2 id="exemplo-completo-stack-web" data-toc="exemplo-completo-stack-web">Exemplo Completo: Stack Web 🌐</h2><div class="code-block" data-lang="yaml">
+version: &quot;3.8&quot;
+
+services:
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - &quot;3000:3000&quot;
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - REACT_APP_API_URL=http://api:5000
+    depends_on:
+      - api
+
+  api:
+    build: ./backend
+    ports:
+      - &quot;5000:5000&quot;
+    environment:
+      - DATABASE_URL=postgres://user:pass@db:5432/dbname
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=dbname
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - &quot;6379:6379&quot;
+
+volumes:
+  pgdata:
+
+networks:
+  default:
+    driver: bridge
+</div></section><section class="chapter"><h2 id="comandos-essenciais" data-toc="comandos-essenciais">Comandos Essenciais 🛠️</h2><div class="code-block" data-lang="bash">
+# Iniciar todos os serviços
+docker-compose up
+
+# Modo detached (background)
+docker-compose up -d
+
+# Parar todos os serviços
+docker-compose down
+
+# Reconstruir imagens
+docker-compose build
+
+# Logs
+docker-compose logs -f
+
+# Status dos serviços
+docker-compose ps
+</div></section><section class="chapter"><h2 id="waifu-docker-compose-tips" data-toc="waifu-docker-compose-tips">Waifu Docker Compose Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="-l9j1b3_28"><p id="-l9j1b3_31"><span class="control" id="-l9j1b3_32">Compose-chan diz:</span> &quot;Mantenha seus servi&ccedil;os organizados e bem documentados! 📝&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-l9j1b3_29"><p id="-l9j1b3_33"><span class="control" id="-l9j1b3_34">Network-chan alerta:</span> &quot;N&atilde;o esque&ccedil;a de configurar suas redes corretamente! 🌐&quot;</p></aside><aside class="prompt" data-type="note" data-title="" id="-l9j1b3_30"><p id="-l9j1b3_35"><span class="control" id="-l9j1b3_36">Volume-chan lembra:</span> &quot;Dados importantes precisam de volumes persistentes! 💾&quot;</p></aside></section><section class="chapter"><h2 id="padr-es-comuns" data-toc="padr-es-comuns">Padr&otilde;es Comuns 🎯</h2><section class="chapter"><h3 id="1-development-environment" data-toc="1-development-environment">1. Development Environment</h3><div class="code-block" data-lang="yaml">
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    command: npm run dev
+</div></section><section class="chapter"><h3 id="2-testing-setup" data-toc="2-testing-setup">2. Testing Setup</h3><div class="code-block" data-lang="yaml">
+services:
+  test:
+    build:
+      context: .
+      target: test
+    command: npm test
+</div></section><section class="chapter"><h3 id="3-production-configuration" data-toc="3-production-configuration">3. Production Configuration</h3><div class="code-block" data-lang="yaml">
+services:
+  app:
+    image: myapp:latest
+    restart: always
+    environment:
+      - NODE_ENV=production
+</div></section></section><section class="chapter"><h2 id="boas-pr-ticas" data-toc="boas-pr-ticas">Boas Pr&aacute;ticas ✨</h2><ol class="list _decimal" id="-l9j1b3_43" type="1"><li class="list__item" id="-l9j1b3_44"><p id="-l9j1b3_48"><span class="control" id="-l9j1b3_50">Versionamento</span></p><ul class="list _bullet" id="-l9j1b3_49"><li class="list__item" id="-l9j1b3_51"><p id="-l9j1b3_53">Sempre especifique a vers&atilde;o do Compose</p></li><li class="list__item" id="-l9j1b3_52"><p id="-l9j1b3_54">Use tags espec&iacute;ficas para imagens</p></li></ul></li><li class="list__item" id="-l9j1b3_45"><p id="-l9j1b3_55"><span class="control" id="-l9j1b3_57">Organiza&ccedil;&atilde;o</span></p><ul class="list _bullet" id="-l9j1b3_56"><li class="list__item" id="-l9j1b3_58"><p id="-l9j1b3_61">Agrupe servi&ccedil;os relacionados</p></li><li class="list__item" id="-l9j1b3_59"><p id="-l9j1b3_62">Use nomes descritivos</p></li><li class="list__item" id="-l9j1b3_60"><p id="-l9j1b3_63">Documente vari&aacute;veis de ambiente</p></li></ul></li><li class="list__item" id="-l9j1b3_46"><p id="-l9j1b3_64"><span class="control" id="-l9j1b3_66">Seguran&ccedil;a</span></p><ul class="list _bullet" id="-l9j1b3_65"><li class="list__item" id="-l9j1b3_67"><p id="-l9j1b3_70">N&atilde;o comite secrets</p></li><li class="list__item" id="-l9j1b3_68"><p id="-l9j1b3_71">Use <code class="code" id="-l9j1b3_72">.env</code> files</p></li><li class="list__item" id="-l9j1b3_69"><p id="-l9j1b3_73">Limite exposi&ccedil;&atilde;o de portas</p></li></ul></li><li class="list__item" id="-l9j1b3_47"><p id="-l9j1b3_74"><span class="control" id="-l9j1b3_76">Performance</span></p><ul class="list _bullet" id="-l9j1b3_75"><li class="list__item" id="-l9j1b3_77"><p id="-l9j1b3_80">Use build cache</p></li><li class="list__item" id="-l9j1b3_78"><p id="-l9j1b3_81">Otimize depend&ecirc;ncias</p></li><li class="list__item" id="-l9j1b3_79"><p id="-l9j1b3_82">Configure healthchecks</p></li></ul></li></ol></section><section class="chapter"><h2 id="checkpoint" data-toc="checkpoint">Checkpoint ✅</h2><p id="-l9j1b3_83">Voc&ecirc; agora domina:</p><ul class="list _bullet" id="-l9j1b3_84"><li class="list__item" id="-l9j1b3_85"><p id="-l9j1b3_92">[x] Estrutura b&aacute;sica do docker-compose.yml</p></li><li class="list__item" id="-l9j1b3_86"><p id="-l9j1b3_93">[x] Configura&ccedil;&atilde;o de servi&ccedil;os</p></li><li class="list__item" id="-l9j1b3_87"><p id="-l9j1b3_94">[x] Redes e volumes</p></li><li class="list__item" id="-l9j1b3_88"><p id="-l9j1b3_95">[x] Vari&aacute;veis de ambiente</p></li><li class="list__item" id="-l9j1b3_89"><p id="-l9j1b3_96">[x] Comandos essenciais</p></li><li class="list__item" id="-l9j1b3_90"><p id="-l9j1b3_97">[x] Padr&otilde;es comuns</p></li><li class="list__item" id="-l9j1b3_91"><p id="-l9j1b3_98">[x] Boas pr&aacute;ticas</p></li></ul></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="-l9j1b3_99" type="1"><li class="list__item" id="-l9j1b3_100"><p id="-l9j1b3_103"><a href="docker-compose-file.html" id="-l9j1b3_104" data-tooltip="Config-chan diz: &quot;Mantenha suas configurações organizadas e versionadas! 📝&quot;">Docker Compose File</a> - Refer&ecirc;ncia completa</p></li><li class="list__item" id="-l9j1b3_101"><p id="-l9j1b3_105"><a href="docker-compose-commands.html" id="-l9j1b3_106" data-tooltip="Compose-chan diz: &quot;Use docker compose config para validar seu arquivo antes de executar! 📝&quot;">Docker Compose Commands</a> - Comandos avan&ccedil;ados</p></li><li class="list__item" id="-l9j1b3_102"><p id="-l9j1b3_107"><a href="container-operations.html" id="-l9j1b3_108" data-tooltip="Container-chan diz: &quot;Mantenha seus containers leves e eficientes! 🎈&quot;">Container Operations</a> - Opera&ccedil;&otilde;es pr&aacute;ticas</p></li></ol></section><section class="chapter"><h2 id="recursos-adicionais" data-toc="recursos-adicionais">Recursos Adicionais 📚</h2><ul class="list _bullet" id="-l9j1b3_109"><li class="list__item" id="-l9j1b3_111"><p id="-l9j1b3_114"><a href="https://docs.docker.com/compose/" id="-l9j1b3_115" data-external="true" rel="noopener noreferrer" target="_blank">Docker Compose Documentation</a></p></li><li class="list__item" id="-l9j1b3_112"><p id="-l9j1b3_116"><a href="https://docs.docker.com/compose/compose-file/" id="-l9j1b3_117" data-external="true" rel="noopener noreferrer" target="_blank">Compose File Reference</a></p></li><li class="list__item" id="-l9j1b3_113"><p id="-l9j1b3_118"><a href="https://github.com/docker/awesome-compose" id="-l9j1b3_119" data-external="true" rel="noopener noreferrer" target="_blank">Awesome Compose Examples</a></p></li></ul><aside class="prompt" data-type="note" data-title="" id="-l9j1b3_110"><p id="-l9j1b3_120"><span class="control" id="-l9j1b3_121">Sensei's Note:</span> &quot;Docker Compose &eacute; como um maestro - coordena todos os instrumentos (containers) para criar uma sinfonia perfeita! 🎵&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="best-practices.html" class="navigation-links__prev">Melhores Pr&aacute;ticas Docker: O Caminho do Mestre 🎯</a><a href="docker-compose-file.html" class="navigation-links__next">Docker Compose File: Anatomia Completa 📑</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

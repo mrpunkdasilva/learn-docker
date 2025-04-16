@@ -1,0 +1,178 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T00:51:07.670356789"><title>Docker Volumes: Persist&ecirc;ncia e Performance 💾 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"volume-types","level":0,"title":"Volume Types 📦","anchor":"#volume-types"},{"id":"volume-management","level":0,"title":"Volume Management 🛠️","anchor":"#volume-management"},{"id":"performance-optimization","level":0,"title":"Performance Optimization 🚀","anchor":"#performance-optimization"},{"id":"docker-compose-integration","level":0,"title":"Docker Compose Integration 📋","anchor":"#docker-compose-integration"},{"id":"volume-security","level":0,"title":"Volume Security 🔒","anchor":"#volume-security"},{"id":"troubleshooting","level":0,"title":"Troubleshooting 🔍","anchor":"#troubleshooting"},{"id":"best-practices","level":0,"title":"Best Practices 💡","anchor":"#best-practices"},{"id":"waifu-volume-tips","level":0,"title":"Waifu Volume Tips 🎀","anchor":"#waifu-volume-tips"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"},{"id":"refer-ncias","level":0,"title":"Referências 📚","anchor":"#refer-ncias"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Docker Volumes: Persist&ecirc;ncia e Performance 💾 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/docker-volumes.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Docker Volumes: Persist&ecirc;ncia e Performance 💾 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/docker-volumes.html#webpage",
+    "url": "writerside-documentation/docker-volumes.html",
+    "name": "Docker Volumes: Persist&ecirc;ncia e Performance 💾 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="docker-volumes" data-main-title="Docker Volumes: Persistência e Performance 💾" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="INFRASTRUCTURE: System Design///Storage"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="docker-volumes" id="docker-volumes.md">Docker Volumes: Persistência e Performance 💾</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════╗
+║           VOLUME ANATOMY              ║
+║                                       ║
+║    [Container] ←→ [Volume] ←→ [Host]  ║
+║         ↑          ↑         ↑        ║
+║    [Bind Mount] [tmpfs] [Block Device]║
+║                                       ║
+╚═══════════════════════════════════════╝
+</div><section class="chapter"><h2 id="volume-types" data-toc="volume-types">Volume Types 📦</h2><section class="chapter"><h3 id="named-volumes" data-toc="named-volumes">Named Volumes</h3><div class="code-block" data-lang="bash">
+# Criar volume nomeado
+docker volume create data-volume
+
+# Usar volume
+docker run -v data-volume:/app/data nginx
+
+# Inspecionar volume
+docker volume inspect data-volume
+</div></section><section class="chapter"><h3 id="bind-mounts" data-toc="bind-mounts">Bind Mounts</h3><div class="code-block" data-lang="bash">
+# Montar diretório do host
+docker run -v /host/path:/container/path nginx
+
+# Modo somente leitura
+docker run -v /host/config:/app/config:ro nginx
+</div></section><section class="chapter"><h3 id="tmpfs-mounts" data-toc="tmpfs-mounts">tmpfs Mounts</h3><div class="code-block" data-lang="bash">
+# Montar volume em memória
+docker run --tmpfs /app/cache nginx
+
+# Configurar tamanho
+docker run --tmpfs /app/cache:size=100M nginx
+</div></section></section><section class="chapter"><h2 id="volume-management" data-toc="volume-management">Volume Management 🛠️</h2><section class="chapter"><h3 id="basic-operations" data-toc="basic-operations">Basic Operations</h3><div class="code-block" data-lang="bash">
+# Listar volumes
+docker volume ls
+
+# Remover volume
+docker volume rm volume_name
+
+# Remover volumes não utilizados
+docker volume prune
+
+# Backup de volume
+docker run --rm \
+  -v volume_name:/source \
+  -v $(pwd):/backup \
+  alpine tar -czf /backup/volume.tar.gz -C /source .
+</div></section><section class="chapter"><h3 id="volume-drivers" data-toc="volume-drivers">Volume Drivers</h3><div class="code-block" data-lang="bash">
+# Criar volume com driver específico
+docker volume create \
+  --driver local \
+  --opt type=btrfs \
+  --opt device=/dev/sda1 \
+  btrfs-volume
+
+# Volume NFS
+docker volume create \
+  --driver local \
+  --opt type=nfs \
+  --opt o=addr=192.168.1.1,rw \
+  --opt device=:/path/to/dir \
+  nfs-volume
+</div></section></section><section class="chapter"><h2 id="performance-optimization" data-toc="performance-optimization">Performance Optimization 🚀</h2><section class="chapter"><h3 id="cache-configuration" data-toc="cache-configuration">Cache Configuration</h3><div class="code-block" data-lang="bash">
+# Volume para cache
+docker volume create \
+  --driver local \
+  --opt type=tmpfs \
+  --opt device=tmpfs \
+  --opt o=size=1g \
+  cache-volume
+
+# Usar cache
+docker run \
+  -v cache-volume:/app/cache \
+  --memory-swappiness=0 \
+  app
+</div></section><section class="chapter"><h3 id="i-o-tuning" data-toc="i-o-tuning">I/O Tuning</h3><div class="code-block" data-lang="yaml">
+version: '3.8'
+services:
+  db:
+    volumes:
+      - data:/var/lib/mysql
+    deploy:
+      resources:
+        limits:
+          blkio-weight: 1000
+
+volumes:
+  data:
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/mnt/high-perf-disk'
+</div></section></section><section class="chapter"><h2 id="docker-compose-integration" data-toc="docker-compose-integration">Docker Compose Integration 📋</h2><section class="chapter"><h3 id="volume-configuration" data-toc="volume-configuration">Volume Configuration</h3><div class="code-block" data-lang="yaml">
+version: '3.8'
+services:
+  web:
+    volumes:
+      - web-data:/var/www/html
+      - ./config:/etc/nginx:ro
+      - type: tmpfs
+        target: /tmp
+        tmpfs:
+          size: 100M
+
+volumes:
+  web-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/data/web'
+</div></section><section class="chapter"><h3 id="backup-strategy" data-toc="backup-strategy">Backup Strategy</h3><div class="code-block" data-lang="yaml">
+services:
+  backup:
+    image: alpine
+    volumes:
+      - data-volume:/source:ro
+      - ./backups:/backup
+    command: tar -czf /backup/backup.tar.gz -C /source .
+    deploy:
+      restart_policy:
+        condition: none
+</div></section></section><section class="chapter"><h2 id="volume-security" data-toc="volume-security">Volume Security 🔒</h2><section class="chapter"><h3 id="permission-management" data-toc="permission-management">Permission Management</h3><div class="code-block" data-lang="bash">
+# Definir permissões
+docker run \
+  -v data:/app/data \
+  --user 1000:1000 \
+  app
+
+# SELinux context
+docker run \
+  -v data:/app/data:z \
+  app
+</div></section><section class="chapter"><h3 id="access-control" data-toc="access-control">Access Control</h3><div class="code-block" data-lang="yaml">
+services:
+  app:
+    volumes:
+      - type: volume
+        source: sensitive-data
+        target: /app/data
+        read_only: true
+        volume:
+          nocopy: true
+</div></section></section><section class="chapter"><h2 id="troubleshooting" data-toc="troubleshooting">Troubleshooting 🔍</h2><section class="chapter"><h3 id="common-issues" data-toc="common-issues">Common Issues</h3><div class="code-block" data-lang="bash">
+# Verificar montagens
+docker inspect -f '{{ .Mounts }}' container_id
+
+# Checar permissões
+docker run --rm -v problem-volume:/vol alpine ls -la /vol
+
+# Verificar espaço
+docker system df -v
+</div></section><section class="chapter"><h3 id="debug-tools" data-toc="debug-tools">Debug Tools</h3><div class="code-block" data-lang="bash">
+# Inspecionar volume
+docker volume inspect volume_name
+
+# Testar acesso
+docker run --rm \
+  -v volume_name:/test \
+  busybox touch /test/testfile
+
+# Verificar logs
+docker logs container_id 2&gt;&amp;1 | grep volume
+</div></section></section><section class="chapter"><h2 id="best-practices" data-toc="best-practices">Best Practices 💡</h2><section class="chapter"><h3 id="volume-design" data-toc="volume-design">Volume Design</h3><ol class="list _decimal" id="butq9l_42" type="1"><li class="list__item" id="butq9l_43"><p id="butq9l_48">Use named volumes para dados persistentes</p></li><li class="list__item" id="butq9l_44"><p id="butq9l_49">Bind mounts para desenvolvimento</p></li><li class="list__item" id="butq9l_45"><p id="butq9l_50">tmpfs para dados sens&iacute;veis tempor&aacute;rios</p></li><li class="list__item" id="butq9l_46"><p id="butq9l_51">Planeje backup e restore</p></li><li class="list__item" id="butq9l_47"><p id="butq9l_52">Monitore uso de espa&ccedil;o</p></li></ol></section><section class="chapter"><h3 id="performance-tips" data-toc="performance-tips">Performance Tips</h3><ol class="list _decimal" id="butq9l_53" type="1"><li class="list__item" id="butq9l_54"><p id="butq9l_59">Use volumes locais para I/O intensivo</p></li><li class="list__item" id="butq9l_55"><p id="butq9l_60">Configure cache apropriadamente</p></li><li class="list__item" id="butq9l_56"><p id="butq9l_61">Evite bind mounts em produ&ccedil;&atilde;o</p></li><li class="list__item" id="butq9l_57"><p id="butq9l_62">Monitore performance de I/O</p></li><li class="list__item" id="butq9l_58"><p id="butq9l_63">Use volumes dedicados para dados cr&iacute;ticos</p></li></ol></section></section><section class="chapter"><h2 id="waifu-volume-tips" data-toc="waifu-volume-tips">Waifu Volume Tips 🎀</h2><aside class="prompt" data-type="tip" data-title="" id="butq9l_64"><p id="butq9l_67"><span class="control" id="butq9l_68">Volume-chan diz:</span> &quot;Sempre fa&ccedil;a backup dos seus dados importantes! 💾&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="butq9l_65"><p id="butq9l_69"><span class="control" id="butq9l_70">Mount-sama alerta:</span> &quot;Cuidado com permiss&otilde;es em bind mounts! ⚠️&quot;</p></aside><aside class="prompt" data-type="note" data-title="" id="butq9l_66"><p id="butq9l_71"><span class="control" id="butq9l_72">Cache-chan sugere:</span> &quot;Use tmpfs para dados tempor&aacute;rios sens&iacute;veis! 🔒&quot;</p></aside></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="butq9l_73" type="1"><li class="list__item" id="butq9l_74"><p id="butq9l_77"><a href="container-storage.html" id="butq9l_78" data-tooltip="&quot;Em um mundo onde dados são mais valiosos que créditos digitais, a arte do armazenamento em containers é como dança macabra entre persistência e efemeridade.&quot; - Memórias de um DBA Cybernético">Container Storage</a></p></li><li class="list__item" id="butq9l_75"><p id="butq9l_79"><span id="butq9l_80">Performance Tuning</span></p></li><li class="list__item" id="butq9l_76"><p id="butq9l_81"><span id="butq9l_82">Backup Strategies</span></p></li></ol></section><section class="chapter"><h2 id="refer-ncias" data-toc="refer-ncias">Refer&ecirc;ncias 📚</h2><ul class="list _bullet" id="butq9l_83"><li class="list__item" id="butq9l_85"><p id="butq9l_89"><a href="https://docs.docker.com/storage/volumes/" id="butq9l_90" data-external="true" rel="noopener noreferrer" target="_blank">Docker Volumes Overview</a></p></li><li class="list__item" id="butq9l_86"><p id="butq9l_91"><a href="https://docs.docker.com/engine/extend/plugins_volume/" id="butq9l_92" data-external="true" rel="noopener noreferrer" target="_blank">Volume Plugins</a></p></li><li class="list__item" id="butq9l_87"><p id="butq9l_93"><a href="https://docs.docker.com/storage/best-practices/" id="butq9l_94" data-external="true" rel="noopener noreferrer" target="_blank">Storage Best Practices</a></p></li><li class="list__item" id="butq9l_88"><p id="butq9l_95"><a href="https://docs.docker.com/storage/security/" id="butq9l_96" data-external="true" rel="noopener noreferrer" target="_blank">Volume Security Guide</a></p></li></ul><aside class="prompt" data-type="note" data-title="" id="butq9l_84"><p id="butq9l_97"><span class="control" id="butq9l_98">Volume Master's Note:</span> &quot;Volumes s&atilde;o a mem&oacute;ria persistente dos seus containers - trate-os com carinho! 🚀&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="container-storage.html" class="navigation-links__prev">Container Storage: Cr&ocirc;nicas dos Dados Perdidos 💾</a><a href="docker-bind-mounts.html" class="navigation-links__next">Docker Bind Mounts: Host Integration 🔗</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>
