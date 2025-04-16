@@ -1,0 +1,58 @@
+[YouTube - Video Principal (10-15min)]
+Título: "Docker em 2024: O Guia Definitivo Cyberpunk 🐳"
+Thumbnail: Montagem cyberpunk com containers neon e Exercise-chan
+
+Intro (30s):
+• Efeito glitch com logo Docker
+• Música synthwave de fundo
+• "Bem-vindos ao futuro da containerização"
+
+Estrutura:
+1. Hook (30s)
+"E se você pudesse deployar aplicações como um hacker do futuro?"
+
+2. Conteúdo Principal (8-10min)
+• Demo live de multi-stage build
+• Casos reais de empresas
+• Demonstração de performance
+• Tips & Tricks avançados
+
+3. Call-to-Action (1min)
+• Link para documentação completa
+• Comunidade Discord
+• Próximos passos
+
+[TikTok/Reels - Série de 60s]
+Vídeo 1: "Docker Basics em 60s"
+• Transições rápidas
+• Efeitos neon
+• Código em tela dividida
+• Música cyberpunk de fundo
+
+Vídeo 2: "3 Docker Hacks Secretos"
+• Formato problem-solution
+• Efeitos de hacker
+• Terminal commands
+• Quick wins
+
+Vídeo 3: "Docker vs VMs Explained"
+• Animação side-by-side
+• Comparação visual
+• Estatísticas em neon
+• Tips finais
+
+[YouTube Shorts - Tips Rápidas]
+Short 1: "Docker Build em 2x"
+• Tip: BuildKit
+• Antes/Depois
+• Resultado imediato
+
+Short 2: "Cache Like a Pro"
+• Tip: Layer optimization
+• Demo prático
+• Resultado visual
+
+Short 3: "Security em 30s"
+• Tip: Scanning
+• Tools demo
+• Quick fixes

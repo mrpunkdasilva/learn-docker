@@ -1,0 +1,31 @@
+[Podcast: Docker Cyberpunk - Ep.1]
+Intro (2min):
+• Música tema cyberpunk
+• Apresentação do conceito
+• Roadmap da série
+
+Tópicos (20min):
+1. Por que Docker em 2024?
+2. Cases reais de sucesso
+3. Tendências futuras
+4. Tips & Tricks
+
+Encerramento (3min):
+• Próximos episódios
+• Call-to-action
+• Links importantes
+
+[Live Stream Plan]
+Título: "Docker Live Coding: Cyberpunk Edition 🎮"
+
+Schedule (2h):
+• Setup inicial (15min)
+• Live coding (1h)
+• Q&A (30min)
+• Challenges (15min)
+
+Interação:
+• Polls ao vivo
+• Code reviews
+• Debugging em grupo
+• Prêmios para participantes

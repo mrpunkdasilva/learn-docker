@@ -1,0 +1,49 @@
+[Slide 1]
+🐳 GUIA DEFINITIVO DOCKER
+Cyberpunk Edition 2025
+[Background: Neon city with docker containers]
+
+[Slide 2]
+O QUE VOCÊ VAI APRENDER
+• Containers 101
+• Multi-stage builds
+• Compose mastery
+• Production deploy
+[Background: Matrix-style code rain]
+
+[Slide 3]
+POR QUE ESTE GUIA?
+• Exemplos práticos
+• Cases reais
+• Exercícios hands-on
+• Suporte Exercise-chan
+[Background: Cyberpunk character with docker logo]
+
+[Slide 4]
+ROADMAP COMPLETO
+• Beginner ➡️ Expert
+• Theory ➡️ Practice
+• Local ➡️ Production
+• Solo ➡️ Enterprise
+[Background: Neon roadmap visualization]
+
+[Slide 5]
+BÔNUS INCLUSOS
+• Cheat sheets
+• Templates
+• Scripts
+• Best practices
+[Background: Holographic displays]
+
+[Slide 6]
+COMECE AGORA
+Link na bio!
+#Docker #DevOps #Tech
+[Background: Future city with CTA]
+
+Caption:
+🚀 Novo guia Docker disponível!
+Transforme sua carreira com o poder da containerização.
+Link na bio para acesso completo.
+
+#Docker #DevOps #Programming #Technology #Development #Containers #CloudComputing #TechEducation #CodingLife #Programming #Developer

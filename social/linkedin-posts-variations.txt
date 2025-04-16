@@ -1,0 +1,64 @@
+[Versão Focada em Iniciantes]
+🎮 Docker Zero to Hero: Guia Cyberpunk Edition!
+
+🔰 Novo na containerização? Este guia foi feito para você:
+• Conceitos explicados de forma clara
+• Exemplos práticos do mundo real
+• Exercícios guiados passo-a-passo
+• Suporte da Exercise-chan, sua assistente virtual
+
+💪 Do básico ao avançado:
+• Primeiro container em 5 minutos
+• Compose em 15 minutos
+• Deploy em produção em 1 hora
+
+🎯 Link: [URL]
+#Docker #DevOps #Programming #TechBeginner
+
+[Versão Focada em Empresas]
+🚀 Transforme sua Equipe com Docker: Guia Empresarial Edition
+
+📈 Benefícios para sua empresa:
+• Redução de 60% no tempo de deploy
+• Economia de recursos em infraestrutura
+• Padronização de ambientes dev/prod
+• Escalabilidade imediata
+
+🛠️ Inclui:
+• Templates prontos para produção
+• Guias de segurança enterprise
+• Práticas de CI/CD
+• Estratégias de migração
+
+💼 Ideal para times de:
+• Desenvolvimento
+• DevOps
+• Arquitetura
+• SRE
+
+📊 Case studies inclusos!
+#Enterprise #DevOps #Docker #Innovation
+
+[Versão Focada em DevOps]
+⚡ Docker Advanced: DevOps Cyberpunk Masterclass
+
+🔧 Stack completa de ferramentas:
+• Multi-stage builds otimizados
+• Pipelines GitLab/GitHub Actions
+• Kubernetes integration
+• Monitoramento e logging
+
+🏗️ Arquiteturas cobertas:
+• Microservices
+• Event-driven
+• Cloud-native
+• Serverless
+
+📚 Bônus:
+• Templates Terraform
+• Helm charts
+• Security scanning
+• Performance tuning
+
+🔗 Acesse: [URL]
+#DevOps #Docker #CloudNative #Infrastructure
