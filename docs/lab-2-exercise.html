@@ -1,0 +1,188 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T16:35:34.775529431"><title>Lab 2: Exerc&iacute;cios Pr&aacute;ticos 🏋️&zwj;♀️ | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"prepara-o","level":0,"title":"Preparação 🔧","anchor":"#prepara-o"},{"id":"exerc-cio-1-frontend-development","level":0,"title":"Exercício 1: Frontend Development 🎨","anchor":"#exerc-cio-1-frontend-development"},{"id":"exerc-cio-2-backend-api","level":0,"title":"Exercício 2: Backend API 🔧","anchor":"#exerc-cio-2-backend-api"},{"id":"exerc-cio-3-database-integration","level":0,"title":"Exercício 3: Database Integration 💾","anchor":"#exerc-cio-3-database-integration"},{"id":"exerc-cio-4-integration-testing","level":0,"title":"Exercício 4: Integration \u0026 Testing 🔄","anchor":"#exerc-cio-4-integration-testing"},{"id":"desafios-extras","level":0,"title":"Desafios Extras 🌟","anchor":"#desafios-extras"},{"id":"checklist-de-conclus-o","level":0,"title":"Checklist de Conclusão ✅","anchor":"#checklist-de-conclus-o"},{"id":"exercise-chan-tips","level":0,"title":"Exercise-chan Tips 💡","anchor":"#exercise-chan-tips"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"},{"id":"recursos-adicionais","level":0,"title":"Recursos Adicionais 📚","anchor":"#recursos-adicionais"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Lab 2: Exerc&iacute;cios Pr&aacute;ticos 🏋️&zwj;♀️ | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/lab-2-exercise.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Lab 2: Exerc&iacute;cios Pr&aacute;ticos 🏋️&zwj;♀️ | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/lab-2-exercise.html#webpage",
+    "url": "writerside-documentation/lab-2-exercise.html",
+    "name": "Lab 2: Exerc&iacute;cios Pr&aacute;ticos 🏋️&zwj;♀️ | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="lab-2-exercise" data-main-title="Lab 2: Exercícios Práticos 🏋️‍♀️" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="PRACTICE: Real World///Lab 2: Development"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="lab-2-exercise" id="lab-2-exercise.md">Lab 2: Exercícios Práticos 🏋️‍♀️</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ EXERCISE STATUS: TREINANDO...                             ║
+║ DIFICULDADE: ★★★☆☆                                      ║
+║ TEMPO ESTIMADO: 90 minutos                               ║
+║ WAIFU ASSISTANT: Exercise-chan                           ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="prepara-o" data-toc="prepara-o">Prepara&ccedil;&atilde;o 🔧</h2><section class="chapter"><h3 id="requisitos" data-toc="requisitos">Requisitos</h3><ul class="list _bullet" id="vdhh5s_16"><li class="list__item" id="vdhh5s_17"><p id="vdhh5s_21">Lab 2 Setup completo</p></li><li class="list__item" id="vdhh5s_18"><p id="vdhh5s_22">Docker Compose funcionando</p></li><li class="list__item" id="vdhh5s_19"><p id="vdhh5s_23">Ambiente de desenvolvimento configurado</p></li><li class="list__item" id="vdhh5s_20"><p id="vdhh5s_24">Editor de c&oacute;digo pronto</p></li></ul></section><section class="chapter"><h3 id="verifica-o-inicial" data-toc="verifica-o-inicial">Verifica&ccedil;&atilde;o Inicial</h3><div class="code-block" data-lang="bash">
+# Verifique o ambiente
+docker compose ps
+
+# Teste os serviços
+curl http://localhost:3000
+curl http://localhost:5000/health
+</div></section></section><section class="chapter"><h2 id="exerc-cio-1-frontend-development" data-toc="exerc-cio-1-frontend-development">Exerc&iacute;cio 1: Frontend Development 🎨</h2><section class="chapter"><h3 id="objetivo" data-toc="objetivo">Objetivo</h3><p id="vdhh5s_28">Desenvolver uma interface React com hot-reload e integra&ccedil;&atilde;o com backend.</p></section><section class="chapter"><h3 id="passos" data-toc="passos">Passos</h3><ol class="list _decimal" id="vdhh5s_29" type="1"><li class="list__item" id="vdhh5s_33"><p id="vdhh5s_34"><span class="control" id="vdhh5s_35">Setup do Frontend</span></p></li></ol><div class="code-block" data-lang="bash">
+# Entre no diretório frontend
+cd frontend
+
+# Crie novo projeto React
+npm create vite@latest . -- --template react-ts
+
+# Instale dependências
+npm install axios @mui/material @emotion/react @emotion/styled
+</div><ol class="list _decimal" id="vdhh5s_31" type="1" start="2"><li class="list__item" id="vdhh5s_36"><p id="vdhh5s_37"><span class="control" id="vdhh5s_38">Componente de Lista</span></p></li></ol><div class="code-block" data-lang="ts">
+// src/components/TaskList.tsx
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+interface Task {
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+export const TaskList = () =&gt; {
+  const [tasks, setTasks] = useState&lt;Task[]&gt;([]);
+
+  useEffect(() =&gt; {
+    axios.get('http://localhost:5000/tasks')
+      .then(response =&gt; setTasks(response.data));
+  }, []);
+
+  return (
+    &lt;div&gt;
+      {tasks.map(task =&gt; (
+        &lt;div key={task.id}&gt;
+          &lt;input
+            type=&quot;checkbox&quot;
+            checked={task.completed}
+            onChange={() =&gt; {/* TODO */}}
+          /&gt;
+          {task.title}
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+};
+</div></section></section><section class="chapter"><h2 id="exerc-cio-2-backend-api" data-toc="exerc-cio-2-backend-api">Exerc&iacute;cio 2: Backend API 🔧</h2><section class="chapter"><h3 id="objetivo" data-toc="objetivo">Objetivo</h3><p id="vdhh5s_41">Criar uma API REST com Flask e integra&ccedil;&atilde;o com PostgreSQL.</p></section><section class="chapter"><h3 id="passos" data-toc="passos">Passos</h3><ol class="list _decimal" id="vdhh5s_42" type="1"><li class="list__item" id="vdhh5s_46"><p id="vdhh5s_47"><span class="control" id="vdhh5s_48">Setup do Backend</span></p></li></ol><div class="code-block" data-lang="bash">
+# Entre no diretório backend
+cd backend
+
+# Crie o arquivo requirements.txt
+cat &gt; requirements.txt &lt;&lt; EOL
+flask==2.0.1
+flask-sqlalchemy==2.5.1
+psycopg2-binary==2.9.1
+flask-cors==3.0.10
+python-dotenv==0.19.0
+EOL
+
+# Instale dependências
+pip install -r requirements.txt
+</div><ol class="list _decimal" id="vdhh5s_44" type="1" start="2"><li class="list__item" id="vdhh5s_49"><p id="vdhh5s_50"><span class="control" id="vdhh5s_51">API REST</span></p></li></ol><div class="code-block" data-lang="python">
+# app.py
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+import os
+
+app = Flask(__name__)
+CORS(app)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+db = SQLAlchemy(app)
+
+class Task(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    completed = db.Column(db.Boolean, default=False)
+
+@app.route('/tasks', methods=['GET'])
+def get_tasks():
+    tasks = Task.query.all()
+    return jsonify([{
+        'id': task.id,
+        'title': task.title,
+        'completed': task.completed
+    } for task in tasks])
+
+@app.route('/tasks', methods=['POST'])
+def create_task():
+    data = request.get_json()
+    task = Task(title=data['title'])
+    db.session.add(task)
+    db.session.commit()
+    return jsonify({
+        'id': task.id,
+        'title': task.title,
+        'completed': task.completed
+    }), 201
+</div></section></section><section class="chapter"><h2 id="exerc-cio-3-database-integration" data-toc="exerc-cio-3-database-integration">Exerc&iacute;cio 3: Database Integration 💾</h2><section class="chapter"><h3 id="objetivo" data-toc="objetivo">Objetivo</h3><p id="vdhh5s_54">Configurar PostgreSQL e migrations.</p></section><section class="chapter"><h3 id="passos" data-toc="passos">Passos</h3><ol class="list _decimal" id="vdhh5s_55" type="1"><li class="list__item" id="vdhh5s_59"><p id="vdhh5s_60"><span class="control" id="vdhh5s_61">Schema Inicial</span></p></li></ol><div class="code-block" data-lang="sql">
+-- database/init.sql
+CREATE TABLE IF NOT EXISTS task (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    completed BOOLEAN DEFAULT FALSE
+);
+
+-- Dados iniciais
+INSERT INTO task (title) VALUES
+    ('Aprender Docker'),
+    ('Dominar Docker Compose'),
+    ('Implementar CI/CD');
+</div><ol class="list _decimal" id="vdhh5s_57" type="1" start="2"><li class="list__item" id="vdhh5s_62"><p id="vdhh5s_63"><span class="control" id="vdhh5s_64">Migrations com Alembic</span></p></li></ol><div class="code-block" data-lang="bash">
+# Instale Alembic
+pip install alembic
+
+# Inicialize
+alembic init migrations
+
+# Crie primeira migration
+alembic revision -m &quot;create_task_table&quot;
+</div></section></section><section class="chapter"><h2 id="exerc-cio-4-integration-testing" data-toc="exerc-cio-4-integration-testing">Exerc&iacute;cio 4: Integration &amp; Testing 🔄</h2><section class="chapter"><h3 id="objetivo" data-toc="objetivo">Objetivo</h3><p id="vdhh5s_67">Integrar todos os servi&ccedil;os e implementar testes.</p></section><section class="chapter"><h3 id="passos" data-toc="passos">Passos</h3><ol class="list _decimal" id="vdhh5s_68" type="1"><li class="list__item" id="vdhh5s_72"><p id="vdhh5s_73"><span class="control" id="vdhh5s_74">Testes de Frontend</span></p></li></ol><div class="code-block" data-lang="bash">
+# Instale dependências de teste
+npm install --save-dev vitest @testing-library/react
+
+# Crie teste
+npm test
+</div><ol class="list _decimal" id="vdhh5s_70" type="1" start="2"><li class="list__item" id="vdhh5s_75"><p id="vdhh5s_76"><span class="control" id="vdhh5s_77">Testes de Backend</span></p></li></ol><div class="code-block" data-lang="bash">
+# Instale pytest
+pip install pytest
+
+# Execute testes
+pytest tests/
+</div></section></section><section class="chapter"><h2 id="desafios-extras" data-toc="desafios-extras">Desafios Extras 🌟</h2><section class="chapter"><h3 id="1-cache-implementation" data-toc="1-cache-implementation">1. Cache Implementation</h3><div class="code-block" data-lang="yaml">
+# docker-compose.yml
+services:
+  redis:
+    image: redis:alpine
+    ports:
+      - &quot;6379:6379&quot;
+</div></section><section class="chapter"><h3 id="2-logging-enhancement" data-toc="2-logging-enhancement">2. Logging Enhancement</h3><div class="code-block" data-lang="python">
+# backend/logging_config.py
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+</div></section><section class="chapter"><h3 id="3-ci-pipeline" data-toc="3-ci-pipeline">3. CI Pipeline</h3><div class="code-block" data-lang="yaml">
+# .github/workflows/ci.yml
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build and test
+        run: docker compose -f docker-compose.test.yml up --exit-code-from tests
+</div></section></section><section class="chapter"><h2 id="checklist-de-conclus-o" data-toc="checklist-de-conclus-o">Checklist de Conclus&atilde;o ✅</h2><section class="chapter"><h3 id="frontend" data-toc="frontend">Frontend</h3><ul class="list _bullet" id="vdhh5s_87"><li class="list__item" id="vdhh5s_88"><p id="vdhh5s_92">[ ] Componentes React implementados</p></li><li class="list__item" id="vdhh5s_89"><p id="vdhh5s_93">[ ] Estiliza&ccedil;&atilde;o com Material-UI</p></li><li class="list__item" id="vdhh5s_90"><p id="vdhh5s_94">[ ] Integra&ccedil;&atilde;o com API</p></li><li class="list__item" id="vdhh5s_91"><p id="vdhh5s_95">[ ] Testes unit&aacute;rios</p></li></ul></section><section class="chapter"><h3 id="backend" data-toc="backend">Backend</h3><ul class="list _bullet" id="vdhh5s_96"><li class="list__item" id="vdhh5s_97"><p id="vdhh5s_101">[ ] API REST funcional</p></li><li class="list__item" id="vdhh5s_98"><p id="vdhh5s_102">[ ] Conex&atilde;o com banco de dados</p></li><li class="list__item" id="vdhh5s_99"><p id="vdhh5s_103">[ ] Migrations configuradas</p></li><li class="list__item" id="vdhh5s_100"><p id="vdhh5s_104">[ ] Testes de integra&ccedil;&atilde;o</p></li></ul></section><section class="chapter"><h3 id="database" data-toc="database">Database</h3><ul class="list _bullet" id="vdhh5s_105"><li class="list__item" id="vdhh5s_106"><p id="vdhh5s_110">[ ] Schema inicial criado</p></li><li class="list__item" id="vdhh5s_107"><p id="vdhh5s_111">[ ] Dados de exemplo inseridos</p></li><li class="list__item" id="vdhh5s_108"><p id="vdhh5s_112">[ ] Backup configurado</p></li><li class="list__item" id="vdhh5s_109"><p id="vdhh5s_113">[ ] Migrations aplicadas</p></li></ul></section></section><section class="chapter"><h2 id="exercise-chan-tips" data-toc="exercise-chan-tips">Exercise-chan Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="vdhh5s_114"><p id="vdhh5s_116"><span class="control" id="vdhh5s_117">Exercise-chan diz:</span> &quot;Lembre-se de usar o comando <code class="code" id="vdhh5s_118">docker compose logs -f</code> para acompanhar os logs em tempo real durante o desenvolvimento! 📝&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="vdhh5s_115"><p id="vdhh5s_119"><span class="control" id="vdhh5s_120">Exercise-chan alerta:</span> &quot;Sempre valide as respostas da API e trate os erros adequadamente no frontend! 🔒&quot;</p></aside></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="vdhh5s_121" type="1"><li class="list__item" id="vdhh5s_122"><p id="vdhh5s_125"><span id="vdhh5s_126">Docker Compose Deep Dive</span></p></li><li class="list__item" id="vdhh5s_123"><p id="vdhh5s_127"><span id="vdhh5s_128">Development Best Practices</span></p></li><li class="list__item" id="vdhh5s_124"><p id="vdhh5s_129"><span id="vdhh5s_130">Lab 3: Production</span></p></li></ol></section><section class="chapter"><h2 id="recursos-adicionais" data-toc="recursos-adicionais">Recursos Adicionais 📚</h2><ul class="list _bullet" id="vdhh5s_131"><li class="list__item" id="vdhh5s_133"><p id="vdhh5s_137"><a href="https://react.dev" id="vdhh5s_138" data-external="true" rel="noopener noreferrer" target="_blank">React Documentation</a></p></li><li class="list__item" id="vdhh5s_134"><p id="vdhh5s_139"><a href="https://flask.palletsprojects.com" id="vdhh5s_140" data-external="true" rel="noopener noreferrer" target="_blank">Flask Documentation</a></p></li><li class="list__item" id="vdhh5s_135"><p id="vdhh5s_141"><a href="https://www.postgresql.org/docs/" id="vdhh5s_142" data-external="true" rel="noopener noreferrer" target="_blank">PostgreSQL Documentation</a></p></li><li class="list__item" id="vdhh5s_136"><p id="vdhh5s_143"><a href="https://docs.docker.com/compose/networking/" id="vdhh5s_144" data-external="true" rel="noopener noreferrer" target="_blank">Docker Compose Networking</a></p></li></ul><aside class="prompt" data-type="note" data-title="" id="vdhh5s_132"><p id="vdhh5s_145"><span class="control" id="vdhh5s_146">Sensei's Note:</span> &quot;A pr&aacute;tica leva &agrave; perfei&ccedil;&atilde;o, mas apenas se voc&ecirc; estiver praticando da maneira correta! 🎯&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="lab-2-setup.html" class="navigation-links__prev">Lab 2: Configura&ccedil;&atilde;o do Ambiente de Desenvolvimento 🛠️</a><a href="hands-on-lab.html" class="navigation-links__next">Laborat&oacute;rio Pr&aacute;tico: M&atilde;o na Massa! 🧪</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

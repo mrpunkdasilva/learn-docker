@@ -1,0 +1,177 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T16:35:34.664088863"><title>Docker Multi-stage Builds 🏗️ | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"basic-concepts","level":0,"title":"Basic Concepts 📚","anchor":"#basic-concepts"},{"id":"basic-examples","level":0,"title":"Basic Examples 🔨","anchor":"#basic-examples"},{"id":"advanced-patterns","level":0,"title":"Advanced Patterns 🎯","anchor":"#advanced-patterns"},{"id":"optimization-techniques","level":0,"title":"Optimization Techniques ⚡","anchor":"#optimization-techniques"},{"id":"development-vs-production","level":0,"title":"Development vs Production 🔄","anchor":"#development-vs-production"},{"id":"best-practices","level":0,"title":"Best Practices ✅","anchor":"#best-practices"},{"id":"security-considerations","level":0,"title":"Security Considerations 🔒","anchor":"#security-considerations"},{"id":"debugging-tips","level":0,"title":"Debugging Tips 🔍","anchor":"#debugging-tips"},{"id":"waifu-build-tips","level":0,"title":"Waifu Build Tips 💫","anchor":"#waifu-build-tips"},{"id":"quick-reference","level":0,"title":"Quick Reference 📚","anchor":"#quick-reference"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Docker Multi-stage Builds 🏗️ | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/docker-multi-stage-builds.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Docker Multi-stage Builds 🏗️ | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/docker-multi-stage-builds.html#webpage",
+    "url": "writerside-documentation/docker-multi-stage-builds.html",
+    "name": "Docker Multi-stage Builds 🏗️ | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="docker-multi-stage-builds" data-main-title="Docker Multi-stage Builds 🏗️" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="ADVANCED: Production Ready///Performance"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="docker-multi-stage-builds" id="docker-multi-stage-builds.md">Docker Multi-stage Builds 🏗️</h1><section class="chapter"><h2 id="basic-concepts" data-toc="basic-concepts">Basic Concepts 📚</h2><section class="chapter"><h3 id="what-are-multi-stage-builds" data-toc="what-are-multi-stage-builds">What are Multi-stage Builds?</h3><p id="-npfrpa_15">Multi-stage builds permitem otimizar Dockerfiles criando imagens intermedi&aacute;rias durante o processo de build. Isso resulta em imagens finais menores e mais seguras.</p></section><section class="chapter"><h3 id="benefits" data-toc="benefits">Benefits</h3><ol class="list _decimal" id="-npfrpa_16" type="1"><li class="list__item" id="-npfrpa_17"><p id="-npfrpa_22">✅ Imagens menores</p></li><li class="list__item" id="-npfrpa_18"><p id="-npfrpa_23">✅ Separa&ccedil;&atilde;o de concerns</p></li><li class="list__item" id="-npfrpa_19"><p id="-npfrpa_24">✅ Seguran&ccedil;a melhorada</p></li><li class="list__item" id="-npfrpa_20"><p id="-npfrpa_25">✅ Build process otimizado</p></li><li class="list__item" id="-npfrpa_21"><p id="-npfrpa_26">✅ Menos depend&ecirc;ncias na imagem final</p></li></ol></section></section><section class="chapter"><h2 id="basic-examples" data-toc="basic-examples">Basic Examples 🔨</h2><section class="chapter"><h3 id="node-js-application" data-toc="node-js-application">Node.js Application</h3><div class="code-block" data-lang="none">
+# Build stage
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Production stage
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY package*.json ./
+RUN npm ci --only=production
+CMD [&quot;node&quot;, &quot;dist/main.js&quot;]
+</div></section><section class="chapter"><h3 id="go-application" data-toc="go-application">Go Application</h3><div class="code-block" data-lang="none">
+# Build stage
+FROM golang:1.19-alpine AS builder
+WORKDIR /app
+COPY go.* ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 go build -o app
+
+# Production stage
+FROM alpine:3.18
+RUN apk add --no-cache ca-certificates
+COPY --from=builder /app/app /usr/local/bin/
+CMD [&quot;app&quot;]
+</div></section></section><section class="chapter"><h2 id="advanced-patterns" data-toc="advanced-patterns">Advanced Patterns 🎯</h2><section class="chapter"><h3 id="multiple-build-stages" data-toc="multiple-build-stages">Multiple Build Stages</h3><div class="code-block" data-lang="none">
+# Dependencies stage
+FROM node:18-alpine AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+
+# Test stage
+FROM deps AS tester
+COPY . .
+RUN npm run test
+
+# Build stage
+FROM deps AS builder
+COPY . .
+RUN npm run build
+
+# Production stage
+FROM node:18-alpine
+COPY --from=builder /app/dist ./dist
+CMD [&quot;node&quot;, &quot;dist/main.js&quot;]
+</div></section><section class="chapter"><h3 id="parallel-builds" data-toc="parallel-builds">Parallel Builds</h3><div class="code-block" data-lang="none">
+# Frontend build
+FROM node:18-alpine AS frontend-builder
+WORKDIR /app
+COPY frontend/package*.json ./
+RUN npm ci
+COPY frontend/ .
+RUN npm run build
+
+# Backend build
+FROM golang:1.19-alpine AS backend-builder
+WORKDIR /app
+COPY backend/go.* ./
+RUN go mod download
+COPY backend/ .
+RUN CGO_ENABLED=0 go build -o api
+
+# Final stage
+FROM alpine:3.18
+RUN apk add --no-cache ca-certificates nginx
+COPY --from=frontend-builder /app/dist /usr/share/nginx/html
+COPY --from=backend-builder /app/api /usr/local/bin/
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
+</div></section></section><section class="chapter"><h2 id="optimization-techniques" data-toc="optimization-techniques">Optimization Techniques ⚡</h2><section class="chapter"><h3 id="cache-optimization" data-toc="cache-optimization">Cache Optimization</h3><div class="code-block" data-lang="none">
+# Dependencies with cache
+FROM node:18-alpine AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci
+
+# Build with cache
+FROM deps AS builder
+COPY . .
+RUN --mount=type=cache,target=/root/.npm \
+    npm run build
+
+# Production
+FROM node:18-alpine
+COPY --from=builder /app/dist ./dist
+CMD [&quot;node&quot;, &quot;dist/main.js&quot;]
+</div></section><section class="chapter"><h3 id="selective-copy" data-toc="selective-copy">Selective Copy</h3><div class="code-block" data-lang="none">
+# Build stage
+FROM golang:1.19 AS builder
+WORKDIR /app
+COPY . .
+RUN go build -o app
+
+# Production stage
+FROM alpine:3.18
+# Copiar apenas binários necessários
+COPY --from=builder /app/app /usr/local/bin/
+COPY --from=builder /app/configs ./configs
+# Ignorar arquivos desnecessários
+</div></section></section><section class="chapter"><h2 id="development-vs-production" data-toc="development-vs-production">Development vs Production 🔄</h2><section class="chapter"><h3 id="development-mode" data-toc="development-mode">Development Mode</h3><div class="code-block" data-lang="none">
+# Base stage
+FROM node:18-alpine AS base
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+
+# Development stage
+FROM base AS development
+COPY . .
+CMD [&quot;npm&quot;, &quot;run&quot;, &quot;dev&quot;]
+
+# Production build
+FROM base AS builder
+COPY . .
+RUN npm run build
+
+# Production stage
+FROM node:18-alpine
+COPY --from=builder /app/dist ./dist
+CMD [&quot;node&quot;, &quot;dist/main.js&quot;]
+</div></section></section><section class="chapter"><h2 id="best-practices" data-toc="best-practices">Best Practices ✅</h2><section class="chapter"><h3 id="do-s" data-toc="do-s">DO's</h3><ol class="list _decimal" id="-npfrpa_43" type="1"><li class="list__item" id="-npfrpa_44"><p id="-npfrpa_49">[x] Use stages espec&iacute;ficos para cada fase</p></li><li class="list__item" id="-npfrpa_45"><p id="-npfrpa_50">[x] Otimize ordem das camadas</p></li><li class="list__item" id="-npfrpa_46"><p id="-npfrpa_51">[x] Utilize cache eficientemente</p></li><li class="list__item" id="-npfrpa_47"><p id="-npfrpa_52">[x] Copie apenas arquivos necess&aacute;rios</p></li><li class="list__item" id="-npfrpa_48"><p id="-npfrpa_53">[x] Mantenha imagem base consistente</p></li></ol></section><section class="chapter"><h3 id="don-ts" data-toc="don-ts">DON'Ts</h3><ol class="list _decimal" id="-npfrpa_54" type="1"><li class="list__item" id="-npfrpa_55"><p id="-npfrpa_60">[ ] Misturar concerns em um &uacute;nico stage</p></li><li class="list__item" id="-npfrpa_56"><p id="-npfrpa_61">[ ] Copiar arquivos desnecess&aacute;rios</p></li><li class="list__item" id="-npfrpa_57"><p id="-npfrpa_62">[ ] Ignorar seguran&ccedil;a</p></li><li class="list__item" id="-npfrpa_58"><p id="-npfrpa_63">[ ] Duplicar depend&ecirc;ncias</p></li><li class="list__item" id="-npfrpa_59"><p id="-npfrpa_64">[ ] Esquecer de otimizar camadas</p></li></ol></section></section><section class="chapter"><h2 id="security-considerations" data-toc="security-considerations">Security Considerations 🔒</h2><section class="chapter"><h3 id="minimal-base-images" data-toc="minimal-base-images">Minimal Base Images</h3><div class="code-block" data-lang="none">
+# Build stage
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY . .
+RUN npm ci &amp;&amp; npm run build
+
+# Secure production stage
+FROM node:18-alpine
+# Criar usuário não-root
+RUN addgroup -S appgroup &amp;&amp; \
+    adduser -S appuser -G appgroup
+USER appuser
+COPY --from=builder /app/dist ./dist
+CMD [&quot;node&quot;, &quot;dist/main.js&quot;]
+</div></section></section><section class="chapter"><h2 id="debugging-tips" data-toc="debugging-tips">Debugging Tips 🔍</h2><section class="chapter"><h3 id="debug-stage" data-toc="debug-stage">Debug Stage</h3><div class="code-block" data-lang="none">
+# Debug stage
+FROM builder AS debug
+RUN apk add --no-cache curl htop
+CMD [&quot;sh&quot;]
+
+# Build com debug
+docker build --target debug .
+</div></section></section><section class="chapter"><h2 id="waifu-build-tips" data-toc="waifu-build-tips">Waifu Build Tips 💫</h2><aside class="prompt" data-type="tip" data-title="" id="-npfrpa_69"><p id="-npfrpa_71"><span class="control" id="-npfrpa_72">Build-chan diz:</span> &quot;Multi-stage &eacute; como fazer um bento box - cada ingrediente tem seu lugar!&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-npfrpa_70"><p id="-npfrpa_73"><span class="control" id="-npfrpa_74">Security-sama alerta:</span> &quot;Mantenha sua imagem final leve e segura!&quot;</p></aside></section><section class="chapter"><h2 id="quick-reference" data-toc="quick-reference">Quick Reference 📚</h2><section class="chapter"><h3 id="common-commands" data-toc="common-commands">Common Commands</h3><div class="code-block" data-lang="bash">
+# Build específico stage
+docker build --target builder .
+
+# Build com args
+docker build \
+  --build-arg NODE_ENV=production \
+  --target production .
+
+# Debug build
+docker build --progress=plain .
+</div></section><section class="chapter"><h3 id="stage-dependencies" data-toc="stage-dependencies">Stage Dependencies</h3><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 271.671875 382"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="271.671875" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_B_0" d="M147.656,62L147.656,66.167C147.656,70.333,147.656,78.667,147.656,84.917C147.656,91.167,147.656,95.333,147.656,98.833C147.656,102.333,147.656,105.167,147.656,106.583L147.656,108"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_C_1" d="M110.641,166L104.929,170.167C99.216,174.333,87.792,182.667,82.079,188.917C76.367,195.167,76.367,199.333,76.367,202.833C76.367,206.333,76.367,209.167,76.367,210.583L76.367,212"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_D_2" d="M184.672,166L190.384,170.167C196.096,174.333,207.521,182.667,213.233,188.917C218.945,195.167,218.945,199.333,218.945,202.833C218.945,206.333,218.945,209.167,218.945,210.583L218.945,212"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_E_3" d="M76.367,270L76.367,274.167C76.367,278.333,76.367,286.667,76.367,292.917C76.367,299.167,76.367,303.333,76.367,306.833C76.367,310.333,76.367,313.167,76.367,314.583L76.367,316"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(147.65625, 35)" id="flowchart-A-18" class="node default"><rect height="54" width="96.578125" y="-27" x="-48.2890625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-18.2890625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="36.578125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Base</p></span></div></foreignObject></g></g><g transform="translate(147.65625, 139)" id="flowchart-B-19" class="node default"><rect height="54" width="162.59375" y="-27" x="-81.296875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-51.296875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="102.59375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Dependencies</p></span></div></foreignObject></g></g><g transform="translate(76.3671875, 243)" id="flowchart-C-21" class="node default"><rect height="54" width="95.703125" y="-27" x="-47.8515625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-17.8515625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="35.703125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Build</p></span></div></foreignObject></g></g><g transform="translate(218.9453125, 243)" id="flowchart-D-23" class="node default"><rect height="54" width="89.453125" y="-27" x="-44.7265625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-14.7265625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="29.453125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Test</p></span></div></foreignObject></g></g><g transform="translate(76.3671875, 347)" id="flowchart-E-25" class="node default"><rect height="54" width="136.734375" y="-27" x="-68.3671875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-38.3671875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="76.734375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Production</p></span></div></foreignObject></g></g></g></g></g></svg><aside class="prompt" data-type="note" data-title="" id="-npfrpa_79"><p id="-npfrpa_80"><span class="control" id="-npfrpa_81">Build Master's Note:</span> &quot;O melhor multi-stage build &eacute; aquele que equilibra efici&ecirc;ncia e manutenibilidade.&quot;</p></aside></section></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="docker-caching.html" class="navigation-links__prev">Docker Caching Guide 🚀</a><a href="container-monitoring.html" class="navigation-links__next">Container Monitoring: Os Olhos do Sistema 👁️</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

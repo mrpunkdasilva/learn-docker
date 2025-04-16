@@ -123,11 +123,4 @@
     </toc-element>
 
     <!-- FASE 7: Certification -->
-    <toc-element toc-title="CERTIFICATION: DCA">
-        <toc-element toc-title="Exam Preparation">
-            <toc-element topic="docker-certified-overview.md"/>
-            <toc-element topic="docker-certified-preparation.md"/>
-            <toc-element topic="docker-certified-topics.md"/>
-        </toc-element>
-    </toc-element>
 </instance-profile>

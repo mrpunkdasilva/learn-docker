@@ -1,0 +1,144 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T16:35:34.245345347"><title>Container Resources Management 📊 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"resource-limits-overview","level":0,"title":"Resource Limits Overview 🎯","anchor":"#resource-limits-overview"},{"id":"cpu-management","level":0,"title":"CPU Management ⚡","anchor":"#cpu-management"},{"id":"memory-management","level":0,"title":"Memory Management 💾","anchor":"#memory-management"},{"id":"storage-management","level":0,"title":"Storage Management 💽","anchor":"#storage-management"},{"id":"network-management","level":0,"title":"Network Management 🌐","anchor":"#network-management"},{"id":"monitoring-resources","level":0,"title":"Monitoring Resources 📈","anchor":"#monitoring-resources"},{"id":"resource-optimization","level":0,"title":"Resource Optimization 🔧","anchor":"#resource-optimization"},{"id":"resource-templates","level":0,"title":"Resource Templates 📋","anchor":"#resource-templates"},{"id":"troubleshooting-guide","level":0,"title":"Troubleshooting Guide 🔍","anchor":"#troubleshooting-guide"},{"id":"waifu-resource-tips","level":0,"title":"Waifu Resource Tips 💡","anchor":"#waifu-resource-tips"},{"id":"quick-reference","level":0,"title":"Quick Reference 📚","anchor":"#quick-reference"},{"id":"next-steps","level":0,"title":"Next Steps 🎯","anchor":"#next-steps"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Container Resources Management 📊 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/container-resources.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Container Resources Management 📊 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/container-resources.html#webpage",
+    "url": "writerside-documentation/container-resources.html",
+    "name": "Container Resources Management 📊 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="container-resources" data-main-title="Container Resources Management 📊" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="ADVANCED: Production Ready///Monitoring"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="container-resources" id="container-resources.md">Container Resources Management 📊</h1><section class="chapter"><h2 id="resource-limits-overview" data-toc="resource-limits-overview">Resource Limits Overview 🎯</h2><section class="chapter"><h3 id="basic-resource-types" data-toc="basic-resource-types">Basic Resource Types</h3><div class="code-block" data-lang="none">
+┌────────────────────┐
+│ CPU                │
+│ Memory             │
+│ I/O                │
+│ Network Bandwidth  │
+└────────────────────┘
+</div></section></section><section class="chapter"><h2 id="cpu-management" data-toc="cpu-management">CPU Management ⚡</h2><section class="chapter"><h3 id="cpu-limits" data-toc="cpu-limits">CPU Limits</h3><div class="code-block" data-lang="bash">
+# Limitar CPUs
+docker run --cpus=2 nginx
+
+# Definir CPU shares
+docker run --cpu-shares=512 nginx
+
+# Especificar CPUs específicas
+docker run --cpuset-cpus=&quot;0,2&quot; nginx
+</div></section><section class="chapter"><h3 id="cpu-quotas" data-toc="cpu-quotas">CPU Quotas</h3><div class="code-block" data-lang="yaml">
+version: '3.8'
+services:
+  app:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+        reservations:
+          cpus: '0.25'
+</div></section></section><section class="chapter"><h2 id="memory-management" data-toc="memory-management">Memory Management 💾</h2><section class="chapter"><h3 id="memory-limits" data-toc="memory-limits">Memory Limits</h3><div class="code-block" data-lang="bash">
+# Limite de memória
+docker run --memory=512m nginx
+
+# Limite de swap
+docker run --memory-swap=1g nginx
+
+# Reserva de memória
+docker run --memory-reservation=256m nginx
+</div></section><section class="chapter"><h3 id="memory-settings-matrix" data-toc="memory-settings-matrix">Memory Settings Matrix</h3><div class="table-wrapper"><table class="wide" id="-j4r05e_24"><thead><tr class="ijRowHead" id="-j4r05e_25"><th id="-j4r05e_30"><p>Par&acirc;metro</p></th><th id="-j4r05e_31"><p>Descri&ccedil;&atilde;o</p></th><th id="-j4r05e_32"><p>Exemplo</p></th></tr></thead><tbody><tr id="-j4r05e_26"><td id="-j4r05e_33"><p>--memory</p></td><td id="-j4r05e_34"><p>Limite m&aacute;ximo</p></td><td id="-j4r05e_35"><p>--memory=1g</p></td></tr><tr id="-j4r05e_27"><td id="-j4r05e_36"><p>--memory-swap</p></td><td id="-j4r05e_37"><p>Limite swap</p></td><td id="-j4r05e_38"><p>--memory-swap=2g</p></td></tr><tr id="-j4r05e_28"><td id="-j4r05e_39"><p>--memory-reservation</p></td><td id="-j4r05e_40"><p>Reserva soft</p></td><td id="-j4r05e_41"><p>--memory-reservation=512m</p></td></tr><tr id="-j4r05e_29"><td id="-j4r05e_42"><p>--kernel-memory</p></td><td id="-j4r05e_43"><p>Mem&oacute;ria kernel</p></td><td id="-j4r05e_44"><p>--kernel-memory=256m</p></td></tr></tbody></table></div></section></section><section class="chapter"><h2 id="storage-management" data-toc="storage-management">Storage Management 💽</h2><section class="chapter"><h3 id="storage-options" data-toc="storage-options">Storage Options</h3><div class="code-block" data-lang="bash">
+# Limitar escrita
+docker run --device-write-bps /dev/sda:1mb nginx
+
+# Limitar leitura
+docker run --device-read-bps /dev/sda:1mb nginx
+
+# Limitar IOPS
+docker run --device-write-iops /dev/sda:100 nginx
+</div></section><section class="chapter"><h3 id="storage-quotas" data-toc="storage-quotas">Storage Quotas</h3><div class="code-block" data-lang="yaml">
+services:
+  db:
+    volumes:
+      - data:/var/lib/mysql
+    deploy:
+      resources:
+        limits:
+          storage: 5G
+</div></section></section><section class="chapter"><h2 id="network-management" data-toc="network-management">Network Management 🌐</h2><section class="chapter"><h3 id="network-controls" data-toc="network-controls">Network Controls</h3><div class="code-block" data-lang="bash">
+# Limitar banda
+docker run --network-bandwidth=100mb nginx
+
+# QoS settings
+docker run --network-qos=high nginx
+</div></section></section><section class="chapter"><h2 id="monitoring-resources" data-toc="monitoring-resources">Monitoring Resources 📈</h2><section class="chapter"><h3 id="resource-usage" data-toc="resource-usage">Resource Usage</h3><div class="code-block" data-lang="bash">
+# Stats em tempo real
+docker stats
+
+# Format específico
+docker stats --format &quot;table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}&quot;
+
+# Batch monitoring
+docker stats --no-stream
+</div></section><section class="chapter"><h3 id="resource-metrics" data-toc="resource-metrics">Resource Metrics</h3><div class="code-block" data-lang="bash">
+# Métricas detalhadas
+docker container inspect container_id
+
+# Logs de recursos
+docker logs --details container_id
+</div></section></section><section class="chapter"><h2 id="resource-optimization" data-toc="resource-optimization">Resource Optimization 🔧</h2><section class="chapter"><h3 id="best-practices" data-toc="best-practices">Best Practices</h3><ol class="list _decimal" id="-j4r05e_57" type="1"><li class="list__item" id="-j4r05e_58"><p id="-j4r05e_63">✅ Defina limites realistas</p></li><li class="list__item" id="-j4r05e_59"><p id="-j4r05e_64">✅ Monitore uso constante</p></li><li class="list__item" id="-j4r05e_60"><p id="-j4r05e_65">✅ Use reservations</p></li><li class="list__item" id="-j4r05e_61"><p id="-j4r05e_66">✅ Configure alertas</p></li><li class="list__item" id="-j4r05e_62"><p id="-j4r05e_67">✅ Otimize regularmente</p></li></ol></section><section class="chapter"><h3 id="anti-patterns" data-toc="anti-patterns">Anti-Patterns</h3><ol class="list _decimal" id="-j4r05e_68" type="1"><li class="list__item" id="-j4r05e_69"><p id="-j4r05e_74">❌ Sem limites definidos</p></li><li class="list__item" id="-j4r05e_70"><p id="-j4r05e_75">❌ Overcommit recursos</p></li><li class="list__item" id="-j4r05e_71"><p id="-j4r05e_76">❌ Ignorar m&eacute;tricas</p></li><li class="list__item" id="-j4r05e_72"><p id="-j4r05e_77">❌ Configura&ccedil;&atilde;o gen&eacute;rica</p></li><li class="list__item" id="-j4r05e_73"><p id="-j4r05e_78">❌ Negligenciar monitoramento</p></li></ol></section></section><section class="chapter"><h2 id="resource-templates" data-toc="resource-templates">Resource Templates 📋</h2><section class="chapter"><h3 id="development-template" data-toc="development-template">Development Template</h3><div class="code-block" data-lang="yaml">
+resources:
+  limits:
+    cpu: 0.5
+    memory: 512M
+  reservations:
+    cpu: 0.1
+    memory: 128M
+</div></section><section class="chapter"><h3 id="production-template" data-toc="production-template">Production Template</h3><div class="code-block" data-lang="yaml">
+resources:
+  limits:
+    cpu: 2
+    memory: 2G
+  reservations:
+    cpu: 1
+    memory: 1G
+</div></section></section><section class="chapter"><h2 id="troubleshooting-guide" data-toc="troubleshooting-guide">Troubleshooting Guide 🔍</h2><section class="chapter"><h3 id="common-issues" data-toc="common-issues">Common Issues</h3><ol class="list _decimal" id="-j4r05e_84" type="1"><li class="list__item" id="-j4r05e_85"><p id="-j4r05e_87"><span class="control" id="-j4r05e_89">OOM Kills</span></p><div class="code-block" data-lang="bash">
+# Verificar logs
+dmesg | grep -i kill
+
+# Aumentar limite
+docker update --memory 1g container_id
+</div></li><li class="list__item" id="-j4r05e_86"><p id="-j4r05e_90"><span class="control" id="-j4r05e_92">CPU Throttling</span></p><div class="code-block" data-lang="bash">
+# Verificar throttling
+docker stats --no-stream --format &quot;{{.CPUPerc}}&quot;
+
+# Ajustar limite
+docker update --cpus 2 container_id
+</div></li></ol></section></section><section class="chapter"><h2 id="waifu-resource-tips" data-toc="waifu-resource-tips">Waifu Resource Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="-j4r05e_93"><p id="-j4r05e_95"><span class="control" id="-j4r05e_96">Resource-chan diz:</span> &quot;Balancear recursos &eacute; como fazer um bento box perfeito - cada item precisa do espa&ccedil;o certo!&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-j4r05e_94"><p id="-j4r05e_97"><span class="control" id="-j4r05e_98">Monitor-sama alerta:</span> &quot;Sempre monitore seus recursos, ou prepare-se para o caos!&quot;</p></aside></section><section class="chapter"><h2 id="quick-reference" data-toc="quick-reference">Quick Reference 📚</h2><section class="chapter"><h3 id="resource-commands" data-toc="resource-commands">Resource Commands</h3><div class="code-block" data-lang="bash">
+# CPU
+--cpus=&lt;value&gt;
+--cpu-shares=&lt;value&gt;
+--cpuset-cpus=&lt;value&gt;
+
+# Memory
+--memory=&lt;value&gt;
+--memory-swap=&lt;value&gt;
+--memory-reservation=&lt;value&gt;
+
+# Storage
+--device-write-bps=&lt;value&gt;
+--device-read-bps=&lt;value&gt;
+
+# Network
+--network-bandwidth=&lt;value&gt;
+</div></section><section class="chapter"><h3 id="monitoring-commands" data-toc="monitoring-commands">Monitoring Commands</h3><div class="code-block" data-lang="bash">
+# Basic monitoring
+docker stats
+
+# Detailed info
+docker inspect
+
+# Resource update
+docker update
+</div></section></section><section class="chapter"><h2 id="next-steps" data-toc="next-steps">Next Steps 🎯</h2><ol class="list _decimal" id="-j4r05e_103" type="1"><li class="list__item" id="-j4r05e_105"><p id="-j4r05e_108"><a href="container-monitoring.html" id="-j4r05e_109" data-tooltip="Monitor-chan diz: &quot;Métricas são como batimentos cardíacos do sistema - monitore-os ou enfrente o flatline! uwu&quot;">Container Monitoring</a></p></li><li class="list__item" id="-j4r05e_106"><p id="-j4r05e_110"><a href="docker-performance.html" id="-j4r05e_111" data-tooltip="[x] Resource limits configurados">Performance Optimization</a></p></li><li class="list__item" id="-j4r05e_107"><p id="-j4r05e_112"><a href="troubleshooting-guide.html" id="-j4r05e_113" data-tooltip="Debug-chan diz: &quot;Logs são como pegadas digitais - siga-as e encontrará a verdade! 🔍&quot;">Troubleshooting Guide</a></p></li></ol><aside class="prompt" data-type="note" data-title="" id="-j4r05e_104"><p id="-j4r05e_114"><span class="control" id="-j4r05e_115">Resource Master's Note:</span> &quot;Um container bem configurado &eacute; como um jardim zen - equilibrado e eficiente.&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="container-monitoring.html" class="navigation-links__prev">Container Monitoring: Os Olhos do Sistema 👁️</a><a href="container-orchestration.html" class="navigation-links__next">Orquestra&ccedil;&atilde;o de Containers: A Sinfonia do Caos Digital</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

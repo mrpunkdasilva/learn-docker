@@ -1,0 +1,175 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T16:35:34.728979401"><title>Lab 2: Configura&ccedil;&atilde;o do Ambiente de Desenvolvimento 🛠️ | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"verifica-o-do-ambiente","level":0,"title":"Verificação do Ambiente 🔍","anchor":"#verifica-o-do-ambiente"},{"id":"estrutura-do-projeto","level":0,"title":"Estrutura do Projeto 📁","anchor":"#estrutura-do-projeto"},{"id":"configura-o-do-ambiente","level":0,"title":"Configuração do Ambiente 🔧","anchor":"#configura-o-do-ambiente"},{"id":"setup-de-desenvolvimento","level":0,"title":"Setup de Desenvolvimento 💻","anchor":"#setup-de-desenvolvimento"},{"id":"verifica-o-do-setup","level":0,"title":"Verificação do Setup ✅","anchor":"#verifica-o-do-setup"},{"id":"setup-chan-tips","level":0,"title":"Setup-chan Tips 💡","anchor":"#setup-chan-tips"},{"id":"troubleshooting","level":0,"title":"Troubleshooting 🔍","anchor":"#troubleshooting"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"},{"id":"recursos-adicionais","level":0,"title":"Recursos Adicionais 📚","anchor":"#recursos-adicionais"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Lab 2: Configura&ccedil;&atilde;o do Ambiente de Desenvolvimento 🛠️ | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/lab-2-setup.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Lab 2: Configura&ccedil;&atilde;o do Ambiente de Desenvolvimento 🛠️ | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/lab-2-setup.html#webpage",
+    "url": "writerside-documentation/lab-2-setup.html",
+    "name": "Lab 2: Configura&ccedil;&atilde;o do Ambiente de Desenvolvimento 🛠️ | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="lab-2-setup" data-main-title="Lab 2: Configuração do Ambiente de Desenvolvimento 🛠️" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="PRACTICE: Real World///Lab 2: Development"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="lab-2-setup" id="lab-2-setup.md">Lab 2: Configuração do Ambiente de Desenvolvimento 🛠️</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ SETUP STATUS: CONFIGURANDO...                             ║
+║ DIFICULDADE: ★★★☆☆                                      ║
+║ TEMPO ESTIMADO: 45 minutos                               ║
+║ WAIFU ASSISTANT: Setup-chan                              ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="verifica-o-do-ambiente" data-toc="verifica-o-do-ambiente">Verifica&ccedil;&atilde;o do Ambiente 🔍</h2><section class="chapter"><h3 id="requisitos-m-nimos" data-toc="requisitos-m-nimos">Requisitos M&iacute;nimos</h3><ul class="list _bullet" id="-kfw6qz_15"><li class="list__item" id="-kfw6qz_16"><p id="-kfw6qz_21">Docker Engine 20.10+</p></li><li class="list__item" id="-kfw6qz_17"><p id="-kfw6qz_22">Docker Compose v2.0+</p></li><li class="list__item" id="-kfw6qz_18"><p id="-kfw6qz_23">8GB RAM</p></li><li class="list__item" id="-kfw6qz_19"><p id="-kfw6qz_24">50GB Espa&ccedil;o em Disco</p></li><li class="list__item" id="-kfw6qz_20"><p id="-kfw6qz_25">Git instalado</p></li></ul></section><section class="chapter"><h3 id="verifica-o-de-depend-ncias" data-toc="verifica-o-de-depend-ncias">Verifica&ccedil;&atilde;o de Depend&ecirc;ncias</h3><div class="code-block" data-lang="bash">
+# Verifique versões
+docker --version
+docker compose version
+git --version
+
+# Verifique recursos disponíveis
+docker info
+</div></section></section><section class="chapter"><h2 id="estrutura-do-projeto" data-toc="estrutura-do-projeto">Estrutura do Projeto 📁</h2><section class="chapter"><h3 id="setup-inicial" data-toc="setup-inicial">Setup Inicial</h3><div class="code-block" data-lang="bash">
+# Clone o repositório base
+git clone https://github.com/seu-usuario/docker-lab-2
+cd docker-lab-2
+
+# Crie a estrutura de diretórios
+mkdir -p {frontend,backend,database,config}
+</div></section><section class="chapter"><h3 id="arquivos-base" data-toc="arquivos-base">Arquivos Base</h3><section class="chapter"><h4 id="1-docker-compose-yml" data-toc="1-docker-compose-yml">1. docker-compose.yml</h4><div class="code-block" data-lang="yaml">
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - &quot;3000:3000&quot;
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend:/app
+      - /app/__pycache__
+    ports:
+      - &quot;5000:5000&quot;
+    environment:
+      - FLASK_ENV=development
+      - DB_HOST=db
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_PASSWORD=devpassword
+      - POSTGRES_DB=devdb
+
+volumes:
+  pgdata:
+</div></section><section class="chapter"><h4 id="2-frontend-dockerfile" data-toc="2-frontend-dockerfile">2. frontend/Dockerfile</h4><div class="code-block" data-lang="none">
+# Estágio de desenvolvimento
+FROM node:18-alpine as development
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+CMD [&quot;npm&quot;, &quot;run&quot;, &quot;dev&quot;]
+
+# Estágio de produção
+FROM node:18-alpine as production
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --production
+COPY . .
+RUN npm run build
+CMD [&quot;npm&quot;, &quot;start&quot;]
+</div></section><section class="chapter"><h4 id="3-backend-dockerfile" data-toc="3-backend-dockerfile">3. backend/Dockerfile</h4><div class="code-block" data-lang="none">
+# Estágio de desenvolvimento
+FROM python:3.9-slim as development
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD [&quot;flask&quot;, &quot;run&quot;, &quot;--host=0.0.0.0&quot;, &quot;--debug&quot;]
+
+# Estágio de produção
+FROM python:3.9-slim as production
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+CMD [&quot;gunicorn&quot;, &quot;app:app&quot;]
+</div></section></section></section><section class="chapter"><h2 id="configura-o-do-ambiente" data-toc="configura-o-do-ambiente">Configura&ccedil;&atilde;o do Ambiente 🔧</h2><section class="chapter"><h3 id="1-vari-veis-de-ambiente" data-toc="1-vari-veis-de-ambiente">1. Vari&aacute;veis de Ambiente</h3><div class="code-block" data-lang="bash">
+# Crie arquivo .env na raiz
+cat &gt; .env &lt;&lt; EOL
+NODE_ENV=development
+FLASK_ENV=development
+DB_HOST=db
+DB_PORT=5432
+DB_NAME=devdb
+DB_USER=postgres
+DB_PASS=devpassword
+EOL
+</div></section><section class="chapter"><h3 id="2-networks" data-toc="2-networks">2. Networks</h3><div class="code-block" data-lang="bash">
+# Crie network para desenvolvimento
+docker network create dev-network
+
+# Verifique a criação
+docker network ls
+</div></section><section class="chapter"><h3 id="3-volumes" data-toc="3-volumes">3. Volumes</h3><div class="code-block" data-lang="bash">
+# Crie volumes necessários
+docker volume create pgdata
+
+# Verifique volumes
+docker volume ls
+</div></section></section><section class="chapter"><h2 id="setup-de-desenvolvimento" data-toc="setup-de-desenvolvimento">Setup de Desenvolvimento 💻</h2><section class="chapter"><h3 id="visual-studio-code" data-toc="visual-studio-code">Visual Studio Code</h3><ol class="list _decimal" id="-kfw6qz_44" type="1"><li class="list__item" id="-kfw6qz_45"><p id="-kfw6qz_46"><span class="control" id="-kfw6qz_48">Extens&otilde;es Recomendadas</span></p><ul class="list _bullet" id="-kfw6qz_47"><li class="list__item" id="-kfw6qz_49"><p id="-kfw6qz_55">Docker</p></li><li class="list__item" id="-kfw6qz_50"><p id="-kfw6qz_56">Remote Containers</p></li><li class="list__item" id="-kfw6qz_51"><p id="-kfw6qz_57">Python</p></li><li class="list__item" id="-kfw6qz_52"><p id="-kfw6qz_58">Node.js</p></li><li class="list__item" id="-kfw6qz_53"><p id="-kfw6qz_59">ESLint</p></li><li class="list__item" id="-kfw6qz_54"><p id="-kfw6qz_60">Prettier</p></li></ul></li></ol></section><section class="chapter"><h3 id="hot-reload" data-toc="hot-reload">Hot Reload</h3><div class="code-block" data-lang="bash">
+# Frontend (package.json)
+{
+  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;vite --host&quot;
+  }
+}
+
+# Backend (requirements.txt)
+flask-debug==0.4.3
+python-dotenv==0.19.0
+</div></section></section><section class="chapter"><h2 id="verifica-o-do-setup" data-toc="verifica-o-do-setup">Verifica&ccedil;&atilde;o do Setup ✅</h2><section class="chapter"><h3 id="teste-de-integra-o" data-toc="teste-de-integra-o">Teste de Integra&ccedil;&atilde;o</h3><div class="code-block" data-lang="bash">
+# Build dos containers
+docker compose build
+
+# Inicie os serviços
+docker compose up -d
+
+# Verifique os logs
+docker compose logs -f
+</div></section><section class="chapter"><h3 id="health-check" data-toc="health-check">Health Check</h3><div class="code-block" data-lang="bash">
+# Verifique status dos containers
+docker compose ps
+
+# Teste conexões
+curl http://localhost:3000
+curl http://localhost:5000/health
+</div></section></section><section class="chapter"><h2 id="setup-chan-tips" data-toc="setup-chan-tips">Setup-chan Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="-kfw6qz_66"><p id="-kfw6qz_68"><span class="control" id="-kfw6qz_69">Setup-chan diz:</span> &quot;Use <code class="code" id="-kfw6qz_70">.dockerignore</code> para excluir arquivos desnecess&aacute;rios e melhorar o build! 📝&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-kfw6qz_67"><p id="-kfw6qz_71"><span class="control" id="-kfw6qz_72">Setup-chan alerta:</span> &quot;Nunca exponha vari&aacute;veis sens&iacute;veis nos Dockerfiles! Use <code class="code" id="-kfw6qz_73">.env</code> ou secrets! 🔒&quot;</p></aside></section><section class="chapter"><h2 id="troubleshooting" data-toc="troubleshooting">Troubleshooting 🔍</h2><section class="chapter"><h3 id="problemas-comuns" data-toc="problemas-comuns">Problemas Comuns</h3><section class="chapter"><h4 id="1-permiss-es-de-volume" data-toc="1-permiss-es-de-volume">1. Permiss&otilde;es de Volume</h4><div class="code-block" data-lang="bash">
+# Corrija permissões
+sudo chown -R $USER:$USER .
+
+# Verifique montagem
+docker compose exec frontend ls -la /app
+</div></section><section class="chapter"><h4 id="2-conex-o-com-database" data-toc="2-conex-o-com-database">2. Conex&atilde;o com Database</h4><div class="code-block" data-lang="bash">
+# Teste conexão
+docker compose exec backend python -c &quot;import psycopg2; conn=psycopg2.connect(host='db', dbname='devdb', user='postgres', password='devpassword')&quot;
+</div></section></section></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="-kfw6qz_79" type="1"><li class="list__item" id="-kfw6qz_80"><p id="-kfw6qz_83"><a href="lab-2-exercise.html" id="-kfw6qz_84" data-tooltip="Lab 2 Setup completo">Lab 2 Exercise</a></p></li><li class="list__item" id="-kfw6qz_81"><p id="-kfw6qz_85"><span id="-kfw6qz_86">Docker Compose Deep Dive</span></p></li><li class="list__item" id="-kfw6qz_82"><p id="-kfw6qz_87"><span id="-kfw6qz_88">Development Best Practices</span></p></li></ol></section><section class="chapter"><h2 id="recursos-adicionais" data-toc="recursos-adicionais">Recursos Adicionais 📚</h2><ul class="list _bullet" id="-kfw6qz_89"><li class="list__item" id="-kfw6qz_91"><p id="-kfw6qz_94"><a href="https://docs.docker.com/compose/compose-file/" id="-kfw6qz_95" data-external="true" rel="noopener noreferrer" target="_blank">Docker Compose File Reference</a></p></li><li class="list__item" id="-kfw6qz_92"><p id="-kfw6qz_96"><a href="https://docs.docker.com/develop/" id="-kfw6qz_97" data-external="true" rel="noopener noreferrer" target="_blank">Development with Docker</a></p></li><li class="list__item" id="-kfw6qz_93"><p id="-kfw6qz_98"><a href="https://docs.docker.com/build/building/multi-stage/" id="-kfw6qz_99" data-external="true" rel="noopener noreferrer" target="_blank">Multi-stage Builds</a></p></li></ul><aside class="prompt" data-type="note" data-title="" id="-kfw6qz_90"><p id="-kfw6qz_100"><span class="control" id="-kfw6qz_101">Sensei's Note:</span> &quot;Um ambiente bem configurado &eacute; a base para um desenvolvimento produtivo! 🎯&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="lab-2-intro.html" class="navigation-links__prev">Lab 2: Desenvolvimento com Docker 🚀</a><a href="lab-2-exercise.html" class="navigation-links__next">Lab 2: Exerc&iacute;cios Pr&aacute;ticos 🏋️&zwj;♀️</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

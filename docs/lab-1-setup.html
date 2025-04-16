@@ -1,0 +1,137 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T16:35:33.917833499"><title>Lab 1: Configura&ccedil;&atilde;o do Ambiente 🛠️ | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"verifica-o-do-sistema","level":0,"title":"Verificação do Sistema 🔍","anchor":"#verifica-o-do-sistema"},{"id":"instala-o-do-docker","level":0,"title":"Instalação do Docker 📦","anchor":"#instala-o-do-docker"},{"id":"verifica-o-da-instala-o","level":0,"title":"Verificação da Instalação ✅","anchor":"#verifica-o-da-instala-o"},{"id":"configura-o-do-projeto","level":0,"title":"Configuração do Projeto 📁","anchor":"#configura-o-do-projeto"},{"id":"configura-o-do-ambiente-de-desenvolvimento","level":0,"title":"Configuração do Ambiente de Desenvolvimento 💻","anchor":"#configura-o-do-ambiente-de-desenvolvimento"},{"id":"verifica-o-final","level":0,"title":"Verificação Final 🎯","anchor":"#verifica-o-final"},{"id":"setup-chan-tips","level":0,"title":"Setup-chan Tips 💡","anchor":"#setup-chan-tips"},{"id":"troubleshooting-de-setup","level":0,"title":"Troubleshooting de Setup 🔧","anchor":"#troubleshooting-de-setup"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"},{"id":"recursos-de-setup","level":0,"title":"Recursos de Setup 📚","anchor":"#recursos-de-setup"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Lab 1: Configura&ccedil;&atilde;o do Ambiente 🛠️ | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/lab-1-setup.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Lab 1: Configura&ccedil;&atilde;o do Ambiente 🛠️ | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/lab-1-setup.html#webpage",
+    "url": "writerside-documentation/lab-1-setup.html",
+    "name": "Lab 1: Configura&ccedil;&atilde;o do Ambiente 🛠️ | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="lab-1-setup" data-main-title="Lab 1: Configuração do Ambiente 🛠️" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="PRACTICE: Real World///Lab 1: Basics"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="lab-1-setup" id="lab-1-setup.md">Lab 1: Configuração do Ambiente 🛠️</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ SETUP STATUS: CONFIGURANDO...                             ║
+║ DIFICULDADE: ★☆☆☆☆                                      ║
+║ TEMPO ESTIMADO: 20 minutos                               ║
+║ WAIFU ASSISTANT: Setup-chan                              ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="verifica-o-do-sistema" data-toc="verifica-o-do-sistema">Verifica&ccedil;&atilde;o do Sistema 🔍</h2><section class="chapter"><h3 id="requisitos-m-nimos" data-toc="requisitos-m-nimos">Requisitos M&iacute;nimos</h3><ul class="list _bullet" id="-h6w7yi_16"><li class="list__item" id="-h6w7yi_17"><p id="-h6w7yi_21">CPU: 2 cores</p></li><li class="list__item" id="-h6w7yi_18"><p id="-h6w7yi_22">RAM: 4GB</p></li><li class="list__item" id="-h6w7yi_19"><p id="-h6w7yi_23">Espa&ccedil;o em Disco: 20GB</p></li><li class="list__item" id="-h6w7yi_20"><p id="-h6w7yi_24">Sistema Operacional: Windows 10+, macOS 10.15+, ou Linux (kernel 3.10+)</p></li></ul></section><section class="chapter"><h3 id="verifica-o-de-compatibilidade" data-toc="verifica-o-de-compatibilidade">Verifica&ccedil;&atilde;o de Compatibilidade</h3><div class="code-block" data-lang="bash">
+# Windows - PowerShell
+systeminfo | findstr /B /C:&quot;OS Name&quot; /C:&quot;OS Version&quot; /C:&quot;System Type&quot;
+
+# macOS - Terminal
+system_profiler SPHardwareDataType | grep &quot;Processor\|Memory&quot;
+
+# Linux - Terminal
+uname -a
+free -h
+nproc
+</div></section></section><section class="chapter"><h2 id="instala-o-do-docker" data-toc="instala-o-do-docker">Instala&ccedil;&atilde;o do Docker 📦</h2><section class="chapter"><h3 id="windows" data-toc="windows">Windows</h3><ol class="list _decimal" id="-h6w7yi_29" type="1"><li class="list__item" id="-h6w7yi_30"><p id="-h6w7yi_31"><span class="control" id="-h6w7yi_33">Docker Desktop</span></p><div class="code-block" data-lang="bash">
+# Verifique se o WSL2 está instalado
+wsl --version
+
+# Instale o Docker Desktop
+winget install Docker.DockerDesktop
+</div></li></ol></section><section class="chapter"><h3 id="macos" data-toc="macos">macOS</h3><ol class="list _decimal" id="-h6w7yi_34" type="1"><li class="list__item" id="-h6w7yi_35"><p id="-h6w7yi_36"><span class="control" id="-h6w7yi_38">Docker Desktop</span></p><div class="code-block" data-lang="bash">
+# Via Homebrew
+brew install --cask docker
+
+# Inicie o Docker Desktop
+open /Applications/Docker.app
+</div></li></ol></section><section class="chapter"><h3 id="linux" data-toc="linux">Linux</h3><ol class="list _decimal" id="-h6w7yi_39" type="1"><li class="list__item" id="-h6w7yi_40"><p id="-h6w7yi_41"><span class="control" id="-h6w7yi_43">Docker Engine</span></p><div class="code-block" data-lang="bash">
+# Ubuntu/Debian
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Configure permissões
+sudo usermod -aG docker $USER
+</div></li></ol></section></section><section class="chapter"><h2 id="verifica-o-da-instala-o" data-toc="verifica-o-da-instala-o">Verifica&ccedil;&atilde;o da Instala&ccedil;&atilde;o ✅</h2><section class="chapter"><h3 id="teste-b-sico" data-toc="teste-b-sico">Teste B&aacute;sico</h3><div class="code-block" data-lang="bash">
+# Verifique a versão
+docker version
+
+# Execute container de teste
+docker run hello-world
+</div></section><section class="chapter"><h3 id="verifica-o-detalhada" data-toc="verifica-o-detalhada">Verifica&ccedil;&atilde;o Detalhada</h3><div class="code-block" data-lang="bash">
+# Info do sistema Docker
+docker info
+
+# Teste de rede
+docker run --rm alpine ping -c 4 google.com
+
+# Teste de disco
+docker run --rm alpine dd if=/dev/zero of=/dev/null bs=1M count=1000
+</div></section></section><section class="chapter"><h2 id="configura-o-do-projeto" data-toc="configura-o-do-projeto">Configura&ccedil;&atilde;o do Projeto 📁</h2><section class="chapter"><h3 id="estrutura-de-diret-rios" data-toc="estrutura-de-diret-rios">Estrutura de Diret&oacute;rios</h3><div class="code-block" data-lang="bash">
+# Crie a estrutura do projeto
+mkdir -p lab-1/{app,config,scripts}
+cd lab-1
+
+# Crie arquivos iniciais
+touch app/index.html
+touch app/style.css
+touch Dockerfile
+touch docker-compose.yml
+</div></section><section class="chapter"><h3 id="arquivos-base" data-toc="arquivos-base">Arquivos Base</h3><section class="chapter"><h4 id="1-index-html" data-toc="1-index-html">1. index.html</h4><div class="code-block" data-lang="markup">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Docker Lab 1&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello Docker!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</div></section><section class="chapter"><h4 id="2-style-css" data-toc="2-style-css">2. style.css</h4><div class="code-block" data-lang="css">
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+</div></section><section class="chapter"><h4 id="3-dockerfile" data-toc="3-dockerfile">3. Dockerfile</h4><div class="code-block" data-lang="none">
+FROM nginx:alpine
+COPY app/ /usr/share/nginx/html/
+</div></section><section class="chapter"><h4 id="4-docker-compose-yml" data-toc="4-docker-compose-yml">4. docker-compose.yml</h4><div class="code-block" data-lang="yaml">
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - &quot;8080:80&quot;
+</div></section></section></section><section class="chapter"><h2 id="configura-o-do-ambiente-de-desenvolvimento" data-toc="configura-o-do-ambiente-de-desenvolvimento">Configura&ccedil;&atilde;o do Ambiente de Desenvolvimento 💻</h2><section class="chapter"><h3 id="visual-studio-code" data-toc="visual-studio-code">Visual Studio Code</h3><ol class="list _decimal" id="-h6w7yi_61" type="1"><li class="list__item" id="-h6w7yi_62"><p id="-h6w7yi_63"><span class="control" id="-h6w7yi_65">Extens&otilde;es Recomendadas</span></p><ul class="list _bullet" id="-h6w7yi_64"><li class="list__item" id="-h6w7yi_66"><p id="-h6w7yi_70">Docker</p></li><li class="list__item" id="-h6w7yi_67"><p id="-h6w7yi_71">Remote - Containers</p></li><li class="list__item" id="-h6w7yi_68"><p id="-h6w7yi_72">YAML</p></li><li class="list__item" id="-h6w7yi_69"><p id="-h6w7yi_73">Dockerfile</p></li></ul></li></ol></section><section class="chapter"><h3 id="terminal" data-toc="terminal">Terminal</h3><div class="code-block" data-lang="bash">
+# Configure aliases úteis
+echo 'alias d=&quot;docker&quot;' &gt;&gt; ~/.bashrc
+echo 'alias dc=&quot;docker-compose&quot;' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</div></section></section><section class="chapter"><h2 id="verifica-o-final" data-toc="verifica-o-final">Verifica&ccedil;&atilde;o Final 🎯</h2><section class="chapter"><h3 id="checklist-de-setup" data-toc="checklist-de-setup">Checklist de Setup</h3><ul class="list _bullet" id="-h6w7yi_77"><li class="list__item" id="-h6w7yi_78"><p id="-h6w7yi_83">[ ] Docker instalado</p></li><li class="list__item" id="-h6w7yi_79"><p id="-h6w7yi_84">[ ] Hello World executado</p></li><li class="list__item" id="-h6w7yi_80"><p id="-h6w7yi_85">[ ] Projeto estruturado</p></li><li class="list__item" id="-h6w7yi_81"><p id="-h6w7yi_86">[ ] Arquivos base criados</p></li><li class="list__item" id="-h6w7yi_82"><p id="-h6w7yi_87">[ ] IDE configurado</p></li></ul></section><section class="chapter"><h3 id="teste-de-ambiente" data-toc="teste-de-ambiente">Teste de Ambiente</h3><div class="code-block" data-lang="bash">
+# Build do projeto
+docker build -t lab1 .
+
+# Execute o container
+docker run -d -p 8080:80 lab1
+
+# Verifique o status
+docker ps
+</div></section></section><section class="chapter"><h2 id="setup-chan-tips" data-toc="setup-chan-tips">Setup-chan Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="-h6w7yi_89"><p id="-h6w7yi_91"><span class="control" id="-h6w7yi_92">Setup-chan diz:</span> &quot;Sempre verifique as permiss&otilde;es do Docker no Linux! Se n&atilde;o conseguir executar comandos, adicione seu usu&aacute;rio ao grupo docker!&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-h6w7yi_90"><p id="-h6w7yi_93"><span class="control" id="-h6w7yi_94">Setup-chan alerta:</span> &quot;No Windows, certifique-se que o WSL2 est&aacute; atualizado e configurado corretamente!&quot;</p></aside></section><section class="chapter"><h2 id="troubleshooting-de-setup" data-toc="troubleshooting-de-setup">Troubleshooting de Setup 🔧</h2><section class="chapter"><h3 id="problemas-comuns" data-toc="problemas-comuns">Problemas Comuns</h3><section class="chapter"><h4 id="1-docker-n-o-inicia" data-toc="1-docker-n-o-inicia">1. Docker n&atilde;o inicia</h4><div class="code-block" data-lang="bash">
+# Windows
+net stop com.docker.service
+net start com.docker.service
+
+# Linux
+sudo systemctl restart docker
+</div></section><section class="chapter"><h4 id="2-permiss-es-negadas" data-toc="2-permiss-es-negadas">2. Permiss&otilde;es negadas</h4><div class="code-block" data-lang="bash">
+# Linux
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+</div></section><section class="chapter"><h4 id="3-portas-em-uso" data-toc="3-portas-em-uso">3. Portas em uso</h4><div class="code-block" data-lang="bash">
+# Verifique portas em uso
+netstat -tulpn | grep LISTEN
+
+# Windows
+netstat -ano | findstr :80
+</div></section></section></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="-h6w7yi_102" type="1"><li class="list__item" id="-h6w7yi_103"><p id="-h6w7yi_106"><a href="lab-1-exercise.html" id="-h6w7yi_107" data-tooltip="Docker instalado e funcionando">Lab 1 Exercise</a></p></li><li class="list__item" id="-h6w7yi_104"><p id="-h6w7yi_108"><a href="docker-commands.html" id="-h6w7yi_109" data-tooltip="Command-chan diz: &quot;Use --help com qualquer comando para ver todas as opções! 📚&quot;">Docker Commands</a></p></li><li class="list__item" id="-h6w7yi_105"><p id="-h6w7yi_110"><a href="containers-101.html" id="-h6w7yi_111" data-tooltip="Um container é como uma cápsula auto-suficiente que contém:">Container Basics</a></p></li></ol></section><section class="chapter"><h2 id="recursos-de-setup" data-toc="recursos-de-setup">Recursos de Setup 📚</h2><ul class="list _bullet" id="-h6w7yi_112"><li class="list__item" id="-h6w7yi_114"><p id="-h6w7yi_117"><a href="https://docs.docker.com/get-docker/" id="-h6w7yi_118" data-external="true" rel="noopener noreferrer" target="_blank">Docker Installation Guide</a></p></li><li class="list__item" id="-h6w7yi_115"><p id="-h6w7yi_119"><a href="https://docs.microsoft.com/windows/wsl/install" id="-h6w7yi_120" data-external="true" rel="noopener noreferrer" target="_blank">WSL2 Installation</a></p></li><li class="list__item" id="-h6w7yi_116"><p id="-h6w7yi_121"><a href="https://docs.docker.com/desktop/" id="-h6w7yi_122" data-external="true" rel="noopener noreferrer" target="_blank">Docker Desktop Settings</a></p></li></ul><aside class="prompt" data-type="note" data-title="" id="-h6w7yi_113"><p id="-h6w7yi_123"><span class="control" id="-h6w7yi_124">Sensei's Note:</span> &quot;Um ambiente bem configurado &eacute; metade do caminho para o sucesso!&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="lab-1-intro.html" class="navigation-links__prev">Lab 1: Primeiros Passos com Docker 🚀</a><a href="lab-1-exercise.html" class="navigation-links__next">Lab 1: Exerc&iacute;cios Pr&aacute;ticos 🏋️&zwj;♀️</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

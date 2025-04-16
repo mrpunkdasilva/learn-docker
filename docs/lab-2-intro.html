@@ -1,0 +1,90 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T16:35:34.651682284"><title>Lab 2: Desenvolvimento com Docker 🚀 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"objetivo-do-lab","level":0,"title":"Objetivo do Lab 🎯","anchor":"#objetivo-do-lab"},{"id":"pr-requisitos","level":0,"title":"Pré-requisitos 📝","anchor":"#pr-requisitos"},{"id":"ambiente-de-desenvolvimento","level":0,"title":"Ambiente de Desenvolvimento 🛠️","anchor":"#ambiente-de-desenvolvimento"},{"id":"estrutura-do-projeto","level":0,"title":"Estrutura do Projeto 📁","anchor":"#estrutura-do-projeto"},{"id":"exerc-cios","level":0,"title":"Exercícios 📚","anchor":"#exerc-cios"},{"id":"desafios-extras","level":0,"title":"Desafios Extras 🌟","anchor":"#desafios-extras"},{"id":"devops-chan-tips","level":0,"title":"DevOps-chan Tips 💡","anchor":"#devops-chan-tips"},{"id":"troubleshooting-comum","level":0,"title":"Troubleshooting Comum 🔧","anchor":"#troubleshooting-comum"},{"id":"checklist-de-conclus-o","level":0,"title":"Checklist de Conclusão ✅","anchor":"#checklist-de-conclus-o"},{"id":"pr-ximos-passos","level":0,"title":"Próximos Passos 🎯","anchor":"#pr-ximos-passos"},{"id":"recursos-adicionais","level":0,"title":"Recursos Adicionais 📚","anchor":"#recursos-adicionais"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Lab 2: Desenvolvimento com Docker 🚀 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/lab-2-intro.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Lab 2: Desenvolvimento com Docker 🚀 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/lab-2-intro.html#webpage",
+    "url": "writerside-documentation/lab-2-intro.html",
+    "name": "Lab 2: Desenvolvimento com Docker 🚀 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="lab-2-intro" data-main-title="Lab 2: Desenvolvimento com Docker 🚀" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="PRACTICE: Real World///Lab 2: Development"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="lab-2-intro" id="lab-2-intro.md">Lab 2: Desenvolvimento com Docker 🚀</h1><div class="code-block" data-lang="none">
+╔═══════════════════════════════════════════════════════════╗
+║ LAB STATUS: INICIANDO...                                  ║
+║ DIFICULDADE: ★★★☆☆                                        ║
+║ TEMPO ESTIMADO: 90 minutos                               ║
+║ WAIFU ASSISTANT: DevOps-chan                             ║
+╚═══════════════════════════════════════════════════════════╝
+</div><section class="chapter"><h2 id="objetivo-do-lab" data-toc="objetivo-do-lab">Objetivo do Lab 🎯</h2><p id="-yk0a62_15">Neste laborat&oacute;rio de desenvolvimento, voc&ecirc; vai:</p><ol class="list _decimal" id="-yk0a62_16" type="1"><li class="list__item" id="-yk0a62_17"><p id="-yk0a62_21">Criar um ambiente de desenvolvimento completo</p></li><li class="list__item" id="-yk0a62_18"><p id="-yk0a62_22">Trabalhar com m&uacute;ltiplos containers</p></li><li class="list__item" id="-yk0a62_19"><p id="-yk0a62_23">Implementar Docker Compose</p></li><li class="list__item" id="-yk0a62_20"><p id="-yk0a62_24">Desenvolver uma aplica&ccedil;&atilde;o multi-container</p></li></ol></section><section class="chapter"><h2 id="pr-requisitos" data-toc="pr-requisitos">Pr&eacute;-requisitos 📝</h2><ul class="list _bullet" id="-yk0a62_25"><li class="list__item" id="-yk0a62_26"><p id="-yk0a62_31">[x] Lab 1 completado</p></li><li class="list__item" id="-yk0a62_27"><p id="-yk0a62_32">[x] Docker Compose instalado</p></li><li class="list__item" id="-yk0a62_28"><p id="-yk0a62_33">[x] Git instalado</p></li><li class="list__item" id="-yk0a62_29"><p id="-yk0a62_34">[x] Editor de c&oacute;digo</p></li><li class="list__item" id="-yk0a62_30"><p id="-yk0a62_35">[x] Conhecimento b&aacute;sico de web development</p></li></ul></section><section class="chapter"><h2 id="ambiente-de-desenvolvimento" data-toc="ambiente-de-desenvolvimento">Ambiente de Desenvolvimento 🛠️</h2><div class="code-block" data-lang="bash">
+# Verifique a instalação do Docker Compose
+docker compose version
+
+# Clone o repositório do projeto
+git clone https://github.com/seu-usuario/docker-lab-2
+cd docker-lab-2
+</div></section><section class="chapter"><h2 id="estrutura-do-projeto" data-toc="estrutura-do-projeto">Estrutura do Projeto 📁</h2><div class="code-block" data-lang="none">
+lab-2/
+├── frontend/
+│   ├── src/
+│   ├── package.json
+│   └── Dockerfile
+├── backend/
+│   ├── src/
+│   ├── requirements.txt
+│   └── Dockerfile
+├── database/
+│   └── init.sql
+├── docker-compose.yml
+└── README.md
+</div></section><section class="chapter"><h2 id="exerc-cios" data-toc="exerc-cios">Exerc&iacute;cios 📚</h2><section class="chapter"><h3 id="1-setup-do-ambiente" data-toc="1-setup-do-ambiente">1. Setup do Ambiente 🏗️</h3><div class="code-block" data-lang="yaml">
+# docker-compose.yml básico
+version: '3.8'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - &quot;3000:3000&quot;
+  
+  backend:
+    build: ./backend
+    ports:
+      - &quot;5000:5000&quot;
+  
+  db:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_PASSWORD: example
+</div></section><section class="chapter"><h3 id="2-desenvolvimento-frontend" data-toc="2-desenvolvimento-frontend">2. Desenvolvimento Frontend 🎨</h3><div class="code-block" data-lang="none">
+# frontend/Dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+CMD [&quot;npm&quot;, &quot;start&quot;]
+</div></section><section class="chapter"><h3 id="3-desenvolvimento-backend" data-toc="3-desenvolvimento-backend">3. Desenvolvimento Backend 🔧</h3><div class="code-block" data-lang="none">
+# backend/Dockerfile
+FROM python:3.9-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD [&quot;python&quot;, &quot;src/app.py&quot;]
+</div></section></section><section class="chapter"><h2 id="desafios-extras" data-toc="desafios-extras">Desafios Extras 🌟</h2><section class="chapter"><h3 id="n-vel-1-developer" data-toc="n-vel-1-developer">N&iacute;vel 1: Developer 💻</h3><ul class="list _bullet" id="-yk0a62_47"><li class="list__item" id="-yk0a62_48"><p id="-yk0a62_51">[ ] Implementar hot-reload</p></li><li class="list__item" id="-yk0a62_49"><p id="-yk0a62_52">[ ] Configurar volumes de desenvolvimento</p></li><li class="list__item" id="-yk0a62_50"><p id="-yk0a62_53">[ ] Adicionar linting e testes</p></li></ul></section><section class="chapter"><h3 id="n-vel-2-architect" data-toc="n-vel-2-architect">N&iacute;vel 2: Architect 🏛️</h3><ul class="list _bullet" id="-yk0a62_54"><li class="list__item" id="-yk0a62_55"><p id="-yk0a62_58">[ ] Implementar cache de build</p></li><li class="list__item" id="-yk0a62_56"><p id="-yk0a62_59">[ ] Otimizar Dockerfiles</p></li><li class="list__item" id="-yk0a62_57"><p id="-yk0a62_60">[ ] Configurar networks isoladas</p></li></ul></section><section class="chapter"><h3 id="n-vel-3-devops" data-toc="n-vel-3-devops">N&iacute;vel 3: DevOps 🔄</h3><ul class="list _bullet" id="-yk0a62_61"><li class="list__item" id="-yk0a62_62"><p id="-yk0a62_65">[ ] Setup CI/CD b&aacute;sico</p></li><li class="list__item" id="-yk0a62_63"><p id="-yk0a62_66">[ ] Implementar health checks</p></li><li class="list__item" id="-yk0a62_64"><p id="-yk0a62_67">[ ] Configurar logging centralizado</p></li></ul></section></section><section class="chapter"><h2 id="devops-chan-tips" data-toc="devops-chan-tips">DevOps-chan Tips 💡</h2><aside class="prompt" data-type="tip" data-title="" id="-yk0a62_68"><p id="-yk0a62_70"><span class="control" id="-yk0a62_71">DevOps-chan diz:</span> &quot;Use volumes para desenvolvimento! N&atilde;o precisa rebuildar a imagem a cada altera&ccedil;&atilde;o no c&oacute;digo! 🔄&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-yk0a62_69"><p id="-yk0a62_72"><span class="control" id="-yk0a62_73">DevOps-chan alerta:</span> &quot;Cuidado com as depend&ecirc;ncias entre servi&ccedil;os! Use <code class="code" id="-yk0a62_74">depends_on</code> e health checks! 🏥&quot;</p></aside></section><section class="chapter"><h2 id="troubleshooting-comum" data-toc="troubleshooting-comum">Troubleshooting Comum 🔧</h2><section class="chapter"><h3 id="problema-servi-os-n-o-se-comunicam" data-toc="problema-servi-os-n-o-se-comunicam">Problema: Servi&ccedil;os n&atilde;o se comunicam</h3><div class="code-block" data-lang="bash">
+# Verifique as networks
+docker network ls
+
+# Inspecione os containers
+docker inspect [container-id]
+</div></section><section class="chapter"><h3 id="problema-volumes-n-o-sincronizam" data-toc="problema-volumes-n-o-sincronizam">Problema: Volumes n&atilde;o sincronizam</h3><div class="code-block" data-lang="bash">
+# Verifique os volumes
+docker volume ls
+
+# Verifique os binds
+docker compose ps
+</div></section></section><section class="chapter"><h2 id="checklist-de-conclus-o" data-toc="checklist-de-conclus-o">Checklist de Conclus&atilde;o ✅</h2><section class="chapter"><h3 id="ambiente" data-toc="ambiente">Ambiente</h3><ul class="list _bullet" id="-yk0a62_82"><li class="list__item" id="-yk0a62_83"><p id="-yk0a62_87">[ ] Docker Compose configurado</p></li><li class="list__item" id="-yk0a62_84"><p id="-yk0a62_88">[ ] Servi&ccedil;os rodando</p></li><li class="list__item" id="-yk0a62_85"><p id="-yk0a62_89">[ ] Networks configuradas</p></li><li class="list__item" id="-yk0a62_86"><p id="-yk0a62_90">[ ] Volumes montados</p></li></ul></section><section class="chapter"><h3 id="desenvolvimento" data-toc="desenvolvimento">Desenvolvimento</h3><ul class="list _bullet" id="-yk0a62_91"><li class="list__item" id="-yk0a62_92"><p id="-yk0a62_96">[ ] Hot-reload funcionando</p></li><li class="list__item" id="-yk0a62_93"><p id="-yk0a62_97">[ ] Logs centralizados</p></li><li class="list__item" id="-yk0a62_94"><p id="-yk0a62_98">[ ] Testes implementados</p></li><li class="list__item" id="-yk0a62_95"><p id="-yk0a62_99">[ ] CI/CD b&aacute;sico configurado</p></li></ul></section><section class="chapter"><h3 id="performance" data-toc="performance">Performance</h3><ul class="list _bullet" id="-yk0a62_100"><li class="list__item" id="-yk0a62_101"><p id="-yk0a62_105">[ ] Build otimizado</p></li><li class="list__item" id="-yk0a62_102"><p id="-yk0a62_106">[ ] Cache configurado</p></li><li class="list__item" id="-yk0a62_103"><p id="-yk0a62_107">[ ] Resources limitados</p></li><li class="list__item" id="-yk0a62_104"><p id="-yk0a62_108">[ ] Monitoring b&aacute;sico</p></li></ul></section></section><section class="chapter"><h2 id="pr-ximos-passos" data-toc="pr-ximos-passos">Pr&oacute;ximos Passos 🎯</h2><ol class="list _decimal" id="-yk0a62_109" type="1"><li class="list__item" id="-yk0a62_110"><p id="-yk0a62_113"><a href="lab-2-setup.html" id="-yk0a62_114" data-tooltip="Docker Engine 20.10+">Lab 2 Setup</a></p></li><li class="list__item" id="-yk0a62_111"><p id="-yk0a62_115"><a href="lab-2-exercise.html" id="-yk0a62_116" data-tooltip="Lab 2 Setup completo">Lab 2 Exercise</a></p></li><li class="list__item" id="-yk0a62_112"><p id="-yk0a62_117"><span id="-yk0a62_118">Docker Compose Deep Dive</span></p></li></ol></section><section class="chapter"><h2 id="recursos-adicionais" data-toc="recursos-adicionais">Recursos Adicionais 📚</h2><ul class="list _bullet" id="-yk0a62_119"><li class="list__item" id="-yk0a62_121"><p id="-yk0a62_124"><a href="https://docs.docker.com/compose/" id="-yk0a62_125" data-external="true" rel="noopener noreferrer" target="_blank">Docker Compose Docs</a></p></li><li class="list__item" id="-yk0a62_122"><p id="-yk0a62_126"><a href="https://docs.docker.com/develop/dev-best-practices/" id="-yk0a62_127" data-external="true" rel="noopener noreferrer" target="_blank">Development Best Practices</a></p></li><li class="list__item" id="-yk0a62_123"><p id="-yk0a62_128"><a href="https://docs.docker.com/develop/" id="-yk0a62_129" data-external="true" rel="noopener noreferrer" target="_blank">Docker in Development</a></p></li></ul><aside class="prompt" data-type="note" data-title="" id="-yk0a62_120"><p id="-yk0a62_130"><span class="control" id="-yk0a62_131">Sensei's Note:</span> &quot;O verdadeiro poder do Docker se revela quando voc&ecirc; domina o desenvolvimento multi-container! 🎯&quot;</p></aside></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="lab-1-exercise.html" class="navigation-links__prev">Lab 1: Exerc&iacute;cios Pr&aacute;ticos 🏋️&zwj;♀️</a><a href="lab-2-setup.html" class="navigation-links__next">Lab 2: Configura&ccedil;&atilde;o do Ambiente de Desenvolvimento 🛠️</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#9F42BC"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2025-04-16T16:35:34.512092154"><title>Docker Caching Guide 🚀 | Learn Docker</title><script type="application/json" id="virtual-toc-data">[{"id":"build-cache-optimization","level":0,"title":"Build Cache Optimization 📦","anchor":"#build-cache-optimization"},{"id":"registry-cache","level":0,"title":"Registry Cache 🌐","anchor":"#registry-cache"},{"id":"local-cache-management","level":0,"title":"Local Cache Management 💾","anchor":"#local-cache-management"},{"id":"cache-invalidation","level":0,"title":"Cache Invalidation ⚡","anchor":"#cache-invalidation"},{"id":"development-cache","level":0,"title":"Development Cache 🔧","anchor":"#development-cache"},{"id":"cache-best-practices","level":0,"title":"Cache Best Practices ✅","anchor":"#cache-best-practices"},{"id":"performance-matrix","level":0,"title":"Performance Matrix 📊","anchor":"#performance-matrix"},{"id":"waifu-cache-tips","level":0,"title":"Waifu Cache Tips 💫","anchor":"#waifu-cache-tips"},{"id":"quick-reference","level":0,"title":"Quick Reference 📚","anchor":"#quick-reference"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content="logo-primary.svg"><!-- Open Graph --><meta property="og:title" content="Docker Caching Guide 🚀 | Learn Docker"><meta property="og:description" content=""><meta property="og:image" content="logo-primary.svg"><meta property="og:site_name" content="Learn Docker Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/docker-caching.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="logo-primary.svg"><meta name="twitter:title" content="Docker Caching Guide 🚀 | Learn Docker"><meta name="twitter:description" content=""><meta name="twitter:creator" content="logo-primary.svg"><meta name="twitter:image:src" content="logo-primary.svg"><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/docker-caching.html#webpage",
+    "url": "writerside-documentation/docker-caching.html",
+    "name": "Docker Caching Guide 🚀 | Learn Docker",
+    "description": "",
+    "image": "logo-primary.svg",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Docker Help"
+}</script><!-- End Schema.org --></head><body data-id="docker-caching" data-main-title="Docker Caching Guide 🚀" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="ADVANCED: Production Ready///Performance"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Docker  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="docker-caching" id="docker-caching.md">Docker Caching Guide 🚀</h1><section class="chapter"><h2 id="build-cache-optimization" data-toc="build-cache-optimization">Build Cache Optimization 📦</h2><section class="chapter"><h3 id="layer-caching" data-toc="layer-caching">Layer Caching</h3><div class="code-block" data-lang="none">
+# ✅ Dependências primeiro
+COPY package*.json ./
+RUN npm ci
+
+# ✅ Código fonte depois
+COPY . .
+RUN npm run build
+</div></section><section class="chapter"><h3 id="buildkit-cache" data-toc="buildkit-cache">BuildKit Cache</h3><div class="code-block" data-lang="none">
+# ✅ Cache mount para build
+RUN --mount=type=cache,target=/root/.cache/go-build \
+    go build -o app
+
+# ✅ Cache mount para package managers
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci
+</div></section></section><section class="chapter"><h2 id="registry-cache" data-toc="registry-cache">Registry Cache 🌐</h2><section class="chapter"><h3 id="registry-caching" data-toc="registry-caching">Registry Caching</h3><div class="code-block" data-lang="bash">
+# Cache em registry remoto
+docker buildx build \
+  --cache-from type=registry,ref=user/app:cache \
+  --cache-to type=registry,ref=user/app:cache \
+  .
+
+# Pull com cache
+docker pull --cache-from user/app:cache myapp
+</div></section><section class="chapter"><h3 id="multi-registry-cache" data-toc="multi-registry-cache">Multi-registry Cache</h3><div class="code-block" data-lang="yaml">
+# docker-compose.yml
+services:
+  app:
+    build:
+      context: .
+      cache_from:
+        - registry-1.example.com/myapp:cache
+        - registry-2.example.com/myapp:cache
+</div></section></section><section class="chapter"><h2 id="local-cache-management" data-toc="local-cache-management">Local Cache Management 💾</h2><section class="chapter"><h3 id="volume-cache" data-toc="volume-cache">Volume Cache</h3><div class="code-block" data-lang="yaml">
+version: '3.8'
+services:
+  app:
+    build: .
+    volumes:
+      # Cache de dependências
+      - deps:/app/node_modules
+      # Cache de build
+      - build:/app/build
+
+volumes:
+  deps:
+  build:
+</div></section><section class="chapter"><h3 id="bind-mount-cache" data-toc="bind-mount-cache">Bind Mount Cache</h3><div class="code-block" data-lang="bash">
+# Cache de desenvolvimento
+docker run \
+  -v $(pwd):/app \
+  -v node_modules:/app/node_modules \
+  node:alpine npm install
+</div></section></section><section class="chapter"><h2 id="cache-invalidation" data-toc="cache-invalidation">Cache Invalidation ⚡</h2><section class="chapter"><h3 id="estrat-gias-de-invalida-o" data-toc="estrat-gias-de-invalida-o">Estrat&eacute;gias de Invalida&ccedil;&atilde;o</h3><div class="code-block" data-lang="none">
+# ✅ Cache bust com ARG
+ARG CACHE_BUST=unknown
+RUN echo &quot;${CACHE_BUST}&quot; &amp;&amp; npm ci
+
+# ✅ Cache com checksum
+COPY package.json package-lock.json ./
+RUN echo &quot;$(md5sum package-lock.json)&quot; &gt; /tmp/hash \
+    &amp;&amp; npm ci
+</div></section><section class="chapter"><h3 id="cache-cleanup" data-toc="cache-cleanup">Cache Cleanup</h3><div class="code-block" data-lang="bash">
+# Limpar cache local
+docker builder prune --filter until=24h
+
+# Limpar volumes de cache
+docker volume rm $(docker volume ls -q -f name=*cache*)
+</div></section></section><section class="chapter"><h2 id="development-cache" data-toc="development-cache">Development Cache 🔧</h2><section class="chapter"><h3 id="hot-reload-cache" data-toc="hot-reload-cache">Hot Reload Cache</h3><div class="code-block" data-lang="yaml">
+# docker-compose.dev.yml
+services:
+  app:
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+      - build_cache:/app/.next
+    environment:
+      - NODE_ENV=development
+
+volumes:
+  node_modules:
+  build_cache:
+</div></section><section class="chapter"><h3 id="multi-stage-cache" data-toc="multi-stage-cache">Multi-stage Cache</h3><div class="code-block" data-lang="none">
+# Build cache
+FROM node:alpine AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+
+# Development
+FROM node:alpine AS dev
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+CMD [&quot;npm&quot;, &quot;run&quot;, &quot;dev&quot;]
+
+# Production build
+FROM dev AS builder
+RUN npm run build
+
+# Production
+FROM node:alpine
+COPY --from=builder /app/dist ./dist
+CMD [&quot;npm&quot;, &quot;start&quot;]
+</div></section></section><section class="chapter"><h2 id="cache-best-practices" data-toc="cache-best-practices">Cache Best Practices ✅</h2><section class="chapter"><h3 id="do-s" data-toc="do-s">DO's</h3><ol class="list _decimal" id="-5ro45b_34" type="1"><li class="list__item" id="-5ro45b_35"><p id="-5ro45b_40">[x] Use multi-stage builds</p></li><li class="list__item" id="-5ro45b_36"><p id="-5ro45b_41">[x] Organize layers por mutabilidade</p></li><li class="list__item" id="-5ro45b_37"><p id="-5ro45b_42">[x] Implemente BuildKit cache mounts</p></li><li class="list__item" id="-5ro45b_38"><p id="-5ro45b_43">[x] Utilize registry caching</p></li><li class="list__item" id="-5ro45b_39"><p id="-5ro45b_44">[x] Mantenha volumes de cache separados</p></li></ol></section><section class="chapter"><h3 id="don-ts" data-toc="don-ts">DON'Ts</h3><ol class="list _decimal" id="-5ro45b_45" type="1"><li class="list__item" id="-5ro45b_46"><p id="-5ro45b_51">[ ] Misturar depend&ecirc;ncias com c&oacute;digo</p></li><li class="list__item" id="-5ro45b_47"><p id="-5ro45b_52">[ ] Ignorar .dockerignore</p></li><li class="list__item" id="-5ro45b_48"><p id="-5ro45b_53">[ ] Cachear dados sens&iacute;veis</p></li><li class="list__item" id="-5ro45b_49"><p id="-5ro45b_54">[ ] Acumular cache desnecess&aacute;rio</p></li><li class="list__item" id="-5ro45b_50"><p id="-5ro45b_55">[ ] Usar cache em produ&ccedil;&atilde;o sem necessidade</p></li></ol></section></section><section class="chapter"><h2 id="performance-matrix" data-toc="performance-matrix">Performance Matrix 📊</h2><div class="table-wrapper"><table class="wide" id="-5ro45b_56"><thead><tr class="ijRowHead" id="-5ro45b_57"><th id="-5ro45b_63"><p>Tipo de Cache</p></th><th id="-5ro45b_64"><p>Uso</p></th><th id="-5ro45b_65"><p>Performance</p></th></tr></thead><tbody><tr id="-5ro45b_58"><td id="-5ro45b_66"><p>Layer</p></td><td id="-5ro45b_67"><p>Build</p></td><td id="-5ro45b_68"><p>Alta</p></td></tr><tr id="-5ro45b_59"><td id="-5ro45b_69"><p>BuildKit</p></td><td id="-5ro45b_70"><p>Build</p></td><td id="-5ro45b_71"><p>Muito Alta</p></td></tr><tr id="-5ro45b_60"><td id="-5ro45b_72"><p>Registry</p></td><td id="-5ro45b_73"><p>Distribui&ccedil;&atilde;o</p></td><td id="-5ro45b_74"><p>M&eacute;dia</p></td></tr><tr id="-5ro45b_61"><td id="-5ro45b_75"><p>Volume</p></td><td id="-5ro45b_76"><p>Runtime</p></td><td id="-5ro45b_77"><p>Alta</p></td></tr><tr id="-5ro45b_62"><td id="-5ro45b_78"><p>Bind Mount</p></td><td id="-5ro45b_79"><p>Desenvolvimento</p></td><td id="-5ro45b_80"><p>M&eacute;dia</p></td></tr></tbody></table></div></section><section class="chapter"><h2 id="waifu-cache-tips" data-toc="waifu-cache-tips">Waifu Cache Tips 💫</h2><aside class="prompt" data-type="tip" data-title="" id="-5ro45b_81"><p id="-5ro45b_83"><span class="control" id="-5ro45b_84">Cache-chan diz:</span> &quot;Cache &eacute; como m&aacute;gica - use com sabedoria!&quot;</p></aside><aside class="prompt" data-type="warning" data-title="" id="-5ro45b_82"><p id="-5ro45b_85"><span class="control" id="-5ro45b_86">Build-sama alerta:</span> &quot;Muito cache pode ser t&atilde;o ruim quanto pouco cache!&quot;</p></aside></section><section class="chapter"><h2 id="quick-reference" data-toc="quick-reference">Quick Reference 📚</h2><section class="chapter"><h3 id="common-commands" data-toc="common-commands">Common Commands</h3><div class="code-block" data-lang="bash">
+# Rebuild sem cache
+docker build --no-cache .
+
+# Usar cache específico
+docker build --cache-from myapp:cache .
+
+# Limpar cache
+docker builder prune
+
+# Inspecionar cache
+docker system df -v
+</div></section><section class="chapter"><h3 id="cache-configuration" data-toc="cache-configuration">Cache Configuration</h3><div class="code-block" data-lang="yaml">
+# .dockerignore
+node_modules
+npm-debug.log
+Dockerfile
+.git
+.cache
+
+# docker-compose.yml
+services:
+  app:
+    build:
+      context: .
+      cache_from:
+        - myapp:cache
+    volumes:
+      - build-cache:/app/build
+
+volumes:
+  build-cache:
+</div><aside class="prompt" data-type="note" data-title="" id="-5ro45b_91"><p id="-5ro45b_92"><span class="control" id="-5ro45b_93">Cache Master's Note:</span> &quot;O cache perfeito &eacute; aquele que voc&ecirc; nem percebe que est&aacute; l&aacute;.&quot;</p></aside></section></section><div class="last-modified">16 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="docker-optimization.html" class="navigation-links__prev">Docker Optimization Guide 🚀</a><a href="docker-multi-stage-builds.html" class="navigation-links__next">Docker Multi-stage Builds 🏗️</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>
